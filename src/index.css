@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-portfolio-bg text-portfolio-text;
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-portfolio-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-portfolio-card rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-portfolio-gold;
+}
