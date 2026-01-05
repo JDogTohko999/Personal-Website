@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    /* DEFAULT (Dark Mode) / Fallback */
-    --portfolio-bg: #121212;
+    /* DEFAULT (Jacarta) */
+    --portfolio-bg: rgb(35, 32, 54); /* Jacarta */
     --portfolio-text: #E0E0E0;
-    --portfolio-gold: #D4AF37;
-    --portfolio-green: #1A3C34;
-    --portfolio-card: #1E1E1E;
+    --portfolio-gold: #f4cc67; /* Saffron */
+    --portfolio-green: #3b3119;
+    --portfolio-card: #0f0c20; /* Darker Jacarta for cards */
     --portfolio-card-text: #E0E0E0;
     --portfolio-muted: #9CA3AF;
-    --portfolio-border: #374151;
+    --portfolio-border: #4B4570;
   }
 
   /* NEWSPAPER THEME (Black & White) */
@@ -20,7 +20,7 @@
     --portfolio-bg: #FFFFFF;
     --portfolio-text: #000000;
     --portfolio-gold: #000000; /* Accents are black */
-    --portfolio-green: #F2F2F2; /* Secondary is Light Grey */
+    --portfolio-green: #aeaeae; /* Secondary is Light Grey */
     --portfolio-card: #F2F2F2; /* Section/Card Background */
     --portfolio-card-text: #000000;
     --portfolio-muted: #404040;
@@ -43,11 +43,11 @@
   [data-theme="uva"] {
     --portfolio-bg: #232D4B; /* Deep Navy Blue */
     --portfolio-text: #FFFFFF; /* White Text */
-    --portfolio-gold: #F84C1E; /* Bright Orange - Accents */
-    --portfolio-green: #E2E2E2; /* Light Grey - Secondary */
-    --portfolio-card: #E2E2E2; /* Light Grey - Cards */
-    --portfolio-card-text: #232D4B; /* Dark Navy Text for contrast on light cards */
-    --portfolio-muted: #CCCCCC;
+    --portfolio-gold: #E57200; /* Bright Orange - Accents */
+    --portfolio-green: #E57200; /* Light Grey - Secondary */
+    --portfolio-card: #e2e2e2; /* Light Grey - Cards */
+    --portfolio-card-text: #040919; /* Dark Navy Text for contrast on light cards */
+    --portfolio-muted: #9f9f9f;
     --portfolio-border: #374151;
   }
 
