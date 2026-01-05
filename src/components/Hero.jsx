@@ -13,7 +13,7 @@ const Hero = () => {
           className="flex-shrink-0"
         >
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-portfolio-gold overflow-hidden shadow-2xl relative">
-            <div className="w-full h-full bg-gray-700 flex items-center justify-center text-gray-500">
+            <div className="w-full h-full bg-portfolio-card flex items-center justify-center text-portfolio-muted">
               {/* Placeholder for Profile Picture */}
               <span className="text-center p-4">Profile Picture<br/>(Add img src)</span>
               {/* To use real image: <img src="/path/to/image.jpg" alt="Me" className="w-full h-full object-cover" /> */}
@@ -27,13 +27,13 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center md:text-left flex-1"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-portfolio-text mb-4">
             Hello, I'm <span className="text-portfolio-gold">Your Name</span>
           </h1>
-          <h2 className="text-xl md:text-2xl text-gray-400 mb-6">
+          <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
             Software Engineer & Developer
           </h2>
-          <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-2xl">
+          <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
             I build modern, reliable, and user-centric web applications. Passionate about clean code, innovative design, and solving complex problems with elegance.
           </p>
 

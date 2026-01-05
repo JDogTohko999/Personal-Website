@@ -8,9 +8,12 @@ import Achievements from './components/Achievements';
 import WorldMap from './components/WorldMap';
 import Footer from './components/Footer';
 
+import ArtisticAccents from './components/ArtisticAccents';
+
 function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
+      <ArtisticAccents />
       <Navbar />
       <main className="flex-grow">
         <Hero />

@@ -44,11 +44,11 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Experience & Education</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Experience & Education</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
         </motion.div>
 
-        <div className="relative border-l-2 border-gray-800 ml-4 md:ml-0 md:pl-0 space-y-12">
+        <div className="relative border-l-2 border-portfolio-border ml-4 md:ml-0 md:pl-0 space-y-12">
           {experiences.map((exp, index) => (
             <motion.div 
               key={exp.id}
@@ -68,18 +68,18 @@ const Experience = () => {
                 </div>
 
                 {/* Content Card */}
-                <div className="col-span-4 bg-portfolio-green/20 border border-gray-800 p-6 rounded-lg hover:border-portfolio-gold/50 transition-colors shadow-lg">
+                <div className="col-span-4 bg-portfolio-card border border-portfolio-border p-6 rounded-lg hover:border-portfolio-gold/50 transition-colors shadow-lg">
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{exp.role}</h3>
+                      <div>
+                        <h3 className="text-xl font-bold text-portfolio-card-text">{exp.role}</h3>
                       <h4 className="text-lg text-portfolio-gold">{exp.company}</h4>
                     </div>
-                    <div className="md:hidden mt-2 flex items-center text-gray-400 text-sm">
+                    <div className="md:hidden mt-2 flex items-center text-portfolio-muted text-sm">
                       <Calendar className="w-4 h-4 mr-1" />
                       {exp.period}
                     </div>
                   </div>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-portfolio-muted leading-relaxed">
                     {exp.description}
                   </p>
                 </div>

@@ -3,8 +3,56 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* DEFAULT (Dark Mode) / Fallback */
+    --portfolio-bg: #121212;
+    --portfolio-text: #E0E0E0;
+    --portfolio-gold: #D4AF37;
+    --portfolio-green: #1A3C34;
+    --portfolio-card: #1E1E1E;
+    --portfolio-card-text: #E0E0E0;
+    --portfolio-muted: #9CA3AF;
+    --portfolio-border: #374151;
+  }
+
+  /* NEWSPAPER THEME (Black & White) */
+  [data-theme="newspaper"] {
+    --portfolio-bg: #FFFFFF;
+    --portfolio-text: #000000;
+    --portfolio-gold: #000000; /* Accents are black */
+    --portfolio-green: #F2F2F2; /* Secondary is Light Grey */
+    --portfolio-card: #F2F2F2; /* Section/Card Background */
+    --portfolio-card-text: #000000;
+    --portfolio-muted: #404040;
+    --portfolio-border: #000000;
+  }
+
+  /* FOREST THEME (Matte Greens) */
+  [data-theme="forest"] {
+    --portfolio-bg: #2D3A3A; /* Deep Matte Sage Green */
+    --portfolio-text: #F0EAD6; /* Soft Cream */
+    --portfolio-gold: #556B2F; /* Moss Green - Accents */
+    --portfolio-green: #1B2626; /* Darker Evergreen - Secondary */
+    --portfolio-card: #1B2626; /* Darker Evergreen - Cards */
+    --portfolio-card-text: #F0EAD6;
+    --portfolio-muted: #B0B0B0;
+    --portfolio-border: #556B2F;
+  }
+
+  /* UVA THEME (Navy/Orange) */
+  [data-theme="uva"] {
+    --portfolio-bg: #232D4B; /* Deep Navy Blue */
+    --portfolio-text: #FFFFFF; /* White Text */
+    --portfolio-gold: #F84C1E; /* Bright Orange - Accents */
+    --portfolio-green: #E2E2E2; /* Light Grey - Secondary */
+    --portfolio-card: #E2E2E2; /* Light Grey - Cards */
+    --portfolio-card-text: #232D4B; /* Dark Navy Text for contrast on light cards */
+    --portfolio-muted: #CCCCCC;
+    --portfolio-border: #374151;
+  }
+
   body {
-    @apply bg-portfolio-bg text-portfolio-text;
+    @apply bg-portfolio-bg text-portfolio-text transition-colors duration-300;
   }
 }
 

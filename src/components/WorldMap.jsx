@@ -47,12 +47,12 @@ const WorldMap = () => {
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      fill={isVisited ? "#D4AF37" : isBucket ? "#1A3C34" : "#374151"}
+                      fill={isVisited ? "var(--portfolio-gold)" : isBucket ? "var(--portfolio-green)" : "#374151"}
                       stroke="#1F2937"
                       strokeWidth={0.5}
                       style={{
                         default: { outline: "none" },
-                        hover: { fill: isVisited ? "#B5952F" : isBucket ? "#142F29" : "#4B5563", outline: "none" },
+                        hover: { fill: isVisited ? "var(--portfolio-gold)" : isBucket ? "var(--portfolio-green)" : "#4B5563", outline: "none", opacity: 0.8 },
                         pressed: { outline: "none" },
                       }}
                     />

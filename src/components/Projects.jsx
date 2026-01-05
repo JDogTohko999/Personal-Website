@@ -39,7 +39,7 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Projects & Activities</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Projects & Activities</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
         </motion.div>
 
@@ -56,19 +56,19 @@ const Projects = () => {
           <div className="relative z-10 md:flex items-center justify-between gap-8">
             <div className="flex-1">
               <div className="inline-block px-3 py-1 bg-portfolio-gold/20 text-portfolio-gold rounded-full text-xs font-bold tracking-wider mb-4">FEATURED CLUB</div>
-              <h3 className="text-3xl font-bold text-white mb-4">VAISI</h3>
-              <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+              <h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
+              <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
                 As a key member/leader of VAISI (The Virginia Artificial Intelligence Software Initiative), I collaborate with peers to explore cutting-edge AI technologies, organize workshops, and build innovative software solutions for the university community.
               </p>
-              <a href="#" className="inline-flex items-center text-portfolio-gold hover:text-white font-bold transition-colors group">
+              <a href="#" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
                 Learn more about VAISI 
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
             {/* Visual element for VAISI (Logo placeholder) */}
             <div className="mt-8 md:mt-0 flex-shrink-0">
-               <div className="w-32 h-32 bg-portfolio-card rounded-full flex items-center justify-center border-2 border-portfolio-gold/50 shadow-lg mx-auto">
-                 <span className="text-2xl font-bold text-white">VAISI</span>
+                 <div className="w-32 h-32 bg-portfolio-card rounded-full flex items-center justify-center border-2 border-portfolio-gold/50 shadow-lg mx-auto">
+                   <span className="text-2xl font-bold text-portfolio-card-text">VAISI</span>
                </div>
             </div>
           </div>
@@ -83,21 +83,21 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-portfolio-card border border-gray-800 rounded-xl overflow-hidden hover:border-portfolio-gold/30 hover:shadow-xl transition-all group"
+              className="bg-portfolio-card border border-portfolio-border rounded-xl overflow-hidden hover:border-portfolio-gold/30 hover:shadow-xl transition-all group"
             >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-portfolio-gold transition-colors">{project.title}</h3>
+                  <h3 className="text-xl font-bold text-portfolio-card-text group-hover:text-portfolio-gold transition-colors">{project.title}</h3>
                   <div className="flex gap-3">
-                    <a href={project.github} className="text-gray-400 hover:text-white transition-colors" title="View Code">
+                    <a href={project.github} className="text-portfolio-muted hover:text-portfolio-text transition-colors" title="View Code">
                       <Github className="w-5 h-5" />
                     </a>
-                    <a href={project.demo} className="text-gray-400 hover:text-white transition-colors" title="Live Demo">
+                    <a href={project.demo} className="text-portfolio-muted hover:text-portfolio-text transition-colors" title="Live Demo">
                       <ExternalLink className="w-5 h-5" />
                     </a>
                   </div>
                 </div>
-                <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+                <p className="text-portfolio-muted mb-6 text-sm leading-relaxed">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">

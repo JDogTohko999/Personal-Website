@@ -35,7 +35,7 @@ const achievements = [
 
 const Achievements = () => {
   return (
-    <section id="achievements" className="py-20 bg-portfolio-bg border-t border-gray-800">
+    <section id="achievements" className="py-20 bg-portfolio-bg border-t border-portfolio-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
@@ -43,7 +43,7 @@ const Achievements = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Achievements</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Achievements</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
         </motion.div>
 
@@ -55,14 +55,14 @@ const Achievements = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-portfolio-card p-6 rounded-xl border border-gray-800 flex flex-col items-center text-center hover:border-portfolio-gold/50 transition-colors group"
+              className="bg-portfolio-card p-6 rounded-xl border border-portfolio-border flex flex-col items-center text-center hover:border-portfolio-gold/50 transition-colors group"
             >
               <div className="w-16 h-16 bg-portfolio-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-portfolio-gold/20 transition-colors">
                 <achievement.icon className="w-8 h-8 text-portfolio-gold" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">{achievement.title}</h3>
+              <h3 className="text-lg font-bold text-portfolio-card-text mb-2">{achievement.title}</h3>
               <p className="text-sm text-portfolio-gold font-medium mb-3">{achievement.organization}</p>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-portfolio-muted text-sm leading-relaxed">
                 {achievement.description}
               </p>
             </motion.div>

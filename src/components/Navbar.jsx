@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Linkedin, Github, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, setTheme, themes } = useTheme();
+  const [themeOpen, setThemeOpen] = useState(false);
   const [linksOpen, setLinksOpen] = useState(false);
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#hero" className="text-xl font-bold text-white hover:text-portfolio-gold transition-colors">
+            <a href="#hero" className="text-xl font-bold text-portfolio-text hover:text-portfolio-gold transition-colors">
               Portfolio
             </a>
           </div>
@@ -47,7 +50,7 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-300 hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="text-portfolio-muted hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {link.name}
                 </a>
@@ -56,7 +59,7 @@ const Navbar = () => {
               {/* Links Dropdown */}
               <div className="relative ml-4 group">
                 <button 
-                  className="flex items-center text-gray-300 hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
+                  className="flex items-center text-portfolio-muted hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
                   onMouseEnter={() => setLinksOpen(true)}
                   onMouseLeave={() => setLinksOpen(false)}
                 >
@@ -74,7 +77,7 @@ const Navbar = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-portfolio-green hover:text-white"
+                      className="flex items-center px-4 py-2 text-sm text-portfolio-muted hover:bg-portfolio-green hover:text-white"
                     >
                       <link.icon className="w-4 h-4 mr-2 text-portfolio-gold" />
                       {link.name}
@@ -82,13 +85,43 @@ const Navbar = () => {
                   ))}
                 </div>
               </div>
+
+
+              {/* Theme Dropdown */}
+              <div className="relative ml-4 group">
+                <button 
+                  className="flex items-center text-portfolio-muted hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
+                  onMouseEnter={() => setThemeOpen(true)}
+                  onMouseLeave={() => setThemeOpen(false)}
+                >
+                  <Palette className="w-4 h-4 mr-1" />
+                  <ChevronDown className="ml-0.5 w-3 h-3" />
+                </button>
+                {/* Dropdown Menu */}
+                <div 
+                  className={`absolute right-0 mt-0 w-40 bg-portfolio-card rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 transition-all duration-200 ${themeOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                  onMouseEnter={() => setThemeOpen(true)}
+                  onMouseLeave={() => setThemeOpen(false)}
+                >
+                  {themes.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setTheme(t.id)}
+                      className={`block w-full text-left px-4 py-2 text-sm text-portfolio-muted hover:bg-portfolio-green hover:text-white ${theme === t.id ? 'text-portfolio-gold font-bold' : ''}`}
+                    >
+                      {t.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
           
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-portfolio-muted hover:text-portfolio-text hover:bg-portfolio-card focus:outline-none"
             >
               {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
             </button>
@@ -104,27 +137,46 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
+                className="text-portfolio-muted hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </a>
             ))}
-            <div className="border-t border-gray-700 pt-2 pb-2">
-              <p className="px-3 text-xs text-gray-500 uppercase tracking-wider">Links</p>
+            <div className="border-t border-portfolio-border pt-2 pb-2">
+              <p className="px-3 text-xs text-portfolio-muted uppercase tracking-wider">Links</p>
               {externalLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center text-gray-300 hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
+                  className="flex items-center text-portfolio-muted hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
                   onClick={() => setIsOpen(false)}
                 >
                   <link.icon className="w-4 h-4 mr-2" />
                   {link.name}
                 </a>
               ))}
+            </div>
+            {/* Mobile Theme Switcher */}
+            <div className="border-t border-portfolio-border pt-2 pb-2">
+               <p className="px-3 text-xs text-portfolio-muted uppercase tracking-wider">Theme</p>
+               {themes.map((t) => (
+                 <button
+                   key={t.id}
+                   onClick={() => {
+                     setTheme(t.id);
+                     setIsOpen(false);
+                   }}
+                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium text-portfolio-muted hover:text-portfolio-gold ${theme === t.id ? 'text-portfolio-gold' : ''}`}
+                 >
+                   <span className="flex items-center">
+                    <span className="w-3 h-3 rounded-full mr-2 border border-portfolio-border" style={{backgroundColor: t.color}}></span>
+                    {t.name}
+                   </span>
+                 </button>
+               ))}
             </div>
           </div>
         </div>
