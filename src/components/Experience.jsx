@@ -5,32 +5,75 @@ import { motion } from 'framer-motion';
 const experiences = [
   {
     id: 1,
-    role: 'Senior Software Engineer',
-    company: 'Tech Corp Inc.',
-    period: '2023 - Present',
-    description: 'Leading a team of developers in building scalable web applications. improved system performance by 40%.'
+    role: 'Founder',
+    company: 'Virginia AI Safety Initiative (VAISI)',
+    period: 'Aug 2025 - Present',
+    description: 'Creating an environment that enables the UVA community to engage with and take action on AI safety. Focused on recruitment, operations, and planning the AI Governance Fellowship.'
   },
   {
     id: 2,
-    role: 'Full Stack Developer',
-    company: 'Creative Solutions',
-    period: '2021 - 2023',
-    description: 'Developed and maintained client-facing platforms using React and Node.js. Implemented CI/CD pipelines.'
+    role: 'Pathfinder Fellow',
+    company: 'Kairos',
+    period: 'Aug 2025 - Dec 2025',
+    description: 'Received mentorship, community, and funding crucial for establishing VAISI.'
   },
   {
     id: 3,
-    role: 'Software Intern',
-    company: 'StartUp Hub',
-    period: '2020 - 2021',
-    description: 'Collaborated on frontend features and bug fixes. Gained hands-on experience with Agile methodologies.'
+    role: 'IT Summer Intern (Systems Engineering)',
+    company: 'UPS',
+    period: 'Jun 2024 - Aug 2024',
+    description: 'Identified bottlenecks and coded a PowerShell script to automate system setup, reducing process time from 2-3hrs to seconds. Estimated anual savings ~$4,000. Won 3rd place in Google Cloud Vision AI Hackathon category.'
+  },
+  {
+    id: 4,
+    role: 'Undergraduate Research Assistant',
+    company: 'UVA Engineering Link Lab',
+    period: 'Sep 2023 - Sep 2024',
+    description: 'Co-authored research paper for UbiComp/ISWC 2024. Spearheaded research on musical chords and emotionality, conducting qualitative and quantitative user studies.'
+  },
+  {
+    id: 5,
+    role: 'IT Summer Intern (Global Networking)',
+    company: 'UPS',
+    period: 'Jun 2023 - Aug 2023',
+    description: 'Worked with SD-WAN, SNMP, and telemetry. Led front-end development for a team that placed top 10% in the UPS 2023 Hackathon.'
+  },
+  {
+    id: 6,
+    role: 'Founder + Operator',
+    company: "JC's PCs",
+    period: 'Aug 2019 - Aug 2022',
+    description: 'Launched custom PC business ($6k revenue). Mentored peers in PC building and hardware troubleshooting.'
   },
   // Education
   {
-    id: 4,
-    role: 'B.S. Computer Science',
-    company: 'University of Tech',
-    period: '2016 - 2020',
-    description: 'Graduated with Honors. Focused on Distributed Systems and AI.'
+    id: 7,
+    role: 'B.S. Computer Engineering',
+    company: 'University of Virginia',
+    period: 'Aug 2022 - May 2026',
+    description: 'GPA: 3.7/4.0. Lead of AI Safety Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society.'
+  },
+  {
+    id: 8,
+    role: 'Engineering & Design Program',
+    company: 'Ramapo High School',
+    period: 'Sep 2018 - Jun 2022',
+    description: 'GPA: 3.8/4.0. Chess Club President, Varsity Tennis Captain.'
+  },
+  // Volunteering
+  {
+    id: 9,
+    role: 'Member',
+    company: 'Giving What We Can',
+    period: 'Sep 2025 - Present',
+    description: 'Pledged to give at least 10% of lifetime income to effective charities.'
+  },
+  {
+    id: 10,
+    role: 'Volunteer',
+    company: 'Families for Families NJ',
+    period: 'Oct 2018 - Aug 2025',
+    description: 'Assisted in furniture collection and delivery for families transitioning out of homelessness. Translated (Spanish) at food pantries.'
   }
 ];
 
@@ -44,7 +87,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Experience & Education</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Experience</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
         </motion.div>
 

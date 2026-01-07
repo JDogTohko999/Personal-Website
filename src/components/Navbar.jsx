@@ -22,16 +22,16 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About Me', href: '#hero' },
+    { name: 'About Me', href: '#about-me' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'VAISI', href: '#vaisi' },
   ];
 
   const externalLinks = [
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com' },
-    { name: 'Substack', icon: FileText, href: 'https://substack.com' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/jasonchin9/' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/JDogTohko999' },
+    { name: 'Substack', icon: FileText, href: 'https://substack.com/@jdogtohko999' },
   ];
 
   return (
@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#hero" className="text-xl font-bold text-portfolio-text hover:text-portfolio-gold transition-colors">
+            <a href="#about-me" className="text-xl font-bold text-portfolio-text hover:text-portfolio-gold transition-colors">
               Portfolio
             </a>
           </div>

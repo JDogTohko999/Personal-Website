@@ -5,30 +5,30 @@ import { motion } from 'framer-motion';
 const achievements = [
   {
     id: 1,
-    title: 'Hackathon Winner',
-    organization: 'Global Tech Summit 2023',
-    description: 'First place in the "AI for Good" category.',
-    icon: Trophy
-  },
-  {
-    id: 2,
-    title: 'Certified Cloud Architect',
-    organization: 'AWS',
-    description: 'Professional certification for designing distributed systems.',
+    title: 'Eagle Scout',
+    organization: 'Boy Scouts of America',
+    description: 'Conceived and executed a project restoring historic headstones. Led volunteers to complete 162 hours of service.',
     icon: Medal
   },
   {
-    id: 3,
-    title: 'Open Source Contributor',
-    organization: 'React Community',
-    description: 'Recognized for significant contributions to core libraries.',
+    id: 2,
+    title: 'Dean\'s List',
+    organization: 'UVA Engineering',
+    description: 'Achieved all 7 semesters (GPA >= 3.4).',
     icon: Star
   },
   {
+    id: 3,
+    title: '3rd Place - Google Vision AI',
+    organization: 'UPS Hackathon 2024',
+    description: 'Competed against 53 teams. Leveraged Cloud Vision AI for package detection.',
+    icon: Trophy
+  },
+  {
     id: 4,
-    title: 'Dean\'s List',
-    organization: 'University of Tech',
-    description: 'Consistently maintained top 5% academic standing.',
+    title: 'Top 10% - UPASK',
+    organization: 'UPS Hackathon 2023',
+    description: 'Conceptualized and developed an interactive help forum. Placed in top 10% out of 50 teams.',
     icon: Award
   }
 ];

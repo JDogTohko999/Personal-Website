@@ -28,27 +28,27 @@ const Hero = () => {
           className="text-center md:text-left flex-1"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-portfolio-text mb-4">
-            Hello, I'm <span className="text-portfolio-gold">Your Name</span>
+            <span className="text-portfolio-gold">Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            Software Engineer & Developer
+            AI Safety | Computer Engineering @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            I build modern, reliable, and user-centric web applications. Passionate about clean code, innovative design, and solving complex problems with elegance.
+            Fourth-year at UVA focused on advancing robust AI while mitigating risks. Exploring technical alignment and smart governance to ensure AI systems are reliable, secure, and beneficial. Co-founder and active president of the Virginia AI Safety Initiative (VAISI).
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/jasonchin9/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-6 py-3 bg-portfolio-gold text-portfolio-bg font-bold rounded-lg hover:bg-opacity-90 transition-all flex items-center shadow-lg hover:shadow-gold/20"
             >
               <Linkedin className="w-5 h-5 mr-2" />
-              Connect on LinkedIn
+              LinkedIn
             </a>
             <a 
-              href="https://github.com" 
+              href="https://github.com/JDogTohko999" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"

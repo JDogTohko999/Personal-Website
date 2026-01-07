@@ -5,25 +5,33 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Dashboard',
-    description: 'A comprehensive analytics dashboard for online retailers featuring real-time data visualization.',
-    tags: ['React', 'D3.js', 'Firebase'],
-    github: '#',
+    title: 'UPS Automation Script',
+    description: 'Developed a robust PowerShell script to automate system setup, reducing process time from 2-3 hours to under a minute with zero errors. Estimated annual savings ~$4,000.',
+    tags: ['PowerShell', 'Automation', 'Scripting'],
+    github: 'https://github.com/JDogTohko999/UPS-Intern-Project',
     demo: '#'
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'Productivity tool allowing teams to collaborate on tasks with live updates and file sharing.',
-    tags: ['Next.js', 'Tailwind', 'Supabase'],
+    title: 'Cloud Vision AI (Hackathon)',
+    description: 'Won 3rd place in Google Category. Leveraged Google Cloud Vision AI to detect and label objects in photos to assist with lost package identification.',
+    tags: ['Google Cloud Vision API', 'Python', 'AI/ML'],
     github: '#',
     demo: '#'
   },
   {
     id: 3,
-    title: 'Weather Forecast AI',
-    description: 'Machine learning model that predicts micro-climate changes using local sensor data.',
-    tags: ['Python', 'TensorFlow', 'React'],
+    title: 'UPASK Forum',
+    description: 'Built a full-stack technology help forum during the 2023 UPS Hackathon (Top 10%). Led front-end development connecting to MySQL via PHP.',
+    tags: ['HTML/CSS/JS', 'PHP', 'MySQL'],
+    github: 'https://github.com/JDogTohko999/UPASK',
+    demo: '#'
+  },
+  {
+    id: 4,
+    title: 'Music & Wellness Research',
+    description: 'Co-authored paper for UbiComp/ISWC 2024. Investigated how musical chords evoke specific emotions to encourage healthier behaviors.',
+    tags: ['Research', 'Data Analysis', 'User Studies'],
     github: '#',
     demo: '#'
   }
@@ -39,7 +47,7 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Projects & Activities</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Projects</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
         </motion.div>
 
@@ -58,7 +66,7 @@ const Projects = () => {
               <div className="inline-block px-3 py-1 bg-portfolio-gold/20 text-portfolio-gold rounded-full text-xs font-bold tracking-wider mb-4">FEATURED CLUB</div>
               <h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
               <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
-                As a key member/leader of VAISI (The Virginia Artificial Intelligence Software Initiative), I collaborate with peers to explore cutting-edge AI technologies, organize workshops, and build innovative software solutions for the university community.
+                As the co-founder and president, my mission is to get VAISI off the ground and attain critical mass in terms of membership, operational capacity, and legitimacy.
               </p>
               <a href="#" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
                 Learn more about VAISI 
