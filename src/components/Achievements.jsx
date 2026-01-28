@@ -28,7 +28,7 @@ const achievements = [
     id: 4,
     title: 'Top 10% - UPASK',
     organization: 'UPS Hackathon 2023',
-    description: 'Conceptualized and developed an interactive help forum. Placed in top 10% out of 50 teams.',
+    description: 'Conceptualized and developed an interactive help forum. Placed in top 10% out of 50+ teams.',
     icon: Award
   }
 ];
