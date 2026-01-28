@@ -101,11 +101,6 @@ const ParticlesControls = () => {
     >
       {/* Main Control Panel */}
       <div className="bg-portfolio-card/95 backdrop-blur-sm border border-portfolio-border rounded-xl shadow-2xl overflow-hidden min-w-[200px]">
-        {/* Drag Handle */}
-        <div className="drag-handle flex items-center justify-center py-1.5 bg-portfolio-border/30 cursor-grab active:cursor-grabbing">
-          <GripHorizontal className="w-4 h-4 text-portfolio-muted" />
-        </div>
-
         {/* Interaction Mode Toggle */}
         <div className="p-3 border-b border-portfolio-border">
           <div className="text-xs text-portfolio-muted mb-2 text-center">Cursor Mode</div>
@@ -235,6 +230,11 @@ const ParticlesControls = () => {
             />
           </div>
         )}
+
+        {/* Drag Handle */}
+        <div className="drag-handle flex items-center justify-center py-1.5 bg-portfolio-border/30 cursor-grab active:cursor-grabbing">
+          <GripHorizontal className="w-4 h-4 text-portfolio-muted" />
+        </div>
       </div>
     </div>
   );
