@@ -80,8 +80,8 @@ const ParticlesControls = () => {
         }`}
       >
         <span
-          className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-            checked ? 'translate-x-5' : 'translate-x-0.5'
+          className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+            checked ? 'translate-x-[1.125rem]' : 'translate-x-0'
           }`}
         />
       </button>
@@ -102,7 +102,18 @@ const ParticlesControls = () => {
       {/* Main Control Panel */}
       <div className="bg-portfolio-card/95 backdrop-blur-sm border border-portfolio-border rounded-xl shadow-2xl overflow-hidden min-w-[200px]">
         {/* Power Button */}
-        <div className="p-2 border-b border-portfolio-border flex justify-center">
+        <div className="px-4 py-2 border-b border-portfolio-border flex justify-between items-center">
+          <span className="text-sm font-medium text-portfolio-text">
+            Particles{' '}
+            <a 
+              href="https://github.com/tsparticles/tsparticles" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs text-portfolio-muted hover:text-portfolio-gold transition-colors"
+            >
+              (source)
+            </a>
+          </span>
           <button
             onClick={() => updateSetting('enabled', !settings.enabled)}
             className={`p-2 rounded-full transition-all duration-300 ${
@@ -154,9 +165,9 @@ const ParticlesControls = () => {
 
         {/* Settings Toggle Button */}
         <button
-          onClick={() => settings.enabled && setSettingsOpen(!settingsOpen)}
+          onClick={() => setSettingsOpen(!settingsOpen)}
           className={`w-full py-2 px-3 flex items-center justify-center gap-2 text-xs text-portfolio-muted hover:text-portfolio-text hover:bg-portfolio-border/30 transition-all duration-300 ${
-            settings.enabled ? 'opacity-100' : 'opacity-50 pointer-events-none'
+            settings.enabled ? 'opacity-100' : 'opacity-50'
           }`}
         >
           {settingsOpen ? (
