@@ -9,12 +9,14 @@ import WorldMap from './components/WorldMap';
 import Footer from './components/Footer';
 import ParticlesBackground from './components/ParticlesBackground';
 import ParticlesControls from './components/ParticlesControls';
+import EasterEgg from './components/EasterEgg';
 
 import ArtisticAccents from './components/ArtisticAccents';
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
+      <EasterEgg />
       <ParticlesBackground />
       <ParticlesControls />
       <ArtisticAccents />

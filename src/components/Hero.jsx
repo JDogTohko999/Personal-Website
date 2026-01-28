@@ -13,11 +13,11 @@ const Hero = () => {
           className="flex-shrink-0"
         >
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-portfolio-gold overflow-hidden shadow-2xl relative">
-            <div className="w-full h-full bg-portfolio-card flex items-center justify-center text-portfolio-muted">
-              {/* Placeholder for Profile Picture */}
-              <span className="text-center p-4">Profile Picture<br/>(Add img src)</span>
-              {/* To use real image: <img src="/path/to/image.jpg" alt="Me" className="w-full h-full object-cover" /> */}
-            </div>
+            <img
+              src="/jason_chin_headshot_cropped_centered.jpg"
+              alt="Jason Chin"
+              className="w-full h-full object-cover"
+            />
           </div>
         </motion.div>
 
