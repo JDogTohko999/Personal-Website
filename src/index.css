@@ -5,7 +5,7 @@
 @layer base {
   :root {
     /* DEFAULT (Jacarta) */
-    --portfolio-bg: rgb(35, 32, 54); /* Jacarta */
+    --portfolio-bg: rgba(35, 32, 54, 0.925); /* Jacarta */
     --portfolio-text: #E0E0E0;
     --portfolio-gold: #f4cc67; /* Saffron */
     --portfolio-green: #3b3119;
@@ -17,7 +17,7 @@
 
   /* NEWSPAPER THEME (Black & White) */
   [data-theme="newspaper"] {
-    --portfolio-bg: #FFFFFF;
+    --portfolio-bg: #ffffffd2;
     --portfolio-text: #000000;
     --portfolio-gold: #000000; /* Accents are black */
     --portfolio-green: #aeaeae; /* Secondary is Light Grey */
