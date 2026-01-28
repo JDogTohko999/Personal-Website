@@ -4,11 +4,14 @@ import App from './App.jsx'
 import './index.css'
 
 import { ThemeProvider } from './context/ThemeContext.jsx'
+import { ParticlesProvider } from './context/ParticlesContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <ParticlesProvider>
+        <App />
+      </ParticlesProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )
