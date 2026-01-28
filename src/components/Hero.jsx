@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8 bg-portfolio-bg">
+    <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center gap-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
