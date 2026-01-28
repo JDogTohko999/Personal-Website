@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 import { useTheme } from '../context/ThemeContext';
 import { useParticles } from '../context/ParticlesContext';
 
 const ParticlesBackground = () => {
-  const containerRef = useRef(null);
+  const [init, setInit] = useState(false);
   const { theme } = useTheme();
   const { settings } = useParticles();
 
@@ -18,172 +20,113 @@ const ParticlesBackground = () => {
     return colors[currentTheme] || colors.default;
   };
 
+  // Initialize tsparticles engine once
   useEffect(() => {
-    let mounted = true;
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
 
-    const initParticles = () => {
-      if (!mounted || !containerRef.current) return;
+  const particleColor = getParticleColor(theme);
 
-      // Destroy existing instance first
-      if (window.pJSDom && window.pJSDom.length > 0) {
-        try {
-          window.pJSDom[0].pJS.fn.vendors.destroypJS();
-          window.pJSDom = [];
-        } catch (e) {
-          window.pJSDom = [];
+  const options = useMemo(() => ({
+    fullScreen: {
+      enable: true,
+      zIndex: 0
+    },
+    fpsLimit: 120,
+    particles: {
+      number: {
+        value: settings.particleCount,
+        density: {
+          enable: true,
+          width: 800,
+          height: 800
+        }
+      },
+      color: {
+        value: particleColor
+      },
+      shape: {
+        type: 'circle'
+      },
+      opacity: {
+        value: { min: 0.1, max: 0.5 },
+        animation: {
+          enable: true,
+          speed: 1,
+          sync: false
+        }
+      },
+      size: {
+        value: { min: 1, max: settings.particleSize },
+        animation: {
+          enable: true,
+          speed: 2,
+          sync: false
+        }
+      },
+      links: {
+        enable: settings.linesEnabled,
+        distance: settings.lineDistance,
+        color: particleColor,
+        opacity: settings.lineOpacity,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: settings.particleSpeed,
+        direction: 'none',
+        random: settings.randomMovement,
+        straight: false,
+        outModes: {
+          default: settings.bounce ? 'bounce' : 'out'
         }
       }
-
-      const particleColor = getParticleColor(theme);
-
-      window.particlesJS('particles-js', {
-        particles: {
-          number: {
-            value: settings.particleCount,
-            density: {
-              enable: true,
-              value_area: 800
-            }
-          },
-          color: {
-            value: particleColor
-          },
-          shape: {
-            type: 'circle',
-            stroke: {
-              width: 0,
-              color: '#000000'
-            }
-          },
-          opacity: {
-            value: 0.5,
-            random: true,
-            anim: {
-              enable: true,
-              speed: 1,
-              opacity_min: 0.1,
-              sync: false
-            }
-          },
-          size: {
-            value: settings.particleSize,
-            random: true,
-            anim: {
-              enable: true,
-              speed: 2,
-              size_min: 0.1,
-              sync: false
-            }
-          },
-          line_linked: {
-            enable: settings.linesEnabled,
-            distance: settings.lineDistance,
-            color: particleColor,
-            opacity: settings.lineOpacity,
-            width: 1
-          },
-          move: {
-            enable: true,
-            speed: settings.particleSpeed,
-            direction: 'none',
-            random: settings.randomMovement,
-            straight: false,
-            out_mode: settings.bounce ? 'bounce' : 'out',
-            bounce: settings.bounce,
-            attract: {
-              enable: settings.interactionMode === 'attract',
-              rotateX: 600,
-              rotateY: 1200
-            }
-          }
+    },
+    interactivity: {
+      detectsOn: 'window',
+      events: {
+        onHover: {
+          enable: true,
+          mode: settings.interactionMode === 'attract' ? 'attract' : 'repulse'
         },
-        interactivity: {
-          detect_on: 'window',
-          events: {
-            onhover: {
-              enable: true,
-              mode: settings.interactionMode === 'attract' ? 'grab' : 'repulse'
-            },
-            onclick: {
-              enable: true,
-              mode: 'push'
-            },
-            resize: true
-          },
-          modes: {
-            grab: {
-              distance: settings.interactionDistance,
-              line_linked: {
-                opacity: 0.8
-              }
-            },
-            repulse: {
-              distance: settings.interactionDistance,
-              duration: 0.4
-            },
-            push: {
-              particles_nb: 4
-            },
-            remove: {
-              particles_nb: 2
-            },
-            bubble: {
-              distance: settings.interactionDistance,
-              size: settings.particleSize * 2,
-              duration: 2,
-              opacity: 0.8,
-              speed: 3
-            }
-          }
+        onClick: {
+          enable: true,
+          mode: 'push'
         },
-        retina_detect: true
-      });
-    };
-
-    // Check if particlesJS is already loaded, otherwise wait for it
-    if (window.particlesJS) {
-      initParticles();
-    } else {
-      // Poll for particles.js to be available (from CDN)
-      const checkInterval = setInterval(() => {
-        if (window.particlesJS) {
-          clearInterval(checkInterval);
-          initParticles();
+        resize: {
+          enable: true
         }
-      }, 100);
-
-      return () => {
-        mounted = false;
-        clearInterval(checkInterval);
-      };
-    }
-
-    // Cleanup on unmount
-    return () => {
-      mounted = false;
-      if (window.pJSDom && window.pJSDom.length > 0) {
-        try {
-          window.pJSDom[0].pJS.fn.vendors.destroypJS();
-          window.pJSDom = [];
-        } catch (e) {
-          window.pJSDom = [];
+      },
+      modes: {
+        attract: {
+          distance: settings.interactionDistance,
+          duration: 0.4,
+          speed: 3
+        },
+        repulse: {
+          distance: settings.interactionDistance,
+          duration: 0.4
+        },
+        push: {
+          quantity: 4
         }
       }
-    };
-  }, [theme, settings]); // Re-initialize when theme or settings change
+    },
+    detectRetina: true
+  }), [theme, settings, particleColor]);
+
+  if (!init) {
+    return null;
+  }
 
   return (
-    <div
-      id="particles-js"
-      ref={containerRef}
-      className="fixed inset-0 z-0"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%'
-      }}
+    <Particles
+      id="tsparticles"
+      options={options}
     />
   );
 };
