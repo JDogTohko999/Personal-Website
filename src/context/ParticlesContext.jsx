@@ -16,17 +16,17 @@ export const ParticlesProvider = ({ children }) => {
     interactionMode: 'repulse',
 
     // Particle settings
-    particleCount: 80,
-    particleSize: 3,
-    particleSpeed: 2,
+    particleCount: 60,
+    particleSize: 4,
+    particleSpeed: 1.5,
 
     // Line settings
     linesEnabled: true,
-    lineDistance: 150,
-    lineOpacity: 0.3,
+    lineDistance: 130,
+    lineOpacity: 0.4,
 
     // Interaction strength
-    interactionDistance: 200,
+    interactionDistance: 120,
 
     // Movement
     randomMovement: false,
