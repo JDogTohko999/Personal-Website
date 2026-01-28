@@ -12,6 +12,9 @@ export const useParticles = () => {
 
 export const ParticlesProvider = ({ children }) => {
   const [settings, setSettings] = useState({
+    // Particles enabled
+    enabled: true,
+
     // Interaction mode: 'repulse' or 'attract'
     interactionMode: 'repulse',
 

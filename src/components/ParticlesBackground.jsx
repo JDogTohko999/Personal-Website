@@ -124,10 +124,16 @@ const ParticlesBackground = () => {
   }
 
   return (
-    <Particles
-      id="tsparticles"
-      options={options}
-    />
+    <div
+      className={`transition-opacity duration-700 ${
+        settings.enabled ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
+      <Particles
+        id="tsparticles"
+        options={options}
+      />
+    </div>
   );
 };
 

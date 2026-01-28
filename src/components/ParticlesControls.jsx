@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, X, GripHorizontal } from 'lucide-react';
+import { Settings, X, GripHorizontal, Power } from 'lucide-react';
 import { useParticles } from '../context/ParticlesContext';
 
 const ParticlesControls = () => {
@@ -101,26 +101,50 @@ const ParticlesControls = () => {
     >
       {/* Main Control Panel */}
       <div className="bg-portfolio-card/95 backdrop-blur-sm border border-portfolio-border rounded-xl shadow-2xl overflow-hidden min-w-[200px]">
+        {/* Power Button */}
+        <div className="p-2 border-b border-portfolio-border flex justify-center">
+          <button
+            onClick={() => updateSetting('enabled', !settings.enabled)}
+            className={`p-2 rounded-full transition-all duration-300 ${
+              settings.enabled
+                ? 'bg-portfolio-gold text-portfolio-bg'
+                : 'bg-portfolio-border text-portfolio-muted'
+            }`}
+            title={settings.enabled ? 'Turn off particles' : 'Turn on particles'}
+          >
+            <Power className="w-4 h-4" />
+          </button>
+        </div>
+
         {/* Interaction Mode Toggle */}
-        <div className="p-3 border-b border-portfolio-border">
+        <div className={`p-3 border-b border-portfolio-border transition-opacity duration-300 ${
+          settings.enabled ? 'opacity-100' : 'opacity-50 pointer-events-none'
+        }`}>
           <div className="text-xs text-portfolio-muted mb-2 text-center">Cursor Mode</div>
-          <div className="flex rounded-lg overflow-hidden border border-portfolio-border">
+          <div className="relative flex rounded-lg overflow-hidden border border-portfolio-border">
+            {/* Sliding background indicator */}
+            <div
+              className="absolute top-0 bottom-0 w-1/2 bg-portfolio-gold rounded-md transition-transform duration-300 ease-in-out"
+              style={{
+                transform: settings.interactionMode === 'attract' ? 'translateX(100%)' : 'translateX(0%)'
+              }}
+            />
             <button
               onClick={() => updateSetting('interactionMode', 'repulse')}
-              className={`flex-1 py-2 px-3 text-xs font-medium transition-colors ${
+              className={`relative flex-1 py-2 px-3 text-xs font-medium transition-colors duration-300 ${
                 settings.interactionMode === 'repulse'
-                  ? 'bg-portfolio-gold text-portfolio-bg'
-                  : 'bg-transparent text-portfolio-text hover:bg-portfolio-border/50'
+                  ? 'text-portfolio-bg'
+                  : 'text-portfolio-text hover:text-portfolio-gold'
               }`}
             >
               Repel
             </button>
             <button
               onClick={() => updateSetting('interactionMode', 'attract')}
-              className={`flex-1 py-2 px-3 text-xs font-medium transition-colors ${
+              className={`relative flex-1 py-2 px-3 text-xs font-medium transition-colors duration-300 ${
                 settings.interactionMode === 'attract'
-                  ? 'bg-portfolio-gold text-portfolio-bg'
-                  : 'bg-transparent text-portfolio-text hover:bg-portfolio-border/50'
+                  ? 'text-portfolio-bg'
+                  : 'text-portfolio-text hover:text-portfolio-gold'
               }`}
             >
               Attract
@@ -130,8 +154,10 @@ const ParticlesControls = () => {
 
         {/* Settings Toggle Button */}
         <button
-          onClick={() => setSettingsOpen(!settingsOpen)}
-          className="w-full py-2 px-3 flex items-center justify-center gap-2 text-xs text-portfolio-muted hover:text-portfolio-text hover:bg-portfolio-border/30 transition-colors"
+          onClick={() => settings.enabled && setSettingsOpen(!settingsOpen)}
+          className={`w-full py-2 px-3 flex items-center justify-center gap-2 text-xs text-portfolio-muted hover:text-portfolio-text hover:bg-portfolio-border/30 transition-all duration-300 ${
+            settings.enabled ? 'opacity-100' : 'opacity-50 pointer-events-none'
+          }`}
         >
           {settingsOpen ? (
             <>
