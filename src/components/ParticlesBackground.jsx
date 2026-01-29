@@ -34,7 +34,7 @@ const ParticlesBackground = () => {
   const options = useMemo(() => ({
     fullScreen: {
       enable: true,
-      zIndex: 0
+      zIndex: -1
     },
     fpsLimit: 120,
     particles: {

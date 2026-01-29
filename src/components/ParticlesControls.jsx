@@ -7,8 +7,40 @@ const ParticlesControls = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [position, setPosition] = useState({ x: 20, y: 20 }); // Distance from bottom-right
   const [isDragging, setIsDragging] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
   const dragRef = useRef(null);
   const offsetRef = useRef({ x: 0, y: 0 });
+
+  // Handle scroll-based fade out
+  useEffect(() => {
+    const handleScroll = () => {
+      const experienceSection = document.getElementById('experience');
+      if (!experienceSection) return;
+
+      const experienceTop = experienceSection.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      // Start fading when experience section is 1.5 screen heights away
+      // Fully faded when experience section reaches top of viewport
+      const fadeStart = windowHeight * 1.5;
+      const fadeEnd = windowHeight * 0.3;
+
+      if (experienceTop > fadeStart) {
+        setScrollOpacity(1);
+      } else if (experienceTop < fadeEnd) {
+        setScrollOpacity(0);
+      } else {
+        // Linear interpolation between fadeStart and fadeEnd
+        const progress = (experienceTop - fadeEnd) / (fadeStart - fadeEnd);
+        setScrollOpacity(progress);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Handle drag start
   const handleMouseDown = (e) => {
@@ -88,19 +120,26 @@ const ParticlesControls = () => {
     </div>
   );
 
+  // Don't render if completely faded
+  if (scrollOpacity === 0) {
+    return null;
+  }
+
   return (
     <div
       ref={dragRef}
-      className="fixed z-50 select-none"
+      className="fixed z-50 select-none transition-opacity duration-200"
       style={{
         right: position.x,
         bottom: position.y,
-        cursor: isDragging ? 'grabbing' : 'auto'
+        cursor: isDragging ? 'grabbing' : 'auto',
+        opacity: scrollOpacity,
+        pointerEvents: scrollOpacity < 0.1 ? 'none' : 'auto'
       }}
       onMouseDown={handleMouseDown}
     >
       {/* Main Control Panel */}
-      <div className="bg-portfolio-card/95 backdrop-blur-sm border border-portfolio-border rounded-xl shadow-2xl overflow-hidden min-w-[200px]">
+      <div className="border border-portfolio-border rounded-xl shadow-2xl overflow-hidden min-w-[200px]" style={{ backgroundColor: '#000000ff' }}>
         {/* Power Button */}
         <div className="px-4 py-2 border-b border-portfolio-border flex justify-between items-center">
           <span className="text-sm font-medium text-portfolio-text">
