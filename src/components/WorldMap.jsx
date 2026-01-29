@@ -9,50 +9,50 @@ const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 const cityData = [
   {
     id: 1,
-    name: "New York City",
-    coordinates: [-74.006, 40.7128],
+    name: "Wyckoff, NJ",
+    coordinates: [-74.1629, 41.0068],
     countryCode: ["USA", "840"],
-    description: "Add your description here - what did you do in NYC?",
+    description: "I grew up my entire life here, a suburb of NYC.",
     images: [],
   },
   {
     id: 2,
-    name: "Kingston",
-    coordinates: [-76.7936, 17.9714],
-    countryCode: ["JAM", "388"],
-    description: "Add your Jamaica experience here.",
+    name: "Charlottesville, VA",
+    coordinates: [-78.4767, 38.0293],
+    countryCode: ["USA", "840"],
+    description: "Wahoowa!",
     images: [],
   },
   {
     id: 3,
-    name: "Madrid",
-    coordinates: [-3.7038, 40.4168],
+    name: "Valencia",
+    coordinates: [-0.3763, 39.4699],
     countryCode: ["ESP", "724"],
-    description: "Add your Spain experience here.",
+    description: "I spent a semester abroad here with the two most amazing host parents, shoutout Elena and Enrique.",
     images: [],
   },
   {
     id: 4,
-    name: "Paris",
-    coordinates: [2.3522, 48.8566],
-    countryCode: ["FRA", "250"],
-    description: "Add your Paris experience here.",
+    name: "Sevilla",
+    coordinates: [-5.9845, 37.3891],
+    countryCode: ["ESP", "724"],
+    description: "Visited twice, very pretty and fun.",
     images: [],
   },
   {
     id: 5,
-    name: "Zurich",
-    coordinates: [8.5417, 47.3769],
-    countryCode: ["CHE", "756"],
-    description: "Add your Switzerland experience here.",
+    name: "Madrid",
+    coordinates: [-3.7038, 40.4168],
+    countryCode: ["ESP", "724"],
+    description: "Visited many times, got the vibe. I prefer other Spanish cities.",
     images: [],
   },
   {
     id: 6,
-    name: "Rome",
-    coordinates: [12.4964, 41.9028],
-    countryCode: ["ITA", "380"],
-    description: "Add your Italy experience here.",
+    name: "Zahara de la Sierra",
+    coordinates: [-5.3920, 36.8406],
+    countryCode: ["ESP", "724"],
+    description: "2 month workaway summer '25.",
     images: [],
   },
   {
@@ -60,47 +60,119 @@ const cityData = [
     name: "London",
     coordinates: [-0.1276, 51.5074],
     countryCode: ["GBR", "826"],
-    description: "Add your London experience here.",
+    description: "Visited.",
     images: [],
   },
   {
     id: 8,
-    name: "Santo Domingo",
-    coordinates: [-69.9312, 18.4861],
-    countryCode: ["DOM", "214"],
-    description: "Add your Dominican Republic experience here.",
+    name: "Marrakesh",
+    coordinates: [-7.9811, 31.6295],
+    countryCode: ["MAR", "504"],
+    description: "Highlight of trip was playing rock paper scissors and soccer with local kids for an hour.",
     images: [],
   },
   {
     id: 9,
-    name: "Mexico City",
-    coordinates: [-99.1332, 19.4326],
-    countryCode: ["MEX", "484"],
-    description: "Add your Mexico experience here.",
+    name: "Annecy",
+    coordinates: [6.1293, 45.8992],
+    countryCode: ["FRA", "250"],
+    description: "Beautiful town and awesome hiking.",
     images: [],
   },
   {
     id: 10,
-    name: "Toronto",
-    coordinates: [-79.3832, 43.6532],
-    countryCode: ["CAN", "124"],
-    description: "Add your Canada experience here.",
+    name: "Geneva",
+    coordinates: [6.1432, 46.2044],
+    countryCode: ["CHE", "756"],
+    description: "Spent just a day here. Super cool (especially the lake), but everything was so expensive.",
     images: [],
   },
   {
     id: 11,
-    name: "Amsterdam",
-    coordinates: [4.9041, 52.3676],
-    countryCode: ["NLD", "528"],
-    description: "Add your Netherlands experience here.",
+    name: "Rome",
+    coordinates: [12.4964, 41.9028],
+    countryCode: ["ITA", "380"],
+    description: "Fun trip with big group.",
     images: [],
   },
   {
     id: 12,
-    name: "Marrakech",
-    coordinates: [-7.9811, 31.6295],
-    countryCode: ["MAR", "504"],
-    description: "Add your Morocco experience here.",
+    name: "Florence",
+    coordinates: [11.2558, 43.7696],
+    countryCode: ["ITA", "380"],
+    description: "Didn't plan anything, wandered around with a friend. Still fun.",
+    images: [],
+  },
+  {
+    id: 13,
+    name: "Amsterdam",
+    coordinates: [4.9041, 52.3676],
+    countryCode: ["NLD", "528"],
+    description: "Had a local show us around, avoided touristy things for better or for worse.",
+    images: [],
+  },
+  {
+    id: 14,
+    name: "Kingston",
+    coordinates: [-76.7936, 17.9714],
+    countryCode: ["JAM", "388"],
+    description: "Family vacations.",
+    images: [],
+  },
+  {
+    id: 15,
+    name: "Punta Cana",
+    coordinates: [-68.4055, 18.5601],
+    countryCode: ["DOM", "214"],
+    description: "Family vacation.",
+    images: [],
+  },
+  {
+    id: 16,
+    name: "Cancun",
+    coordinates: [-86.8475, 21.1619],
+    countryCode: ["MEX", "484"],
+    description: "Family Vacations.",
+    images: [],
+  },
+  {
+    id: 17,
+    name: "Montreal",
+    coordinates: [-73.5673, 45.5017],
+    countryCode: ["CAN", "124"],
+    description: "Visit 2nd cousins.",
+    images: [],
+  },
+  {
+    id: 18,
+    name: "East Madison, NH",
+    coordinates: [-71.1278, 43.8340],
+    countryCode: ["USA", "840"],
+    description: "7 week sleepaway camp for 8 summers straight.",
+    images: [],
+  },
+  {
+    id: 19,
+    name: "Olympic Mountain Range",
+    coordinates: [-123.5000, 47.8333],
+    countryCode: ["USA", "840"],
+    description: "Month long NOLS backpacking trip.",
+    images: [],
+  },
+  {
+    id: 20,
+    name: "Mt. Pleasant, SC",
+    coordinates: [-79.8690, 32.7935],
+    countryCode: ["USA", "840"],
+    description: "Parents moved south from NJ in late 2025!",
+    images: [],
+  },
+  {
+    id: 21,
+    name: "Paris",
+    coordinates: [2.3522, 48.8566],
+    countryCode: ["FRA", "250"],
+    description: "Befriended some of the most interesting people I've met, awesome first time solo travelling.",
     images: [],
   },
 ];
@@ -116,22 +188,43 @@ const getVisitedCountryCodes = () => {
   return codes;
 };
 
+// Group cities by country code
+const getCitiesByCountry = () => {
+  const grouped = {};
+  cityData.forEach(city => {
+    const key = city.countryCode[1] || city.countryCode[0];
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(city);
+  });
+  return grouped;
+};
+
 const WorldMap = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [tooltipCity, setTooltipCity] = useState(null);
+  const [zoom, setZoom] = useState(1);
 
   const visitedCountryCodes = useMemo(() => getVisitedCountryCodes(), []);
+  const citiesByCountry = useMemo(() => getCitiesByCountry(), []);
 
-  // Group cities by country for gradient rendering
-  const visitedCitiesByCountry = useMemo(() => {
-    const grouped = {};
-    cityData.forEach(city => {
-      const key = city.countryCode[1] || city.countryCode[0];
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(city);
-    });
-    return grouped;
-  }, []);
+  // Handle zoom changes
+  const handleMoveEnd = (pos) => {
+    if (pos.zoom && pos.zoom > 0) {
+      setZoom(pos.zoom);
+    }
+  };
+
+  // Calculate sizes based on zoom
+  const baseOuter = 5;
+  const baseInner = 3;
+  const baseGlow = 30; // Base glow radius
+  const scale = Math.max(0.4, 1 / Math.sqrt(Math.max(1, zoom)));
+  const markerSize = {
+    outer: Math.max(2, baseOuter * scale),
+    inner: Math.max(1.5, baseInner * scale),
+    stroke: Math.max(0.5, 1 * scale),
+    glow: baseGlow * scale
+  };
 
   const getCountryCategory = (geo) => {
     const id = geo.id;
@@ -152,85 +245,113 @@ const WorldMap = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">World</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">World Map</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full mb-8"></div>
 
           <div className="flex justify-center gap-6 mb-8 flex-wrap">
             <div className="flex items-center">
               <span className="w-4 h-4 bg-portfolio-gold rounded-full mr-2"></span>
-              <span className="text-gray-300">Visited</span>
+              <span className="text-gray-300">Been</span>
             </div>
             <div className="flex items-center">
               <span className="w-4 h-4 rounded-full mr-2" style={{ backgroundColor: '#5eb822' }}></span>
-              <span className="text-gray-300">Going Soon</span>
+              <span className="text-gray-300">Going</span>
             </div>
             <div className="flex items-center">
               <span className="w-4 h-4 rounded-full mr-2" style={{ backgroundColor: '#A78BFA' }}></span>
-              <span className="text-gray-300">Bucket List</span>
+              <span className="text-gray-300">Bucket</span>
             </div>
           </div>
           <p className="text-gray-400 text-sm">Click on a city marker to learn more</p>
         </motion.div>
 
-        <div className="w-full h-[650px] border border-gray-800 rounded-2xl bg-portfolio-card shadow-2xl overflow-hidden relative">
-          <ComposableMap projection="geoEqualEarth" projectionConfig={{ scale: 160, center: [0, -20] }}>
-            <defs>
-              {/* Create radial gradients for visited countries */}
-              {Object.entries(visitedCitiesByCountry).map(([countryCode]) => (
-                <radialGradient
-                  key={`gradient-${countryCode}`}
-                  id={`gradient-${countryCode}`}
-                  cx="50%"
-                  cy="50%"
-                  r="80%"
-                >
-                  <stop offset="0%" stopColor="#f4cc67" stopOpacity="1" />
-                  <stop offset="30%" stopColor="#f4cc67" stopOpacity="0.8" />
-                  <stop offset="60%" stopColor="#f4cc67" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#f4cc67" stopOpacity="0.2" />
-                </radialGradient>
-              ))}
-            </defs>
-
-            <ZoomableGroup>
+        <div className="w-full h-[560px] border border-gray-800 rounded-2xl bg-portfolio-card shadow-2xl overflow-hidden relative cursor-grab active:cursor-grabbing">
+          <ComposableMap
+            projection="geoEqualEarth"
+            projectionConfig={{ scale: 140, center: [0, 0] }}
+            width={800}
+            height={560}
+          >
+            <ZoomableGroup onMoveEnd={handleMoveEnd}>
               <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const category = getCountryCategory(geo);
-                    const isVisited = category === "visited";
+                {({ geographies, path }) => (
+                  <>
+                    {/* Define clipPaths for visited countries */}
+                    <defs>
+                      {geographies
+                        .filter(geo => visitedCountryCodes.has(geo.id) || visitedCountryCodes.has(geo.properties?.ISO_A3))
+                        .map(geo => (
+                          <clipPath key={`clip-${geo.id}`} id={`clip-${geo.id}`}>
+                            <path d={path(geo)} />
+                          </clipPath>
+                        ))}
 
-                    let fill = "#374151";
-                    if (isVisited) {
-                      fill = `url(#gradient-${geo.id})`;
-                    } else if (category === "goingSoon") {
-                      fill = "#5eb822";
-                    } else if (category === "bucketList") {
-                      fill = "#A78BFA";
-                    }
+                      {/* Radial gradient for glow effect */}
+                      <radialGradient id="cityGlow">
+                        <stop offset="0%" stopColor="#f4cc67" stopOpacity="0.8" />
+                        <stop offset="30%" stopColor="#f4cc67" stopOpacity="0.5" />
+                        <stop offset="60%" stopColor="#f4cc67" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#f4cc67" stopOpacity="0" />
+                      </radialGradient>
+                    </defs>
 
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={fill}
-                        stroke="#1F2937"
-                        strokeWidth={0.5}
-                        style={{
-                          default: { outline: "none" },
-                          hover: {
-                            outline: "none",
-                            opacity: 0.85,
-                            filter: category ? "brightness(1.15)" : "none"
-                          },
-                          pressed: { outline: "none" },
-                        }}
-                      />
-                    );
-                  })
-                }
+                    {/* Render countries */}
+                    {geographies.map((geo) => {
+                      const category = getCountryCategory(geo);
+
+                      let fill = "#374151";
+                      if (category === "visited") {
+                        fill = "#374151"; // Base color, glow will be added separately
+                      } else if (category === "goingSoon") {
+                        fill = "#5eb822";
+                      } else if (category === "bucketList") {
+                        fill = "#A78BFA";
+                      }
+
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={fill}
+                          stroke="#1F2937"
+                          strokeWidth={0.5}
+                          style={{
+                            default: { outline: "none" },
+                            hover: {
+                              outline: "none",
+                              opacity: 0.85,
+                              filter: category ? "brightness(1.15)" : "none"
+                            },
+                            pressed: { outline: "none" },
+                          }}
+                        />
+                      );
+                    })}
+
+                    {/* Render glow circles clipped to country borders */}
+                    {geographies
+                      .filter(geo => visitedCountryCodes.has(geo.id) || visitedCountryCodes.has(geo.properties?.ISO_A3))
+                      .map(geo => {
+                        const countryCities = citiesByCountry[geo.id] || [];
+
+                        return (
+                          <g key={`glow-group-${geo.id}`} clipPath={`url(#clip-${geo.id})`}>
+                            {countryCities.map(city => (
+                              <Marker key={`glow-${city.id}`} coordinates={city.coordinates}>
+                                <circle
+                                  r={markerSize.glow}
+                                  fill="url(#cityGlow)"
+                                />
+                              </Marker>
+                            ))}
+                          </g>
+                        );
+                      })}
+                  </>
+                )}
               </Geographies>
 
-              {/* City Markers (visited only) */}
+              {/* City Markers (on top of everything) */}
               {cityData.map((city) => (
                 <Marker
                   key={city.id}
@@ -241,9 +362,20 @@ const WorldMap = () => {
                   style={{ cursor: 'pointer' }}
                 >
                   {/* Outer glow */}
-                  <circle r={5} fill="#f4cc67" fillOpacity={0.3} />
+                  <circle
+                    r={markerSize.outer}
+                    fill={tooltipCity?.id === city.id ? "#ffffff" : "#f4cc67"}
+                    fillOpacity={tooltipCity?.id === city.id ? 0.5 : 0.3}
+                    style={{ cursor: 'pointer', transition: 'fill 0.2s, fill-opacity 0.2s' }}
+                  />
                   {/* Inner circle */}
-                  <circle r={3} fill="#f4cc67" stroke="#fff" strokeWidth={1} />
+                  <circle
+                    r={markerSize.inner}
+                    fill={tooltipCity?.id === city.id ? "#ffffff" : "#f4cc67"}
+                    stroke="#fff"
+                    strokeWidth={markerSize.stroke}
+                    style={{ cursor: 'pointer', transition: 'fill 0.2s' }}
+                  />
                 </Marker>
               ))}
             </ZoomableGroup>
