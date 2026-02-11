@@ -25,7 +25,7 @@ const cityData = [
   },
   {
     id: 3,
-    name: "Valencia",
+    name: "València",
     coordinates: [-0.3763, 39.4699],
     countryCode: ["ESP", "724"],
     description: "I spent a semester abroad here with the two most amazing host parents, shoutout Elena and Enrique.",
@@ -272,7 +272,7 @@ const WorldMap = () => {
             width={800}
             height={560}
           >
-            <ZoomableGroup onMoveEnd={handleMoveEnd}>
+            <ZoomableGroup center={[8, -34]} onMoveEnd={handleMoveEnd}>
               <Geographies geography={geoUrl}>
                 {({ geographies, path }) => (
                   <>
