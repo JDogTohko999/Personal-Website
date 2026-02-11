@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Plus, Minus } from 'lucide-react';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -175,6 +175,30 @@ const cityData = [
     description: "Befriended some of the most interesting people I've met, awesome first time solo travelling.",
     images: [],
   },
+  {
+    id: 22,
+    name: "Grand Canyon, AZ",
+    coordinates: [-112.1401, 36.0544],
+    countryCode: ["USA", "840"],
+    description: "Spring break 2025.",
+    images: [],
+  },
+  {
+    id: 23,
+    name: "Zion National Park, UT",
+    coordinates: [-113.0263, 37.2982],
+    countryCode: ["USA", "840"],
+    description: "Spring break 2025.",
+    images: [],
+  },
+  {
+    id: 24,
+    name: "Sedona, AZ",
+    coordinates: [-111.7610, 34.8697],
+    countryCode: ["USA", "840"],
+    description: "Spring break 2025.",
+    images: [],
+  },
 ];
 
 // Countries for going soon and bucket list (solid fill only, no markers)
@@ -203,16 +227,34 @@ const WorldMap = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [tooltipCity, setTooltipCity] = useState(null);
   const [zoom, setZoom] = useState(1);
+  const mapRef = useRef(null);
 
   const visitedCountryCodes = useMemo(() => getVisitedCountryCodes(), []);
   const citiesByCountry = useMemo(() => getCitiesByCountry(), []);
 
-  // Handle zoom changes
+  // Disable scroll zoom on the map container
+  useEffect(() => {
+    const el = mapRef.current;
+    if (!el) return;
+    const prevent = (e) => e.preventDefault();
+    el.addEventListener('wheel', prevent, { passive: false });
+    return () => el.removeEventListener('wheel', prevent);
+  }, []);
+
+  // Handle zoom changes from pan/drag
   const handleMoveEnd = (pos) => {
     if (pos.zoom && pos.zoom > 0) {
       setZoom(pos.zoom);
     }
   };
+
+  const handleZoomIn = useCallback(() => {
+    setZoom(z => Math.min(z * 1.5, 8));
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setZoom(z => Math.max(z / 1.5, 1));
+  }, []);
 
   // Calculate sizes based on zoom
   const baseOuter = 5;
@@ -265,14 +307,14 @@ const WorldMap = () => {
           <p className="text-gray-400 text-sm">Click on a city marker to learn more</p>
         </motion.div>
 
-        <div className="w-full h-[560px] border border-gray-800 rounded-2xl bg-portfolio-card shadow-2xl overflow-hidden relative cursor-grab active:cursor-grabbing">
+        <div ref={mapRef} className="w-full h-[560px] border border-gray-800 rounded-2xl bg-portfolio-card shadow-2xl overflow-hidden relative cursor-grab active:cursor-grabbing">
           <ComposableMap
             projection="geoEqualEarth"
             projectionConfig={{ scale: 140, center: [0, 0] }}
             width={800}
             height={560}
           >
-            <ZoomableGroup center={[8, -34]} onMoveEnd={handleMoveEnd}>
+            <ZoomableGroup center={[8, -34]} zoom={zoom} onMoveEnd={handleMoveEnd}>
               <Geographies geography={geoUrl}>
                 {({ geographies, path }) => (
                   <>
@@ -395,9 +437,25 @@ const WorldMap = () => {
             )}
           </AnimatePresence>
 
+          {/* Zoom controls */}
+          <div className="absolute bottom-4 left-4 flex flex-col gap-1">
+            <button
+              onClick={handleZoomIn}
+              className="bg-black/60 backdrop-blur hover:bg-black/80 text-gray-300 hover:text-white w-8 h-8 rounded flex items-center justify-center transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleZoomOut}
+              className="bg-black/60 backdrop-blur hover:bg-black/80 text-gray-300 hover:text-white w-8 h-8 rounded flex items-center justify-center transition-colors"
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+          </div>
+
           {/* Interactive Map label */}
           <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur px-4 py-2 rounded text-xs text-gray-400 pointer-events-none">
-            Scroll to zoom • Drag to pan
+            Drag to pan
           </div>
         </div>
 
