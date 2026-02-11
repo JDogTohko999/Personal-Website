@@ -7,28 +7,28 @@ const achievements = [
     id: 1,
     title: 'Eagle Scout',
     organization: 'Boy Scouts of America',
-    description: 'Conceived and executed a project restoring historic headstones. Led volunteers to complete 162 hours of service.',
+    description: 'Achieved by 4% of scouts. Conceived and executed a project restoring and archiving local historic headstones. Led volunteers to complete 162 hours of service.',
     icon: Medal
   },
   {
     id: 2,
     title: 'Dean\'s List',
     organization: 'UVA Engineering',
-    description: 'Achieved all 7 semesters (GPA >= 3.4).',
+    description: 'Achieved all 7 semesters',
     icon: Star
   },
   {
     id: 3,
-    title: '3rd Place - Google Vision AI',
+    title: '3rd - Google Vision AI',
     organization: 'UPS Hackathon 2024',
     description: 'Competed against 53 teams. Leveraged Cloud Vision AI for package detection.',
     icon: Trophy
   },
   {
     id: 4,
-    title: 'Top 10% - UPASK',
+    title: 'Top 5 Overall',
     organization: 'UPS Hackathon 2023',
-    description: 'Conceptualized and developed an interactive help forum. Placed in top 10% out of 50+ teams.',
+    description: 'Conceptualized and developed UPASK, an interactive help forum. Presented to senior management.',
     icon: Award
   }
 ];
