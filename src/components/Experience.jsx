@@ -63,17 +63,17 @@ const experiences = [
   // Volunteering
   {
     id: 9,
-    role: 'Member',
-    company: 'Giving What We Can',
-    period: 'Sep 2025 - Present',
-    description: 'Pledged to give at least 10% of lifetime income to effective charities.'
-  },
-  {
-    id: 10,
     role: 'Volunteer',
     company: 'Families for Families NJ',
     period: 'Oct 2018 - Aug 2025',
     description: 'Assisted in furniture collection and delivery for families transitioning out of homelessness. Translated (Spanish) at food pantries.'
+  },
+  {
+    id: 10,
+    role: 'Member',
+    company: 'Giving What We Can',
+    period: 'Sep 2025 - Present',
+    description: 'Pledged to give at least 10% of lifetime income to effective charities.'
   }
 ];
 
