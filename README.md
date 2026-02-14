@@ -1,4 +1,4 @@
 # Personal-Website
 Finally time to make a personal website! I also really want to try out Antigravity and Claude Code.
 
-[jasonchin.dev]([url](https://jasonchin.dev/))
+[jasonchin.dev](https://jasonchin.dev/)
