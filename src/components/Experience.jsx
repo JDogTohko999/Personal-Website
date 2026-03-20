@@ -57,10 +57,10 @@ const experiences = [
   // Education
   {
     id: 8,
-    role: 'B.S. Computer Engineering',
+    role: 'B.S. Computer Engineering | AI Focal Path',
     company: 'University of Virginia',
     period: 'Aug 2022 - May 2026',
-    description: 'GPA: 3.7/4.0. Lead of AI Safety Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society.'
+    description: 'GPA: 3.7/4.0. Lead of AI Safety Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).'
   },
   {
     id: 9,
