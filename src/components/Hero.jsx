@@ -34,7 +34,7 @@ const Hero = () => {
             AI Safety | Computer Engineering @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            Fourth-year at UVA focused on advancing robust AI while mitigating risks. Exploring technical alignment and smart governance to ensure AI systems are reliable, secure, and beneficial. Co-founder and active president of the Virginia AI Safety Initiative (VAISI).
+            Fourth-year at UVA focused on advancing robust AI while mitigating risks. Exploring technical alignment and smart governance to ensure AI systems are reliable, secure, and beneficial. Co-founder and president of the Virginia AI Security Initiative (VAISI).
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">

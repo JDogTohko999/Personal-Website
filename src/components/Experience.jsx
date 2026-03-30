@@ -8,7 +8,7 @@ const experiences = [
     role: 'Co-founder and President',
     company: 'Virginia AI Safety Initiative (VAISI)',
     period: 'Aug 2025 - Present',
-    description: 'Creating an environment that enables the UVA community to engage with and take action on AI safety. Focused on recruitment, operations, and planning the AI Governance Fellowship.'
+    description: 'Creating an environment that enables the UVA community to engage with and take action on AI safety. Focused on team management, effective recruitment, event coordination, and creating + leading the VAISI\'s AI Governance Fellowship.'
   },
   
   {
