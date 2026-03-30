@@ -85,8 +85,7 @@ const Projects = () => {
           
           <div className="relative z-10 md:flex items-center justify-between gap-8">
             <div className="flex-1">
-              <div className="inline-block px-3 py-1 bg-portfolio-gold/20 text-portfolio-gold rounded-full text-xs font-bold tracking-wider mb-4">FEATURED CLUB</div>
-              <h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
+<h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
               <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
                 As the co-founder and president, my mission is to get VAISI off the ground and attain critical mass in terms of membership, operational capacity, and legitimacy.
               </p>
@@ -97,8 +96,8 @@ const Projects = () => {
             </div>
             {/* Visual element for VAISI (Logo placeholder) */}
             <div className="mt-8 md:mt-0 flex-shrink-0">
-                 <div className="w-32 h-32 bg-portfolio-card rounded-full flex items-center justify-center border-2 border-portfolio-gold/50 shadow-lg mx-auto">
-                   <span className="text-2xl font-bold text-portfolio-card-text">VAISI</span>
+                 <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-portfolio-gold/50 shadow-lg mx-auto">
+                   <img src="/VAISI_Logo_cropped.png" alt="VAISI Logo" className="w-full h-full object-cover -translate-y-.5" />
                </div>
             </div>
           </div>
