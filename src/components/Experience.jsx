@@ -6,9 +6,9 @@ const experiences = [
   {
     id: 1,
     role: 'Co-founder and President',
-    company: 'Virginia AI Safety Initiative (VAISI)',
+    company: 'Virginia AI Security Initiative (VAISI)',
     period: 'Aug 2025 - Present',
-    description: 'Creating an environment that enables the UVA community to engage with and take action on AI safety. Focused on team management, effective recruitment, event coordination, and creating + leading the VAISI\'s AI Governance Fellowship.'
+    description: 'Creating an environment that enables the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading the VAISI\'s AI Governance Fellowship.'
   },
   
   {
@@ -60,7 +60,7 @@ const experiences = [
     role: 'B.S. Computer Engineering | AI Focal Path',
     company: 'University of Virginia',
     period: 'Aug 2022 - May 2026',
-    description: 'GPA: 3.7/4.0. Lead of AI Safety Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).'
+    description: 'GPA: 3.7/4.0. Lead of AI Security Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).'
   },
   {
     id: 9,
