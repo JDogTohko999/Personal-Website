@@ -13,17 +13,16 @@ const Footer = () => {
           </div>
           
           <div className="flex space-x-6">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
+            <a href="https://www.linkedin.com/in/jasonchin9/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
+            <a href="https://github.com/JDogTohko999" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
               <Github className="w-5 h-5" />
             </a>
-            <a href="https://substack.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
+            <a href="https://substack.com/@jdogtohko999" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-portfolio-gold transition-colors">
               <FileText className="w-5 h-5" />
             </a>
-            <a href="mailto:email@example.com" className="text-gray-400 hover:text-portfolio-gold transition-colors">
-              <Mail className="w-5 h-5" />
+            <a href="jasonchin098@gmail.com" className="text-gray-400 hover:text-portfolio-gold transition-colors">
             </a>
           </div>
         </div>
