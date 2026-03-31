@@ -1,37 +1,32 @@
 import React from 'react';
-// Components will be imported here
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Achievements from './components/Achievements';
-import WorldMap from './components/WorldMap';
-import Footer from './components/Footer';
-import ParticlesBackground from './components/ParticlesBackground';
-import ParticlesControls from './components/ParticlesControls';
-import EasterEgg from './components/EasterEgg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import ArtisticAccents from './components/ArtisticAccents';
+import MinimalHome from './pages/MinimalHome';
+import TextExpansions from './pages/TextExpansions';
+import OldWebsiteWrapper from './pages/OldWebsiteWrapper';
+
+import MinimalExperience from './pages/MinimalExperience';
+import MinimalProjects from './pages/MinimalProjects';
+import MinimalAchievements from './pages/MinimalAchievements';
+import MinimalTravel from './pages/MinimalTravel';
+import MinimalBlogList from './pages/MinimalBlogList';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
-      <EasterEgg />
-      <ParticlesBackground />
-      <ParticlesControls />
-      <ArtisticAccents />
-      <div className="relative z-10">
-        <Navbar />
-        <main className="flex-grow">
-          <Hero />
-          <Experience />
-          <Projects />
-          <Achievements />
-          <WorldMap />
-        </main>
-        <Footer />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MinimalHome />} />
+        <Route path="/blog" element={<MinimalBlogList />} />
+        <Route path="/blog/text-expansions" element={<TextExpansions />} />
+        
+        <Route path="/experience" element={<MinimalExperience />} />
+        <Route path="/projects" element={<MinimalProjects />} />
+        <Route path="/achievements" element={<MinimalAchievements />} />
+        <Route path="/travel" element={<MinimalTravel />} />
+        
+        <Route path="/old" element={<OldWebsiteWrapper />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

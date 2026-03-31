@@ -15,6 +15,12 @@ export default {
         'portfolio-card-text': 'var(--portfolio-card-text)', // New variable for card text contrast
         'portfolio-muted': 'var(--portfolio-muted)',
         'portfolio-border': 'var(--portfolio-border)',
+        'minimal-brown': '#5b4033',
+        'minimal-tan': '#d2b48c',
+        'minimal-green': '#3a5f45',
+        'minimal-olive': '#708238',
+        'minimal-dark-grey': '#2f353b',
+        'minimal-gold': '#d4af37',
       },
       fontFamily: {
         sans: ['Inter', 'Roboto', 'sans-serif'],
