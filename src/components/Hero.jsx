@@ -47,14 +47,22 @@ const Hero = () => {
               <Linkedin className="w-5 h-5 mr-2" />
               LinkedIn
             </a>
-            <a 
-              href="https://github.com/JDogTohko999" 
-              target="_blank" 
+            <a
+              href="https://github.com/JDogTohko999"
+              target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"
             >
               <Github className="w-5 h-5 mr-2" />
               GitHub
+            </a>
+            <a
+              href="/membership_over_time.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"
+            >
+              GroupMe Plots
             </a>
           </div>
         </motion.div>
