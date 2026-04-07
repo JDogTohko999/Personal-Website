@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GroupMe Membership</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -30,6 +31,25 @@
       gap: 10px;
       margin-top: 10px;
       align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      html, body {
+        height: auto;
+        overflow: auto;
+      }
+      #controls {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      #plot-wrapper,
+      #plot-wrapper > div,
+      .plotly-graph-div {
+        height: 70vw !important;
+        min-height: 280px !important;
+      }
     }
     #controls span {
       font-size: 13px;
