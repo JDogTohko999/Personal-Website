@@ -89,10 +89,16 @@ const Projects = () => {
               <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
                 As the co-founder and president, my mission is to get VAISI off the ground and attain critical mass in terms of membership, operational capacity, and legitimacy.
               </p>
-              <a href="https://vaisi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
-                Learn more about VAISI 
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              <div className="flex flex-wrap items-center gap-6">
+                <a href="https://vaisi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
+                  Learn more about VAISI
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a href="/membership_over_time.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-muted hover:text-portfolio-gold transition-colors group text-sm">
+                  GroupMe membership plots
+                  <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
             {/* Visual element for VAISI (Logo placeholder) */}
             <div className="mt-8 md:mt-0 flex-shrink-0">

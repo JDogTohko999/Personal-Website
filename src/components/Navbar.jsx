@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette } from 'lucide-react';
+import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette, MessageCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
@@ -32,6 +32,7 @@ const Navbar = () => {
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/jasonchin9/' },
     { name: 'GitHub', icon: Github, href: 'https://github.com/JDogTohko999' },
     { name: 'Substack', icon: FileText, href: 'https://substack.com/@jdogtohko999' },
+    { name: 'Admonymous', icon: MessageCircle, href: 'https://www.admonymous.co/jason-chin' }
   ];
 
   return (
