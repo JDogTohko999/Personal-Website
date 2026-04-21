@@ -83,7 +83,7 @@ const BoresAIDividendContent = () => (
         I wish briefs like this were longer, or at least had some appendix, methodologies, or further supporting research. I want to know exactly <em>how</em> these will be executed on. The suggestions sound interesting, but implementation specifications matter so much. Ahh, are early signs that I'm going to be a policy wonk? Thinking about what is optimal to tax is extremely complex, and it felt unsatisfying to see how unnuanced the "tax tokens" section was. I know it's a 3-page brief, so they're not really supposed to go into the details. Is this how all policy people feel about briefs?
       </Footnote>
       <Footnote n={2}>
-        I'm a campaign fellow and a genuine supporter of Alex Bores, and one of my deeply held priors is that his AI policy work would be technically grounded. That's probably why this caught me off guard, and why I felt a tinge of disappointment when finding this. It's a small thing, but I guess it's the kind of thing I wouldn't expect from him. I assume Alex read this before it went out (it's only 3 pages), but there is a chance he did not. I'm not really sure how these things go!
+        I'm a campaign fellow and a genuine supporter of Alex Bores, and one of my deeply held priors is that his AI policy work would be technically grounded. That's probably why this caught me off guard, and why I felt a tinge of disappointment when finding this. It's a small thing, and seemingly not that important. I assume Alex read this before it went out (it's only 3 pages), but there is a chance he did not. I'm not really sure how these things go!
       </Footnote>
     </div>
 
