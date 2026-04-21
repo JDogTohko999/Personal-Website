@@ -1,5 +1,6 @@
 import React from 'react';
-import { Linkedin, Github } from 'lucide-react';
+import { Linkedin, Github, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -56,6 +57,13 @@ const Hero = () => {
               <Github className="w-5 h-5 mr-2" />
               GitHub
             </a>
+            <Link
+              to="/blog"
+              className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"
+            >
+              <BookOpen className="w-5 h-5 mr-2" />
+              Blog
+            </Link>
           </div>
         </motion.div>
       </div>
