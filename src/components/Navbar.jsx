@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette, MessageCircle, BookOpen } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
@@ -29,6 +30,7 @@ const Navbar = () => {
   ];
 
   const externalLinks = [
+    { name: 'Blog', icon: BookOpen, href: '/blog', internal: true },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/jasonchin9/' },
     { name: 'GitHub', icon: Github, href: 'https://github.com/JDogTohko999' },
     { name: 'Substack', icon: FileText, href: 'https://substack.com/@jdogtohko999' },
@@ -72,7 +74,16 @@ const Navbar = () => {
                   onMouseEnter={() => setLinksOpen(true)}
                   onMouseLeave={() => setLinksOpen(false)}
                 >
-                  {externalLinks.map((link) => (
+                  {externalLinks.map((link) => link.internal ? (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="flex items-center px-4 py-2 text-sm text-portfolio-muted hover:bg-portfolio-green hover:text-white"
+                    >
+                      <link.icon className="w-4 h-4 mr-2 text-portfolio-gold" />
+                      {link.name}
+                    </Link>
+                  ) : (
                     <a
                       key={link.name}
                       href={link.href}
@@ -146,7 +157,17 @@ const Navbar = () => {
             ))}
             <div className="border-t border-portfolio-border pt-2 pb-2">
               <p className="px-3 text-xs text-portfolio-muted uppercase tracking-wider">Links</p>
-              {externalLinks.map((link) => (
+              {externalLinks.map((link) => link.internal ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="flex items-center text-portfolio-muted hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <link.icon className="w-4 h-4 mr-2" />
+                  {link.name}
+                </Link>
+              ) : (
                 <a
                   key={link.name}
                   href={link.href}
