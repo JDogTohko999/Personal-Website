@@ -96,7 +96,7 @@ export const blogPosts = [
     title: "A Small Correction to Bores' AI Dividend Brief",
     date: 'April 21, 2026',
     lastEdited: 'April 21, 2026, 4:07 AM',
-    tags: ['AI', 'Tax Policy', 'Alex Bores'],
+    tags: ['AI', 'Alex Bores', 'Nitpicking'],
     summary: 'Noting a small inaccuracy in the AI Dividend brief from Alex Bores — tokens are not units of computation.',
     Content: BoresAIDividendContent,
   },
