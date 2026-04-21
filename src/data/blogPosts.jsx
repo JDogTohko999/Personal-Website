@@ -18,7 +18,7 @@ const BoresAIDividendContent = () => (
     <div className="border-l-2 border-portfolio-gold/50 pl-4 mb-10">
       <p className="text-sm font-semibold text-portfolio-gold mb-1">TLDR</p>
       <p className="text-sm">
-        The sentence <em>"AI usage is measured in tokens, or units of computation."</em> is inaccurate — tokens are not units of computation.
+        The sentence <em>"AI usage is measured in tokens, or units of computation."</em> is inaccurate — tokens are not units of computation. The conflation is technically incorrect and has meaningful policy implications.
       </p>
     </div>
 
@@ -38,7 +38,10 @@ const BoresAIDividendContent = () => (
     <img src="/AI_Dividend_Policy_Summary.png" alt="AI Dividend Policy Summary" className="my-6 rounded-lg border border-portfolio-border max-w-2xl mx-auto block" />
 
     <p className="mb-5 mt-8">
-      I've recently been thinking about optimal AI-related tax policies, so I was super excited when I found out about this. As I was reading, annoyed by the frequent oversimplifications<Ref n={1} />, I suddenly stopped — <em>that can't be right...</em> I must have misread that. Wait, but surely ", or" implies that they're defining the previous word. I checked with my CS roommate as he brushed his teeth: "read this, does anything feel off about it?" He agreed.
+      I've recently been thinking about optimal AI-related tax policies, so I was super excited when I found out about this. I think this is an important initiative worth exploring, and this is a great first step.
+    </p>
+    <p className="mb-5">
+      As I was reading, annoyed by the frequent oversimplifications<Ref n={1} />, I suddenly stopped — <em>that can't be right...</em> I must have misread that. Wait, but surely ", or" implies that they're defining the previous word. I checked with my CS roommate as he brushed his teeth: "read this, does anything feel off about it?" He agreed.
     </p>
 
     <p className="mb-5">
@@ -50,7 +53,7 @@ const BoresAIDividendContent = () => (
     <p className="mb-5 mt-8">
       This sentence incorrectly defines tokens.{' '}
       <strong className="font-bold text-portfolio-text px-1 rounded" style={{ backgroundColor: 'rgba(244, 204, 103, 0.25)' }}>Tokens are not units of computation.</strong>{' '}
-      I had to triple-check my understanding of what a token is, then reconfirmed with Claude and yet another CS friend. Equating them is simply incorrect — this isn't pedantic, the distinction is meaningful and should have been caught before publishing<Ref n={2} />. That said, this probably reflects common industry shorthand where tokens are a proxy for computational cost in billing.
+      I had to triple-check my understanding of what a token is, then reconfirmed with Claude and yet another CS friend. Equating them is incorrect — this might be pedantic, but I do think the distinction is meaningful and should have been caught before publishing<Ref n={2} />. That said, this probably reflects common industry shorthand where tokens are a proxy for computational cost in billing. Tokens currently correlate quite well with computation, but this might not always be the case. New model architectures or reasoning modes could render this correlation less reliable, which is why it's important to be precise in definitions.
     </p>
 
     <p className="mb-5">
@@ -94,8 +97,8 @@ export const blogPosts = [
   {
     id: 'bores-ai-dividend-inaccuracy',
     title: "A Small Correction to Bores' AI Dividend Brief",
-    date: 'April 21, 2026',
-    lastEdited: 'April 21, 2026, 4:07 AM',
+    date: 'April 21, 2026, 4:07am',
+    lastEdited: 'April 21, 2026, 12:02pm',
     tags: ['AI', 'Alex Bores', 'Nitpicking'],
     summary: 'Noting a small inaccuracy in the AI Dividend brief from Alex Bores — tokens are not units of computation.',
     Content: BoresAIDividendContent,
