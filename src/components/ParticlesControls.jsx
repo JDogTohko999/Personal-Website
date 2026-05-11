@@ -217,7 +217,7 @@ const ParticlesControls = () => {
           ) : (
             <>
               <Settings className="w-3 h-3" />
-              More Settings
+              Mess Around w Settings
             </>
           )}
         </button>
