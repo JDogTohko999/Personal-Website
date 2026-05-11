@@ -202,7 +202,7 @@ const cityData = [
   {
     id: 25,
     name: "Guatemala",
-    coordinates: [14.6771, -91.2034],
+    coordinates: [-91.2034, 14.6771],
     countryCode: ["GTM", "320"],
     description: "Spring break 2026.",
     images: [],
