@@ -80,7 +80,7 @@ const experiences = [
   {
     id: 11,
     role: 'Member',
-    company: 'Giving What We Can',
+    company: 'Giving What We Can 🔸',
     period: 'Sep 2025 - Present',
     description: 'Pledged to give at least 10% of lifetime income to effective charities.'
   }

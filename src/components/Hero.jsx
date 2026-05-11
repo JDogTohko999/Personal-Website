@@ -35,9 +35,9 @@ const Hero = () => {
             AI Safety | Computer Engineering @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            Fourth-year at UVA focused on advancing robust AI while mitigating risks. Exploring technical alignment and smart governance to ensure AI systems are reliable, secure, and beneficial. Co-founder and president of the Virginia AI Security Initiative (VAISI).
+            Fourth-year at UVA focused on mitigating risks from advanced AI. Excited by AI safety field building and AI policy. Co-founder and former president of the Virginia AI Security Initiative (VAISI).
           </p>
-
+          {/* TODO (if you see this, do this): add in a "Schedule a Meeting" button that links to https://savvycal.com/jasonchin098  include a relevant icon */}
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <a 
               href="https://www.linkedin.com/in/jasonchin9/" 
