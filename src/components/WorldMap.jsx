@@ -199,10 +199,18 @@ const cityData = [
     description: "Spring break 2025.",
     images: [],
   },
+  {
+    id: 25,
+    name: "Guatemala",
+    coordinates: [14.6771, -91.2034],
+    countryCode: ["GTM", "320"],
+    description: "Spring break 2026.",
+    images: [],
+  },
 ];
 
 // Countries for going soon and bucket list (solid fill only, no markers)
-const goingSoon = ["ARM", "051", "GTM", "320"];
+const goingSoon = ["ARM", "051", "CRI", "188"];
 const bucketList = ["IND", "356", "CHN", "156", "MNG", "496", "IDN", "360", "NGA", "566", "KOR", "410"];
 
 // Get visited country codes from cityData
