@@ -201,16 +201,56 @@ const cityData = [
   },
   {
     id: 25,
-    name: "Guatemala",
-    coordinates: [-91.2034, 14.6771],
+    name: "Antigua, Acatenango & Lago Atitlán",
+    coordinates: [-90.7339, 14.5586],
     countryCode: ["GTM", "320"],
     description: "Spring break 2026.",
+    images: [],
+  },
+  {
+    id: 26,
+    name: "Semuc Champey",
+    coordinates: [-89.9667, 15.5333],
+    countryCode: ["GTM", "320"],
+    description: "Spring break 2026.",
+    images: [],
+  },
+  {
+    id: 27,
+    name: "Tikal & Flores",
+    coordinates: [-89.8917, 16.9286],
+    countryCode: ["GTM", "320"],
+    description: "Spring break 2026.",
+    images: [],
+  },
+  {
+    id: 28,
+    name: "La Fortuna",
+    coordinates: [-84.6453, 10.4706],
+    countryCode: ["CRI", "188"],
+    description: "May 2026.",
+    images: [],
+  },
+  {
+    id: 29,
+    name: "Monteverde",
+    coordinates: [-84.8260, 10.3010],
+    countryCode: ["CRI", "188"],
+    description: "May 2026.",
+    images: [],
+  },
+  {
+    id: 30,
+    name: "Manuel Antonio",
+    coordinates: [-84.1370, 9.3920],
+    countryCode: ["CRI", "188"],
+    description: "May 2026.",
     images: [],
   },
 ];
 
 // Countries for going soon and bucket list (solid fill only, no markers)
-const goingSoon = ["ARM", "051", "CRI", "188"];
+const goingSoon = ["ARM", "051"];
 const bucketList = ["IND", "356", "CHN", "156", "MNG", "496", "IDN", "360", "NGA", "566", "KOR", "410"];
 
 // Get visited country codes from cityData
