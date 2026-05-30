@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 const experiences = [
   {
     id: 1,
-    role: 'Co-founder and President',
+    role: 'Co-founder and Former President',
     company: 'Virginia AI Security Initiative (VAISI)',
-    period: 'Aug 2025 - Present',
-    description: 'Creating an environment that enables the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading the VAISI\'s AI Governance Fellowship.'
+    period: 'Aug 2025 - May 2026',
+    description: 'Created an environment that enabled the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading VAISI\'s AI Governance Fellowship.'
   },
   
   {

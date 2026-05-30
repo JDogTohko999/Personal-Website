@@ -87,7 +87,7 @@ const Projects = () => {
             <div className="flex-1">
 <h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
               <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
-                As the co-founder and president, my mission is to get VAISI off the ground and attain critical mass in terms of membership, operational capacity, and legitimacy.
+                As the co-founder and former president, my goal was to get VAISI off the ground, attaining a critical mass in terms of membership, operational capacity, and legitimacy.
               </p>
               <div className="flex flex-wrap items-center gap-6">
                 <a href="https://vaisi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
