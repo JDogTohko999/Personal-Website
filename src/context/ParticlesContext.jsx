@@ -19,7 +19,7 @@ export const ParticlesProvider = ({ children }) => {
     interactionMode: 'repulse',
 
     // Particle settings
-    particleCount: 60,
+    particleCount: 40,
     particleSize: 4,
     particleSpeed: 1.5,
 

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Linkedin, Github, BookOpen } from 'lucide-react';
+import React, { useState } from 'react';
+import { Linkedin, BookOpen, CalendarDays, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import NowModal from './NowModal';
 
 const Hero = () => {
+  const [nowOpen, setNowOpen] = useState(false);
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center gap-12">
@@ -32,42 +34,71 @@ const Hero = () => {
             <span className="text-portfolio-gold">Hi, I'm Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            AI Safety | Computer Eng @ UVA (May '26)
+            AI Safety | Computer Eng @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
-            I believe we should aim to identify, understand, and address the things that matter, the most pressing problems in the world.
+            I'm working to ensure that AI goes well, and to give this website a complete makeover.
           </p>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            Last year I became convinced that ensuring AI goes well is probably the most important problem. I feel especially fortunate to be in a position where I can make a difference, albeit likely a small one. I founded VAISI in Aug '25 and led it during my 4th year. Now, I'm trying to build the skills and context to be an effective AI safety field-builder/generalist.
-          </p>
-          {/* TODO (if you see this, do this): add in a "Schedule a Meeting" button that links to https://savvycal.com/jasonchin098  include a relevant icon */}
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-            <a 
-              href="https://www.linkedin.com/in/jasonchin9/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-portfolio-gold text-portfolio-bg font-bold rounded-lg hover:bg-opacity-90 transition-all flex items-center shadow-lg hover:shadow-gold/20"
-            >
-              <Linkedin className="w-5 h-5 mr-2" />
-              LinkedIn
-            </a>
+            I just graduated from UVA and am now looking for ways to contribute to AI safety, primarily through{' '}
             <a
-              href="https://github.com/JDogTohko999"
+              href="https://forum.effectivealtruism.org/posts/rAqKSSXankvys2Fzu/the-case-for-ai-safety-capacity-building-work#Letting_our_team_know"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"
+              className="text-portfolio-gold hover:underline"
             >
-              <Github className="w-5 h-5 mr-2" />
-              GitHub
+              capacity
             </a>
-            <Link
-              to="/blog"
-              className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center"
+            /
+            <a
+              href="https://80000hours.org/career-reviews/ai-safety-fieldbuilding/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-portfolio-gold hover:underline"
             >
-              <BookOpen className="w-5 h-5 mr-2" />
-              Blog
-            </Link>
+              field-building
+            </a>
+            .
+          </p>
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <div className="inline-flex flex-col items-stretch gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://www.linkedin.com/in/jasonchin9/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-portfolio-gold text-portfolio-bg font-bold rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center shadow-lg hover:shadow-gold/20"
+                >
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  LinkedIn
+                </a>
+                <button
+                  onClick={() => setNowOpen(true)}
+                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center focus:outline-none"
+                >
+                  <Clock className="w-5 h-5 mr-2" />
+                  Now
+                </button>
+                <Link
+                  to="/blog"
+                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
+                >
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Blog
+                </Link>
+              </div>
+              <a
+                href="https://savvycal.com/jasonchin098"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
+              >
+                <CalendarDays className="w-5 h-5 mr-2" />
+                Schedule a Meeting
+              </a>
+            </div>
           </div>
+          <NowModal isOpen={nowOpen} onClose={() => setNowOpen(false)} />
         </motion.div>
       </div>
     </section>

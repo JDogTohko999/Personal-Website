@@ -53,7 +53,7 @@ const ParticlesBackground = () => {
         type: 'circle'
       },
       opacity: {
-        value: { min: 0.1, max: 0.5 },
+        value: { min: 0.1, max: 0.42 },
         animation: {
           enable: true,
           speed: 1,
