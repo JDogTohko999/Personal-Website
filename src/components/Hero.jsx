@@ -32,7 +32,7 @@ const Hero = () => {
             <span className="text-portfolio-gold">Hi, I'm Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            AI Safety | Computer Eng @ UVA '26
+            AI Safety | Computer Eng @ UVA (May '26)
           </h2>
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
             I believe we should aim to identify, understand, and address the things that matter, the most pressing problems in the world.
