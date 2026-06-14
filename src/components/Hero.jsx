@@ -29,13 +29,16 @@ const Hero = () => {
           className="text-center md:text-left flex-1"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-portfolio-text mb-4">
-            <span className="text-portfolio-gold">Jason Chin</span>
+            <span className="text-portfolio-gold">Hi, I'm Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            AI Safety | Computer Engineering @ UVA '26
+            AI Safety | Computer Eng @ UVA '26
           </h2>
-          <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            Fourth-year at UVA focused on mitigating risks from advanced AI. Excited by AI safety field building and AI policy. Co-founder and former president of the Virginia AI Security Initiative (VAISI).
+          <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
+            I believe we should aim to identify, understand, and address the things that matter, the most pressing problems in the world.
+          </p>
+          <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl indent-8">
+            Last year I became convinced that ensuring AI goes well is probably the most important problem. I feel especially fortunate to be in a position where I can make a difference, albeit likely a small one. I founded VAISI in Aug '25 and led it during my 4th year. Now, I'm trying to build the skills and context to be an effective AI safety field-builder/generalist.
           </p>
           {/* TODO (if you see this, do this): add in a "Schedule a Meeting" button that links to https://savvycal.com/jasonchin098  include a relevant icon */}
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">

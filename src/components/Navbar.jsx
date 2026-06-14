@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette, MessageCircle, BookOpen } from 'lucide-react';
+import { Menu, X, ChevronDown, Linkedin, Github, FileText, Palette, MessageCircle, BookOpen, Clock } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import NowModal from './NowModal';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,7 @@ const Navbar = () => {
   const { theme, setTheme, themes } = useTheme();
   const [themeOpen, setThemeOpen] = useState(false);
   const [linksOpen, setLinksOpen] = useState(false);
+  const [nowOpen, setNowOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +32,6 @@ const Navbar = () => {
   ];
 
   const externalLinks = [
-    { name: 'Blog', icon: BookOpen, href: '/blog', internal: true },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/jasonchin9/' },
     { name: 'GitHub', icon: Github, href: 'https://github.com/JDogTohko999' },
     { name: 'Substack', icon: FileText, href: 'https://substack.com/@jdogtohko999' },
@@ -58,6 +59,19 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
+
+              <Link
+                to="/blog"
+                className="text-portfolio-muted hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Blog
+              </Link>
+              <button
+                onClick={() => setNowOpen(true)}
+                className="text-portfolio-muted hover:text-portfolio-gold px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none"
+              >
+                Now
+              </button>
               
               {/* Links Dropdown */}
               <div className="relative ml-4 group">
@@ -155,6 +169,22 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
+            <Link
+              to="/blog"
+              className="text-portfolio-muted hover:text-portfolio-gold block px-3 py-2 rounded-md text-base font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Blog
+            </Link>
+            <button
+              onClick={() => {
+                setNowOpen(true);
+                setIsOpen(false);
+              }}
+              className="text-portfolio-muted hover:text-portfolio-gold block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+            >
+              Now
+            </button>
             <div className="border-t border-portfolio-border pt-2 pb-2">
               <p className="px-3 text-xs text-portfolio-muted uppercase tracking-wider">Links</p>
               {externalLinks.map((link) => link.internal ? (
@@ -203,6 +233,8 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      <NowModal isOpen={nowOpen} onClose={() => setNowOpen(false)} />
     </nav>
   );
 };
