@@ -37,7 +37,7 @@ const Hero = () => {
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
             I believe we should aim to identify, understand, and address the things that matter, the most pressing problems in the world.
           </p>
-          <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl indent-8">
+          <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
             Last year I became convinced that ensuring AI goes well is probably the most important problem. I feel especially fortunate to be in a position where I can make a difference, albeit likely a small one. I founded VAISI in Aug '25 and led it during my 4th year. Now, I'm trying to build the skills and context to be an effective AI safety field-builder/generalist.
           </p>
           {/* TODO (if you see this, do this): add in a "Schedule a Meeting" button that links to https://savvycal.com/jasonchin098  include a relevant icon */}
