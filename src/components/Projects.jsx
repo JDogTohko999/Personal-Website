@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, ArrowRight, ScrollText } from 'lucide-react';
+import { Github, ScrollText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -71,42 +71,6 @@ const Projects = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-portfolio-text mb-4">Projects</h2>
           <div className="w-20 h-1 bg-portfolio-gold mx-auto rounded-full"></div>
-        </motion.div>
-
-        {/* VAISI Spotlight */}
-        <motion.div 
-          id="vaisi"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="mb-16 bg-gradient-to-r from-portfolio-green to-portfolio-bg border border-portfolio-gold/30 rounded-2xl p-8 md:p-10 shadow-2xl relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-portfolio-gold/10 rounded-full blur-3xl"></div>
-          
-          <div className="relative z-10 md:flex items-center justify-between gap-8">
-            <div className="flex-1">
-<h3 className="text-3xl font-bold text-portfolio-text mb-4">VAISI</h3>
-              <p className="text-portfolio-muted text-lg mb-6 leading-relaxed">
-                As the co-founder and former president, my goal was to get VAISI off the ground, attaining a critical mass in terms of membership, operational capacity, and legitimacy.
-              </p>
-              <div className="flex flex-wrap items-center gap-6">
-                <a href="https://vaisi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-gold hover:text-portfolio-text font-bold transition-colors group">
-                  Learn more about VAISI
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a href="/membership_over_time.html" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-portfolio-muted hover:text-portfolio-gold transition-colors group text-sm">
-                  GroupMe membership plots
-                  <ArrowRight className="ml-1 w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
-            {/* Visual element for VAISI (Logo placeholder) */}
-            <div className="mt-8 md:mt-0 flex-shrink-0">
-                 <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-portfolio-gold/50 shadow-lg mx-auto">
-                   <img src="/VAISI_Logo_cropped.png" alt="VAISI Logo" className="w-full h-full object-cover -translate-y-.5" />
-               </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Project Grid */}

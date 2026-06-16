@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
+import Vaisi from './components/Vaisi';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import WorldMap from './components/WorldMap';
@@ -26,6 +27,7 @@ function HomePage() {
         <main className="flex-grow">
           <Hero />
           <Experience />
+          <Vaisi />
           <Projects />
           <Achievements />
           <WorldMap />
