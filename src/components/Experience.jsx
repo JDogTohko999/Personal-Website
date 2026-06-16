@@ -107,7 +107,7 @@ const Experience = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.05, duration: 0.25 }}
               className="relative pl-8 md:pl-0"
             >
               {/* Timeline Dot */}
