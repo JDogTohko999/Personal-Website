@@ -88,7 +88,7 @@ const Hero = () => {
                 </Link>
               </div>
               <a
-                href="https://savvycal.com/jasonchin098"
+                href="https://savvycal.com/jasonchin098/meet-with-jason"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
