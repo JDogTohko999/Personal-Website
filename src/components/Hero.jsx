@@ -37,7 +37,7 @@ const Hero = () => {
             AI Safety | Computer Eng @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
-            I'm working to ensure that AI goes well, and to give this website a complete makeover.
+            I'm trying to ensure that AI goes well... and to find the time to give this website a complete makeover.
           </p>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
             I just graduated from UVA and am now looking for ways to contribute to AI safety, primarily through{' '}
