@@ -98,13 +98,15 @@ const BoresBackpackContent = () => (
       </div>
     </figure>
 
-    {/* judy — straight, large */}
-    <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
-      <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)"><img src="/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} /></Frame>
-      <Cap>
-        Meet Judy. Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
-      </Cap>
-    </figure>
+  {/* judy — straight, large */}
+  <figure style={{ display: 'flex', flexDirection: 'row', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
+    <Cap>
+      Meet Judy. Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
+    </Cap>
+    <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
+      <img src="/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} />
+    </Frame>
+  </figure>
 
     {/* monday canvassing — video on the left, photos slightly overlapping on the right */}
     <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 60px' }}>
