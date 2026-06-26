@@ -112,11 +112,11 @@ const BoresBackpackContent = () => (
         <video src="/canvassing_bores.mp4" controls playsInline style={{ display: 'block', width: 215 }} />
       </Frame>
       <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
-        My Monday morning of canvassing. Got to meet Alex himself!
+        My Monday morning canvassing. Got to meet Alex himself!
       </figcaption>
       <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
         <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}><img src="/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} /></Frame>
-        <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}><img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 125 }} /></Frame>
+        <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}><img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 155 }} /></Frame>
       </div>
     </figure>
 
