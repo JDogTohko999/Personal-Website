@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Linkedin, BookOpen, CalendarDays, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import NowModal from './NowModal';
 
 const Hero = () => {
-  const [nowOpen, setNowOpen] = useState(false);
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center gap-12">
@@ -72,13 +70,13 @@ const Hero = () => {
                   <Linkedin className="w-5 h-5 mr-2" />
                   LinkedIn
                 </a>
-                <button
-                  onClick={() => setNowOpen(true)}
-                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center focus:outline-none"
+                <Link
+                  to="/now"
+                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
                 >
                   <Clock className="w-5 h-5 mr-2" />
                   Now
-                </button>
+                </Link>
                 <Link
                   to="/blog"
                   className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
@@ -98,7 +96,6 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          <NowModal isOpen={nowOpen} onClose={() => setNowOpen(false)} />
         </motion.div>
       </div>
     </section>

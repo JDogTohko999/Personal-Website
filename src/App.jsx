@@ -14,6 +14,7 @@ import EasterEgg from './components/EasterEgg';
 import ArtisticAccents from './components/ArtisticAccents';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
+import Now from './components/Now';
 
 function HomePage() {
   return (
@@ -44,6 +45,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
+      <Route path="/now" element={<Now />} />
     </Routes>
   );
 }

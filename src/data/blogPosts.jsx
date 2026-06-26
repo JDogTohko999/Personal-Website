@@ -11,6 +11,141 @@ const Footnote = ({ n, children }) => (
   </p>
 );
 
+const Figure = ({ src, alt, caption, className = '' }) => (
+  <figure className={`my-6 mx-auto max-w-[80%] ${className}`}>
+    <img
+      src={src}
+      alt={alt || ''}
+      className="w-full rounded-lg border border-portfolio-border shadow-md"
+      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+    />
+    {caption && (
+      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
+        {caption}
+      </figcaption>
+    )}
+  </figure>
+);
+
+const BoresBackpackContent = () => (
+  <div>
+    <p className="mb-5">
+      The past 10 days here in NYC have been a whirlwind. I came up to canvass for{' '}
+      <a href="https://www.alexbores.nyc/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold underline underline-offset-2 hover:opacity-80">Alex Bores</a>
+      {' '}in the NY-12 primary, and to see friends and family.
+    </p>
+
+    <Figure
+      src="/canvassing_hours.png"
+      alt="Canvassing hours log"
+      caption="My feet started hurting on the 20th, bought new shoes which helped a bit."
+    />
+
+    <Figure
+      src="/rip_reeboks.png"
+      alt="Worn out Reeboks"
+      caption="RIP carpet reeboks, served me well these past few yrs."
+    />
+
+    <Figure
+      src="/curtisssss_SLIWAAAAA.png"
+      alt="Curtis Sliwa"
+      caption="Ran into the real mayor, he gave me his business card lol."
+    />
+
+    <Figure
+      src="/indian_joint.JPG"
+      alt="Hole in the wall Indian restaurant"
+      caption='Found a hole-in-the-wall Indian joint. Based on the cleanliness of the kitchen and serving area, the fact that I had the lightest skin tone in there, that nobody was speaking English, and things were cheap, I knew it was either going to absolutely slap or give me food poisoning. I got lucky — slap it did :)'
+    />
+
+    <figure className="my-6 mx-auto max-w-[80%]">
+      <div className="grid grid-cols-2 gap-2">
+        <img src="/flatiron1.jpg" alt="Flatiron, edit 1" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src="/flatiron2.jpg" alt="Flatiron, edit 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+      </div>
+      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
+        Pic I took of Flatiron. Just spent 10min playing with post processing settings, I've never done that before but it was fun making 6 versions of that photo. Weird how the color messes with my perception of the shapes/angles.
+      </figcaption>
+    </figure>
+
+    <figure className="my-6 mx-auto max-w-[80%]">
+      <div className="grid grid-cols-2 gap-2">
+        <img src="/anti_bores.jpg" alt="Anti-Bores sign" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src="/anti_bores2.jpg" alt="Anti-Bores sign 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src="/pro_bores.jpg" alt="Pro-Bores sign" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src="/pro_bores2.jpg" alt="Pro-Bores sign 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+      </div>
+      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
+        <div>"Looks like it's gonna be a great day today"</div>
+        <div className="text-[8px] italic mt-1">
+          <a href="https://genius.com/Mf-doom-great-day-lyrics" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">
+            "DOOM, are you pondering what I'm pondering"
+          </a>
+        </div>
+      </figcaption>
+    </figure>
+
+    <Figure
+      src="/judy.jpg"
+      alt="Judy"
+      caption="Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. Hobbled onto the scene, barely knew anything about Micah, and sat down after 20m bc her back hurt. Cheerful throughout."
+    />
+
+    <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">June 23rd</h2>
+
+    <p className="mb-5">
+      Woke up at 4am, got to my pollsite, PS87, at 5:50am, and put down my backpack by our table of things to go tape up some flyers. Came back 40min later to find nobody by our table and that my backpack was gone. I liked that backpack. Luckily had nothing especially valuable in it, but damn. I got over it pretty quick though. Met a bunch of cool people, namely two fellow Bores fellows, Jack and Tobias, and two Lasher volunteers, Benji and some older guy that was kind, level-headed, and well-read. All of them were very sharp and knowledgeable about Bores, Lasher, and NYC politics.
+    </p>
+    <p className="mb-5">
+      I also had a super interesting kerfuffle with perhaps the most disagreeable and irrational person I've met in the past few years.
+    </p>
+    <p className="mb-5">
+      It was on and off drizzling and my umbrella and rain jacket were in my backpack.
+    </p>
+    <p className="mb-5">
+      We stayed out there until 9pm. My feet were struggling, but my body never actually got tired.
+    </p>
+
+    <Figure
+      src="/kalshi_bores.png"
+      alt="Kalshi odds for Bores"
+      caption="Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff."
+    />
+
+    <p className="mb-5">
+      Oddly enough, losing the election felt a lot like losing my backpack. I realized it, thought about what I had put into it, thought about the implications, acquiesced for 20 seconds, then moved on.
+    </p>
+    <p className="mb-5">
+      Of course, there was no melancholic "after party" for the loss of my backpack, but parallels can't always be perfect.
+    </p>
+
+    <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">In other news</h2>
+    <p className="mb-5">
+      I'm going to try to track all of the content/media I consume, inspired by{' '}
+      <a
+        href="https://substack.com/home/post/p-186570918"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-portfolio-gold underline underline-offset-2 hover:opacity-80"
+      >
+        Nixon Hanna
+      </a>
+      . Hopefully making this public will reduce my doom youtubing. I'll do weekly batches.
+    </p>
+    <p className="mb-3">Today (6/25) I watched:</p>
+    <ul className="list-disc list-outside pl-5 space-y-2 mb-5">
+      <li>You should, unfortunately, be worried about Sam Altman — AI in Context</li>
+      <li>Palestine — Channel 5 with Andrew Callaghan.</li>
+      <li>Palestine part 2/4 (yes I did just pay $50 for a year of Channel 5 Patreon).</li>
+      <li>45min of Louis Theroux Interview — Channel 5 (Patreon).</li>
+      <li>Some 20min long Louis Theroux <em>Weird Weekends</em> compilation.</li>
+      <li>A few movie clips of <em>Parasite</em>.</li>
+      <li>A few clips of <em>The Bear</em>.</li>
+    </ul>
+  </div>
+);
+
 const BoresAIDividendContent = () => (
   <div>
 
@@ -94,6 +229,14 @@ const BoresAIDividendContent = () => (
 );
 
 export const blogPosts = [
+  {
+    id: 'bores-and-a-backpack-lost',
+    title: 'A Bores and a backpack. Lost.',
+    date: 'June 26, 2026',
+    tags: ['Alex Bores', 'NYC', 'Canvassing'],
+    summary: '10 days canvassing for Alex Bores in NYC — Curtis Sliwa, a hole-in-the-wall Indian joint, Judy, and a lost backpack.',
+    Content: BoresBackpackContent,
+  },
   {
     id: 'bores-ai-dividend-inaccuracy',
     title: "A Small Correction to Bores' AI Dividend Brief",
