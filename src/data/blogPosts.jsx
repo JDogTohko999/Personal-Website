@@ -145,7 +145,7 @@ const BoresBackpackContent = () => (
       className="text-portfolio-text"
       style={{ fontSize: 18, lineHeight: 1.8, fontStyle: 'italic', borderLeft: '3px solid var(--portfolio-gold)', paddingLeft: 22, margin: '10px 0 26px' }}
     >
-      Oddly enough, losing the election felt a lot like losing my backpack. I realized it, thought about what I had put into it, thought about the implications, acquiesced for 20 seconds, then moved on.
+      Oddly enough, losing the election felt a lot like losing my backpack. When the realization was made I thought about the implications and what I'd put into it. I acquiesced for 20 seconds, then moved on.
     </p>
     <p className="mb-5">
       Of course, there was no melancholic "after party" for the loss of my backpack, but parallels can't always be perfect.
