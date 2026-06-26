@@ -108,20 +108,30 @@ const BoresBackpackContent = () => (
     </Frame>
   </figure>
 
-    {/* monday canvassing — video on the left, photos slightly overlapping on the right */}
-    <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 60px' }}>
-      <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
-        <video src="/canvassing_bores.mp4" controls playsInline style={{ display: 'block', width: 215 }} />
+  {/* monday canvassing — video on the left, photos slightly overlapping on the right */}
+  <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 60px' }}>
+    <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
+      <video 
+        src="/canvassing_bores.mp4" 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        style={{ display: 'block', width: 215 }} 
+      />
+    </Frame>
+    <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
+      My Monday morning canvassing. Got to meet Alex himself!
+    </figcaption>
+    <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
+      <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}>
+        <img src="/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} />
       </Frame>
-      <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
-        My Monday morning canvassing. Got to meet Alex himself!
-      </figcaption>
-      <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
-        <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}><img src="/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} /></Frame>
-        <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}><img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 155 }} /></Frame>
-      </div>
-    </figure>
-
+      <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}>
+        <img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 155 }} />
+      </Frame>
+    </div>
+  </figure>
     <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">June 23rd</h2>
     <p className="mb-5">
       Woke up at 4am, got to my pollsite, PS87, at 5:50am, and put down my backpack by our table of things to go tape up some flyers. Came back 40min later to find nobody by our table and that my backpack was gone. I liked that backpack. Luckily had nothing especially valuable in it, but damn. I got over it pretty quick though. Met a bunch of cool people, namely two fellow Bores fellows, Jack and Tobias, and two Lasher volunteers, Benji and some older guy that was kind, level-headed, and well-read. All of them were very sharp and knowledgeable about Bores, Lasher, and NYC politics.
