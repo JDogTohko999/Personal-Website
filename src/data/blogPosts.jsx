@@ -30,7 +30,7 @@ const Figure = ({ src, alt, caption, className = '' }) => (
 const BoresBackpackContent = () => (
   <div>
     <p className="mb-5">
-      The past 10 days here in NYC have been a whirlwind. I came up to canvass for{' '}
+      The past 10 days here in NYC have been a whirlwind. I came to canvass for{' '}
       <a href="https://www.alexbores.nyc/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold underline underline-offset-2 hover:opacity-80">Alex Bores</a>
       {' '}in the NY-12 primary, and to see friends and family.
     </p>
@@ -92,6 +92,22 @@ const BoresBackpackContent = () => (
       caption="Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. Hobbled onto the scene, barely knew anything about Micah, and sat down after 20m bc her back hurt. Cheerful throughout."
     />
 
+    <figure className="my-6 mx-auto max-w-[80%]">
+      <video
+        src="/canvassing_bores.mp4"
+        controls
+        playsInline
+        className="w-full rounded-lg border border-portfolio-border shadow-md mb-2"
+      />
+      <div className="grid grid-cols-2 gap-2">
+        <img src="/AlexBores.png" alt="Alex Bores" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src="/AlexBores2.png" alt="Alex Bores 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+      </div>
+      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
+        My Monday morning of canvassing. Got to meet Alex himself!
+      </figcaption>
+    </figure>
+
     <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">June 23rd</h2>
 
     <p className="mb-5">
@@ -139,9 +155,9 @@ const BoresBackpackContent = () => (
       <li>Palestine — Channel 5 with Andrew Callaghan.</li>
       <li>Palestine part 2/4 (yes I did just pay $50 for a year of Channel 5 Patreon).</li>
       <li>45min of Louis Theroux Interview — Channel 5 (Patreon).</li>
-      <li>Some 20min long Louis Theroux <em>Weird Weekends</em> compilation.</li>
-      <li>A few movie clips of <em>Parasite</em>.</li>
-      <li>A few clips of <em>The Bear</em>.</li>
+      <li>20min long Louis Theroux <em>Weird Weekends</em> compilation.</li>
+      <li>25min of movie clips from <em>Parasite</em>.</li>
+      <li>15min of clips from <em>The Bear</em>.</li>
     </ul>
   </div>
 );
@@ -231,7 +247,7 @@ const BoresAIDividendContent = () => (
 export const blogPosts = [
   {
     id: 'bores-and-a-backpack-lost',
-    title: 'A Bores and a backpack. Lost.',
+    title: 'Losing — A Bores and a backpack',
     date: 'June 26, 2026',
     tags: ['Alex Bores', 'NYC', 'Canvassing'],
     summary: '10 days canvassing for Alex Bores in NYC — Curtis Sliwa, a hole-in-the-wall Indian joint, Judy, and a lost backpack.',
