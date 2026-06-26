@@ -11,105 +11,116 @@ const Footnote = ({ n, children }) => (
   </p>
 );
 
-const Figure = ({ src, alt, caption, className = '' }) => (
-  <figure className={`my-6 mx-auto max-w-[80%] ${className}`}>
-    <img
-      src={src}
-      alt={alt || ''}
-      className="w-full rounded-lg border border-portfolio-border shadow-md"
-      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-    />
-    {caption && (
-      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
-        {caption}
-      </figcaption>
-    )}
-  </figure>
+// Cream photo frame ("polaroid"). Pass rotate for the tilted cluster photos.
+const Frame = ({ children, rotate = 0, pad = 8, shadow = '0 10px 24px rgba(0,0,0,.45)', style = {} }) => (
+  <div
+    style={{
+      background: '#f5f3ec',
+      padding: pad,
+      borderRadius: 2,
+      boxShadow: shadow,
+      transform: `rotate(${rotate}deg)`,
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+);
+
+// Caption that sits beside a photo.
+const Cap = ({ children, align = 'left' }) => (
+  <figcaption
+    className="text-portfolio-muted"
+    style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: align }}
+  >
+    {children}
+  </figcaption>
 );
 
 const BoresBackpackContent = () => (
   <div>
-    <p className="mb-5">
+    <p className="mb-7">
       The past 10 days here in NYC have been a whirlwind. I came to canvass for{' '}
       <a href="https://www.alexbores.nyc/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold underline underline-offset-2 hover:opacity-80">Alex Bores</a>
-      {' '}in the NY-12 primary, and to see friends and family.
+      {' '}in the NY-12 primary, and to see friends and family. Here are some things that happened.
     </p>
 
-    <Figure
-      src="/canvassing_hours.png"
-      alt="Canvassing hours log"
-      caption="My feet started hurting on the 20th, bought new shoes which helped a bit."
-    />
-
-    <Figure
-      src="/rip_reeboks.png"
-      alt="Worn out Reeboks"
-      caption="RIP carpet reeboks, served me well these past few yrs."
-    />
-
-    <Figure
-      src="/curtisssss_SLIWAAAAA.png"
-      alt="Curtis Sliwa"
-      caption="Ran into the real mayor, he gave me his business card lol."
-    />
-
-    <Figure
-      src="/indian_joint.JPG"
-      alt="Hole in the wall Indian restaurant"
-      caption='Found a hole-in-the-wall Indian joint. Based on the cleanliness of the kitchen and serving area, the fact that I had the lightest skin tone in there, that nobody was speaking English, and things were cheap, I knew it was either going to absolutely slap or give me food poisoning. I got lucky — slap it did :)'
-    />
-
-    <figure className="my-6 mx-auto max-w-[80%]">
-      <div className="grid grid-cols-2 gap-2">
-        <img src="/flatiron1.jpg" alt="Flatiron, edit 1" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-        <img src="/flatiron2.jpg" alt="Flatiron, edit 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-      </div>
-      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
-        Pic I took of Flatiron. Just spent 10min playing with post processing settings, I've never done that before but it was fun making 6 versions of that photo. Weird how the color messes with my perception of the shapes/angles.
-      </figcaption>
+    {/* canvassing hours — straight, large */}
+    <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 48px' }}>
+      <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
+        <img src="/canvassing_hours.png" alt="Canvassing hours log" style={{ display: 'block', width: 430 }} />
+      </Frame>
+      <Cap>My feet started hurting on the 20th, bought new shoes which helped a bit.</Cap>
     </figure>
 
-    <figure className="my-6 mx-auto max-w-[80%]">
-      <div className="grid grid-cols-2 gap-2">
-        <img src="/anti_bores.jpg" alt="Anti-Bores sign" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-        <img src="/anti_bores2.jpg" alt="Anti-Bores sign 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-        <img src="/pro_bores.jpg" alt="Pro-Bores sign" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-        <img src="/pro_bores2.jpg" alt="Pro-Bores sign 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-      </div>
-      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
-        <div>"Looks like it's gonna be a great day today"</div>
-        <div className="text-[8px] italic mt-1">
-          <a href="https://genius.com/Mf-doom-great-day-lyrics" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">
-            "DOOM, are you pondering what I'm pondering"
-          </a>
-        </div>
-      </figcaption>
+    {/* reeboks + curtis — same row, captions on the outer sides */}
+    <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 50px' }}>
+      <Cap align="right">RIP carpet reeboks, served me well these past few yrs.</Cap>
+      <Frame><img src="/rip_reeboks.png" alt="Worn out Reeboks" style={{ display: 'block', width: 225 }} /></Frame>
+      <Frame><img src="/curtisssss_SLIWAAAAA.png" alt="Curtis Sliwa" style={{ display: 'block', width: 225 }} /></Frame>
+      <Cap>Ran into the real mayor, he gave me his business card lol.</Cap>
     </figure>
 
-    <Figure
-      src="/judy.jpg"
-      alt="Judy"
-      caption="Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. Hobbled onto the scene, barely knew anything about Micah, and sat down after 20m bc her back hurt. Cheerful throughout."
-    />
+    {/* indian joint — straight */}
+    <figure style={{ display: 'flex', flexDirection: 'row-reverse', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
+      <Frame><img src="/indian_joint.JPG" alt="Hole in the wall Indian restaurant" style={{ display: 'block', width: 210 }} /></Frame>
+      <Cap>
+        Found a hole-in-the-wall Indian joint. Based on the cleanliness of the kitchen and serving area, the fact that I had the lightest skin tone in there, that nobody was speaking English, and things were cheap, I knew it was either going to absolutely slap or give me food poisoning. I got lucky — slap it did :)
+      </Cap>
+    </figure>
 
-    <figure className="my-6 mx-auto max-w-[80%]">
-      <video
-        src="/canvassing_bores.mp4"
-        controls
-        playsInline
-        className="w-full rounded-lg border border-portfolio-border shadow-md mb-2"
-      />
-      <div className="grid grid-cols-2 gap-2">
-        <img src="/AlexBores.png" alt="Alex Bores" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-        <img src="/AlexBores2.png" alt="Alex Bores 2" className="w-full rounded-lg border border-portfolio-border shadow-md" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+    {/* flatiron — 4 photos, slight overlap, tilted */}
+    <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 60px' }}>
+      <div style={{ flex: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, width: 290 }}>
+        <img src="/flatiron1.jpg" alt="Flatiron 1" style={{ display: 'block', width: '100%' }} />
+        <img src="/flatiron2.jpg" alt="Flatiron 2" style={{ display: 'block', width: '100%' }} />
+        <img src="/flatiron3.jpg" alt="Flatiron 3" style={{ display: 'block', width: '100%' }} />
+        <img src="/flatiron4.jpg" alt="Flatiron 4" style={{ display: 'block', width: '100%' }} />
       </div>
-      <figcaption className="text-xs italic text-portfolio-muted/80 mt-2 text-center">
+      <Cap>
+        Took a pic of Flatiron. Post processed it a few times for fun.
+      </Cap>
+    </figure>
+
+    {/* bores signs — anti on the left, pro on the right, caption between */}
+    <figure style={{ display: 'flex', gap: 18, alignItems: 'center', margin: '0 0 60px' }}>
+      <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
+        <Frame pad={6} rotate={-5} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 2 }}><img src="/anti_bores.jpg" alt="Anti-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 115, top: 38, zIndex: 1 }}><img src="/anti_bores2.jpg" alt="Anti-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
+      </div>
+      <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 22, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
+        "Looks like it's gonna be a great day today"<br />
+        <a href="https://genius.com/Mf-doom-great-day-lyrics" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold" style={{ fontSize: 8, textDecoration: 'none' }}>"DOOM, are you pondering what I'm pondering"</a>
+      </figcaption>
+      <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
+        <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 0, top: 0, zIndex: 2 }}><img src="/pro_bores.jpg" alt="Pro-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={-4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 115, top: 38, zIndex: 1 }}><img src="/pro_bores2.jpg" alt="Pro-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
+      </div>
+    </figure>
+
+    {/* judy — straight, large */}
+    <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
+      <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)"><img src="/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} /></Frame>
+      <Cap>
+        Meet Judy. Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
+      </Cap>
+    </figure>
+
+    {/* monday canvassing — video on the left, photos slightly overlapping on the right */}
+    <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 60px' }}>
+      <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
+        <video src="/canvassing_bores.mp4" controls playsInline style={{ display: 'block', width: 215 }} />
+      </Frame>
+      <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
         My Monday morning of canvassing. Got to meet Alex himself!
       </figcaption>
+      <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
+        <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}><img src="/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} /></Frame>
+        <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}><img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 125 }} /></Frame>
+      </div>
     </figure>
 
     <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">June 23rd</h2>
-
     <p className="mb-5">
       Woke up at 4am, got to my pollsite, PS87, at 5:50am, and put down my backpack by our table of things to go tape up some flyers. Came back 40min later to find nobody by our table and that my backpack was gone. I liked that backpack. Luckily had nothing especially valuable in it, but damn. I got over it pretty quick though. Met a bunch of cool people, namely two fellow Bores fellows, Jack and Tobias, and two Lasher volunteers, Benji and some older guy that was kind, level-headed, and well-read. All of them were very sharp and knowledgeable about Bores, Lasher, and NYC politics.
     </p>
@@ -123,13 +134,17 @@ const BoresBackpackContent = () => (
       We stayed out there until 9pm. My feet were struggling, but my body never actually got tired.
     </p>
 
-    <Figure
-      src="/kalshi_bores.png"
-      alt="Kalshi odds for Bores"
-      caption="Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff."
-    />
+    {/* kalshi — straight */}
+    <figure style={{ display: 'flex', flexDirection: 'row-reverse', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
+      <Frame><img src="/kalshi_bores.png" alt="Kalshi odds for Bores" style={{ display: 'block', width: 300 }} /></Frame>
+      <Cap>Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff.</Cap>
+    </figure>
 
-    <p className="mb-5">
+    {/* emphasized callout */}
+    <p
+      className="text-portfolio-text"
+      style={{ fontSize: 18, lineHeight: 1.8, fontStyle: 'italic', borderLeft: '3px solid var(--portfolio-gold)', paddingLeft: 22, margin: '10px 0 26px' }}
+    >
       Oddly enough, losing the election felt a lot like losing my backpack. I realized it, thought about what I had put into it, thought about the implications, acquiesced for 20 seconds, then moved on.
     </p>
     <p className="mb-5">
@@ -139,14 +154,7 @@ const BoresBackpackContent = () => (
     <h2 className="text-xl font-bold text-portfolio-text mt-14 mb-3">In other news</h2>
     <p className="mb-5">
       I'm going to try to track all of the content/media I consume, inspired by{' '}
-      <a
-        href="https://substack.com/home/post/p-186570918"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-portfolio-gold underline underline-offset-2 hover:opacity-80"
-      >
-        Nixon Hanna
-      </a>
+      <a href="https://substack.com/home/post/p-186570918" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold underline underline-offset-2 hover:opacity-80">Nixon Hanna</a>
       . Hopefully making this public will reduce my doom youtubing. I'll do weekly batches.
     </p>
     <p className="mb-3">Today (6/25) I watched:</p>
