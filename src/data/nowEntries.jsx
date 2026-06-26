@@ -41,7 +41,16 @@ export const nowEntry = {
           , who has recently joined me. We plan to spend more time on the hunt for potential founders, casting a wider net. Seeding more than bootloading. We'll hopefully update the documentation to reflect this soon.
         </li>
         <li>
-          Helping prep VAISI for the fall sem, and writing a VAISI retrospective.
+          Helping prep{' '}
+          <a
+            href="https://vaisi.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            VAISI
+          </a>
+          {' '}for the fall sem, and writing a VAISI retrospective.
         </li>
         <li>
           The{' '}
