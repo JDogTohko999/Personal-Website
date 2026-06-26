@@ -136,7 +136,7 @@ const BoresBackpackContent = () => (
 
     {/* kalshi — straight */}
     <figure style={{ display: 'flex', flexDirection: 'row-reverse', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
-      <Frame><img src="/kalshi_bores.png" alt="Kalshi odds for Bores" style={{ display: 'block', width: 300 }} /></Frame>
+      <Frame><img src="/kalshi_bores.png" alt="Kalshi odds for Bores" style={{ display: 'block', width: 500 }} /></Frame>
       <Cap>Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff.</Cap>
     </figure>
 
