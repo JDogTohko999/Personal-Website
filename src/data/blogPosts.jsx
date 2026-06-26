@@ -116,6 +116,7 @@ const BoresBackpackContent = () => (
         autoPlay 
         loop 
         muted 
+        controls
         playsInline 
         style={{ display: 'block', width: 215 }} 
       />
