@@ -1,21 +1,14 @@
 import React from 'react';
 
 export const nowEntry = {
-  date: '2:06am, 6/26/2026',
+  date: '1:27am, 7/1/2026',
   content: (
     <>
       <p>
-        I'm currently at my cousin's apartment in Hoboken. I'm on the tail end of{' '}
-        <a
-          href="/blog/bores-and-a-backpack-lost"
-          className="text-portfolio-gold hover:underline"
-        >
-          my 2 week trip to NYC
-        </a>
-        .
+        I'm currently all alone in the Chin family abode in Charleston since my parents are on a trip.
       </p>
       <p>
-        I'll be flying back to Charleston on the 28th and will drive up a week later to stay in Charlottesville for the month of July.
+        Tentative plan to drive to Charlottesville on Thursday and stay for a large chunk of July.
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Working on...</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
@@ -38,7 +31,16 @@ export const nowEntry = {
           >
             Thomas Rodskog
           </a>
-          , who has recently joined me. We plan to spend more time on the hunt for potential founders, casting a wider net. Seeding more than bootloading. We'll hopefully update the documentation to reflect this soon.
+          {' '}and{' '}
+          <a
+            href="https://www.linkedin.com/in/jbrinton"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Jacob Brinton
+          </a>
+          , who have recently joined me. We plan to spend more time on the hunt for potential founders, casting a wider net. Seeding more than bootloading. We'll hopefully update the documentation to reflect this soon.
         </li>
         <li>
           Helping prep{' '}
@@ -65,18 +67,20 @@ export const nowEntry = {
           .
         </li>
         <li>Rebuying the things that were in my backpack.</li>
-        <li>Transforming this website into something I'm actually proud of.</li>
         <li>
-          Reading with intention, and{' '}
+          Transforming this website into something I'm actually proud of. Feels like everyday I come across someone else's cool website, today was{' '}
           <a
-            href="https://www.cold-takes.com/learning-by-writing/"
+            href="https://andyqhan.github.io/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            learning by writing
+            Andy Han
           </a>
-          . I've been super inspired by{' '}
+          .
+        </li>
+        <li>
+          Writing about my cognitive dissonance and attempting to implement more concrete plans to reduce it. Among other things, success would look like me writing and posting at least once a month. I've been super inspired by{' '}
           <a
             href="https://elianadu.substack.com/"
             target="_blank"
@@ -87,6 +91,7 @@ export const nowEntry = {
           </a>
           .
         </li>
+        <li>Making an effort to catch up with close college friends before we drift apart forever :(</li>
       </ul>
     </>
   ),

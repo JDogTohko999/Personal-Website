@@ -2,6 +2,7 @@ import React from 'react';
 import { Linkedin, BookOpen, CalendarDays, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { nowEntry } from '../data/nowEntries';
 
 const Hero = () => {
   return (
@@ -70,13 +71,19 @@ const Hero = () => {
                   <Linkedin className="w-5 h-5 mr-2" />
                   LinkedIn
                 </a>
-                <Link
-                  to="/now"
-                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
-                >
-                  <Clock className="w-5 h-5 mr-2" />
-                  Now
-                </Link>
+                <div className="relative group flex">
+                  <Link
+                    to="/now"
+                    className="w-full px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
+                  >
+                    <Clock className="w-5 h-5 mr-2" />
+                    Now
+                  </Link>
+                  <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-portfolio-text px-3 py-1.5 text-xs font-medium text-portfolio-bg opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
+                    Last updated {nowEntry.date}
+                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-portfolio-text" />
+                  </div>
+                </div>
                 <Link
                   to="/blog"
                   className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
