@@ -5,7 +5,7 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        I'm currently alone at home in SC.
+        I'm currently home alone in SC.
       </p>
       <p>
         Tentative plan to drive to Charlottesville on Thursday and stay for a large chunk of July.
