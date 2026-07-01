@@ -5,7 +5,7 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        I'm currently all alone in the Chin family abode in Charleston since my parents are on a trip.
+        I'm currently alone at home in SC.
       </p>
       <p>
         Tentative plan to drive to Charlottesville on Thursday and stay for a large chunk of July.
