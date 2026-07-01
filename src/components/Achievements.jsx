@@ -32,7 +32,7 @@ const achievements = [
     id: 2,
     title: 'Dean\'s List',
     organization: 'UVA Engineering',
-    description: 'Achieved all 7 semesters',
+    description: 'Achieved each semester',
     icon: Star
   },
   {
