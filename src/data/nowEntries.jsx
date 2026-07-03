@@ -80,7 +80,7 @@ export const nowEntry = {
           .
         </li>
         <li>
-          Writing about my cognitive dissonance and attempting to implement more concrete plans to reduce it. Among other things, success would look like me writing and posting at least once a month. I've been super inspired by{' '}
+          Writing. I've been super inspired by{' '}
           <a
             href="https://elianadu.substack.com/"
             target="_blank"
@@ -91,7 +91,19 @@ export const nowEntry = {
           </a>
           .
         </li>
-        <li>Making an effort to catch up with close college friends before we drift apart forever :(</li>
+        <li>Catching up with college friends before it gets much harder to do so :( </li>
+        <li>
+          Making sense of some epistemologies like critical rationalism and bayesianism, strong/weak longtermism, and the 'culty' elements of EA and AIS. Mostly spurred by my recent hours of engagement with the content of the{' '}
+          <a
+            href="https://www.incrementspodcast.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Increments Podcast
+          </a>
+          .
+        </li>
       </ul>
     </>
   ),
