@@ -1,14 +1,14 @@
 import React from 'react';
 
 export const nowEntry = {
-  date: '1:27am, 7/1/2026',
+  date: '3:37pm, 7/3/2026',
   content: (
     <>
       <p>
-        I'm currently home alone in SC.
+        Currently chilling with Mario in Nova watching Mo Salah vs Ozzieland. Spending the weekend here to observe USA 250 with friends RAAAHHHH. Love him or hate him, I do think Trump will make this an event to remember.
       </p>
       <p>
-        Tentative plan to drive to Charlottesville on Thursday and stay for a large chunk of July.
+        After, I'll be in Charlottesville for the rest of July.
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Working on...</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
