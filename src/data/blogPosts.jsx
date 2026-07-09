@@ -39,6 +39,9 @@ const Cap = ({ children, align = 'left' }) => (
 
 const BoresBackpackContent = () => (
   <div>
+    <p className="text-portfolio-muted italic mb-4" style={{ fontSize: 14 }}>
+      minor edits 7/9 3:37am
+    </p>
     <p className="mb-7">
       The past 10 days here in NYC have been a whirlwind. I came to canvass for{' '}
       <a href="https://www.alexbores.nyc/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold underline underline-offset-2 hover:opacity-80">Alex Bores</a>
