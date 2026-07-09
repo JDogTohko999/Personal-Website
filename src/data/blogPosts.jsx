@@ -278,7 +278,7 @@ export const blogPosts = [
     id: 'bores-and-a-backpack-lost',
     title: 'Losing — A Bores and a backpack',
     date: 'June 26, 2026',
-    tags: ['Alex Bores', 'NYC', 'Canvassing'],
+    tags: ['Canvassing', 'NYC', 'Loss'],
     summary: '10 days canvassing for Alex Bores in NYC — Curtis Sliwa, a hole-in-the-wall Indian joint, Judy, and a lost backpack.',
     Content: BoresBackpackContent,
   },
