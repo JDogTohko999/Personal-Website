@@ -159,8 +159,8 @@ const BoresBackpackContent = () => (
     <p className="mb-5">
       Oddly enough, losing the election felt a lot like losing my backpack.<br />
       There was an exact moment of realization.<br />
-      An expectation that I'd feel helplessness and despair.<br />
-      But instead my mind was flooded with an all too simple acknowledgement of the situation.<br />
+      An expectation of helplessness and despair.<br />
+      But instead my mind was overridden by an all too simple acknowledgement of the situation.<br />
       It is what it is, move on.<br />
       I noticed how unbothered I was shortly thereafter and wondered if that was normal, or more importantly rather, healthy.<br />
       I'm still not sure.
