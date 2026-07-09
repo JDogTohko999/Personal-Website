@@ -154,7 +154,16 @@ const BoresBackpackContent = () => (
     </figure>
 
     <p className="mb-5">
-      Oddly enough, losing the election felt a lot like losing my backpack. When the realization was made I thought about the implications and what I'd put into it. I acquiesced for 20 seconds, then moved on.
+      Oddly enough, losing the election felt a lot like losing my backpack.<br />
+      There was an exact moment of realization.<br />
+      An expectation that I'd feel helplessness and despair.<br />
+      But instead my mind was flooded with an all too simple acknowledgement of the situation.<br />
+      It is what it is, move on.<br />
+      I noticed how unbothered I was shortly thereafter and wondered if that was normal, or more importantly rather, healthy.<br />
+      I'm still not sure.
+    </p>
+    <p className="mb-5">
+      It reminded me of how I took the loss of my grandmothers in 2019 and 2024. I wasn't <em>that</em> close to them — like how some are — but I knew and loved them. I never had any of the typical strong emotions that accompany loss, only some minor regrets.
     </p>
     <p className="mb-5">
       Of course, there was no melancholic "after party" for the loss of my backpack, but parallels can't always be perfect.
