@@ -78,7 +78,7 @@ const BoresBackpackContent = () => (
         <img src="/flatiron4.jpg" alt="Flatiron 4" style={{ display: 'block', width: '100%' }} />
       </div>
       <Cap>
-        Took a pic of Flatiron. Post processed it a few times for fun.
+        Took a pic of Flatiron. Post processed it a few times for fun. Top two are cool, bottoms not so much.
       </Cap>
     </figure>
 
@@ -101,7 +101,7 @@ const BoresBackpackContent = () => (
   {/* judy — straight, large */}
   <figure style={{ display: 'flex', flexDirection: 'row', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
     <Cap>
-      Meet Judy. Her shirt says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
+      Meet Judy. She's showing off her shirt that says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
     </Cap>
     <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
       <img src="/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} />
@@ -153,11 +153,7 @@ const BoresBackpackContent = () => (
       <Cap>Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff.</Cap>
     </figure>
 
-    {/* emphasized callout */}
-    <p
-      className="text-portfolio-text"
-      style={{ fontSize: 18, lineHeight: 1.8, fontStyle: 'italic', borderLeft: '3px solid var(--portfolio-gold)', paddingLeft: 22, margin: '10px 0 26px' }}
-    >
+    <p className="mb-5">
       Oddly enough, losing the election felt a lot like losing my backpack. When the realization was made I thought about the implications and what I'd put into it. I acquiesced for 20 seconds, then moved on.
     </p>
     <p className="mb-5">

@@ -1,9 +1,12 @@
 import React from 'react';
 
 export const nowEntry = {
-  date: '12:05am, 7/9/2026',
+  date: '3:14am, 7/9/2026',
   content: (
     <>
+      <p>
+        I watched S5E1 of The Bear at 11pm. It is now 3am, no regrets. I'm in Charlottesville, and will be until the end of July.
+      </p>
       <p>
         I'm in Charlottesville, and will be until the end of July.
       </p>
