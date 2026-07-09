@@ -4,6 +4,14 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
+    id: 12,
+    role: 'Co-director',
+    company: 'AI Safety Seeding Initiative',
+    period: 'May 2026 - Present',
+    description: 'Actively sourcing and supporting founders of AI safety university groups.',
+    link: 'https://aisafetyseeding.org/'
+  },
+  {
     id: 1,
     role: 'Co-founder and Former President',
     company: 'Virginia AI Security Initiative (VAISI)',
