@@ -7,8 +7,8 @@ const experiences = [
     id: 12,
     role: 'Co-director',
     company: 'AI Safety Seeding Initiative',
-    period: 'May 2026 - Present',
-    description: 'Actively sourcing and supporting founders of AI safety university groups.',
+    period: 'June 2026 - Present',
+    description: 'Actively sourcing and supporting founders of AI safety university groups. This is an expanded version of my original Bootloader Initiative from May',
     link: 'https://aisafetyseeding.org/'
   },
   {
