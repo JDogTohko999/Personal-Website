@@ -1,26 +1,23 @@
 import React from 'react';
 
 export const nowEntry = {
-  date: '3:37pm, 7/3/2026',
+  date: '12:05am, 7/9/2026',
   content: (
     <>
       <p>
-        Currently chilling with Mario in Nova watching Mo Salah vs Ozzieland. Spending the weekend here to observe USA 250 with friends RAAAHHHH. Love him or hate him, I do think Trump will make this an event to remember.
-      </p>
-      <p>
-        After, I'll be in Charlottesville for the rest of July.
+        I'm in Charlottesville, and will be until the end of July.
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Working on...</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          My{' '}
+          {' '}
           <a
-            href="https://docs.google.com/document/d/1H4GSOgFZQwTMONCAVTI3E6abM2rv0tP-ovegX-7POBU/edit?usp=sharing"
+            href="https://aisafetyseeding.org/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            Bootloader Initiative
+            AI Safety Seeding Initiative
           </a>
           {' '}with{' '}
           <a
@@ -31,28 +28,34 @@ export const nowEntry = {
           >
             Thomas Rodskog
           </a>
-          {' '}and{' '}
+          , and help from{' '}
           <a
             href="https://www.linkedin.com/in/jbrinton"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            Jacob Brinton
+            Jacob
           </a>
-          , who have recently joined me. We plan to spend more time on the hunt for potential founders, casting a wider net. Seeding more than bootloading. We'll hopefully update the documentation to reflect this soon.
-        </li>
-        <li>
-          Helping prep{' '}
+          ,{' '}
           <a
-            href="https://vaisi.org/"
+            href="https://jeremykintana.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            VAISI
+            Jeremy
           </a>
-          {' '}for the fall sem, and writing a VAISI retrospective.
+          , and{' '}
+          <a
+            href="https://tzukitchan.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Tzu
+          </a>
+          .
         </li>
         <li>
           The{' '}
@@ -66,9 +69,21 @@ export const nowEntry = {
           </a>
           .
         </li>
+        <li>
+          Helping prep{' '}
+          <a
+            href="https://vaisi.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            VAISI
+          </a>
+          {' '}for the fall sem, and writing a VAISI retrospective.
+        </li>
         <li>Rebuying the things that were in my backpack.</li>
         <li>
-          Transforming this website into something I'm actually proud of. Feels like everyday I come across someone else's cool website, today was{' '}
+          Transforming this website into something I'm actually proud of. Feels like every week I come across someone else's dope ass website, most recently {' '}
           <a
             href="https://andyqhan.github.io/"
             target="_blank"
@@ -89,9 +104,9 @@ export const nowEntry = {
           >
             Eliana Du's awesome substack
           </a>
-          .
+          . First post will be about how I stumbled into EA/AIS and where I'm at now, exactly one year in. 
         </li>
-        <li>Catching up with college friends before it gets much harder to do so :( </li>
+        <li>Catching up with college friends before it gets much harder to do so :( if you're one of them, this is me telling u to text or call me</li>
         <li>
           Making sense of some epistemologies like critical rationalism and bayesianism, strong/weak longtermism, and the 'culty' elements of EA and AIS. Mostly spurred by my recent hours of engagement with the content of the{' '}
           <a
