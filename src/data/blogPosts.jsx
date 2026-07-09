@@ -166,7 +166,7 @@ const BoresBackpackContent = () => (
       I'm still not sure.
     </p>
     <p className="mb-5">
-      It reminded me of how I took the loss of my grandmothers in 2019 and 2024. I wasn't <em>that</em> close to them — like how some are — but I knew and loved them. I never had any of the typical strong emotions that accompany loss, only some minor regrets.
+      It reminded me of how I took the loss of my grandmothers in 2019 and 2024. I wasn't <em>that</em> close to either of them like how some are, but I knew and loved them. After hearing about their deaths, I never felt the typical emotions that accompany loss, only some minor regrets.
     </p>
     <p className="mb-5">
       Of course, there was no melancholic "after party" for the loss of my backpack, but parallels can't always be perfect.
