@@ -5,7 +5,7 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        I watched S5E1 of The Bear at 11pm. It is now 3am, no regrets. I'm in Charlottesville, and will be until the end of July.
+        I watched S5E1 of The Bear at 11pm. It is now 3am, no regrets. 
       </p>
       <p>
         I'm in Charlottesville, and will be until the end of July.
