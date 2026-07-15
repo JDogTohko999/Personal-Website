@@ -13,7 +13,7 @@ export const nowEntry = {
       <p className="pt-2 font-semibold text-portfolio-text">Working on...</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          {' '}
+          ~40hr/wk{' '}
           <a
             href="https://aisafetyseeding.org/"
             target="_blank"
