@@ -16,7 +16,8 @@ const experiences = [
     role: 'Co-founder and Former President',
     company: 'Virginia AI Security Initiative (VAISI)',
     period: 'Aug 2025 - May 2026',
-    description: 'Created an environment that enabled the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading VAISI\'s AI Governance Fellowship.'
+    description: 'Created an environment that enabled the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading VAISI\'s AI Governance Fellowship.',
+    link: 'https://vaisi.org'
   },
   
   {
@@ -24,7 +25,8 @@ const experiences = [
     role: 'Pathfinder Fellow',
     company: 'Kairos',
     period: 'Aug 2025 - Dec 2025',
-    description: 'Received mentorship, community, and funding crucial for establishing VAISI.'
+    description: 'Received mentorship, community, and funding crucial for establishing VAISI.',
+    link: 'https://pathfinder.kairos-project.org/'
   },
   {
     id: 3,
@@ -46,7 +48,8 @@ const experiences = [
     role: 'Undergraduate Research Assistant',
     company: 'UVA Engineering Link Lab',
     period: 'Sep 2023 - Sep 2024',
-    description: 'Co-authored research paper for UbiComp/ISWC 2024. Spearheaded research on musical chords and emotionality, conducting qualitative and quantitative user studies.'
+    description: 'Co-authored research paper for UbiComp/ISWC 2024. Spearheaded research on musical chords and emotionality, conducting qualitative and quantitative user studies.',
+    link: 'https://doi.org/10.1145/3675094.3678495'
   },
   {
     id: 6,
@@ -68,7 +71,8 @@ const experiences = [
     role: 'B.S. Computer Engineering | AI Focal Path',
     company: 'University of Virginia',
     period: 'Aug 2022 - May 2026',
-    description: 'GPA: 3.7/4.0. Lead of AI Security Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).'
+    description: 'GPA: 3.7/4.0. Lead of AI Security Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).',
+    link: 'https://doi.org/10.18130/yqgv-1g90'
   },
   {
     id: 9,
@@ -90,7 +94,8 @@ const experiences = [
     role: 'Member',
     company: 'Giving What We Can 🔸',
     period: 'Sep 2025 - Present',
-    description: 'Pledged to give at least 10% of lifetime income to effective charities.'
+    description: 'Pledged to give at least 10% of lifetime income to effective charities.',
+    link: 'https://www.givingwhatwecan.org/pledge'
   }
 ];
 

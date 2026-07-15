@@ -4,13 +4,23 @@ import { motion } from 'framer-motion';
 
 const projects = [
   {
+    id: 7,
+    title: 'A Framing Analysis of Virginia Newspaper Coverage of AI Data Center Water Usage',
+    subtitle: 'UVA STS Thesis',
+    date: 'Spring 2026',
+    description: 'Analyzed how Virginia newspapers frame the water consumption of AI data centers, examining which stakeholders, tradeoffs, and responsibilities the coverage foregrounds — and which it leaves out.',
+    tags: ['Research', 'Framing Analysis', 'AI Policy'],
+    paper: 'https://doi.org/10.18130/yqgv-1g90'
+  },
+  {
     id: 1,
     title: 'PRAGUVA',
     subtitle: 'UVA Capstone Project',
     date: 'Fall 2025',
     description: 'Built a Graph RAG interface for UVA\'s academic knowledge graph. Uses Neo4j with vector-indexed semantic search and GraphSAGE embeddings to enable intelligent querying of interconnected academic data.',
     tags: ['Python', 'Neo4j', 'Graph RAG'],
-    github: 'https://github.com/jongh0327/PRAGUVA'
+    github: 'https://github.com/jongh0327/PRAGUVA',
+    paper: 'https://doi.org/10.18130/yqgv-1g90'
   },
   {
     id: 2,
