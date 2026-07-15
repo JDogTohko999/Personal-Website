@@ -5,10 +5,10 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        I watched S5E1 of The Bear at 11pm. It is now 3am, no regrets. 
+        Currently lying in bed in Charlottesville where I'll be until the end of July. 
       </p>
       <p>
-        I'm in Charlottesville, and will be until the end of July.
+        I just binged the entire 5th season of The Bear on my phone. I typically say I don't like TV shows, but it might just be that I never start them. 
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Working on...</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
@@ -58,7 +58,7 @@ export const nowEntry = {
           >
             Tzu
           </a>
-          .
+          . 
         </li>
         <li>
           The{' '}
@@ -109,7 +109,7 @@ export const nowEntry = {
           </a>
           . First post will be about how I stumbled into EA/AIS and where I'm at now, exactly one year in. 
         </li>
-        <li>Catching up with college friends before it gets much harder to do so :( if you're one of them, this is me telling u to text or call me</li>
+        <li>Trying to stay in touch with college friends.</li>
         <li>
           Making sense of some epistemologies like critical rationalism and bayesianism, strong/weak longtermism, and the 'culty' elements of EA and AIS. Mostly spurred by my recent hours of engagement with the content of the{' '}
           <a
