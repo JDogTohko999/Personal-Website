@@ -15,6 +15,7 @@ import ArtisticAccents from './components/ArtisticAccents';
 import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import Now from './components/Now';
+import MapImage from './components/MapImage';
 
 function HomePage() {
   return (
@@ -46,6 +47,7 @@ function App() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
       <Route path="/now" element={<Now />} />
+      <Route path="/map" element={<MapImage />} />
     </Routes>
   );
 }
