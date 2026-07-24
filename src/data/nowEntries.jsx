@@ -23,7 +23,7 @@ export const nowEntry = {
       </div>
       
       <p>
-        Anyways... I'm on week 3/4 in Cville. I'll be in NH for a week-long family reunion at the start of August, then ~70% chance I head to Berkeley for the EAGx and other AI safety related happenings.
+        Anyways... I'm on week 3 of 4 in Cville. I'll be in NH for a week-long family reunion at the start of August, then ~70% chance I head to Berkeley for the EAGx and other AI safety related happenings.
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
@@ -49,7 +49,7 @@ export const nowEntry = {
           {' '}team. This project has grown way bigger than I anticipated 2 months ago. Spending +40hr/wk.
         </li>
       </ul>
-      <p className="pt-2 font-semibold text-portfolio-text">On the backburner</p>
+      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
           Helping coordinate an event for The{' '}
