@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Settings, X, GripHorizontal, Power } from 'lucide-react';
+import { Settings, X, GripHorizontal, Power, RotateCcw } from 'lucide-react';
 import { useParticles } from '../context/ParticlesContext';
 
 const ParticlesControls = () => {
-  const { settings, updateSetting, toggleInteractionMode } = useParticles();
+  const { settings, updateSetting, setInteractionMode, resetSettings } = useParticles();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [position, setPosition] = useState({ x: 20, y: 20 }); // Distance from bottom-right
   const [isDragging, setIsDragging] = useState(false);
@@ -143,7 +143,7 @@ const ParticlesControls = () => {
         {/* Power Button */}
         <div className="px-4 py-2 border-b border-portfolio-border flex justify-between items-center">
           <span className="text-sm font-medium text-portfolio-text">
-            Particles{' '}
+            particles{' '}
             <a 
               href="https://github.com/tsparticles/tsparticles" 
               target="_blank" 
@@ -170,7 +170,7 @@ const ParticlesControls = () => {
         <div className={`p-3 border-b border-portfolio-border transition-opacity duration-300 ${
           settings.enabled ? 'opacity-100' : 'opacity-50 pointer-events-none'
         }`}>
-          <div className="text-xs text-portfolio-muted mb-2 text-center">Cursor Mode</div>
+          <div className="text-xs text-portfolio-muted mb-2 text-center">cursor mode</div>
           <div className="relative flex rounded-lg overflow-hidden border border-portfolio-border">
             {/* Sliding background indicator */}
             <div
@@ -180,24 +180,24 @@ const ParticlesControls = () => {
               }}
             />
             <button
-              onClick={() => updateSetting('interactionMode', 'repulse')}
+              onClick={() => setInteractionMode('repulse')}
               className={`relative flex-1 py-2 px-3 text-xs font-medium transition-colors duration-300 ${
                 settings.interactionMode === 'repulse'
                   ? 'text-portfolio-bg'
                   : 'text-portfolio-text hover:text-portfolio-gold'
               }`}
             >
-              Repel
+              repel
             </button>
             <button
-              onClick={() => updateSetting('interactionMode', 'attract')}
+              onClick={() => setInteractionMode('attract')}
               className={`relative flex-1 py-2 px-3 text-xs font-medium transition-colors duration-300 ${
                 settings.interactionMode === 'attract'
                   ? 'text-portfolio-bg'
                   : 'text-portfolio-text hover:text-portfolio-gold'
               }`}
             >
-              Attract
+              attract
             </button>
           </div>
         </div>
@@ -212,14 +212,24 @@ const ParticlesControls = () => {
           {settingsOpen ? (
             <>
               <X className="w-3 h-3" />
-              Close Settings
+              close settings
             </>
           ) : (
             <>
               <Settings className="w-3 h-3" />
-              Mess Around w Settings
+              mess around w settings
             </>
           )}
+        </button>
+
+        {/* Reset Button */}
+        <button
+          onClick={resetSettings}
+          className="w-full py-2 px-3 flex items-center justify-center gap-2 text-xs text-portfolio-muted hover:text-portfolio-gold hover:bg-portfolio-border/30 border-t border-portfolio-border transition-all duration-300"
+          title="Reset particles to default"
+        >
+          <RotateCcw className="w-3 h-3" />
+          reset to default
         </button>
 
         {/* Expanded Settings Panel */}
@@ -228,7 +238,7 @@ const ParticlesControls = () => {
             <div className="text-xs text-portfolio-muted mb-3 font-medium">Particles</div>
 
             <SliderControl
-              label="Count"
+              label="count"
               value={settings.particleCount}
               min={10}
               max={200}
@@ -236,7 +246,7 @@ const ParticlesControls = () => {
             />
 
             <SliderControl
-              label="Size"
+              label="size"
               value={settings.particleSize}
               min={1}
               max={10}
@@ -244,7 +254,7 @@ const ParticlesControls = () => {
             />
 
             <SliderControl
-              label="Speed"
+              label="speed"
               value={settings.particleSpeed}
               min={0.5}
               max={10}
@@ -252,10 +262,10 @@ const ParticlesControls = () => {
               onChange={(v) => updateSetting('particleSpeed', v)}
             />
 
-            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">Connections</div>
+            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">connections</div>
 
             <ToggleControl
-              label="Show Lines"
+              label="show lines"
               checked={settings.linesEnabled}
               onChange={(v) => updateSetting('linesEnabled', v)}
             />
@@ -263,7 +273,7 @@ const ParticlesControls = () => {
             {settings.linesEnabled && (
               <>
                 <SliderControl
-                  label="Line Distance"
+                  label="line distance"
                   value={settings.lineDistance}
                   min={50}
                   max={300}
@@ -271,7 +281,7 @@ const ParticlesControls = () => {
                 />
 
                 <SliderControl
-                  label="Line Opacity"
+                  label="line opacity"
                   value={settings.lineOpacity}
                   min={0.1}
                   max={1}
@@ -284,7 +294,7 @@ const ParticlesControls = () => {
             <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">Interaction</div>
 
             <SliderControl
-              label="Cursor Range"
+              label="cursor range"
               value={settings.interactionDistance}
               min={50}
               max={400}
@@ -294,13 +304,13 @@ const ParticlesControls = () => {
             <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">Behavior</div>
 
             <ToggleControl
-              label="Random Direction"
+              label="random direction"
               checked={settings.randomMovement}
               onChange={(v) => updateSetting('randomMovement', v)}
             />
 
             <ToggleControl
-              label="Bounce on Edges"
+              label="bounce on edges"
               checked={settings.bounce}
               onChange={(v) => updateSetting('bounce', v)}
             />
