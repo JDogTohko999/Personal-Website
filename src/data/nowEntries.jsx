@@ -1,25 +1,16 @@
 import React from 'react';
 
 export const nowEntry = {
-  date: '11:49pm, 8/6/2026',
+  date: '6:17pm, 8/15/2026',
   content: (
     <>
       <p>
-        I'm currently sitting in bed at our annual family reunion in NH. Sharing a room w{' '}
-        <a
-          href="https://www.instagram.com/2cardtito/?hl=en"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-portfolio-gold hover:underline"
-        >
-          2cardtito
-        </a>
-        . We fly back to SC in 2 days. Then, I'll be in SF (Berkeley) from the 17th–28th, hopefully at the EAGx and around Constellation/Mox.
+        Currently at home in SC. Will be in SF from the 17th–28th, attending EAGxSF, meeting people, and seeing the area for the first time!
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          Mainly working on the{' '}
+          Main project: the{' '}
           <a
             href="https://aisafetyseeding.org/"
             target="_blank"
@@ -37,29 +28,21 @@ export const nowEntry = {
           >
             Thomas
           </a>
-          {' '}et al. Our "sprint" phase has finished and I'm pretty happy with the results so far! We've counterfactually seeded 10 groups and had some influence on some 20 others. I'll be writing up a progress report in a few days.
+          {' '}et al. The primary sprint ended in early August, and the experience has taught me much! Chiefly, that I overestimated the number of groups in which we counterfactually produced clearly good outcomes. We will continue the project in a less "sprinty" capacity for at least the next month or two.
         </li>
+        <li>Becoming a better candidate for roles I desire and actually applying to those roles.</li>
         <li>
-          Thinking about the question "what is the role of government?" which was posed to me by my thoughtful uncle. More concretely, how should something like social media be governed? I hope to gain clarity on this – the US relies on informed citizens.
-        </li>
-        <li>Soon to start applying to some fulltime roles.</li>
-      </ul>
-      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
-      <ul className="list-disc list-outside pl-5 space-y-2">
-        <li>
-          Helping coordinate an event for The{' '}
           <a
-            href="https://docs.google.com/document/d/1v2LjcFjHKsBRGR46_F6BbZk0wZlY-EQW-LLFs1i1xP8/edit?usp=drive_link"
+            href="https://pathfinder.kairos-project.org/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            Confluence Initiative
+            Pathfinder
           </a>
-          .
+          {' '}mentor.
         </li>
         <li>
-          Helping prep{' '}
           <a
             href="https://vaisi.org/"
             target="_blank"
@@ -68,9 +51,11 @@ export const nowEntry = {
           >
             VAISI
           </a>
-          {' '}for the fall sem, and writing a VAISI retrospective.
+          {' '}advisor.
         </li>
-        <li>Rebuying the things that were in my backpack.</li>
+      </ul>
+      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
+      <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
           Transforming this website into something I'm actually proud of. Feels like every week I come across someone else's dope ass website, most recently {' '}
           <a
@@ -80,6 +65,15 @@ export const nowEntry = {
             className="text-portfolio-gold hover:underline"
           >
             Andy Han
+          </a>
+          {' '}and{' '}
+          <a
+            href="https://maltech.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Malcolm Krolick
           </a>
           .
         </li>
