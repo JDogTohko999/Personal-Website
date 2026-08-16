@@ -5,7 +5,7 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        Currently at home in SC. Will be in SF from the 17th–28th, attending EAGxSF, meeting people, and seeing the area for the first time!
+        Currently at home in SC. Will be in SF from the 17th–28th, attending EAGxBerkeley, meeting people, and seeing the area for the first time!
       </p>
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
