@@ -28,9 +28,9 @@ export const nowEntry = {
           >
             Thomas
           </a>
-          {' '}et al. The primary sprint ended in early August, and the experience has taught me much! Chiefly, that I overestimated the number of groups in which we counterfactually produced clearly good outcomes. We will continue the project in a less "sprinty" capacity for at least the next month or two.
+          {' '}et al. Our primary sprint ended in early August, and the experience has taught me much! Chiefly, that I overestimated the number of groups in which we counterfactually produced clearly good outcomes. We will continue the project in a less "sprinty" capacity for at least the next month or two.
         </li>
-        <li>Becoming a better candidate for roles I desire and actually applying to those roles.</li>
+        <li>Working to become a better candidate for roles I desire, and actually applying to those roles.</li>
         <li>
           <a
             href="https://pathfinder.kairos-project.org/"
