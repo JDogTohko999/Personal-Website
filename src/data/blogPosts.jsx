@@ -162,7 +162,8 @@ const BoresBackpackContent = () => (
       An expectation of helplessness and despair.<br />
       But instead my mind was overridden by an all too simple acknowledgement of the situation.<br />
       It is what it is, move on.<br />
-      I noticed how unbothered I was shortly thereafter and wondered if that was normal, or more importantly rather, healthy.<br />
+      I noticed how unbothered I was shortly thereafter and wondered if that was normal,<br />
+      or, more importantly rather, healthy.<br />
       I'm still not sure.
     </p>
     <p className="mb-5">
@@ -185,6 +186,9 @@ const BoresBackpackContent = () => (
       <li>25min of movie clips from <em>Parasite</em>.</li>
       <li>15min of clips from <em>The Bear</em>.</li>
     </ul>
+    <p className="italic text-portfolio-muted mt-8">
+      update from jason from the future: i tracked this for a few weeks then got too lazy. it's lowkey a lot of work (ig thats the point tho). Might retry this in a bit with a better forcing function.
+    </p>
   </div>
 );
 
