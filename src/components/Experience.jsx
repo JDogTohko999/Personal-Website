@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
+    id: 13,
+    role: 'TBA soon',
+    period: 'Starting Sep 2026',
+    description: 'In Boston, starting in September. If you know me well, reach out and ask!'
+  },
+  {
     id: 12,
     role: 'Co-director',
     company: 'AI Safety Seeding Initiative',
@@ -150,7 +156,7 @@ const Experience = () => {
                             </a>
                           )}
                         </div>
-                        <h4 className="text-lg text-portfolio-gold">{exp.company}</h4>
+                        {exp.company && <h4 className="text-lg text-portfolio-gold">{exp.company}</h4>}
                     </div>
                     <div className="md:hidden mt-2 flex items-center text-portfolio-muted text-sm">
                       <Calendar className="w-4 h-4 mr-1" />

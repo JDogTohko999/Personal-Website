@@ -247,6 +247,14 @@ const cityData = [
     description: "May 2026.",
     images: [],
   },
+  {
+    id: 31,
+    name: "Bay",
+    coordinates: [-122.3500, 37.8200],
+    countryCode: ["USA", "840"],
+    description: "Berkeley: Spent a week here in August 2026 for a workshop and conference, met a lot of young AIS folks! San Francisco: Didn't actually explore, only did the Batteries to Bluffs hike shortly after sunset.",
+    images: ["/SF_hike1.JPG", "/SF_hike2.jpg", "/SF_hike3.jpg"],
+  },
 ];
 
 // Countries for going soon and bucket list (solid fill only, no markers)
