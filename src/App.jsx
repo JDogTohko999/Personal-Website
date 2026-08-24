@@ -18,7 +18,7 @@ import Now from './components/Now';
 
 function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="min-h-screen flex flex-col font-sans select-none">
       <EasterEgg />
       <ParticlesBackground />
       <ParticlesControls />
