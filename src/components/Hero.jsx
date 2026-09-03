@@ -33,13 +33,13 @@ const Hero = () => {
             <span className="text-portfolio-gold">Hi, I'm Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            AI Safety | Computer Eng @ UVA '26
+            AI Safety | CpE @ UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
             I'm trying to make AI go well.
           </p>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            I graduated in May and am now looking to contribute to AI safety through{' '}
+            I graduated in May and am working on{' '}
             <a
               href="https://forum.effectivealtruism.org/posts/rAqKSSXankvys2Fzu/the-case-for-ai-safety-capacity-building-work#Letting_our_team_know"
               target="_blank"
@@ -55,26 +55,17 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="text-portfolio-gold hover:underline"
             >
-              field-building
+              field building
             </a>
-            .
+            , specifically accelerating young talent.
           </p>
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="inline-flex flex-col items-stretch gap-4">
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://www.linkedin.com/in/jasonchin9/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-portfolio-gold text-portfolio-bg font-bold rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center shadow-lg hover:shadow-gold/20"
-                >
-                  <Linkedin className="w-5 h-5 mr-2" />
-                  LinkedIn
-                </a>
                 <div className="relative group flex">
                   <Link
                     to="/now"
-                    className="w-full px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
+                    className="w-full px-6 py-3 bg-portfolio-gold text-portfolio-bg font-bold rounded-lg hover:bg-opacity-90 transition-all flex items-center justify-center shadow-lg hover:shadow-gold/20"
                   >
                     <Clock className="w-5 h-5 mr-2" />
                     Now
@@ -91,6 +82,15 @@ const Hero = () => {
                   <BookOpen className="w-5 h-5 mr-2" />
                   Blog
                 </Link>
+                <a
+                  href="https://www.linkedin.com/in/jasonchin9/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 border border-portfolio-gold text-portfolio-gold font-bold rounded-lg hover:bg-portfolio-gold/10 transition-all flex items-center justify-center"
+                >
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  LinkedIn
+                </a>
               </div>
               <a
                 href="https://savvycal.com/jasonchin098/meet-with-jason"
