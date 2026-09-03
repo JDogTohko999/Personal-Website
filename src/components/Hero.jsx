@@ -41,23 +41,41 @@ const Hero = () => {
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
             I graduated in May and am working on{' '}
             <a
-              href="https://forum.effectivealtruism.org/posts/rAqKSSXankvys2Fzu/the-case-for-ai-safety-capacity-building-work#Letting_our_team_know"
+              href="https://80000hours.org/ai/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-portfolio-gold hover:underline"
             >
-              capacity
-            </a>
-            /
+              AI safety
+            </a>{' '}
             <a
               href="https://80000hours.org/career-reviews/ai-safety-fieldbuilding/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-portfolio-gold hover:underline"
             >
-              field building
+              field-building. 
             </a>
-            , specifically accelerating young talent.
+            <br />
+            I'm especially bullish on strengthening and{' '}
+            <a
+              href="https://aisafetyseeding.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-portfolio-gold hover:underline"
+            >
+               growing
+            </a>{' '}
+            the early-career talent ecosystem. Huge fan of the work being done at{' '}
+            <a
+              href="https://kairos-project.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-portfolio-gold hover:underline"
+            >
+              Kairos
+            </a>
+            .
           </p>
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="inline-flex flex-col items-stretch gap-4">

@@ -235,7 +235,7 @@ const ParticlesControls = () => {
         {/* Expanded Settings Panel */}
         {settingsOpen && (
           <div className="p-3 border-t border-portfolio-border max-h-[300px] overflow-y-auto">
-            <div className="text-xs text-portfolio-muted mb-3 font-medium">Particles</div>
+            <div className="text-xs text-portfolio-muted mb-3 font-medium underline">Particles</div>
 
             <SliderControl
               label="count"
@@ -262,7 +262,7 @@ const ParticlesControls = () => {
               onChange={(v) => updateSetting('particleSpeed', v)}
             />
 
-            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">connections</div>
+            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium underline">Connections</div>
 
             <ToggleControl
               label="show lines"
@@ -291,7 +291,7 @@ const ParticlesControls = () => {
               </>
             )}
 
-            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium">Interaction</div>
+            <div className="text-xs text-portfolio-muted mb-3 mt-4 font-medium underline">Interaction</div>
 
             <SliderControl
               label="cursor range"

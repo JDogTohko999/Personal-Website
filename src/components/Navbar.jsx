@@ -23,7 +23,6 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'About Me', href: '#about-me' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'VAISI', href: '#vaisi' },
@@ -39,13 +38,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-portfolio-bg/95 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <a href="#about-me" className="text-xl font-bold text-portfolio-text hover:text-portfolio-gold transition-colors">
-              Portfolio
-            </a>
-          </div>
-          
+        <div className="flex items-center justify-end h-16">
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (

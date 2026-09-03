@@ -42,22 +42,15 @@ export const ParticlesProvider = ({ children }) => {
   const [resetNonce, setResetNonce] = useState(0);
   // Shared reference to the live tsparticles container.
   const containerRef = useRef(null);
-  // Live particle count captured at the moment of a mode switch, so it can be
-  // restored after the canvas reloads (keeps the same number of particles).
-  const pendingCountRef = useRef(null);
 
   const updateSetting = (key, value) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
-  // Switching the cursor mode reloads the canvas (required for the interaction
-  // to actually change). Capture the current count first so it can be restored.
+  // The canvas applies the cursor mode to the running container, so switching
+  // is just a state change — the particles on screen are never rebuilt.
   const setInteractionMode = (mode) => {
-    setSettings(prev => {
-      if (prev.interactionMode === mode) return prev;
-      pendingCountRef.current = containerRef.current?.particles?.count ?? null;
-      return { ...prev, interactionMode: mode };
-    });
+    setSettings(prev => (prev.interactionMode === mode ? prev : { ...prev, interactionMode: mode }));
   };
 
   const toggleInteractionMode = () => {
@@ -79,7 +72,6 @@ export const ParticlesProvider = ({ children }) => {
         resetSettings,
         resetNonce,
         containerRef,
-        pendingCountRef,
       }}
     >
       {children}
