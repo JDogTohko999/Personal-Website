@@ -29,7 +29,7 @@ export const ThemeProvider = ({ children }) => {
     theme,
     setTheme,
     themes: [
-      { id: 'default', name: 'Default (Elite Build)', color: '#121212' },
+      { id: 'default', name: 'Default', color: '#121212' },
       { id: 'newspaper', name: 'Newspaper', color: '#FFFFFF' },
       { id: 'forest', name: 'Forest', color: '#2D3A3A' },
       { id: 'uva', name: 'UVA', color: '#232D4B' },
