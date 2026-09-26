@@ -147,7 +147,7 @@ export const nowEntry = {
       </div>
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
-        <li>Prepping for Boston.</li>
+        <li>Prepping for Boston. If you're in the area hmu.</li>
         <li>
           Rapid AIS upskilling. Reading foundational texts, logging disagreements, and discussing with friends. I've been postponing this forever, might need to{' '}
           <a

@@ -97,8 +97,8 @@ const experiences = [
   },
   {
     id: 11,
-    role: 'Member',
-    company: 'Giving What We Can 🔸',
+    role: '🔸Pledger',
+    company: 'Giving What We Can',
     period: 'Sep 2025 - Present',
     description: 'Pledged to give at least 10% of lifetime income to effective charities.',
     link: 'https://www.givingwhatwecan.org/pledge'
