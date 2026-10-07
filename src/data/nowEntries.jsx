@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // Inline text link that opens one or more images in a lightbox overlay.
 const ImageLink = ({ children, images }) => {
@@ -125,136 +126,76 @@ const VideoBonus = () => {
 };
 
 export const nowEntry = {
-  date: '2:31pm, 8/24/2026',
+  date: '12:03am, 10/7/2026',
   content: (
     <>
       <p>
-        Currently in a beautiful UC Berkeley{' '}
-        <ImageLink images="/UCBerkLib.jpg">library</ImageLink>
-        . Attended OASIS and EAGxBerkeley this past week, and{' '}
-        <ImageLink images={['/SF_hike1.JPG', '/SF_hike2.jpg', '/SF_hike3.jpg']}>saw</ImageLink>
-        {' '}a few pockets of the bay. 98% prob I'll be in Boston by the end of the month starting a new position.
+        Currently in the MAIA office about to head home. In the coming days I'll fly down to SC and drive back up to Boston, stopping at UVA's YAR along the way. Excited to see friends and family!
       </p>
-      <div className="my-4 w-full max-w-[380px] mx-auto">
-        <img
-          src="/fatebook_position.png"
-          alt="My forecast: Will I have accepted and started a full-time, paid position? — 65%"
-          className="w-full h-auto rounded-lg border border-portfolio-border"
-        />
-        <p className="mt-2 text-center text-sm italic text-portfolio-muted">
-          Wish I had forecasted for each month and not just eoy
-        </p>
-      </div>
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
-        <li>Prepping for Boston. If you're in the area hmu.</li>
         <li>
-          Rapid AIS upskilling. Reading foundational texts, logging disagreements, and discussing with friends. I've been postponing this forever, might need to{' '}
+          Between the many hours I spend on MAIA and a month of living out of a suitcase in Airbnbs, I've been pushing off figuring out what work-life balance means for someone who cares about impact.
+        </li>
+        <li>
+          I worry that my exploit:explore ratio is too exploity, and that the local min I'm in will become apparent. Fortunately, I think being around Roman will have great mid-to-long-term effects.
+        </li>
+        <li>
+          What am I going to do with my car in Cambridge... should I even bother bringing it? My bike too?
+        </li>
+      </ul>
+      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
+      <ul className="list-disc list-outside pl-5 space-y-2">
+        <li>
+          I should probably try and meet more ppl outside of MIT. I've also considered writing a date me doc, but idk if I'm that ratty.
+        </li>
+        <li>
+          Looking for Alice
+          <a
+            href="https://www.henrikkarlsson.xyz/p/looking-for-alice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            .
+          </a>
+        </li>
+        <li>
+          Writing. I really have to make my first substack post. Gotta{' '}
           <a
             href="https://usefulfictions.substack.com/p/tying-yourself-to-the-mast"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            'tie myself to the mast'
+            tie myself to the mast
           </a>
-          .
-        </li>
-        <li>
-          Mentoring 3{' '}
+          . Shoutout{' '}
           <a
-            href="https://pathfinder.kairos-project.org/"
+            href="https://romansattic.substack.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            Pathfinder
-          </a>
-          {' '}fellows.
-        </li>
-        <li>
-          Advising{' '}
-          <a
-            href="https://vaisi.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            VAISI
-          </a>
-          .
-        </li>
-      </ul>
-      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
-      <ul className="list-disc list-outside pl-5 space-y-2">
-        <li>
-          The{' '}
-          <a
-            href="https://aisafetyseeding.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            AI Safety Seeding Initiative
-          </a>
-          {' '}with{' '}
-          <a
-            href="https://thomasrodskog.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Thomas
-          </a>
-          {' '}et al. Our primary sprint ended in early August, and the experience has taught me much! Chiefly, that I overestimated the number of groups in which we counterfactually produced clearly good outcomes. We will continue the project in a less "sprinty" capacity for at least the next month or two.
-        </li>
-        <li>
-          Transforming this website into something I'm actually proud of. Feels like every week I come across someone else's dope ass website, most recently {' '}
-          <a
-            href="https://andyqhan.github.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Andy Han
+            Roman
           </a>
           {' '}and{' '}
-          <a
-            href="https://maltech.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Malcolm Krolick
-          </a>
-          .
-        </li>
-        <li>
-          Writing. I've been super inspired by{' '}
           <a
             href="https://elianadu.substack.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            Eliana Du's awesome substack
+            Eliana
           </a>
-          . First post will be about how I stumbled into EA/AIS and where I'm at now, exactly one year in.
-        </li>
-        <li>
-          Learning about the Israel-Palestine conflict. Watching some of my favorite documentarians (Channel 5 and Louis Theroux) cover it has caused an initial sympathy for Palestine. The content I've seen focused on Israeli settlers, so it's hard not conclude they're being oppressive. Now, I'm trying to learn more about the conflict and it's history – quite the daunting task :)
-        </li>
-        <li>
-          Making sense of some epistemologies like critical rationalism and bayesianism, strong/weak longtermism, and the 'culty' elements of EA and AIS. Mostly spurred by my recent hours of engagement with the content of the{' '}
-          <a
-            href="https://www.incrementspodcast.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+          {' '}for their blogs. Lemme{' '}
+          <Link
+            to="/blog/passed"
             className="text-portfolio-gold hover:underline"
           >
-            Increments Podcast
-          </a>
-          .
+            post
+          </Link>
+          {' '}something to my blog rn so I can start overcoming the fear of publishing.
         </li>
       </ul>
 
@@ -265,6 +206,9 @@ export const nowEntry = {
           <span className="inline-block transition-transform group-open:rotate-90">▸</span>
           Bonus 2
         </summary>
+        <p className="mt-3 text-sm text-portfolio-muted">
+          From previous now: <span className="italic">2:31pm, 8/24/2026</span>
+        </p>
         <p className="mt-3 italic text-portfolio-muted">Shoutout the Boomsticks</p>
         <div className="mt-3 w-full max-w-[640px] mx-auto flex flex-col sm:flex-row gap-3">
           <img
