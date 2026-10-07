@@ -6,14 +6,17 @@ import './index.css'
 
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { ParticlesProvider } from './context/ParticlesContext.jsx'
+import { FunModeProvider } from './context/FunModeContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <ParticlesProvider>
-          <App />
-        </ParticlesProvider>
+        <FunModeProvider>
+          <ParticlesProvider>
+            <App />
+          </ParticlesProvider>
+        </FunModeProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

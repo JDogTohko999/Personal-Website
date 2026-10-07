@@ -4,104 +4,12 @@ import { loadSlim } from '@tsparticles/slim';
 import { Sparkles } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useParticles } from '../context/ParticlesContext';
+import Leaderboard from './Leaderboard';
 
 // Memoized so a re-render of the background (settings changing, theme toggling)
 // never hands <Particles> a fresh props object — that would tear down and
 // rebuild the canvas, wiping every particle currently on screen.
 const MemoizedParticles = memo(Particles);
-
-// Particles added per click — mirrors interactivity.modes.push.quantity below.
-const PUSH_QUANTITY = 4;
-// Spamming threshold: more than this many particles created within one second.
-const SPAM_PARTICLES_PER_SECOND = 12;
-const RECORD_MESSAGE = 'record is 2.5k, set by elias k';
-// How long the record message lingers before it fades back out.
-const RECORD_VISIBLE_MS = 3000;
-const RECORD_FADE_MS = 500;
-
-// Fades a note in just above the cursor once someone starts spam-clicking
-// particles into existence. Separate component so its state churn never
-// reaches the <Particles> canvas.
-const RecordHint = ({ enabled }) => {
-  const [hint, setHint] = useState(null);
-  const [visible, setVisible] = useState(false);
-  const clickTimesRef = useRef([]);
-  const timersRef = useRef([]);
-  const frameRef = useRef(null);
-  // Latch: the note fires once per burst of spamming, not once per click.
-  const armedRef = useRef(true);
-
-  useEffect(() => {
-    if (!enabled) {
-      return undefined;
-    }
-
-    const clearTimers = () => {
-      timersRef.current.forEach(clearTimeout);
-      timersRef.current = [];
-      if (frameRef.current !== null) {
-        cancelAnimationFrame(frameRef.current);
-        frameRef.current = null;
-      }
-    };
-
-    const handleClick = (event) => {
-      const now = Date.now();
-      const recent = clickTimesRef.current.filter((t) => now - t < 1000);
-      const wasSpamming = recent.length * PUSH_QUANTITY > SPAM_PARTICLES_PER_SECOND;
-      recent.push(now);
-      clickTimesRef.current = recent;
-
-      // Clicking has dropped back under the threshold, so the burst is over and
-      // the next one may show the note again.
-      if (!wasSpamming) {
-        armedRef.current = true;
-      }
-
-      if (!armedRef.current || recent.length * PUSH_QUANTITY <= SPAM_PARTICLES_PER_SECOND) {
-        return;
-      }
-      // Fires only on the click that starts a burst; it then stays quiet until
-      // the spamming stops, so the note always fades after RECORD_VISIBLE_MS.
-      armedRef.current = false;
-
-      // Keep the note on screen even when the cursor is near an edge.
-      const x = Math.min(Math.max(event.clientX, 150), window.innerWidth - 150);
-      const y = Math.max(event.clientY, 60);
-
-      clearTimers();
-      setHint({ x, y });
-      // Next frame, so the element mounts at opacity 0 and then transitions in.
-      frameRef.current = requestAnimationFrame(() => {
-        frameRef.current = null;
-        setVisible(true);
-      });
-      timersRef.current.push(
-        setTimeout(() => setVisible(false), RECORD_VISIBLE_MS),
-        setTimeout(() => setHint(null), RECORD_VISIBLE_MS + RECORD_FADE_MS)
-      );
-    };
-
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('click', handleClick);
-      clearTimers();
-    };
-  }, [enabled]);
-
-  if (!enabled || !hint) return null;
-
-  return (
-    <div
-      className={`fixed z-40 pointer-events-none -translate-x-1/2 -translate-y-full text-center text-xs font-medium text-portfolio-muted transition-opacity duration-500 ${
-        visible ? 'opacity-100' : 'opacity-0'
-      }`}
-      style={{ left: hint.x, top: hint.y - 18 }}
-    >
-      {RECORD_MESSAGE}
-    </div>
-  );
-};
 
 // Overlay UI (live counter) kept in its own component so its frequent state
 // updates never re-render the <Particles> canvas.
@@ -119,18 +27,25 @@ const ParticleOverlay = ({ enabled, containerRef }) => {
   if (!enabled) return null;
 
   return (
-    /* Particle counter: bottom-left corner */
-    <div className="fixed bottom-4 left-4 z-40 pointer-events-none flex items-center gap-1.5 rounded-full border border-portfolio-border bg-portfolio-card/80 px-3 py-1.5 text-xs font-medium text-portfolio-muted shadow-lg backdrop-blur">
-      <Sparkles className="w-3.5 h-3.5 text-portfolio-gold" />
-      <span className="tabular-nums text-portfolio-text">{count}</span>
-      particles
-      <span className="text-portfolio-muted/70">· click to create more</span>
+    /* Bottom-left corner: leaderboard stacked on the particle counter. It
+       grows upward when opened, since the stack is pinned to the bottom. */
+    <div className="fixed bottom-7 left-7 z-40 pointer-events-none flex flex-col items-start gap-2">
+      <Leaderboard />
+      <div className="flex items-center gap-1.5 rounded-full border border-portfolio-border bg-portfolio-card/80 px-3 py-1.5 text-xs font-medium text-portfolio-muted shadow-lg backdrop-blur">
+        <Sparkles className="w-3.5 h-3.5 text-portfolio-gold" />
+        <span className="tabular-nums text-portfolio-text">{count}</span>
+        particles
+        <span className="text-portfolio-muted/70">· click to create more</span>
+      </div>
     </div>
   );
 };
 
 const ParticlesBackground = () => {
   const [init, setInit] = useState(false);
+  // False until the first canvas has particles, so it fades in rather than
+  // popping in after the engine finishes loading.
+  const [ready, setReady] = useState(false);
   const { theme } = useTheme();
   const { settings, resetNonce, containerRef } = useParticles();
 
@@ -143,6 +58,8 @@ const ParticlesBackground = () => {
   // Capture the live tsparticles container so the overlay can read the count.
   const particlesLoaded = useCallback(async (loadedContainer) => {
     containerRef.current = loadedContainer ?? null;
+    // Next frame, so the canvas paints once at opacity 0 before transitioning.
+    requestAnimationFrame(() => setReady(true));
   }, [containerRef]);
 
   // Switching attract/repel is applied straight to the running container. The
@@ -286,7 +203,7 @@ const ParticlesBackground = () => {
     <>
       <div
         className={`transition-opacity duration-700 ${
-          settings.enabled ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          settings.enabled && ready ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
         <MemoizedParticles
@@ -298,7 +215,6 @@ const ParticlesBackground = () => {
       </div>
 
       <ParticleOverlay enabled={settings.enabled} containerRef={containerRef} />
-      <RecordHint enabled={settings.enabled} />
     </>
   );
 };

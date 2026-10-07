@@ -36,7 +36,7 @@ const shuffle = (arr) => {
   return a;
 };
 
-const JasoningSlot = ({ items, openers = [], onLand }) => {
+const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN_DELAY_MS }) => {
   const viewportRef = useRef(null);
   const reelRef = useRef(null);
   const spinningRef = useRef(false);
@@ -110,7 +110,7 @@ const JasoningSlot = ({ items, openers = [], onLand }) => {
   useEffect(() => {
     let cancelled = false;
     const go = async () => {
-      const pause = new Promise((resolve) => setTimeout(resolve, AUTO_SPIN_DELAY_MS));
+      const pause = new Promise((resolve) => setTimeout(resolve, autoSpinDelayMs));
       if (document.fonts?.ready) {
         try { await document.fonts.ready; } catch { /* measure anyway */ }
       }
@@ -120,7 +120,7 @@ const JasoningSlot = ({ items, openers = [], onLand }) => {
     };
     go();
     return () => { cancelled = true; };
-  }, [buildSpin]);
+  }, [buildSpin, autoSpinDelayMs]);
 
   useLayoutEffect(() => {
     if (!spinId || !reelRef.current || !viewportRef.current) return undefined;

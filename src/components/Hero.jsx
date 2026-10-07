@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Linkedin, BookOpen, CalendarDays, Clock } from 'lucide-react';
+import { Linkedin, BookOpen, CalendarDays, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { nowEntry } from '../data/nowEntries';
+import { useFunMode } from '../context/FunModeContext';
 import JasoningSlot from './JasoningSlot';
 
 const HEADSHOT = '/jason_headshot_grad.png';
 
 // The first spin of a visit always settles on one of these.
-const OPENERS = ['stalling', 'sacking', 'hanging', 'smiling'];
+const OPENERS = ['stalling', 'sacking', 'hanging', 'smiling', 'cheesing'];
 
 // Whichever of these the reel lands on fills the circle above. The headshot is
 // in the list too, so the reel can always come back to it.
@@ -36,12 +37,36 @@ const JASONINGS = [
   // Space and '!' in these filenames stay percent-encoded in the URL.
   { label: 'troublemaking', src: '/trouble%20making.jpg' },
   { label: 'snowing!', src: '/snowing%21.jpg' },
+  { label: 'unnecessary risking', src: '/unnecessary%20risking.jpg' },
+  { label: 'napping', src: '/napping.jpg' },
+  { label: 'cheesing', src: '/cheesing.jpg' },
+  { label: 'considering', src: '/considering.jpg' },
   { label: 'big backing', src: '/big%20backing.jpg' },
-  { label: 'larping', src: '/larping.jpg' },
+  { label: 'performing', src: '/performing.jpg' },
 ];
 
 const Hero = () => {
   const [active, setActive] = useState(null);
+  const { funMode, setFunMode } = useFunMode();
+  const [justTurnedOn, setJustTurnedOn] = useState(false);
+  // Set while heading back to the normal outlook, so the circle fades back to
+  // the headshot instead of cutting. Spins still swap pictures instantly.
+  const [fadingToHeadshot, setFadingToHeadshot] = useState(false);
+
+  const enterFunMode = () => {
+    setJustTurnedOn(true);
+    setFadingToHeadshot(false);
+    setFunMode(true);
+  };
+
+  // Normal outlook always shows the plain headshot.
+  const leaveFunMode = () => {
+    setFadingToHeadshot(true);
+    setActive(null);
+    setFunMode(false);
+  };
+
+  const pictureFade = { duration: fadingToHeadshot ? 0.6 : 0 };
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
@@ -53,28 +78,89 @@ const Hero = () => {
           className="flex-shrink-0"
         >
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-portfolio-gold overflow-hidden shadow-2xl relative">
-            {active?.type === 'video' ? (
-              <video
-                key={active.src}
-                src={active.src}
-                className="w-full h-full object-cover"
-                autoPlay
-                loop
-                muted
-                playsInline
-                aria-label={`Jason ${active.label}`}
-              />
-            ) : (
-              <img
-                src={active ? active.src : HEADSHOT}
-                alt={active ? `Jason ${active.label}` : 'Jason Chin'}
-                className="w-full h-full object-cover"
-              />
-            )}
+            <AnimatePresence initial={false}>
+              {active?.type === 'video' ? (
+                <motion.video
+                  key={active.src}
+                  src={active.src}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={`Jason ${active.label}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={pictureFade}
+                />
+              ) : (
+                <motion.img
+                  key={active ? active.src : HEADSHOT}
+                  src={active ? active.src : HEADSHOT}
+                  alt={active ? `Jason ${active.label}` : 'Jason Chin'}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={pictureFade}
+                />
+              )}
+            </AnimatePresence>
           </div>
 
-          <div className="mt-4">
-            <JasoningSlot items={JASONINGS} openers={OPENERS} onLand={setActive} />
+          <div className="mt-4 flex flex-col items-center">
+            {/* The invite and the wheel fade into each other rather than swapping. */}
+            <AnimatePresence mode="wait" initial={false}>
+            {funMode ? (
+              <motion.div
+                key="fun"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="flex flex-col items-center"
+              >
+                <JasoningSlot
+                  items={JASONINGS}
+                  openers={OPENERS}
+                  onLand={setActive}
+                  // Spin almost right away when they just asked for it; a page
+                  // load that remembers fun mode gets the usual pause.
+                  autoSpinDelayMs={justTurnedOn ? 300 : undefined}
+                />
+                <button
+                  type="button"
+                  onClick={leaveFunMode}
+                  className="mt-3 text-xs text-portfolio-muted hover:text-portfolio-gold hover:underline transition-colors"
+                >
+                  back to boring website
+                </button>
+              </motion.div>
+            ) : (
+              <motion.button
+                key="invite"
+                type="button"
+                onClick={enterFunMode}
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="group flex items-center gap-2 whitespace-nowrap text-sm font-medium text-portfolio-gold"
+              >
+                {/* Nudges toward the text and swells a little, on a loop, to draw the eye. */}
+                <motion.span
+                  aria-hidden="true"
+                  animate={{ x: [0, 6, 0], scale: [1, 1.25, 1] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                  className="inline-flex"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.span>
+                <span className="group-hover:underline">make website more fun</span>
+              </motion.button>
+            )}
+            </AnimatePresence>
           </div>
         </motion.div>
 
