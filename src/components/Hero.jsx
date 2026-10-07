@@ -19,7 +19,7 @@ const JASONINGS = [
   { label: 'sacking', src: '/sacking.jpg' },
   { label: 'stalling', src: '/stalling.JPG' },
   { label: 'jim carey-ing', src: '/jim-careying.JPG' },
-  { label: 'napoleoning', src: '/napoleoning.JPG' },
+  { label: 'napoleoning', src: '/napoleoning.jpg' },
   { label: 'pointing', src: '/pointing.jpg' },
   { label: 'hanging', src: '/hanging.jpg' },
   { label: 'speaking', src: '/speaking.jpg' },
@@ -36,6 +36,8 @@ const JASONINGS = [
   // Space and '!' in these filenames stay percent-encoded in the URL.
   { label: 'troublemaking', src: '/trouble%20making.jpg' },
   { label: 'snowing!', src: '/snowing%21.jpg' },
+  { label: 'big backing', src: '/big%20backing.jpg' },
+  { label: 'larping', src: '/larping.jpg' },
 ];
 
 const Hero = () => {
