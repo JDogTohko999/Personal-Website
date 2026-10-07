@@ -135,7 +135,7 @@ export const nowEntry = {
       <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          Between the many hours I spend on MAIA and a month of living out of a suitcase in Airbnbs, I've been pushing off figuring out what work-life balance means for someone who cares about impact.
+          Between the many hours I spend on MAIA and the fact that I'm still living in Airbnb + suitcase mode, I've inadvertently been pushing off figuring out what work-life balance means for someone who cares about impact.
         </li>
         <li>
           I worry that my exploit:explore ratio is too exploity, and that the local min I'm in will become apparent. Fortunately, I think being around Roman will have great mid-to-long-term effects.
