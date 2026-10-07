@@ -310,7 +310,7 @@ const AliceContent = () => (
   <div>
 
     <p className="mb-5">
-      Random thoughts on traits I think Alice probably has.
+      Some thoughts on traits I think Alice probably has.
     </p>
 
     <ul className="list-disc list-outside pl-5 space-y-2 mb-5">
