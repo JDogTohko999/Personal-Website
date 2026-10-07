@@ -96,7 +96,7 @@ const experiences = [
     role: 'Engineering & Design Program',
     company: 'Ramapo High School',
     period: 'Sep 2018 - Jun 2022',
-    description: 'GPA: 3.8/4.0. Chess Club President, Varsity Tennis Captain.'
+    description: 'GPA: 3.8/4.0. Chess Club President, Varsity Tennis Co-Captain.'
   },
   // Volunteering
   {
