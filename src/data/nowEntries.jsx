@@ -138,7 +138,7 @@ export const nowEntry = {
           Between the many hours I spend on MAIA and the fact that I'm still living in Airbnb + suitcase mode, I've inadvertently been pushing off figuring out what work-life balance means for someone who cares about impact.
         </li>
         <li>
-          I worry that my exploit:explore ratio is too exploity, and that the local min I'm in will become apparent. Fortunately, I think being around Roman will have great mid-to-long-term effects.
+          I worry that my exploit:explore ratio is too exploity, and that I'm getting lulled into a local min. Fortunately, I think being around Roman will mitigate this risk to some extent.
         </li>
         <li>
           What am I going to do with my car in Cambridge... should I even bother bringing it? My bike too?
