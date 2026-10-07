@@ -4,9 +4,12 @@ import { ChevronUp, Trophy } from 'lucide-react';
 
 // Particle-count records. `proof` is either a screenshot path or a note.
 const ENTRIES = [
-  { name: 'anna k', score: '6,911', proof: { image: '/anna_record_proof.jpg' } },
-  { name: 'elias k', score: '2.5k', proof: { note: 'I saw this in person. No screenshot. Trust.' } },
+  { name: 'anna k', score: 6911, proof: { image: '/anna_record_proof.jpg' } },
+  { name: 'elias k', score: 2500, proof: { note: 'I saw this in person. No screenshot. Trust.' } },
 ];
+
+// Shown to the nearest hundred, in thousands: 6911 -> "6.9k".
+const formatScore = (n) => `${(n / 1000).toFixed(1)}k`;
 const SLOTS = 3;
 
 const Leaderboard = () => {
@@ -83,7 +86,7 @@ const Leaderboard = () => {
                     {entry ? (
                       <>
                         <span className="text-portfolio-text">{entry.name}</span>
-                        <span className="text-portfolio-muted tabular-nums">{entry.score}</span>
+                        <span className="text-portfolio-muted tabular-nums">{formatScore(entry.score)}</span>
                         <button
                           type="button"
                           tabIndex={open ? 0 : -1}
@@ -135,7 +138,7 @@ const Leaderboard = () => {
               >
                 <img
                   src={proofEntry.proof.image}
-                  alt={`${proofEntry.name}'s record of ${proofEntry.score} particles`}
+                  alt={`${proofEntry.name}'s record of ${proofEntry.score.toLocaleString()} particles`}
                   className="block w-full h-auto rounded"
                 />
               </a>

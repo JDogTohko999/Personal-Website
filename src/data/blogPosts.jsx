@@ -277,10 +277,12 @@ const BoresAIDividendContent = () => (
 const PassedContent = () => (
   <div>
 
-    <p className="mb-5 text-sm text-portfolio-muted">4:33</p>
+    <p className="mb-5">
+      Walking south, broadway and 28th.
+    </p>
 
     <p className="mb-5">
-      Cheers. Someone scored in France vs Senegal. Walking south, broadway and 28th.
+      Cheers. Someone scored in France vs Senegal.
     </p>
 
     <p className="mb-5">
@@ -298,6 +300,8 @@ const PassedContent = () => (
     <p className="mb-5">
       I thought about looking back, but never did I actually.
     </p>
+
+    <p className="mb-5 text-sm text-portfolio-muted">4:33pm</p>
 
     <p className="mt-12 text-sm italic text-portfolio-muted">
       Written minutes after it happened, then touched up months later.
