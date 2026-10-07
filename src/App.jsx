@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -16,12 +16,38 @@ import Blog from './components/Blog';
 import BlogPost from './components/BlogPost';
 import Now from './components/Now';
 
+// Particles are a mouse toy, so only show them when the main input is a mouse or
+// trackpad. This keys off how the visitor points, not screen width, so phones
+// and tablets are excluded but a narrow desktop window is not.
+const POINTER_QUERY = '(hover: hover) and (pointer: fine)';
+
+const useHasMouse = () => {
+  const [hasMouse, setHasMouse] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(POINTER_QUERY).matches
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(POINTER_QUERY);
+    const onChange = (e) => setHasMouse(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  return hasMouse;
+};
+
 function HomePage() {
+  const hasMouse = useHasMouse();
+
   return (
     <div className="min-h-screen flex flex-col font-sans select-none">
       <EasterEgg />
-      <ParticlesBackground />
-      <ParticlesControls />
+      {hasMouse && (
+        <>
+          <ParticlesBackground />
+          <ParticlesControls />
+        </>
+      )}
       <ArtisticAccents />
       <div className="relative z-10">
         <Navbar />
