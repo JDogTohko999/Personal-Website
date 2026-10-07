@@ -40,7 +40,7 @@ const JASONINGS = [
   { label: 'unnecessary risking', src: '/unnecessary%20risking.jpg' },
   { label: 'napping', src: '/napping.jpg' },
   { label: 'cheesing', src: '/cheesing.jpg' },
-  { label: 'considering', src: '/considering.jpg' },
+  { label: 'considering :)', src: '/considering.jpg' },
   { label: 'big backing', src: '/big%20backing.jpg' },
   { label: 'performing', src: '/performing.jpg' },
 ];
