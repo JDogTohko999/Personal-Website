@@ -337,7 +337,7 @@ export const blogPosts = [
     title: 'Passed',
     date: 'October 7, 2026',
     tags: ['NYC'],
-    summary: 'Notes app fragment from June.',
+    summary: 'Quick notes app writing from June',
     Content: PassedContent,
   },
   {
