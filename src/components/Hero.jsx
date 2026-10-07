@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Linkedin, BookOpen, CalendarDays, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { nowEntry } from '../data/nowEntries';
+import JasoningSlot from './JasoningSlot';
+
+const HEADSHOT = '/jason_headshot_grad.png';
+
+// The first spin of a visit always settles on one of these.
+const OPENERS = ['stalling', 'sacking', 'hanging', 'smiling'];
+
+// Whichever of these the reel lands on fills the circle above. The headshot is
+// in the list too, so the reel can always come back to it.
+const JASONINGS = [
+  { label: 'smiling', src: HEADSHOT },
+  // Space in the filename must stay percent-encoded in the URL.
+  { label: 'field rushing', src: '/field%20rushing.jpg' },
+  { label: 'sacking', src: '/sacking.jpg' },
+  { label: 'stalling', src: '/stalling.JPG' },
+  { label: 'jim carey-ing', src: '/jim-careying.JPG' },
+  { label: 'napoleoning', src: '/napoleoning.JPG' },
+  { label: 'pointing', src: '/pointing.jpg' },
+  { label: 'hanging', src: '/hanging.jpg' },
+  { label: 'speaking', src: '/speaking.jpg' },
+  { label: 'canvassing', src: '/canvassing_bores.mp4', type: 'video' },
+  { label: 'blocking', src: '/blocking.JPG' },
+  { label: 'protesting', src: '/protesting.JPG' },
+  { label: 'ranking', src: '/ranking.PNG' },
+  { label: 'chilling', src: '/chilling.jpg' },
+  { label: 'LDOCing', src: '/LDOCing.jpg' },
+  { label: 'hooping', src: '/hooping.jpg' },
+  { label: 'G-splitting', src: '/G-splitting.jpg' },
+  { label: 'climbing', src: '/climbing.jpg' },
+  { label: 'winning', src: '/winning.jpg' },
+  // Space and '!' in these filenames stay percent-encoded in the URL.
+  { label: 'troublemaking', src: '/trouble%20making.jpg' },
+  { label: 'snowing!', src: '/snowing%21.jpg' },
+];
 
 const Hero = () => {
+  const [active, setActive] = useState(null);
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center gap-12">
@@ -15,11 +51,28 @@ const Hero = () => {
           className="flex-shrink-0"
         >
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-portfolio-gold overflow-hidden shadow-2xl relative">
-            <img
-              src="/jason_chin_headshot_cropped_centered.jpg"
-              alt="Jason Chin"
-              className="w-full h-full object-cover"
-            />
+            {active?.type === 'video' ? (
+              <video
+                key={active.src}
+                src={active.src}
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label={`Jason ${active.label}`}
+              />
+            ) : (
+              <img
+                src={active ? active.src : HEADSHOT}
+                alt={active ? `Jason ${active.label}` : 'Jason Chin'}
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
+
+          <div className="mt-4">
+            <JasoningSlot items={JASONINGS} openers={OPENERS} onLand={setActive} />
           </div>
         </motion.div>
 
@@ -33,13 +86,13 @@ const Hero = () => {
             <span className="text-portfolio-gold">Hi, I'm Jason Chin</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-portfolio-muted mb-6">
-            AI Safety | CpE @ UVA '26
+            AI Safety | UVA '26
           </h2>
           <p className="text-lg text-portfolio-muted mb-4 leading-relaxed max-w-2xl">
             I'm trying to make AI go well.
           </p>
           <p className="text-lg text-portfolio-muted mb-8 leading-relaxed max-w-2xl">
-            I graduated in May and am working on{' '}
+            I graduated in May and am now{' '}
             <a
               href="https://80000hours.org/ai/"
               target="_blank"
@@ -54,8 +107,9 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="text-portfolio-gold hover:underline"
             >
-              field-building. 
-            </a>
+              field-building
+            </a>{' '}
+            in Boston.
             <br />
             I'm especially bullish on strengthening and{' '}
             <a

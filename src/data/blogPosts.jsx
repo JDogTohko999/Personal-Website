@@ -306,6 +306,27 @@ const PassedContent = () => (
   </div>
 );
 
+const AliceContent = () => (
+  <div>
+
+    <p className="mb-5">
+      Random thoughts on traits I think Alice probably has.
+    </p>
+
+    <ul className="list-disc list-outside pl-5 space-y-2 mb-5">
+      <li>Wit and candor.</li>
+      <li>Adventurous.</li>
+      <li>Caring. As in (1) a loving kindness towards others and (2) actually giving a shit abt things.</li>
+      <li>Meta convos.</li>
+      <li>Open to new ideas.</li>
+      <li>Reads and reflects.</li>
+      <li>Funny.</li>
+      <li>Attractive (to me).</li>
+    </ul>
+
+  </div>
+);
+
 export const blogPosts = [
   {
     id: 'passed',
@@ -331,5 +352,14 @@ export const blogPosts = [
     tags: ['AI', 'Alex Bores', 'Nitpicking'],
     summary: 'Noting a small inaccuracy in the AI Dividend brief from Alex Bores — tokens are not units of computation.',
     Content: BoresAIDividendContent,
+  },
+  {
+    id: 'alice',
+    title: 'Alice',
+    date: 'October 7, 2026',
+    tags: [],
+    summary: 'Traits I think Alice probably has.',
+    unlisted: true,
+    Content: AliceContent,
   },
 ];

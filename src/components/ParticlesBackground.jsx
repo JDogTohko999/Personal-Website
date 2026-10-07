@@ -14,7 +14,7 @@ const MemoizedParticles = memo(Particles);
 const PUSH_QUANTITY = 4;
 // Spamming threshold: more than this many particles created within one second.
 const SPAM_PARTICLES_PER_SECOND = 12;
-const RECORD_MESSAGE = 'record is 5k, set by elias k';
+const RECORD_MESSAGE = 'record is 2.5k, set by elias k';
 // How long the record message lingers before it fades back out.
 const RECORD_VISIBLE_MS = 3000;
 const RECORD_FADE_MS = 500;

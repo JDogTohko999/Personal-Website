@@ -126,7 +126,7 @@ const VideoBonus = () => {
 };
 
 export const nowEntry = {
-  date: '12:03am, 10/7/2026',
+  date: '1:03am, 10/7/2026',
   content: (
     <>
       <p>
@@ -150,15 +150,21 @@ export const nowEntry = {
           I should probably try and meet more ppl outside of MIT. I've also considered writing a date me doc, but idk if I'm that ratty.
         </li>
         <li>
-          Looking for Alice
+          Looking for{' '}
           <a
             href="https://www.henrikkarlsson.xyz/p/looking-for-alice"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            .
+            Alice
           </a>
+          <Link
+            to="/blog/alice"
+            className="text-portfolio-gold hover:underline"
+          >
+            .
+          </Link>
         </li>
         <li>
           Writing. I really have to make my first substack post. Gotta{' '}

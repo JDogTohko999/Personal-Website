@@ -1,20 +1,31 @@
 import React from 'react';
 import { Briefcase, Calendar, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 const experiences = [
   {
     id: 13,
-    role: 'TBA soon',
-    period: 'Starting Sep 2026',
-    description: 'In Boston, starting in September. If you know me well, reach out and ask!'
+    role: 'Student Team Organizer',
+    company: 'Cambridge Boston Alignment Initiative',
+    period: 'Sep 2026 - Present',
+    description: (
+      <>
+        Organizing MIT's AI safety group (<a href="https://mitaialignment.org/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">MAIA</a>), and likely some shared programming with Harvard's (<a href="https://haist.ai/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">AISST</a>).
+      </>
+    ),
+    link: 'https://mitaialignment.org/',
   },
   {
     id: 12,
     role: 'Co-director',
     company: 'AI Safety Seeding Initiative',
     period: 'June 2026 - Present',
-    description: 'Actively sourcing and supporting founders of AI safety university groups. This is an expanded version of my original Bootloader Initiative from May',
+    description: (
+      <>
+        Actively sourcing and supporting founders of AI safety university groups. This is an expanded version of my original Bootloader Initiative from May.
+      </>
+    ),
     link: 'https://aisafetyseeding.org/'
   },
   {
@@ -105,7 +116,13 @@ const experiences = [
   }
 ];
 
+const LIGHT_CARD_THEMES = ['newspaper', 'uva'];
+
 const Experience = () => {
+  const { theme } = useTheme();
+  const logoFor = (logo) =>
+    LIGHT_CARD_THEMES.includes(theme) ? logo.onLight : logo.onDark;
+
   return (
     <section id="experience" className="py-20 bg-portfolio-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -141,7 +158,15 @@ const Experience = () => {
                 {/* Content Card */}
                 <div className="col-span-4 bg-portfolio-card border border-portfolio-border p-6 rounded-lg hover:border-portfolio-gold/50 transition-colors shadow-lg">
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                      <div>
+                      <div className="flex items-center gap-3">
+                        {exp.logo && (
+                          <img
+                            src={logoFor(exp.logo)}
+                            alt={`${exp.company} logo`}
+                            className="h-8 w-auto flex-shrink-0"
+                          />
+                        )}
+                        <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-xl font-bold text-portfolio-card-text">{exp.role}</h3>
                           {exp.link && (
@@ -157,6 +182,7 @@ const Experience = () => {
                           )}
                         </div>
                         {exp.company && <h4 className="text-lg text-portfolio-gold">{exp.company}</h4>}
+                        </div>
                     </div>
                     <div className="md:hidden mt-2 flex items-center text-portfolio-muted text-sm">
                       <Calendar className="w-4 h-4 mr-1" />

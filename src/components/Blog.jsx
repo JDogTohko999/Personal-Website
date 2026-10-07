@@ -22,7 +22,7 @@ const Blog = () => {
           <div className="w-16 h-1 bg-portfolio-gold rounded-full mb-12"></div>
 
           <div className="flex flex-col gap-6">
-            {blogPosts.map((post) => (
+            {blogPosts.filter((post) => !post.unlisted).map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.id}`}
