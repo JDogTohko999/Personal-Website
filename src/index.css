@@ -13,6 +13,7 @@
     --portfolio-card-text: #E0E0E0;
     --portfolio-muted: #9CA3AF;
     --portfolio-border: #4B4570;
+    --portfolio-on-gold: #231F36; /* ink for solid gold fills */
   }
 
   /* NEWSPAPER THEME (Black & White) */
@@ -25,6 +26,7 @@
     --portfolio-card-text: #000000;
     --portfolio-muted: #404040;
     --portfolio-border: #000000;
+    --portfolio-on-gold: #FFFFFF; /* gold is black here */
   }
 
   /* FOREST THEME (Matte Greens) */
@@ -37,6 +39,7 @@
     --portfolio-card-text: #F0EAD6;
     --portfolio-muted: #B0B0B0;
     --portfolio-border: #556B2F;
+    --portfolio-on-gold: #F0EAD6; /* moss green needs light ink */
   }
 
   /* UVA THEME (Navy/Orange) */
@@ -49,6 +52,7 @@
     --portfolio-card-text: #040919; /* Dark Navy Text for contrast on light cards */
     --portfolio-muted: #9f9f9f;
     --portfolio-border: #374151;
+    --portfolio-on-gold: #231F36; /* dark ink reads best on orange */
   }
 
   body {

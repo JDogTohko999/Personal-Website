@@ -13,9 +13,9 @@ const featuredAchievement = {
     { label: 'About the Series', href: 'https://news.virginia.edu/content/late-professors-legacy-spawns-new-scientific-debate-series-4000-prize' }
   ],
   photos: [
-    '/martin_skeptical_debate_first_round.jpg',
-    '/Martin_Skeptical_Debate_Inline-02-NA-Debate-RG.jpg',
-    '/J_Mrtn_skpt_debate_finals.jpg',
+    '/achievements/martin_skeptical_debate_first_round.jpg',
+    '/achievements/Martin_Skeptical_Debate_Inline-02-NA-Debate-RG.jpg',
+    '/achievements/J_Mrtn_skpt_debate_finals.jpg',
   ],
   icon: Trophy
 };

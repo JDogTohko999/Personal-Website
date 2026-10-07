@@ -4,7 +4,7 @@ import { ChevronUp, Trophy } from 'lucide-react';
 
 // Particle-count records. `proof` is either a screenshot path or a note.
 const ENTRIES = [
-  { name: 'anna k', score: 6911, proof: { image: '/anna_record_proof.jpg' } },
+  { name: 'anna k', score: 6911, proof: { image: '/leaderboard/anna_record_proof.jpg' } },
   { name: 'elias k', score: 2500, proof: { note: 'I saw this in person. No screenshot. Trust.' } },
 ];
 

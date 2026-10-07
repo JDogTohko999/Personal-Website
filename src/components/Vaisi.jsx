@@ -45,7 +45,7 @@ const SitePreview = () => {
         className="relative w-full overflow-hidden bg-white"
         style={{
           aspectRatio: `${PREVIEW_WIDTH} / ${PREVIEW_HEIGHT}`,
-          backgroundImage: 'url(/vaisi_homepage.jpg)',
+          backgroundImage: 'url(/vaisi/vaisi_homepage.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'top',
         }}
@@ -81,21 +81,21 @@ const imageSets = {
         <a href="https://www.cs.virginia.edu/~evans/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline" onClick={(e) => e.stopPropagation()}>Evans</a>
       </>
     ),
-    cover: '/panel_audience.JPG',
+    cover: '/vaisi/panel_audience.JPG',
     images: [
-      '/panel_audience.JPG',
-      '/panel_chat.JPG',
-      '/panel_further_right.JPG',
-      '/panel_right.JPG',
+      '/vaisi/panel_audience.JPG',
+      '/vaisi/panel_chat.JPG',
+      '/vaisi/panel_further_right.JPG',
+      '/vaisi/panel_right.JPG',
     ],
   },
   fellowship: {
     altText: 'AI Governance Fellowship',
     label: 'AI Governance Fellowship',
-    cover: '/fellows_on_steps.JPG',
+    cover: '/vaisi/fellows_on_steps.JPG',
     images: [
-      '/fellows_on_steps.JPG',
-      '/fellows_standing.JPG',
+      '/vaisi/fellows_on_steps.JPG',
+      '/vaisi/fellows_standing.JPG',
     ],
   },
 };
@@ -147,7 +147,7 @@ const TextPopover = () => {
           >
             <span className="block rounded-lg border-2 border-portfolio-gold/60 bg-portfolio-card p-1.5 shadow-2xl">
               <img
-                src="/vaisi_jason_andrew_text.jpg"
+                src="/vaisi/vaisi_jason_andrew_text.jpg"
                 alt="The text message that started VAISI"
                 className="block w-full max-h-[45vh] object-contain rounded"
               />
@@ -214,7 +214,7 @@ const Vaisi = () => {
               >
                 {/* Wide wordmark: contained so the full name fits across the circle. */}
                 <img
-                  src="/new_vaisi_logo.jpg"
+                  src="/vaisi/new_vaisi_logo.jpg"
                   alt="VAISI logo"
                   className="w-full h-full object-contain scale-110"
                 />
@@ -272,7 +272,12 @@ const Vaisi = () => {
                 Through some combination of luck and skill, I managed to find{' '}
                 <a href="https://www.sethlifland.com/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">Seth</a>,{' '}
                 <a href="https://www.linkedin.com/in/nia-m-a50406379/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">Nia</a>,{' '}
-                <a href="https://shubhrangshu.com/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">Shubs</a>, and a{' '}
+                <a href="https://shubhrangshu.com/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">Shubs</a>,{' '}
+                {/* Breaks the sentence into two even halves on wide screens;
+                    on narrow ones it already wraps, so the break is dropped
+                    (the space above survives either way). */}
+                <br className="hidden sm:inline" />
+                and a{' '}
                 <a href="https://vaisi.org/about" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">handful</a>{' '}
                 of incredible students who are now organizing VAISI.
               </p>
@@ -282,7 +287,7 @@ const Vaisi = () => {
               <TextPopover />
               {/* Hidden for now; the plots page is still in public/.
               <a
-                href="/membership_over_time.html"
+                href="/vaisi/membership_over_time.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-portfolio-muted hover:text-portfolio-gold transition-colors group text-sm"

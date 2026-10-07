@@ -68,7 +68,7 @@ const cityData = [
     name: "Marrakesh",
     coordinates: [-7.9811, 31.6295],
     countryCode: ["MAR", "504"],
-    description: "Highlight of trip was playing rock paper scissors and soccer with local kids for an hour.",
+    description: "Highlight of trip was playing soccer and rock paper scissors with local kids for an hour.",
     images: [],
   },
   {
@@ -253,7 +253,7 @@ const cityData = [
     coordinates: [-122.3500, 37.8200],
     countryCode: ["USA", "840"],
     description: "Berkeley: Spent a week here in August 2026 for a workshop and conference, met a lot of young AIS folks! San Francisco: Didn't actually explore, only did the Batteries to Bluffs hike shortly after sunset.",
-    images: ["/SF_hike1.JPG", "/SF_hike2.jpg", "/SF_hike3.jpg"],
+    images: ["/map/SF_hike1.JPG", "/map/SF_hike2.jpg", "/map/SF_hike3.jpg"],
   },
 ];
 

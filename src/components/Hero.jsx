@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Linkedin, BookOpen, CalendarDays, Clock, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Linkedin, BookOpen, CalendarDays, Clock, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { nowEntry } from '../data/nowEntries';
 import { useFunMode } from '../context/FunModeContext';
 import JasoningSlot from './JasoningSlot';
 
-const HEADSHOT = '/jason_headshot_grad.png';
+const HEADSHOT = '/jasoning/jason_headshot_grad.png';
 
 // The first spin of a visit always settles on one of these.
 const OPENERS = ['stalling', 'sacking', 'hanging', 'smiling', 'cheesing'];
@@ -16,36 +16,45 @@ const OPENERS = ['stalling', 'sacking', 'hanging', 'smiling', 'cheesing'];
 const JASONINGS = [
   { label: 'smiling', src: HEADSHOT },
   // Space in the filename must stay percent-encoded in the URL.
-  { label: 'field rushing', src: '/field%20rushing.jpg' },
-  { label: 'sacking', src: '/sacking.jpg' },
-  { label: 'stalling', src: '/stalling.JPG' },
-  { label: 'jim carey-ing', src: '/jim-careying.JPG' },
-  { label: 'napoleoning', src: '/napoleoning.jpg' },
-  { label: 'pointing', src: '/pointing.jpg' },
-  { label: 'hanging', src: '/hanging.jpg' },
-  { label: 'speaking', src: '/speaking.jpg' },
-  { label: 'canvassing', src: '/canvassing_bores.mp4', type: 'video' },
-  { label: 'blocking', src: '/blocking.JPG' },
-  { label: 'protesting', src: '/protesting.JPG' },
-  { label: 'ranking', src: '/ranking.PNG' },
-  { label: 'chilling', src: '/chilling.jpg' },
-  { label: 'LDOCing', src: '/LDOCing.jpg' },
-  { label: 'hooping', src: '/hooping.jpg' },
-  { label: 'G-splitting', src: '/G-splitting.jpg' },
-  { label: 'climbing', src: '/climbing.jpg' },
-  { label: 'winning', src: '/winning.jpg' },
+  { label: 'field rushing', src: '/jasoning/field%20rushing.jpg' },
+  { label: 'sacking', src: '/jasoning/sacking.jpg' },
+  { label: 'stalling', src: '/jasoning/stalling.JPG' },
+  { label: 'jim carey-ing', src: '/jasoning/jim-careying.JPG' },
+  { label: 'napoleoning', src: '/jasoning/napoleoning.jpg' },
+  { label: 'pointing', src: '/jasoning/pointing.jpg' },
+  { label: 'hanging', src: '/jasoning/hanging.jpg' },
+  { label: 'speaking', src: '/jasoning/speaking.jpg' },
+  { label: 'canvassing', src: '/blog/canvassing_bores.mp4', type: 'video' },
+  { label: 'blocking', src: '/jasoning/blocking.JPG' },
+  { label: 'protesting', src: '/jasoning/protesting.JPG' },
+  { label: 'ranking', src: '/jasoning/ranking.PNG' },
+  { label: 'chilling', src: '/jasoning/chilling.jpg' },
+  { label: 'LDOCing', src: '/jasoning/LDOCing.jpg' },
+  { label: 'hooping', src: '/jasoning/hooping.jpg' },
+  { label: 'G-splitting', src: '/jasoning/G-splitting.jpg' },
+  { label: 'climbing', src: '/jasoning/climbing.jpg' },
+  { label: 'winning', src: '/jasoning/winning.jpg' },
   // Space and '!' in these filenames stay percent-encoded in the URL.
-  { label: 'troublemaking', src: '/trouble%20making.jpg' },
-  { label: 'snowing!', src: '/snowing%21.jpg' },
-  { label: 'unnecessary risking', src: '/unnecessary%20risking.jpg' },
-  { label: 'napping', src: '/napping.jpg' },
-  { label: 'cheesing', src: '/cheesing.jpg' },
-  { label: 'considering :)', src: '/considering.jpg' },
-  { label: 'big backing', src: '/big%20backing.jpg' },
-  { label: 'performing', src: '/performing.jpg' },
+  { label: 'troublemaking', src: '/jasoning/trouble%20making.jpg' },
+  { label: 'snowing!', src: '/jasoning/snowing%21.jpg' },
+  { label: 'unnecessary risking', src: '/jasoning/unnecessary%20risking.jpg' },
+  { label: 'napping', src: '/jasoning/napping.jpg' },
+  { label: 'cheesing', src: '/jasoning/cheesing.jpg' },
+  { label: 'considering :)', src: '/jasoning/considering.jpg' },
+  { label: 'big backing', src: '/jasoning/big%20backing.jpg' },
+  { label: 'performing', src: '/jasoning/performing.jpg' },
 ];
 
 const Hero = () => {
+  // The cue is only useful before the first scroll; after that it is clutter.
+  const [atTop, setAtTop] = useState(true);
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const [active, setActive] = useState(null);
   const { funMode, setFunMode } = useFunMode();
   const [justTurnedOn, setJustTurnedOn] = useState(false);
@@ -69,7 +78,7 @@ const Hero = () => {
   const pictureFade = { duration: fadingToHeadshot ? 0.6 : 0 };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center gap-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
@@ -128,14 +137,16 @@ const Hero = () => {
                   // Spin almost right away when they just asked for it; a page
                   // load that remembers fun mode gets the usual pause.
                   autoSpinDelayMs={justTurnedOn ? 300 : undefined}
+                  footer={
+                    <button
+                      type="button"
+                      onClick={leaveFunMode}
+                      className="mt-3 text-xs text-portfolio-muted hover:text-portfolio-gold hover:underline transition-colors"
+                    >
+                      back to boring website
+                    </button>
+                  }
                 />
-                <button
-                  type="button"
-                  onClick={leaveFunMode}
-                  className="mt-3 text-xs text-portfolio-muted hover:text-portfolio-gold hover:underline transition-colors"
-                >
-                  back to boring website
-                </button>
               </motion.div>
             ) : (
               <motion.button
@@ -265,6 +276,25 @@ const Hero = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Scroll cue, centred at the foot of the first screen. */}
+      <motion.a
+        href="#experience"
+        aria-label="Scroll to experience"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-portfolio-muted hover:text-portfolio-gold transition-colors"
+        initial={false}
+        animate={{ opacity: atTop ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ pointerEvents: atTop ? 'auto' : 'none' }}
+      >
+        <motion.span
+          className="block"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown className="w-6 h-6" strokeWidth={2} />
+        </motion.span>
+      </motion.a>
     </section>
   );
 };

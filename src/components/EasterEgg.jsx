@@ -10,9 +10,9 @@ const EasterEgg = () => {
   const fadeOutTimerRef = useRef(null);
 
   const images = [
-    '/jason_volleyball_squirrel.JPG',
-    '/banana.jpg',
-    '/garfield_tundy.jpg',
+    '/easter-eggs/jason_volleyball_squirrel.JPG',
+    '/easter-eggs/banana.jpg',
+    '/easter-eggs/garfield_tundy.jpg',
   ];
 
   const handleMouseEnter = () => {

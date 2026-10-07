@@ -194,7 +194,7 @@ export const nowEntry = {
           >
             Eliana
           </a>
-          {' '}for their blogs. Lemme{' '}
+          {' '}for their blogs. Let me{' '}
           <Link
             to="/blog/passed"
             className="text-portfolio-gold hover:underline"
@@ -218,12 +218,12 @@ export const nowEntry = {
         <p className="mt-3 italic text-portfolio-muted">Shoutout the Boomsticks</p>
         <div className="mt-3 w-full max-w-[640px] mx-auto flex flex-col sm:flex-row gap-3">
           <img
-            src="/Boomsticks_AFC.jpg"
+            src="/now/Boomsticks_AFC.jpg"
             alt="The Boomsticks"
             className="w-full sm:w-1/2 h-auto rounded-lg border border-portfolio-border object-cover"
           />
           <img
-            src="/boomsticks_beach_outside_grad.JPG"
+            src="/now/boomsticks_beach_outside_grad.JPG"
             alt="The Boomsticks at the beach"
             className="w-full sm:w-1/2 h-auto rounded-lg border border-portfolio-border object-cover"
           />

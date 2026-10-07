@@ -51,7 +51,7 @@ const BoresBackpackContent = () => (
     {/* canvassing hours — straight, large */}
     <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 48px' }}>
       <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
-        <img src="/canvassing_hours.png" alt="Canvassing hours log" style={{ display: 'block', width: 430 }} />
+        <img src="/blog/canvassing_hours.png" alt="Canvassing hours log" style={{ display: 'block', width: 430 }} />
       </Frame>
       <Cap>My feet started hurting on the 20th, bought new shoes which helped a bit.</Cap>
     </figure>
@@ -59,14 +59,14 @@ const BoresBackpackContent = () => (
     {/* reeboks + curtis — same row, captions on the outer sides */}
     <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 50px' }}>
       <Cap align="right">RIP carpet reeboks, served me well these past few yrs.</Cap>
-      <Frame><img src="/rip_reeboks.png" alt="Worn out Reeboks" style={{ display: 'block', width: 225 }} /></Frame>
-      <Frame><img src="/curtisssss_SLIWAAAAA.png" alt="Curtis Sliwa" style={{ display: 'block', width: 225 }} /></Frame>
+      <Frame><img src="/blog/rip_reeboks.png" alt="Worn out Reeboks" style={{ display: 'block', width: 225 }} /></Frame>
+      <Frame><img src="/blog/curtisssss_SLIWAAAAA.png" alt="Curtis Sliwa" style={{ display: 'block', width: 225 }} /></Frame>
       <Cap>Ran into the real mayor, he gave me his business card lol.</Cap>
     </figure>
 
     {/* indian joint — straight */}
     <figure style={{ display: 'flex', flexDirection: 'row-reverse', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
-      <Frame><img src="/indian_joint.JPG" alt="Hole in the wall Indian restaurant" style={{ display: 'block', width: 210 }} /></Frame>
+      <Frame><img src="/blog/indian_joint.JPG" alt="Hole in the wall Indian restaurant" style={{ display: 'block', width: 210 }} /></Frame>
       <Cap>
         Found a hole-in-the-wall Indian joint. Based on the cleanliness of the kitchen and serving area, the fact that I had the lightest skin tone in there, that nobody was speaking English, and things were cheap, I knew it was either going to absolutely slap or give me food poisoning. I got lucky — slap it did :)
       </Cap>
@@ -75,10 +75,10 @@ const BoresBackpackContent = () => (
     {/* flatiron — 4 photos, slight overlap, tilted */}
     <figure style={{ display: 'flex', gap: 30, alignItems: 'center', margin: '0 0 60px' }}>
       <div style={{ flex: 'none', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, width: 290 }}>
-        <img src="/flatiron1.jpg" alt="Flatiron 1" style={{ display: 'block', width: '100%' }} />
-        <img src="/flatiron2.jpg" alt="Flatiron 2" style={{ display: 'block', width: '100%' }} />
-        <img src="/flatiron3.jpg" alt="Flatiron 3" style={{ display: 'block', width: '100%' }} />
-        <img src="/flatiron4.jpg" alt="Flatiron 4" style={{ display: 'block', width: '100%' }} />
+        <img src="/blog/flatiron1.jpg" alt="Flatiron 1" style={{ display: 'block', width: '100%' }} />
+        <img src="/blog/flatiron2.jpg" alt="Flatiron 2" style={{ display: 'block', width: '100%' }} />
+        <img src="/blog/flatiron3.jpg" alt="Flatiron 3" style={{ display: 'block', width: '100%' }} />
+        <img src="/blog/flatiron4.jpg" alt="Flatiron 4" style={{ display: 'block', width: '100%' }} />
       </div>
       <Cap>
         Took a pic of Flatiron. Post processed it a few times for fun. Top two are cool, bottoms not so much.
@@ -88,16 +88,16 @@ const BoresBackpackContent = () => (
     {/* bores signs — anti on the left, pro on the right, caption between */}
     <figure style={{ display: 'flex', gap: 18, alignItems: 'center', margin: '0 0 60px' }}>
       <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
-        <Frame pad={6} rotate={-5} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 2 }}><img src="/anti_bores.jpg" alt="Anti-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
-        <Frame pad={6} rotate={3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 115, top: 38, zIndex: 1 }}><img src="/anti_bores2.jpg" alt="Anti-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={-5} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 2 }}><img src="/blog/anti_bores.jpg" alt="Anti-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 115, top: 38, zIndex: 1 }}><img src="/blog/anti_bores2.jpg" alt="Anti-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
       </div>
       <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 22, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
         "Looks like it's gonna be a great day today"<br />
         <a href="https://genius.com/Mf-doom-great-day-lyrics" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold" style={{ fontSize: 8, textDecoration: 'none' }}>"DOOM, are you pondering what I'm pondering"</a>
       </figcaption>
       <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
-        <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 0, top: 0, zIndex: 2 }}><img src="/pro_bores.jpg" alt="Pro-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
-        <Frame pad={6} rotate={-4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 115, top: 38, zIndex: 1 }}><img src="/pro_bores2.jpg" alt="Pro-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 0, top: 0, zIndex: 2 }}><img src="/blog/pro_bores.jpg" alt="Pro-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
+        <Frame pad={6} rotate={-4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 115, top: 38, zIndex: 1 }}><img src="/blog/pro_bores2.jpg" alt="Pro-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
       </div>
     </figure>
 
@@ -107,7 +107,7 @@ const BoresBackpackContent = () => (
       Meet Judy. She's showing off her shirt that says 'Life Goal: Pet All The Dogs'. She was awesome. She came for an hour or so as a Lasher volunteer, though I'm not sure she really knew much at all about him. A good example of the type of older folks that are so consistent in their civic duties. Met at least 3 people on their way to vote that walked at something like .5mph.
     </Cap>
     <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
-      <img src="/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} />
+      <img src="/blog/judy.jpg" alt="Judy" style={{ display: 'block', width: 300 }} />
     </Frame>
   </figure>
 
@@ -115,7 +115,7 @@ const BoresBackpackContent = () => (
   <figure style={{ display: 'flex', gap: 22, alignItems: 'center', margin: '0 0 60px' }}>
     <Frame pad={9} shadow="0 12px 28px rgba(0,0,0,.45)">
       <video 
-        src="/canvassing_bores.mp4" 
+        src="/blog/canvassing_bores.mp4" 
         autoPlay 
         loop 
         muted 
@@ -129,10 +129,10 @@ const BoresBackpackContent = () => (
     </figcaption>
     <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
       <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}>
-        <img src="/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} />
+        <img src="/blog/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} />
       </Frame>
       <Frame pad={6} rotate={-3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 122, top: 42, zIndex: 2 }}>
-        <img src="/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 155 }} />
+        <img src="/blog/AlexBores2.png" alt="Alex Bores 2" style={{ display: 'block', width: 155 }} />
       </Frame>
     </div>
   </figure>
@@ -152,7 +152,7 @@ const BoresBackpackContent = () => (
 
     {/* kalshi — straight */}
     <figure style={{ display: 'flex', flexDirection: 'row-reverse', gap: 30, alignItems: 'center', margin: '0 0 44px' }}>
-      <Frame><img src="/kalshi_bores.png" alt="Kalshi odds for Bores" style={{ display: 'block', width: 500 }} /></Frame>
+      <Frame><img src="/blog/kalshi_bores.png" alt="Kalshi odds for Bores" style={{ display: 'block', width: 500 }} /></Frame>
       <Cap>Jack and I watched it go from 25% to 1% in just a few minutes after 9pm when the results were just starting to come out. Rough stuff.</Cap>
     </figure>
 
@@ -216,7 +216,7 @@ const BoresAIDividendContent = () => (
       , a brief that aims to prepare the public for the potential of rapid AI-driven job displacement via direct resource redistribution programs. Here's the summary:
     </p>
 
-    <img src="/AI_Dividend_Policy_Summary.png" alt="AI Dividend Policy Summary" className="my-6 rounded-lg border border-portfolio-border max-w-2xl mx-auto block" />
+    <img src="/blog/AI_Dividend_Policy_Summary.png" alt="AI Dividend Policy Summary" className="my-6 rounded-lg border border-portfolio-border max-w-2xl mx-auto block" />
 
     <p className="mb-5 mt-8">
       I've recently been thinking about optimal AI-related tax policies, so I was super excited when I found out about this. I think this is an important initiative worth exploring, and this is a great first step.
@@ -229,7 +229,7 @@ const BoresAIDividendContent = () => (
       This sentence: <em>"AI usage is measured in tokens, or units of computation."</em>
     </p>
 
-    <img src="/AI_Dividend_A_Token_Tax.png" alt="AI Dividend Token Tax section" className="my-6 rounded-lg border border-portfolio-border max-w-2xl mx-auto block" />
+    <img src="/blog/AI_Dividend_A_Token_Tax.png" alt="AI Dividend Token Tax section" className="my-6 rounded-lg border border-portfolio-border max-w-2xl mx-auto block" />
 
     <p className="mb-5 mt-8">
       This sentence incorrectly defines tokens.{' '}

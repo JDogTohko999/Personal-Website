@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, Lock } from 'lucide-react';
 
 /* Horizontal slot machine for the "Jason-ing" picker.
 
@@ -15,14 +15,31 @@ import { RotateCcw } from 'lucide-react';
 
    Landing targets are chosen separately from the reel order: see nextTarget.
 
+   After it settles, the two words either side of centre become clickable, so
+   a visitor can walk along the reel one word at a time instead of spinning
+   again. That is capped at MAX_NUDGES steps, after which the strip locks and
+   points them at the spin button — otherwise they could stroll the whole list
+   and the reel stops being a reel. The pads are sized to cover the cap so a
+   walk in either direction never runs out of words.
+
    Widths vary per word ("pointing" vs "jim carey-ing"), so centring is
    measured from live rects rather than assuming a fixed step. */
 
-const LEAD = 1;          // words parked left of the start word
-const TAIL = 2;          // words parked right of the landing word
+const MAX_NUDGES = 3;    // steps allowed after a spin before the strip locks
+const LEAD = MAX_NUDGES; // words parked left of the start word
+const TAIL = MAX_NUDGES; // words parked right of the landing word
 const SPIN_MS = 2000;
+const NUDGE_MS = 420;
 const AUTO_SPIN_DELAY_MS = 1000;
 const EASE = 'cubic-bezier(.16, .68, .26, 1)';
+const NUDGE_EASE = 'cubic-bezier(.22, .61, .36, 1)';
+
+const LockNote = () => (
+  <p className="mt-1 flex items-center justify-center gap-1 text-xs text-portfolio-gold">
+    <Lock className="h-3 w-3 flex-shrink-0" />
+    that&apos;s your three, respin
+  </p>
+);
 
 let uid = 0;
 const row = (item) => ({ key: `r${uid++}`, item });
@@ -36,7 +53,7 @@ const shuffle = (arr) => {
   return a;
 };
 
-const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN_DELAY_MS }) => {
+const JasoningSlot = ({ items, openers = [], onLand, footer = null, autoSpinDelayMs = AUTO_SPIN_DELAY_MS }) => {
   const viewportRef = useRef(null);
   const reelRef = useRef(null);
   const spinningRef = useRef(false);
@@ -48,8 +65,28 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
   const [startIdx, setStartIdx] = useState(0);
   const [targetIdx, setTargetIdx] = useState(0);
   const [spinId, setSpinId] = useState(0);
-  const [landedIdx, setLandedIdx] = useState(-1);
+  const [centerIdx, setCenterIdx] = useState(-1);
+  const [nudges, setNudges] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
+
+  const locked = nudges >= MAX_NUDGES;
+
+  // Slide the reel so the word at `idx` sits in the middle of the viewport.
+  // Both rects carry the reel's current transform identically, so their
+  // difference is the untransformed offset — no rounding drift.
+  const centerOn = useCallback((idx, ms, ease) => {
+    const reelEl = reelRef.current;
+    const vp = viewportRef.current;
+    if (!reelEl || !vp) return;
+    const rowEl = reelEl.children[idx];
+    if (!rowEl) return;
+    const reelRect = reelEl.getBoundingClientRect();
+    const rowRect = rowEl.getBoundingClientRect();
+    const vpRect = vp.getBoundingClientRect();
+    const tx = vpRect.width / 2 - ((rowRect.left - reelRect.left) + rowRect.width / 2);
+    reelEl.style.transition = ms ? `transform ${ms}ms ${ease}` : 'none';
+    reelEl.style.transform = `translateX(${tx}px)`;
+  }, []);
 
   // Which word this spin settles on.
   //
@@ -98,7 +135,8 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
     setReel(seq.map((item) => row(item)));
     setStartIdx(sIdx);
     setTargetIdx(tIdx);
-    setLandedIdx(-1);
+    setCenterIdx(-1);
+    setNudges(0);
     setIsSpinning(true);
     setSpinId((n) => n + 1);
     spinCount.current += 1;
@@ -126,30 +164,17 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
     if (!spinId || !reelRef.current || !viewportRef.current) return undefined;
     const reelEl = reelRef.current;
 
-    const centerOn = (idx, animate) => {
-      const rowEl = reelEl.children[idx];
-      if (!rowEl) return;
-      // Both rects carry the reel's current transform identically, so the
-      // difference is the untransformed offset — no rounding drift.
-      const reelRect = reelEl.getBoundingClientRect();
-      const rowRect = rowEl.getBoundingClientRect();
-      const vpRect = viewportRef.current.getBoundingClientRect();
-      const tx = vpRect.width / 2 - ((rowRect.left - reelRect.left) + rowRect.width / 2);
-      reelEl.style.transition = animate ? `transform ${SPIN_MS}ms ${EASE}` : 'none';
-      reelEl.style.transform = `translateX(${tx}px)`;
-    };
-
     spinningRef.current = true;
     reelEl.style.willChange = 'transform';
-    centerOn(startIdx, false);
+    centerOn(startIdx, 0);
     void reelEl.offsetWidth; // flush the snap before animating away from it
-    centerOn(targetIdx, true);
+    centerOn(targetIdx, SPIN_MS, EASE);
 
     const onEnd = () => {
       spinningRef.current = false;
       reelEl.style.willChange = '';
       setIsSpinning(false);
-      setLandedIdx(targetIdx);
+      setCenterIdx(targetIdx);
       const item = reel[targetIdx]?.item;
       if (item) {
         lastLanded.current = item;
@@ -163,15 +188,30 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spinId]);
 
+  // Step one word left (-1) or right (+1) from centre.
+  const nudge = (dir) => {
+    if (spinningRef.current || locked || centerIdx < 0) return;
+    const next = centerIdx + dir;
+    if (next < 0 || next >= reel.length) return;
+    const item = reel[next].item;
+    setCenterIdx(next);
+    setNudges((n) => n + 1);
+    lastLanded.current = item;
+    onLand?.(item);
+    centerOn(next, NUDGE_MS, NUDGE_EASE);
+  };
+
   const spin = () => {
     if (!spinningRef.current) buildSpin();
   };
+
+  const settled = centerIdx >= 0 && !isSpinning;
 
   return (
     <div className="w-48 md:w-64">
       <div
         ref={viewportRef}
-        className="relative h-7 overflow-hidden"
+        className={`relative h-7 overflow-hidden ${locked ? 'animate-lockshake' : ''}`}
         style={{
           WebkitMaskImage:
             'linear-gradient(to right, transparent, black 25%, black 75%, transparent)',
@@ -180,16 +220,32 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
         }}
       >
         <div ref={reelRef} className="flex h-full w-max items-center gap-6">
-          {reel.map(({ key, item }, i) => (
-            <span
-              key={key}
-              className={`whitespace-nowrap text-sm transition-colors duration-300 ${
-                i === landedIdx ? 'text-portfolio-gold' : 'text-portfolio-muted'
-              }`}
-            >
-              {item.label}
-            </span>
-          ))}
+          {reel.map(({ key, item }, i) => {
+            const offset = settled ? i - centerIdx : null;
+            const isCentre = offset === 0;
+            const canNudge = settled && !locked && Math.abs(offset) === 1;
+            const cls = [
+              'whitespace-nowrap text-sm transition-all duration-300',
+              isCentre ? 'text-portfolio-gold' : 'text-portfolio-muted',
+              canNudge ? 'cursor-pointer hover:text-portfolio-gold hover:underline underline-offset-4' : '',
+              // Once locked, the neighbours stop inviting a click.
+              locked && Math.abs(offset) === 1 ? 'opacity-40' : '',
+            ].join(' ');
+
+            return canNudge ? (
+              <button
+                key={key}
+                type="button"
+                onClick={() => nudge(offset)}
+                aria-label={`Step to ${item.label}`}
+                className={cls}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <span key={key} className={cls}>{item.label}</span>
+            );
+          })}
         </div>
       </div>
 
@@ -200,10 +256,37 @@ const JasoningSlot = ({ items, openers = [], onLand, autoSpinDelayMs = AUTO_SPIN
           onClick={spin}
           disabled={isSpinning}
           aria-label="Spin for another picture"
-          className="flex h-7 w-7 items-center justify-center rounded-full border border-portfolio-gold/60 text-portfolio-gold transition-all duration-300 hover:border-portfolio-gold hover:rotate-[-60deg] active:rotate-[-180deg] active:scale-95 disabled:opacity-40"
+          className={`flex h-8 w-8 items-center justify-center rounded-full bg-portfolio-gold text-portfolio-on-gold shadow-[0_2px_6px_rgba(0,0,0,.35)] transition-all duration-300 hover:rotate-[-60deg] hover:shadow-[0_4px_10px_rgba(0,0,0,.45)] hover:brightness-110 active:rotate-[-180deg] active:scale-95 active:shadow-[0_1px_3px_rgba(0,0,0,.4)] disabled:opacity-40 disabled:shadow-none ${
+            locked ? 'ring-2 ring-portfolio-gold/40 ring-offset-2 ring-offset-transparent' : ''
+          }`}
         >
-          <RotateCcw className="h-3.5 w-3.5" />
+          <RotateCcw className="h-3.5 w-3.5" strokeWidth={2.5} />
         </button>
+      </div>
+
+      {/* The note collapses to nothing until the cap is hit, so `footer` sits
+          straight under the label and is only pushed down when it opens. */}
+      <div
+        className={`grid transition-all duration-300 ease-out ${
+          locked ? 'grid-rows-[1fr] opacity-100' : 'pointer-events-none grid-rows-[0fr] opacity-0'
+        }`}
+        aria-live="polite"
+      >
+        <div className="overflow-hidden"><LockNote /></div>
+      </div>
+
+      <div className="flex justify-center">{footer}</div>
+
+      {/* An invisible twin of the note, collapsing in the opposite direction.
+          The two always sum to one note's height, so this column never changes
+          size — without it the hero row re-centres and lifts the portrait. */}
+      <div
+        aria-hidden="true"
+        className={`grid transition-all duration-300 ease-out ${
+          locked ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]'
+        }`}
+      >
+        <div className="invisible overflow-hidden"><LockNote /></div>
       </div>
     </div>
   );

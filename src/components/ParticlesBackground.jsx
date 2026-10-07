@@ -5,6 +5,7 @@ import { Sparkles } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useParticles } from '../context/ParticlesContext';
 import Leaderboard from './Leaderboard';
+import { isFlagged, flagAssisted, MAX_PLAUSIBLE_DELTA, RESIZE_GRACE_MS } from '../utils/cheatWatch';
 
 // Memoized so a re-render of the background (settings changing, theme toggling)
 // never hands <Particles> a fresh props object — that would tear down and
@@ -15,14 +16,78 @@ const MemoizedParticles = memo(Particles);
 // updates never re-render the <Particles> canvas.
 const ParticleOverlay = ({ enabled, containerRef }) => {
   const [count, setCount] = useState(0);
+  const [assisted, setAssisted] = useState(isFlagged);
+  // Bumped to rebuild the mark if someone deletes it from the DOM.
+  const [markNonce, setMarkNonce] = useState(0);
+
+  const numberRef = useRef(null);
+  const markRef = useRef(null);
+  const shownRef = useRef(0);      // what the span last rendered
+  const prevRef = useRef(0);       // previous true count
+  const resizeAtRef = useRef(0);
+  const lastRebuildRef = useRef(0);
+
+  // Keep a record of the value React actually painted, so the poll can tell
+  // whether the text on screen still matches it.
+  useEffect(() => { shownRef.current = count; }, [count]);
+
+  useEffect(() => {
+    const onResize = () => { resizeAtRef.current = Date.now(); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   // Poll the live particle count from the shared container ref
   useEffect(() => {
-    const update = () => setCount(containerRef.current?.particles?.count ?? 0);
+    const update = () => {
+      const truth = containerRef.current?.particles?.count ?? 0;
+
+      // (1) The number on screen no longer matches what React painted, so it
+      //     was edited in place. React only repaints when the count changes,
+      //     which is why a hand-typed value sticks.
+      const painted = numberRef.current?.textContent?.trim();
+      if (painted !== undefined && painted !== String(shownRef.current)) flagAssisted();
+
+      // (2) Growth no human hand could produce. Skipped just after a resize,
+      //     when the engine re-seeds by density on its own.
+      const sinceResize = Date.now() - resizeAtRef.current;
+      if (sinceResize > RESIZE_GRACE_MS && truth - prevRef.current > MAX_PLAUSIBLE_DELTA) {
+        flagAssisted();
+      }
+
+      prevRef.current = truth;
+      setCount(truth);
+      if (isFlagged()) setAssisted(true);
+    };
     update();
     const interval = setInterval(update, 400);
     return () => clearInterval(interval);
   }, [containerRef]);
+
+  // Put the mark back if it is deleted, and re-assert the properties that
+  // would hide it. Runs per frame, so anything done by hand is undone before
+  // a screenshot can catch it.
+  useEffect(() => {
+    if (!assisted) return undefined;
+    let raf;
+    const hold = () => {
+      const el = markRef.current;
+      if (!el || !document.contains(el)) {
+        const now = Date.now();
+        if (now - lastRebuildRef.current > 150) {
+          lastRebuildRef.current = now;
+          setMarkNonce((n) => n + 1);
+        }
+      } else {
+        el.style.setProperty('display', 'inline-flex', 'important');
+        el.style.setProperty('visibility', 'visible', 'important');
+        el.style.setProperty('opacity', '1', 'important');
+      }
+      raf = requestAnimationFrame(hold);
+    };
+    raf = requestAnimationFrame(hold);
+    return () => cancelAnimationFrame(raf);
+  }, [assisted]);
 
   if (!enabled) return null;
 
@@ -31,11 +96,34 @@ const ParticleOverlay = ({ enabled, containerRef }) => {
        grows upward when opened, since the stack is pinned to the bottom. */
     <div className="fixed bottom-7 left-7 z-40 pointer-events-none flex flex-col items-start gap-2">
       <Leaderboard />
-      <div className="flex items-center gap-1.5 rounded-full border border-portfolio-border bg-portfolio-card/80 px-3 py-1.5 text-xs font-medium text-portfolio-muted shadow-lg backdrop-blur">
-        <Sparkles className="w-3.5 h-3.5 text-portfolio-gold" />
-        <span className="tabular-nums text-portfolio-text">{count}</span>
+      <div
+        className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur ${
+          assisted
+            ? 'border-red-400/70 bg-red-950/80 text-red-200'
+            : 'border-portfolio-border bg-portfolio-card/80 text-portfolio-muted'
+        }`}
+      >
+        <Sparkles className={`w-3.5 h-3.5 ${assisted ? 'text-red-300' : 'text-portfolio-gold'}`} />
+        {/* The number itself is marked, not just the badge — a crop tight
+            enough to lose the tag still shows a struck-through red score. */}
+        <span
+          ref={numberRef}
+          className={`tabular-nums ${assisted ? 'text-red-300 line-through' : 'text-portfolio-text'}`}
+        >
+          {count}
+        </span>
         particles
-        <span className="text-portfolio-muted/70">· click to create more</span>
+        {assisted ? (
+          <span
+            key={markNonce}
+            ref={markRef}
+            className="inline-flex items-center rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+          >
+            nice console work
+          </span>
+        ) : (
+          <span className="text-portfolio-muted/70">· click to create more</span>
+        )}
       </div>
     </div>
   );
