@@ -100,7 +100,7 @@ const VideoBonus = () => {
         Bonus 1
       </summary>
       <p className="mt-3 text-sm text-portfolio-muted">
-        From previous now: <span className="italic">11:58pm, 7/23/2026</span>
+        from past now (7/23/26)
       </p>
       <p className="mt-2">
         Just found my new favorite 10s yt clip. First time I've actually laughed out loud from a video in a while.
