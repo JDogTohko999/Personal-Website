@@ -54,6 +54,15 @@ function HomePage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7, ease: 'easeInOut' }}
+            // Everything in here positions itself (the canvas is fullScreen,
+            // the controls and counter are fixed), so this wrapper must never
+            // take part in layout. Without h-0 the canvas is briefly in flow
+            // before tsParticles makes it fixed, which inserts height above
+            // the whole page; Chrome's scroll anchoring compensates by pushing
+            // scrollTop down and never takes it back once the height vanishes,
+            // so turning fun mode on jumped you down the page.
+            className="h-0"
+            style={{ overflowAnchor: 'none' }}
           >
             <ParticlesBackground />
             <ParticlesControls />
