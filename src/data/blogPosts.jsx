@@ -298,7 +298,7 @@ const PassedContent = () => (
     </p>
 
     <p className="mb-5">
-      Though, worlds apart.
+      Though, our worlds apart.
     </p>
 
     {/* The gaps widen from here on, so the piece opens out as it ends. */}
