@@ -278,23 +278,15 @@ const PassedContent = () => (
   <div>
 
     <p className="mb-5">
-      Walking south, broadway and 28th.
+      Walking south, broadway and 28th. Cheers, someone scored in France vs Senegal.
     </p>
 
     <p className="mb-5">
-      Cheers. Someone scored in France vs Senegal.
+      A door bursts open. White woman, thirties, forearms lined with shopping bags. Texting frantically, chest heaving, tears welling, overtaken by something, something world shattering. Though, worlds apart.
     </p>
 
     <p className="mb-5">
-      A door bursts open, white woman, thirties, forearms lined with shopping bags. Texting frantically, chest heaving, tears welling, overtaken by something, something earth shattering.
-    </p>
-
-    <p className="mb-5">
-      I want to say something, to help, to know.
-    </p>
-
-    <p className="mb-5">
-      But the chance has passed, it's been past for minutes now.
+      I want to say something, to help, to know. But the chance has passed, it's been past for minutes now.
     </p>
 
     <p className="mb-5">
@@ -304,7 +296,7 @@ const PassedContent = () => (
     <p className="mb-5 text-sm text-portfolio-muted">4:33pm</p>
 
     <p className="mt-12 text-sm italic text-portfolio-muted">
-      Written minutes after it happened, then touched up months later.
+      Written minutes after it happened, then refound and touched up months later.
     </p>
 
   </div>
