@@ -278,25 +278,42 @@ const PassedContent = () => (
   <div>
 
     <p className="mb-5">
-      Walking south, broadway and 28th. Cheers, someone scored in France vs Senegal.
+      Walking south, Broadway and 28th. Cheers, someone must've scored in France vs Senegal.
     </p>
 
     <p className="mb-5">
-      A door bursts open. White woman, thirties, forearms lined with shopping bags. Texting frantically, chest heaving, tears welling, overtaken by something, something world shattering. Though, worlds apart.
+      A door bursts open. White woman, thirties, forearms lined with shopping bags.
     </p>
 
     <p className="mb-5">
+      Texting frantically, chest heaving, tears welling,
+    </p>
+
+    <p className="mb-5">
+      Overtaken by something,
+    </p>
+
+    <p className="mb-5">
+      Something world shattering.
+    </p>
+
+    <p className="mb-5">
+      Though, worlds apart.
+    </p>
+
+    {/* The gaps widen from here on, so the piece opens out as it ends. */}
+    <p className="mt-10 mb-5">
       I want to say something, to help, to know. But the chance has passed, it's been past for minutes now.
     </p>
 
-    <p className="mb-5">
+    <p className="mt-14 mb-5">
       I thought about looking back, but never did I actually.
     </p>
 
-    <p className="mb-5 text-sm text-portfolio-muted">4:33pm</p>
+    <p className="mt-20 text-sm text-portfolio-muted">4:33pm</p>
 
     <p className="mt-12 text-sm italic text-portfolio-muted">
-      Written minutes after it happened, then refound and touched up months later.
+      Written minutes after it happened, then touched up months later.
     </p>
 
   </div>
