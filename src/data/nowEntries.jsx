@@ -83,48 +83,6 @@ const ImageLink = ({ children, images }) => {
   );
 };
 
-// Bonus 1 is its own component so the YouTube iframe mounts only once the
-// <details> is opened. Loading it while hidden inside a collapsed <details>
-// makes the player initialize at zero size and serve a low-res (blurry)
-// stream; deferring the mount lets it load sharp at full size.
-const VideoBonus = () => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <details
-      className="group mt-6 pt-4 border-t border-portfolio-border"
-      onToggle={(e) => { if (e.currentTarget.open) setLoaded(true); }}
-    >
-      <summary className="cursor-pointer list-none text-sm font-medium text-portfolio-muted hover:text-portfolio-gold transition-colors flex items-center gap-1">
-        <span className="inline-block transition-transform group-open:rotate-90">▸</span>
-        Bonus 1
-      </summary>
-      <p className="mt-3 text-sm text-portfolio-muted">
-        from past now (7/23/26)
-      </p>
-      <p className="mt-2">
-        Just found my new favorite 10s yt clip. First time I've actually laughed out loud from a video in a while.
-      </p>
-      <div className="my-4 w-full max-w-[420px] mx-auto">
-        <div className="relative w-full overflow-hidden rounded-lg border border-portfolio-border" style={{ paddingTop: '56.25%' }}>
-          {loaded && (
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src="https://www.youtube.com/embed/4K9RDZg4y7o?si=DuCWe_mBPR7MEFQl&start=3355"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          )}
-        </div>
-        <p className="mt-2 text-center text-sm italic text-portfolio-muted">somehow perfectly at 55:55 🤯</p>
-      </div>
-    </details>
-  );
-};
-
 export const nowEntry = {
   date: '1:03am, 10/7/2026',
   content: (
@@ -205,28 +163,20 @@ export const nowEntry = {
         </li>
       </ul>
 
-      <VideoBonus />
-
-      <details className="group mt-4 pt-4 border-t border-portfolio-border">
+      <details className="group mt-6 pt-4 border-t border-portfolio-border">
         <summary className="cursor-pointer list-none text-sm font-medium text-portfolio-muted hover:text-portfolio-gold transition-colors flex items-center gap-1">
           <span className="inline-block transition-transform group-open:rotate-90">▸</span>
-          Bonus 2
+          Bonus
         </summary>
-        <p className="mt-3 text-sm text-portfolio-muted">
-          From previous now: <span className="italic">2:31pm, 8/24/2026</span>
-        </p>
-        <p className="mt-3 italic text-portfolio-muted">Shoutout the Boomsticks</p>
-        <div className="mt-3 w-full max-w-[640px] mx-auto flex flex-col sm:flex-row gap-3">
+        <div className="mt-3 w-full max-w-[420px] mx-auto">
           <img
-            src="/now/Boomsticks_AFC.jpg"
-            alt="The Boomsticks"
-            className="w-full sm:w-1/2 h-auto rounded-lg border border-portfolio-border object-cover"
+            src="/now/me%20pretending%20to%20climb%20vertically%20up%20a%20relatively%20flat%20stretch%20of%20mountain.jpg"
+            alt="Me pretending to climb vertically up a relatively flat stretch of mountain"
+            className="w-full h-auto rounded-lg border border-portfolio-border"
           />
-          <img
-            src="/now/boomsticks_beach_outside_grad.JPG"
-            alt="The Boomsticks at the beach"
-            className="w-full sm:w-1/2 h-auto rounded-lg border border-portfolio-border object-cover"
-          />
+          <p className="mt-2 text-center text-sm italic text-portfolio-muted">
+            me pretending to climb vertically up a relatively flat stretch of mountain
+          </p>
         </div>
       </details>
     </>
