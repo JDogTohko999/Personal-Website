@@ -301,18 +301,36 @@ const PassedContent = () => (
       Though, our worlds apart.
     </p>
 
-    {/* The gaps widen from here on, so the piece opens out as it ends. */}
-    <p className="mt-10 mb-5">
-      I want to say something, to help, to know. But the chance has passed, it's been past for minutes now.
+    {/* The gaps widen from here on, so the piece opens out as it ends.
+        These three also step rightward, each starting near where the last one ends.
+        The min() caps keep "to know." from overflowing on narrow screens. */}
+    <p className="mt-10 mb-5 pl-[3.75em]">
+      I want to say something,
     </p>
 
-    <p className="mt-14 mb-5">
+    <p className="mt-10 mb-5 pl-[min(15em,40%)]">
+      to help,
+    </p>
+
+    <p className="mt-10 mb-5 pl-[min(18.75em,50%)]">
+      to know.
+    </p>
+
+    <p className="mt-10 mb-5">
+      But the chance has passed,
+    </p>
+
+    <p className="mt-10 mb-5">
+      it's been past for minutes now.
+    </p>
+
+    <p className="mt-20 mb-5">
       I thought about looking back, but never did I actually.
     </p>
 
-    <p className="mt-20 text-sm text-portfolio-muted">4:33pm</p>
+    <p className="mt-20 text-sm text-portfolio-muted">4:33pm – Broadway & 28th</p>
 
-    <p className="mt-12 text-sm italic text-portfolio-muted">
+    <p className="mt-40 text-sm italic text-portfolio-muted">
       Written minutes after it happened, then touched up months later.
     </p>
 
