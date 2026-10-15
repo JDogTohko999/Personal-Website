@@ -93,6 +93,7 @@ function App() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
       <Route path="/now" element={<Now />} />
+      <Route path="/now/bonus" element={<Now />} />
     </Routes>
   );
 }

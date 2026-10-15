@@ -1,10 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { nowEntry } from '../data/nowEntries.jsx';
 
 const Now = () => {
+  const { pathname } = useLocation();
+
+  // /now/bonus opens the bonus section and scrolls straight to it.
+  useEffect(() => {
+    if (pathname !== '/now/bonus') return;
+    const bonus = document.getElementById('now-bonus');
+    if (!bonus) return;
+    bonus.open = true;
+    bonus.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-portfolio-bg pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">

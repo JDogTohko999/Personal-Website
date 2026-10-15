@@ -163,7 +163,7 @@ export const nowEntry = {
         </li>
       </ul>
 
-      <details className="group mt-6 pt-4 border-t border-portfolio-border">
+      <details id="now-bonus" className="group mt-6 pt-4 border-t border-portfolio-border scroll-mt-24">
         <summary className="cursor-pointer list-none text-sm font-medium text-portfolio-muted hover:text-portfolio-gold transition-colors flex items-center gap-1">
           <span className="inline-block transition-transform group-open:rotate-90">▸</span>
           Bonus
