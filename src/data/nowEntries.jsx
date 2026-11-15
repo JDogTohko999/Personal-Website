@@ -136,7 +136,7 @@ export const nowEntry = {
           </a>
         </li>
       </ul>
-      <p className="pt-2 font-semibold text-portfolio-text">In other non-AI safety and less depressing news:</p>
+      <p className="pt-2 font-semibold text-portfolio-text">In other, non-AI safety, less depressing news (:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
           I recently moved into my new place in Central.
