@@ -87,7 +87,7 @@ export const nowEntry = {
   content: (
     <>
       <p>
-        I'm currently sitting with Shubs and Aidan at AIST/MAIA Workshop 2. I'm starting to internalize the recent METR report and its implications. It sucks that we're forced to put so much faith in METR due to Anthropic redacting almost all of the load-bearing evidence in the report, but largely I trust METR.
+        I'm currently sitting with Shubs and Aidan at AIST/MAIA Workshop 2. I'm starting to internalize the recent METR report and its implications. It sucks that we're forced to put so much faith in METR due to Anthropic redacting almost all of the load-bearing evidence in the report, but largely I trust METR. Thus, my naive timeline until crazy powerful AI has drastically shortened.
       </p>
       <p className="pt-2">
         I'll be writing and posting something in a week or two on my timelines and approach to all of this because I'll probably want to start talking to my friends and family about this.
