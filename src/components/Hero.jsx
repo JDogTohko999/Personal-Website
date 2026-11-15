@@ -210,25 +210,29 @@ const Hero = () => {
             </a>{' '}
             in Boston.
             <br />
-            I'm especially bullish on strengthening and{' '}
-            <a
-              href="https://aisafetyseeding.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-portfolio-gold hover:underline"
-            >
-               growing
-            </a>{' '}
-            the early-career talent ecosystem. Huge fan of the work being done at{' '}
+            I was quite bullish on{' '}
             <a
               href="https://kairos-project.org/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-portfolio-gold hover:underline"
             >
-              Kairos
-            </a>
-            .
+              strengthening
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://aisafetyseeding.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-portfolio-gold hover:underline"
+            >
+              growing
+            </a>{' '}
+            the early-career talent ecosystem.{' '}
+            <Link to="/now" className="text-portfolio-gold hover:underline">
+              Now
+            </Link>{' '}
+            I'm less sure.
           </p>
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="inline-flex flex-col items-stretch gap-4">
