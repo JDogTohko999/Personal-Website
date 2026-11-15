@@ -155,7 +155,7 @@ export const nowEntry = {
         </li>
       </ul>
       <p className="pt-2">
-        I'll be writing and posting something in a week or two on my timelines and approach to this all.
+        I'll be writing and posting something in a week or two on my timelines and approach to all of this.
       </p>
     </>
   ),
