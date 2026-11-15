@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 // Inline text link that opens one or more images in a lightbox overlay.
 const ImageLink = ({ children, images }) => {
@@ -84,101 +83,77 @@ const ImageLink = ({ children, images }) => {
 };
 
 export const nowEntry = {
-  date: '1:03am, 10/7/2026',
+  date: '1:53am, 11/15/2026',
   content: (
     <>
       <p>
-        Currently in the MAIA office about to head home. In the coming days I'll fly down to SC and drive back up to Boston, stopping at UVA's YAR along the way. Excited to see friends and family!
+        Currently at an AIST/MAIA Workshop. I'm starting to internalize the recent METR report and its implications. It sucks that we're forced to put so much faith in METR due to Anthropic redacting almost all of the load-bearing evidence in the report, but largely I trust METR. I hope to spend some hours in the next week thinking through my timelines and what this means for how I should be spending my time.
       </p>
-      <p className="pt-2 font-semibold text-portfolio-text">Top of mind:</p>
+      <p className="pt-2 font-semibold text-portfolio-text">For those curious about wtf I'm talking about, these are the best resources:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          Between the many hours I spend on MAIA and the fact that I'm still living in Airbnb + suitcase mode, I've inadvertently been pushing off figuring out what work-life balance means for someone who cares about impact.
+          <a
+            href="https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            The METR report
+          </a>
         </li>
         <li>
-          I worry that my exploit:explore ratio is too exploity, and that I'm getting lulled into a local min. Fortunately, I think being around Roman will mitigate this risk to some extent.
+          <a
+            href="https://substack.com/home/post/p-223816733"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Ajeya's post
+          </a>
+          {' '}(short and understandable)
         </li>
         <li>
-          What am I going to do with my car in Cambridge... should I even bother bringing it? My bike too?
+          <a
+            href="https://blog.aifutures.org/p/q35-timelines-update-looks-like-the"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            AI Futures Project timelines update
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.youtube.com/watch?v=1NHPDzpfR6Y"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-portfolio-gold hover:underline"
+          >
+            Dwarkesh Video
+          </a>
         </li>
       </ul>
-      <p className="pt-2 font-semibold text-portfolio-text">Backburner</p>
+      <p className="pt-2 font-semibold text-portfolio-text">In other non-AI safety and less depressing news:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
-          I should probably try and meet more ppl outside of MIT. I've also considered writing a date me doc, but idk if I'm that ratty.
+          I recently moved into my new place in Central.
         </li>
         <li>
-          Looking for{' '}
-          <a
-            href="https://www.henrikkarlsson.xyz/p/looking-for-alice"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Alice
-          </a>
-          <Link
-            to="/blog/alice"
-            className="text-portfolio-gold hover:underline"
-          >
-            .
-          </Link>
+          I'm hoping the Facebook Marketplace gods bless me with a reasonably priced, nicely colored, light, single speed bike so I can stop walking around Cambridge.
         </li>
         <li>
-          Writing. I really have to make my first substack post. Gotta{' '}
+          I've also decided to start fixing my sleep schedule by waking up at 8am every day. Inspired by Roman,{' '}
           <a
-            href="https://usefulfictions.substack.com/p/tying-yourself-to-the-mast"
+            href="https://blog.dewierwan.com/p/sleep"
             target="_blank"
             rel="noopener noreferrer"
             className="text-portfolio-gold hover:underline"
           >
-            tie myself to the mast
+            Dewi
           </a>
-          . Shoutout{' '}
-          <a
-            href="https://romansattic.substack.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Roman
-          </a>
-          {' '}and{' '}
-          <a
-            href="https://elianadu.substack.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-portfolio-gold hover:underline"
-          >
-            Eliana
-          </a>
-          {' '}for their blogs. Let me{' '}
-          <Link
-            to="/blog/passed"
-            className="text-portfolio-gold hover:underline"
-          >
-            post
-          </Link>
-          {' '}something to my blog rn so I can start overcoming the fear of publishing.
+          , and any... most normal people.
         </li>
       </ul>
-
-      <details id="now-bonus" className="group mt-6 pt-4 border-t border-portfolio-border scroll-mt-24">
-        <summary className="cursor-pointer list-none text-sm font-medium text-portfolio-muted hover:text-portfolio-gold transition-colors flex items-center gap-1">
-          <span className="inline-block transition-transform group-open:rotate-90">▸</span>
-          Bonus
-        </summary>
-        <div className="mt-3 w-full max-w-[420px] mx-auto">
-          <img
-            src="/now/me%20pretending%20to%20climb%20vertically%20up%20a%20relatively%20flat%20stretch%20of%20mountain.jpg"
-            alt="Me pretending to climb vertically up a relatively flat stretch of mountain"
-            className="w-full h-auto rounded-lg border border-portfolio-border"
-          />
-          <p className="mt-2 text-center text-sm italic text-portfolio-muted">
-            me pretending to climb vertically up a relatively flat stretch of mountain
-          </p>
-        </div>
-      </details>
     </>
   ),
 };
