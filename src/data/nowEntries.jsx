@@ -89,6 +89,9 @@ export const nowEntry = {
       <p>
         I'm currently sitting with Shubs and Aidan at AIST/MAIA Workshop 2. I'm starting to internalize the recent METR report and its implications. It sucks that we're forced to put so much faith in METR due to Anthropic redacting almost all of the load-bearing evidence in the report, but largely I trust METR. I hope to spend some hours in the next week thinking through my timelines and what this means for how I should be spending my time.
       </p>
+      <p className="pt-2">
+        I'll be writing and posting something in a week or two on my timelines and approach to all of this because I'll probably want to start talking to my friends and family about this.
+      </p>
       <p className="pt-2 font-semibold text-portfolio-text">For those curious about wtf I'm talking about, these are the best resources:</p>
       <ul className="list-disc list-outside pl-5 space-y-2">
         <li>
@@ -154,9 +157,6 @@ export const nowEntry = {
           , and any... most normal people.
         </li>
       </ul>
-      <p className="pt-2">
-        I'll be writing and posting something in a week or two on my timelines and approach to all of this because I'll probably want to start talking to my friends and family about this.
-      </p>
     </>
   ),
 };
