@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as vaisi from '../data/vaisi.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import useTitle from '../lib/useTitle.js';
+import { full, thumb } from '../components/webImage.js';
 
 export default function Vaisi() {
   useTitle('VAISI');
@@ -26,10 +27,10 @@ export default function Vaisi() {
               <button
                 key={src}
                 type="button"
-                onClick={() => setBox({ images: set.images, index: i, alt: set.altText })}
+                onClick={() => setBox({ images: set.images.map(full), index: i, alt: set.altText })}
                 aria-label={`${set.altText}, photo ${i + 1}`}
               >
-                <img src={src} alt="" loading="lazy" />
+                <img src={thumb(src)} alt="" loading="lazy" />
               </button>
             ))}
           </div>
@@ -37,7 +38,7 @@ export default function Vaisi() {
       ))}
 
       <h3>{vaisi.textImage.label}</h3>
-      <img src={vaisi.textImage.src} alt={vaisi.textImage.alt} loading="lazy" style={{ maxWidth: 280 }} />
+      <img src={thumb(vaisi.textImage.src)} alt={vaisi.textImage.alt} loading="lazy" style={{ maxWidth: 280 }} />
 
       {box && (
         <Lightbox

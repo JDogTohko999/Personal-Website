@@ -6,6 +6,7 @@ import { nowEntry } from '../data/nowEntries.jsx';
 import { JASONINGS, OPENERS } from '../data/jasonings.js';
 import { achievements } from '../data/achievements.jsx';
 import useTitle from '../lib/useTitle.js';
+import { thumb } from '../components/webImage.js';
 
 // Reference home: every piece of home-page data, plainly. Builders restyle or replace this.
 const listedPosts = blogPosts.filter((p) => !p.unlisted);
@@ -24,7 +25,7 @@ function Jasoning() {
       {item.type === 'video' ? (
         <video src={item.src} muted loop autoPlay playsInline style={box} />
       ) : (
-        <img src={item.src} alt={`Jason ${item.label}`} width="280" height="280" style={box} />
+        <img src={thumb(item.src)} alt={`Jason ${item.label}`} width="280" height="280" style={box} />
       )}
       <figcaption aria-live="polite">
         Jason, {item.label}{' '}
@@ -81,7 +82,7 @@ export default function Home() {
           <p className="muted small">{debate.organization} · {debate.date}</p>
           <p style={{ whiteSpace: 'pre-line' }}>{debate.description}</p>
           <div className="thumbs">
-            {debate.photos.map((src) => <img key={src} src={src} alt="" loading="lazy" />)}
+            {debate.photos.map((src) => <img key={src} src={thumb(src)} alt="" loading="lazy" />)}
           </div>
           <p className="small">
             {debate.links.map((l, i) => (

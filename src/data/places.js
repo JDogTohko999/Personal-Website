@@ -1,11 +1,20 @@
 // Map data for the "places" section (extracted from the original WorldMap.jsx).
 //
+// THE TOUR (Jason, this is the bit you edit):
+//   The touring globe (src/components/TourGlobe.jsx) flies between every place that has `tour`
+//   set. `tour: 3` means "third stop"; stops are visited in number order, then it loops.
+//   `tour: true` also works (those go after the numbered ones, in list order).
+//   To drop a stop, delete its `tour` line (or set `tour: false`). To add one, give it a number.
+//   The caption shows the place's `name` and `description`.
+//   Current tour: Cambridge (home) -> Wyckoff -> London -> Valencia -> Marrakesh -> Kingston
+//                 -> Antigua/Atitlan -> the Bay -> back to Cambridge.
+//
 // Exports:
 //   geoUrl               TopoJSON of world countries (world-atlas 110m) for react-simple-maps.
 //                        Country features are matched by numeric id ("840") or properties.ISO_A3.
 //   cities               Every VISITED place; each has a marker + popup.
 //                        { id, name, coordinates: [lon, lat], countryCode: [ISO_A3, ISO_numeric],
-//                          description, images: string[] }
+//                          description, images: string[], tour?: number | boolean, home?: true }
 //   goingSoon            Country codes (ISO_A3 and numeric, mixed) filled as "going" (no markers).
 //   bucketList           Country codes (ISO_A3 and numeric, mixed) filled as "bucket list" (no markers).
 //   visitedCountryCodes  Set of every code in cities[].countryCode (a country is "visited" if in it).
@@ -13,6 +22,8 @@
 //   getCountryCategory   (geo) => 'visited' | 'goingSoon' | 'bucketList' | null for a geography feature.
 //   categoryColors       Colors the original map used for each category.
 //   mapDefaults          Original projection / size / initial center constants (geoEqualEarth).
+//   homePlace            The city with `home: true` (Cambridge / Boston).
+//   tourPlaces           Cities with `tour` set, in tour order (see THE TOUR above).
 
 export const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -25,6 +36,7 @@ export const cities = [
     countryCode: ["USA", "840"],
     description: "I grew up my entire life here, a suburb of NYC.",
     images: [],
+    tour: 2,
   },
   {
     id: 2,
@@ -41,6 +53,7 @@ export const cities = [
     countryCode: ["ESP", "724"],
     description: "I spent a semester abroad here with the two most amazing host parents, shoutout Elena and Enrique.",
     images: [],
+    tour: 4,
   },
   {
     id: 4,
@@ -73,6 +86,7 @@ export const cities = [
     countryCode: ["GBR", "826"],
     description: "Visited.",
     images: [],
+    tour: 3,
   },
   {
     id: 8,
@@ -81,6 +95,7 @@ export const cities = [
     countryCode: ["MAR", "504"],
     description: "Highlight of trip was playing soccer and rock paper scissors with local kids for an hour.",
     images: [],
+    tour: 5,
   },
   {
     id: 9,
@@ -129,6 +144,7 @@ export const cities = [
     countryCode: ["JAM", "388"],
     description: "Family vacations.",
     images: [],
+    tour: 6,
   },
   {
     id: 15,
@@ -217,6 +233,7 @@ export const cities = [
     countryCode: ["GTM", "320"],
     description: "Spring break 2026.",
     images: [],
+    tour: 7,
   },
   {
     id: 26,
@@ -265,6 +282,17 @@ export const cities = [
     countryCode: ["USA", "840"],
     description: "Berkeley: Spent a week here in August 2026 for a workshop and conference, met a lot of young AIS folks! San Francisco: Didn't actually explore, only did the Batteries to Bluffs hike shortly after sunset.",
     images: ["/map/SF_hike1.JPG", "/map/SF_hike2.jpg", "/map/SF_hike3.jpg"],
+    tour: 8,
+  },
+  {
+    id: 32,
+    name: "Cambridge / Boston, MA",
+    coordinates: [-71.0942, 42.3601],
+    countryCode: ["USA", "840"],
+    description: "Moved here Sept 2026 for AI safety field-building.",
+    images: [],
+    home: true, // where Jason lives now; globes draw this pin differently
+    tour: 1,
   },
 ];
 
@@ -307,3 +335,12 @@ export const mapDefaults = {
   height: 560,
   initialCenter: [8, -34],
 };
+
+export const homePlace = cities.find((c) => c.home) || null;
+
+const tourRank = (c) => (typeof c.tour === 'number' ? c.tour : Infinity);
+export const tourPlaces = cities
+  .map((c, i) => [c, i])
+  .filter(([c]) => c.tour)
+  .sort((a, b) => tourRank(a[0]) - tourRank(b[0]) || a[1] - b[1])
+  .map(([c]) => c);
