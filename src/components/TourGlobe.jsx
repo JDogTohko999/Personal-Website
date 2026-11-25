@@ -31,10 +31,13 @@ import { copyCam, evalPlan, makePlan, nearestNext, targetIndex } from './tourMot
  * @param {boolean}  zoomable=false     Wheel, pinch and +/- zoom.
  * @param {boolean}  showCaption=true   Built-in caption (name + description of the latest place).
  * @param {boolean}  showControls=true  Built-in prev / pause / next text buttons.
- * @param {function} renderCaption      (place, { moving }) => node, replaces the built-in caption.
- *                                      moving is true once the caption should fade.
- * @param {function} onStop             (place) as the camera passes closest to a place, or arrives
- *                                      at a selection. (Name kept from the version that stopped.)
+ * @param {function} renderCaption      (place, { moving, auto }) => node, replaces the built-in caption.
+ *                                      moving: the caption should fade; auto: the automatic drift
+ *                                      (not the visitor) brought this place. Don't make an
+ *                                      auto-updating caption aria-live; announce only !auto changes.
+ * @param {function} onStop             (place, { auto }) as the camera passes closest to a place,
+ *                                      or arrives at one the visitor asked for (auto: false).
+ *                                      (Name kept from the version that stopped.)
  * @param {function} onPick             (place) when a pin is clicked/tapped (not on drags).
  * @param {number}   selectedId         Fly to this place and stay; null resumes the tour.
  * @param {number}   homeId             Pin drawn as home (default: the `home: true` place).
@@ -50,11 +53,15 @@ import { copyCam, evalPlan, makePlan, nearestNext, targetIndex } from './tourMot
  * Ref handle: { flyTo(idOrPlace), next(), prev(), pause(), play() }.
  *
  * Behaviour: hovering eases the drift down to a slow crawl (HOVER_RATE) and back up when the
- * pointer leaves; dragging takes over (with inertia) and, a moment after it settles, the tour
+ * pointer leaves, but a flight the visitor asked for (pin, prev/next, flyTo, selection) always
+ * runs at full speed; dragging takes over (with inertia) and, a moment after it settles, the tour
  * resumes from the current view towards the nearest next place; prev/next retarget the drift
  * (animated, blended from the current motion); arrow keys step when focused; it stops while the
  * tab is hidden or the globe is off screen. Under reduced motion nothing moves on its own: a
  * static framed view of home with its caption, and prev/next jump without animation.
+ * Touch: touch-action is pan-y and touch/pen drags spin east-west only, so the page still
+ * scrolls. Screen readers: the visual caption is not a live region; a hidden polite live region
+ * announces only places the visitor asked for, and the description lists the whole tour.
  *
  * Fast: world rings are pre-converted to 3D unit vectors once; each frame rotates them with one
  * 3x3 basis (no per-point trig), culls back-facing and off-frame countries by bounding cap, and
@@ -175,7 +182,8 @@ const TourGlobe = forwardRef(function TourGlobe(
   const baseRef = useRef(null);
   const topRef = useRef(null);
   const descId = useId();
-  const [cap, setCap] = useState({ place: null, moving: true });
+  const [cap, setCap] = useState({ place: null, moving: true, auto: true });
+  const [announce, setAnnounce] = useState('');
   const [paused, setPaused] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -196,7 +204,7 @@ const TourGlobe = forwardRef(function TourGlobe(
         ? { lon: home.coordinates[0], lat: home.coordinates[1], k: zoomIn }
         : { lon: (first?.coordinates[0] ?? 0) + 35, lat: 15, k: 1 },
       drawn: { lon: NaN, lat: NaN, k: NaN },
-      clock: 0, rate: 1, plan: null, started: false, introAt: 0, capFadeAt: 0, capPlace: null,
+      clock: 0, rate: 1, plan: null, started: false, introAt: 0, capFadeAt: 0, capPlace: null, boostUntil: -1,
       vel: [0, 0], drag: null, pinch: null, pointers: new Map(),
       hovering: false, manual: false, resumeAt: 0, userPaused: false, pinned: null,
       hover: null, screen: [], screenN: 0, world: null, pinVecs: null, colors: FALLBACK, grad: null,
@@ -206,24 +214,28 @@ const TourGlobe = forwardRef(function TourGlobe(
   const st = s.current;
 
   // ---- tour control (plain functions over `st`; React state only for caption/paused) ----
-  const passed = (place) => {
+  // A place is reached (passed, or arrived at). `user`: the visitor asked for it (pick, prev/next,
+  // flyTo, selection). Only those are announced to screen readers; the automatic drift is not.
+  const passed = (place, user = false) => {
     st.capPlace = place;
     st.pinsDirty = true;
-    setCap({ place, moving: false });
-    propsRef.current.onStop?.(place);
+    setCap({ place, moving: false, auto: !user });
+    if (user) setAnnounce(`${place.name}. ${place.description || ''}`);
+    propsRef.current.onStop?.(place, { auto: !user });
   };
 
-  const jump = (place) => {
+  const jump = (place, user = true) => {
     st.plan = null;
     st.cam = { lon: place.coordinates[0], lat: place.coordinates[1], k: Math.max(st.cam.k, propsRef.current.zoomIn) };
     st.dirty = true;
-    passed(place);
+    passed(place, user);
   };
 
   // Head for `place` from wherever the camera is now, blending out of the current motion.
-  const startPlan = (place, idx, terminal) => {
+  // user: the visitor asked for this flight, so it runs at full speed even while hovered.
+  const startPlan = (place, idx, terminal, user = true) => {
     if (!place) return;
-    if (st.reduced) { jump(place); return; }
+    if (st.reduced) { jump(place, user); return; }
     const p = propsRef.current;
     const moving = st.plan && !st.plan.done && st.rate > 0.05 && !st.manual;
     const nextIdx = idx >= 0 ? undefined : nearestNext(p.tourPlaces, place.coordinates[0], place.coordinates[1]);
@@ -232,6 +244,7 @@ const TourGlobe = forwardRef(function TourGlobe(
       legMs: p.legMs, flyMs: p.flyMs, zoomIn: p.zoomIn,
       from: moving ? st.plan : null, blendMs: Math.min(2000, 0.3 * p.legMs),
     });
+    if (user) { st.plan.legs[0].user = true; st.boostUntil = st.plan.legs[0].passAt; }
     st.manual = false;
     st.vel = [0, 0];
     if (terminal) setCap((c) => (c.place ? { ...c, moving: true } : c));
@@ -303,7 +316,7 @@ const TourGlobe = forwardRef(function TourGlobe(
 
   // Under reduced motion, show home's caption straight away.
   useEffect(() => {
-    if (st.reduced && home && !st.pinned) passed(home);
+    if (st.reduced && home && !st.pinned) passed(home, false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -559,7 +572,7 @@ const TourGlobe = forwardRef(function TourGlobe(
 
     // Passing a place: caption it now, fade it a while later (a selection's caption stays).
     const onPass = (leg) => {
-      passed(leg.place);
+      passed(leg.place, !!leg.user);
       st.capFadeAt = st.plan && !st.plan.terminal ? st.clock + FADE_AFTER * propsRef.current.legMs : 0;
     };
     const render = () => {
@@ -610,8 +623,10 @@ const TourGlobe = forwardRef(function TourGlobe(
       }
 
       // Speed: eases down to a crawl on hover, to a standstill when paused, back up after.
-      const target = st.hovering ? HOVER_RATE : st.userPaused && !st.plan?.terminal ? 0 : 1;
-      st.rate += (target - st.rate) * (1 - Math.exp(-dt / RATE_TAU));
+      // A flight the visitor asked for always runs at full speed, hovered or not.
+      const boost = !!st.plan && st.clock < st.boostUntil;
+      const target = st.hovering && !boost ? HOVER_RATE : st.userPaused && !st.plan?.terminal ? 0 : 1;
+      st.rate += (target - st.rate) * (1 - Math.exp(-dt / (boost ? 120 : RATE_TAU)));
 
       const steering = st.reduced || st.manual || st.drag || st.pinch;
       if (!steering) {
@@ -620,7 +635,7 @@ const TourGlobe = forwardRef(function TourGlobe(
           // pause) head for the nearest next place from wherever the camera is.
           const i = st.started ? nearestNext(p.tourPlaces, st.cam.lon, st.cam.lat) : 0;
           st.started = true;
-          startPlan(p.tourPlaces[i], i, false);
+          startPlan(p.tourPlaces[i], i, false, false);
         }
         if (st.plan && !st.plan.done) {
           st.clock += tdt * st.rate;
@@ -709,7 +724,9 @@ const TourGlobe = forwardRef(function TourGlobe(
         st.drag = null;
         takeOver();
       } else if (st.pointers.size === 1) {
-        st.drag = { x0: e.clientX, y0: e.clientY, lon0: st.cam.lon, lat0: st.cam.lat, moved: false, lx: e.clientX, ly: e.clientY, lt: now };
+        // Touch and pen drag only spin east-west, so a vertical swipe still scrolls the page.
+        const flat = e.pointerType !== 'mouse';
+        st.drag = { x0: e.clientX, y0: e.clientY, lon0: st.cam.lon, lat0: st.cam.lat, moved: false, lx: e.clientX, ly: e.clientY, lt: now, flat };
         top.style.cursor = 'grabbing';
       }
     };
@@ -729,10 +746,10 @@ const TourGlobe = forwardRef(function TourGlobe(
         if (!st.drag.moved) return;
         const k = 180 / (Math.PI * radius() * st.cam.k); // degrees per pixel at the centre
         st.cam.lon = st.drag.lon0 - dx * k;
-        st.cam.lat = clamp(st.drag.lat0 + dy * k, -MAX_TILT, MAX_TILT);
+        if (!st.drag.flat) st.cam.lat = clamp(st.drag.lat0 + dy * k, -MAX_TILT, MAX_TILT);
         const now = performance.now();
         const dtm = Math.max(now - st.drag.lt, 1);
-        st.vel = [st.vel[0] * 0.5 + (((e.clientX - st.drag.lx) * k) / dtm) * 0.5, st.vel[1] * 0.5 + ((-(e.clientY - st.drag.ly) * k) / dtm) * 0.5];
+        st.vel = [st.vel[0] * 0.5 + (((e.clientX - st.drag.lx) * k) / dtm) * 0.5, st.drag.flat ? 0 : st.vel[1] * 0.5 + ((-(e.clientY - st.drag.ly) * k) / dtm) * 0.5];
         Object.assign(st.drag, { lx: e.clientX, ly: e.clientY, lt: now });
         st.hover = null;
         return;
@@ -859,7 +876,7 @@ const TourGlobe = forwardRef(function TourGlobe(
         style={{
           position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block',
           cursor: interactive ? 'grab' : 'default', pointerEvents: interactive ? 'auto' : 'none',
-          touchAction: zoomable ? 'none' : 'pan-y', outlineOffset: -2,
+          touchAction: 'pan-y', outlineOffset: -2, // never trap page scroll on phones; pinch still zooms
         }}
       />
       <p id={descId} style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap', margin: 0 }}>
@@ -869,9 +886,12 @@ const TourGlobe = forwardRef(function TourGlobe(
         All places are also listed in text on the map page.
       </p>
 
-      {showCaption && place && (renderCaption ? renderCaption(place, { moving: cap.moving }) : (
+      <p aria-live="polite" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap', margin: 0 }}>
+        {announce}
+      </p>
+
+      {showCaption && place && (renderCaption ? renderCaption(place, { moving: cap.moving, auto: cap.auto }) : (
         <div
-          aria-live="polite"
           className={cn.caption}
           data-moving={cap.moving || undefined}
           style={cn.caption ? undefined : {

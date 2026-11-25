@@ -48,16 +48,51 @@ export const placesByCountry = visitedIso.map((iso3) => ({
     up "been there" on the coast of South America. The South American ring is split off into
     its own uncategorised shape.
   - Madagascar (450) is uncategorised, Greenland (304) is separate from Denmark, and the US
-    keeps Alaska and Hawaii (same country). Western Sahara (732) is its own feature but
-    Morocco's outline overlaps it, hence DRAW_LAST below.
+    keeps Alaska and Hawaii (same country).
+  - Morocco's outline (504) runs down the Western Sahara coast to 21.4N, so a strip south of
+    Morocco would light up "been there". It is cut at the border latitude (27.667N, see CUTS):
+    the northern part keeps Morocco's category, the southern strip becomes an uncategorised
+    shape. Western Sahara (732) is its own feature and is still painted last (DRAW_LAST).
 */
 const OVERSEAS = {
   250: { id: 'GUF', name: 'French Guiana', isOverseas: (ring) => geoCentroid({ type: 'Polygon', coordinates: [ring] })[0] < -30 },
 };
 
+// Features cut along a parallel: the part south of `lat` becomes its own uncategorised shape.
+const CUTS = {
+  504: { id: 'MAR-S', name: 'Western Sahara coast (in Morocco’s outline)', lat: 27.667 },
+};
+
+// Sutherland-Hodgman clip of one ring against a parallel (keep north or south of lat).
+function clipRing(ring, lat, north) {
+  const inside = (p) => (north ? p[1] >= lat : p[1] <= lat);
+  const out = [];
+  for (let i = 0; i < ring.length - 1; i++) {
+    const a = ring[i];
+    const b = ring[i + 1];
+    if (inside(a)) out.push(a);
+    if (inside(a) !== inside(b)) out.push([a[0] + ((lat - a[1]) * (b[0] - a[0])) / (b[1] - a[1]), lat]);
+  }
+  if (out.length < 3) return null;
+  out.push(out[0]);
+  return out;
+}
+const clipPolys = (polys, lat, north) => polys
+  .map((poly) => poly.map((ring) => clipRing(ring, lat, north)))
+  .filter((poly) => poly[0])
+  .map((poly) => poly.filter(Boolean));
+
 export function splitOverseas(features) {
   const out = [];
   features.forEach((f) => {
+    const cut = CUTS[f.id];
+    if (cut && f.geometry) {
+      const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+      const south = clipPolys(polys, cut.lat, false);
+      out.push({ ...f, geometry: { type: 'MultiPolygon', coordinates: clipPolys(polys, cut.lat, true) } });
+      if (south.length) out.push({ type: 'Feature', id: cut.id, properties: { name: cut.name }, geometry: { type: 'MultiPolygon', coordinates: south } });
+      return;
+    }
     const rule = OVERSEAS[f.id];
     if (!rule || f.geometry?.type !== 'MultiPolygon') {
       out.push(f);
@@ -79,7 +114,8 @@ export function splitOverseas(features) {
 export const DRAW_LAST = new Set(['732']);
 
 // Category for a (possibly split) feature. The split-off pieces have no category.
-export const categoryOf = (f) => (Object.values(OVERSEAS).some((r) => r.id === f.id) ? null : getCountryCategory(f));
+const PIECES = new Set([...Object.values(OVERSEAS), ...Object.values(CUTS)].map((r) => r.id));
+export const categoryOf = (f) => (PIECES.has(f.id) ? null : getCountryCategory(f));
 
 // The world, fetched once and shared by every map/globe on the page.
 let worldPromise;

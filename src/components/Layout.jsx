@@ -40,7 +40,7 @@ export default function Layout() {
   const { pathname, hash } = useLocation();
   // New page: start at the top (unless the URL points at an anchor, e.g. a footnote).
   useEffect(() => {
-    if (!hash) window.scrollTo(0, 0);
+    if (!hash && pathname !== '/now/bonus') window.scrollTo(0, 0); // /now/bonus scrolls itself to #now-bonus
   }, [pathname, hash]);
 
   return (
