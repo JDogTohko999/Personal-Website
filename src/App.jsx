@@ -21,14 +21,18 @@ export default function App() {
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/now" element={<Now />} />
         <Route path="/now/bonus" element={<Now />} />
-        <Route
-          path="/map"
-          element={
-            <Suspense fallback={<p className="muted">Loading the map…</p>}>
-              <MapPage />
-            </Suspense>
-          }
-        />
+        {/* /places is the page's name in the nav; /map stays as an alias for old links. */}
+        {['/places', '/map'].map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Suspense fallback={<p className="quiet">Loading the globe…</p>}>
+                <MapPage />
+              </Suspense>
+            }
+          />
+        ))}
         <Route path="/vaisi" element={<Vaisi />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="*" element={<NotFound />} />

@@ -5,65 +5,502 @@
 @tailwind utilities;
 
 /*
-  Reference styles only: plain and readable so the data wiring is easy to see.
-  Direction builders replace this file's bottom half with their own design.
+  sky (round 3, take A): a caption in the corner of a photograph.
+
+  One face, Newsreader (variable, with optical sizes: the name gets the display cut, the tiny
+  links the caption cut, automatically). One ink. The photo does the rest.
+
+  Palette, from the photo (public/bg3/README.md):
+    ink    #121a18  text on the sky and the panel (the sky is mid-tone: only a near-black reads)
+    paper  #e2e5db  the reading panel, the haze lifted towards white
+    sky    #849082  top-left sky, the page colour before the photo arrives
+    teal   #4a6a69  top-right sky; links on the panel are this, deepened
+    scree  #3b351f  olive scree; the second accent, deepened
 */
+:root,
+:root[data-theme] {
+  color-scheme: light;
+  --ink: #121a18;
+  --paper: #e2e5db;
+  --panel: rgba(226, 229, 219, 0.9);
+  --sky: #849082;
+
+  /* Semantic tokens (post bodies and the globe read these). Every text pair >= 4.5:1 on the
+     panel; see DECISIONS.md for the numbers. */
+  --bg: #e2e5db;
+  --surface: #ebede5;
+  --text: #18211f;
+  --muted: #45514c;
+  --faint: #a5ad9f;
+  --accent: #2c4745;
+  --accent-2: #4a4626;
+  --rule: #c2c8ba;
+  --link: #24433f;
+  --link-hover: #121a18;
+
+  --globe-ocean: #eef0e9;
+  --globe-land: #cfd4c6;
+  --globe-visited: #8e9a87;
+  --globe-going: #b3a679;
+  --globe-bucket: #d8d0b4;
+  --globe-border: #eef0e9;
+  --globe-pin: #4a4626;
+  --globe-pin-home: #2c4745;
+  --globe-halo: rgba(74, 106, 105, 0.14);
+  --globe-limb: rgba(18, 26, 24, 0.07);
+  --globe-frame: #e7e9e0;
+
+  --face: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+}
+
 @layer base {
   html {
-    background: var(--bg);
+    background: var(--sky);
     color: var(--text);
+    -webkit-text-size-adjust: 100%;
   }
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--sky);
     color: var(--text);
-    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-family: var(--face);
+    font-optical-sizing: auto;
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   a {
     color: var(--link);
-    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
   }
   a:hover,
   a:focus-visible {
     color: var(--link-hover);
   }
   :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: 1.5px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 1px;
   }
   h1, h2, h3 {
-    font-weight: 600;
-    line-height: 1.25;
+    font-weight: 420;
+    line-height: 1.2;
+    color: var(--ink);
   }
-  h1 { font-size: 1.75rem; margin: 0 0 0.75rem; }
-  h2 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
-  h3 { font-size: 1.05rem; margin: 1.25rem 0 0.25rem; }
-  p { margin: 0 0 0.9rem; }
-  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: 0 0 1rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
   button { color: inherit; }
+  ::selection { background: rgba(74, 106, 105, 0.28); }
 }
 
-.site { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
-.site-nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; align-items: baseline; margin-bottom: 2rem; font-size: 0.95rem; }
-.site-nav a[aria-current='page'] { color: var(--text); text-decoration: none; }
-.site-nav .spacer { flex: 1; }
-.muted { color: var(--muted); }
+html[data-page='home'],
+html[data-page='home'] body { overflow: hidden; }
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 60;
+  padding: 0.4rem 0.7rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.875rem;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- the photo ---------- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--sky);
+}
+.backdrop picture,
+.backdrop-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.backdrop-photo {
+  object-fit: cover;
+  object-position: 62% 76%; /* the hiker, in the wide crop */
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+.backdrop[data-ready] .backdrop-photo { opacity: 1; }
+@media (max-aspect-ratio: 4/5) {
+  .backdrop-photo { object-position: 61% 71%; } /* the hiker, in the tall crop */
+}
+
+/* Film grain: a tile of SVG fractal noise, overlaid. The photo already has its own grain; this
+   keeps the upscaled 1920 copy from looking smooth and makes the still feel projected. It jumps
+   a few pixels ten times a second (stepped, so it never slides), and holds still under
+   prefers-reduced-motion. */
+.grain {
+  position: absolute;
+  inset: -64px;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.16;
+  animation: grain 0.8s steps(1) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  12.5% { transform: translate(-23px, 11px); }
+  25% { transform: translate(17px, -29px); }
+  37.5% { transform: translate(-9px, 31px); }
+  50% { transform: translate(29px, 7px); }
+  62.5% { transform: translate(-31px, -17px); }
+  75% { transform: translate(5px, 23px); }
+  87.5% { transform: translate(21px, -5px); }
+}
+
+/* ---------- the tiny lowercase links ---------- */
+
+.sky-nav ul { list-style: none; margin: 0; padding: 0; }
+.sky-nav a {
+  color: var(--ink);
+  text-decoration: none;
+  text-transform: lowercase;
+}
+.sky-nav a:hover,
+.sky-nav a:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+/* Where you are: the word goes italic. No colour, no marker. */
+.sky-nav a.is-here { font-style: italic; }
+
+/* ---------- home: the caption ---------- */
+
+.home {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  outline: none;
+}
+.caption {
+  position: absolute;
+  left: clamp(1.5rem, 6.2vw, 6.75rem);
+  top: clamp(1.75rem, 10.5vh, 7.5rem);
+  max-width: min(24rem, calc(100vw - 3rem));
+  color: var(--ink);
+  animation: caption-in 1.2s 0.35s ease both;
+}
+@keyframes caption-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.caption-name {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.25rem + 1.15vw, 2.375rem);
+  font-weight: 380;
+  letter-spacing: -0.014em;
+  line-height: 1.05;
+}
+.caption-line {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1rem, 0.94rem + 0.22vw, 1.15rem);
+  font-style: italic;
+  font-weight: 380;
+  line-height: 1.35;
+}
+.sky-nav-stack {
+  margin-top: clamp(1.25rem, 4.2vh, 2.5rem);
+  font-size: 0.875rem;
+  letter-spacing: 0.012em;
+  line-height: 1.3;
+}
+.sky-nav-stack li { padding: 0.12rem 0; }
+.sky-nav-stack a { display: inline-block; padding: 0.06rem 0; }
+.sky-nav-stack .sky-nav-out { margin-top: 0.85rem; }
+.sky-nav-when {
+  margin-left: 0.6em;
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+@media (pointer: coarse) {
+  /* Fingers: every link at least 32px tall. */
+  .sky-nav-stack li { padding: 0; }
+  .sky-nav-stack a { padding: 0.45rem 0; }
+}
+
+/* ---------- inner pages: the reading panel ---------- */
+
+.panel {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: clamp(30rem, 47vw, 43rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(1.75rem, 5vh, 3rem) clamp(1.75rem, 4vw, 3.75rem) 6rem;
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(24px) saturate(1.05);
+  backdrop-filter: blur(24px) saturate(1.05);
+}
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1.75rem;
+  color: var(--ink);
+}
+.panel-name {
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 420;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+}
+.panel-name:hover { text-decoration: underline; color: var(--ink); }
+.sky-nav-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.012em;
+}
+.sky-nav-inline ul { display: flex; flex-wrap: wrap; gap: 0 0.95rem; }
+.sky-nav-inline a { display: inline-block; padding: 0.2rem 0; }
+.panel-main { outline: none; }
+
+@media (max-width: 959.98px) {
+  /* The photo becomes a band at the top, framed on the hiker; the panel is the page below it. */
+  .backdrop[data-mode='inner'] {
+    position: absolute;
+    bottom: auto;
+    height: 38vh;
+    height: 38svh;
+  }
+  .backdrop[data-mode='inner'] .backdrop-photo { object-position: 60% 80%; }
+  .panel {
+    width: auto;
+    margin-top: 38vh;
+    margin-top: 38svh;
+    min-height: 62svh;
+    padding: 1.75rem clamp(1.25rem, 5vw, 2.5rem) 5rem;
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  /* The name and links sit up in the band's sky, like the home caption. */
+  .panel-head {
+    position: absolute;
+    left: clamp(1.25rem, 5vw, 2.5rem);
+    right: clamp(1.25rem, 5vw, 2.5rem);
+    top: calc(-38vh + 1.1rem);
+    top: calc(-38svh + 1.1rem);
+    display: block;
+  }
+  .panel-name { font-size: 1.25rem; }
+  .sky-nav-inline { margin-top: 0.3rem; gap: 0 1.1rem; font-size: 0.875rem; }
+  .sky-nav-inline ul { gap: 0 0.85rem; }
+  .sky-nav-inline a { padding: 0.35rem 0; }
+}
+
+/* ---------- reading type ---------- */
+
+.page-title {
+  margin: clamp(2.75rem, 9vh, 5rem) 0 0.6rem;
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  font-weight: 380;
+  letter-spacing: -0.012em;
+}
+.page-lede {
+  margin: 0 0 2.25rem;
+  color: var(--muted);
+  font-style: italic;
+}
+.section-title {
+  margin: 3rem 0 1rem;
+  font-size: 1.0625rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--muted);
+}
+.quiet { color: var(--muted); font-size: 0.9375rem; }
 .small { font-size: 0.875rem; }
-.plain-list { list-style: none; padding: 0; margin: 0; }
-.plain-list > li { margin: 0 0 0.6rem; }
-.text-button { background: none; border: 0; padding: 0; font: inherit; color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; cursor: pointer; }
-.text-button:hover { color: var(--link-hover); }
-.thumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 1rem; }
-.thumbs img { display: block; width: 120px; height: 90px; object-fit: cover; border-radius: 3px; }
-.thumbs button { padding: 0; border: 0; background: none; cursor: zoom-in; }
-.prose-body { max-width: 65ch; }
-.lightbox { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(20, 16, 12, 0.85); }
-.lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
-.lightbox button { position: absolute; top: 1rem; right: 1rem; background: none; border: 0; color: #fff; font: inherit; cursor: pointer; }
+.muted { color: var(--muted); }
+.plain { list-style: none; margin: 0; padding: 0; }
+.word {
+  background: none;
+  border: 0;
+  padding: 0.2rem 0;
+  font: inherit;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.word:hover { color: var(--link-hover); }
+.word + .word { margin-left: 1rem; }
+
+.prose-body { max-width: 36rem; }
+.prose-body h2 { font-size: 1.25rem; }
+.prose-body blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 1px solid var(--rule); color: var(--muted); }
 /* Post bodies carry some fixed pixel widths (inline styles); keep them inside a phone screen. */
 .prose-body img, .prose-body video { max-width: 100%; height: auto; }
 .prose-body figure { flex-wrap: wrap; max-width: 100%; }
 .prose-body pre, .prose-body table { max-width: 100%; overflow-x: auto; }
+.prose-body p[id^='fn'] { font-size: 0.9375rem; }
+
+/* ---------- writing ---------- */
+
+.about {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin: 0 0 1rem;
+}
+.about p { margin: 0; }
+.jasoning { margin: 0; flex: none; width: 6.5rem; }
+.jasoning-frame {
+  display: block;
+  width: 6.5rem;
+  height: 6.5rem;
+  padding: 0;
+  border: 0;
+  background: var(--surface);
+  cursor: pointer;
+  overflow: hidden;
+}
+.jasoning-frame img,
+.jasoning-frame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.jasoning figcaption { margin-top: 0.35rem; font-size: 0.8125rem; line-height: 1.35; color: var(--muted); font-style: italic; }
+
+.posts > li { margin: 0 0 1.6rem; }
+.post-link { font-size: 1.1875rem; line-height: 1.35; color: var(--ink); text-decoration: none; }
+.post-link:hover { text-decoration: underline; color: var(--ink); }
+.post-meta { margin: 0.15rem 0 0.3rem; font-size: 0.875rem; color: var(--muted); }
+.post-summary { margin: 0; }
+
+.post-head { margin-bottom: 2.25rem; }
+.post-back { margin: clamp(2rem, 6vh, 3.5rem) 0 0; font-size: 0.875rem; }
+.post-back + .page-title { margin-top: 0.75rem; }
+.post-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  font-size: 0.9375rem;
+}
+.post-foot > span:last-child { text-align: right; }
+.post-foot em { display: block; font-size: 0.8125rem; color: var(--muted); }
+
+/* ---------- work ---------- */
+
+.work > li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0 1.25rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+.work > li:last-child { border-bottom: 1px solid var(--rule); }
+.work-date { font-size: 0.8125rem; color: var(--muted); padding-top: 0.2rem; font-variant-numeric: tabular-nums; }
+.work-role { margin: 0; font-size: 1.0625rem; font-weight: 450; }
+.work-role button {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.work-role button:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.work-mark { margin-left: 0.45em; color: var(--muted); font-weight: 400; }
+.work-org { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+.work-text { margin: 0.35rem 0 0; }
+.work-more { margin-top: 0.5rem; }
+.work-more p { margin: 0 0 0.6rem; }
+.work-meta { font-size: 0.875rem; color: var(--muted); }
+@media (max-width: 30rem) {
+  .work > li { grid-template-columns: 1fr; }
+  .work-date { padding: 0 0 0.15rem; }
+}
+
+/* ---------- photos and the lightbox ---------- */
+
+.photos { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.photos button { padding: 0; border: 0; background: var(--surface); cursor: zoom-in; }
+.photos img { display: block; width: 7.5rem; height: 5.5rem; object-fit: cover; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(18, 26, 24, 0.92);
+  color: #e2e5db;
+}
+.lightbox img { max-width: 100%; max-height: calc(100vh - 7rem); object-fit: contain; }
+.lightbox-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  width: min(100%, 60rem);
+  font-size: 0.875rem;
+}
+.lightbox .word { color: #e2e5db; }
+.lightbox .word:hover { color: #fff; }
+.lightbox :focus-visible { outline-color: #e2e5db; }
+
+/* ---------- vaisi ---------- */
+
+.vaisi-logo { display: block; width: 3.5rem; height: 3.5rem; object-fit: contain; margin-top: clamp(2.75rem, 9vh, 5rem); }
+.vaisi-logo + .page-title { margin-top: 1rem; }
+.vaisi-text { max-width: 18rem; width: 100%; display: block; }
+
+/* ---------- places ---------- */
+
+.globe-frame { border: 1px solid var(--rule); background: var(--globe-frame); border-radius: 2px; }
+.map-controls { display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0.6rem 0 0; font-size: 0.875rem; }
+.map-controls .word + .word { margin-left: 0; }
+.map-shown { margin: 1.25rem 0 0; transition: opacity 0.4s ease; }
+.map-shown[data-moving] { opacity: 0.55; }
+.map-place { margin: 0 0 0.3rem; font-size: 1.25rem; font-weight: 420; }
+.map-key { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin: 1rem 0 0; font-size: 0.8125rem; color: var(--muted); }
+.map-key i { display: inline-block; width: 0.6rem; height: 0.6rem; margin-right: 0.4rem; border-radius: 50%; vertical-align: 0.05em; }
+.countries { columns: 2 12rem; column-gap: 2rem; margin-top: 2.5rem; }
+.countries section { break-inside: avoid; margin: 0 0 1.1rem; }
+.countries h3 { margin: 0 0 0.15rem; font-size: 0.875rem; font-style: italic; font-weight: 400; color: var(--muted); }
+.place-word {
+  padding: 0.15rem 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.place-word:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.place-word[aria-pressed='true'] { font-style: italic; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+/* ---------- now ---------- */
+
+details#now-bonus summary { cursor: pointer; color: var(--link); }
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+  .caption { animation: none; }
+  .backdrop-photo { transition: none; }
+  .map-shown { transition: none; }
+}

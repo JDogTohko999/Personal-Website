@@ -1,64 +1,44 @@
 import React, { useEffect } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { links } from '../data/profile.jsx';
-import { useTheme } from '../theme/useTheme.js';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import Backdrop from './Backdrop.jsx';
+import SkyNav from './SkyNav.jsx';
 
-// Reference shell: a plain nav of words, the page, and a quiet theme switch.
-const NAV = [
-  ['/', 'Home'],
-  ['/blog', 'Writing'],
-  ['/now', 'Now'],
-  ['/vaisi', 'VAISI'],
-  ['/map', 'Map'],
-  ['/experience', 'Experience'],
-];
-
-function ThemeSwitch() {
-  const { theme, setTheme, themes } = useTheme();
-  return (
-    <span className="small muted">
-      theme:{' '}
-      {themes.map((t, i) => (
-        <React.Fragment key={t.id}>
-          {i > 0 && ' · '}
-          <button
-            type="button"
-            className="text-button"
-            aria-pressed={t.id === theme}
-            style={t.id === theme ? { color: 'var(--text)', textDecoration: 'none' } : undefined}
-            onClick={() => setTheme(t.id)}
-          >
-            {t.label.toLowerCase()}
-          </button>
-        </React.Fragment>
-      ))}
-    </span>
-  );
-}
-
+/*
+  Two shells over one photo.
+    home   the photo is the page; the caption sits top-left in the sky (pages/Home.jsx).
+    inner  the photo recedes: a sky-tinted reading panel down the left (desktop), or the photo as
+           a short band with the panel below it (under 960px). Same tiny lowercase nav.
+*/
 export default function Layout() {
   const { pathname, hash } = useLocation();
+  const home = pathname === '/';
+
   // New page: start at the top (unless the URL points at an anchor, e.g. a footnote).
   useEffect(() => {
     if (!hash && pathname !== '/now/bonus') window.scrollTo(0, 0); // /now/bonus scrolls itself to #now-bonus
   }, [pathname, hash]);
 
+  useEffect(() => {
+    document.documentElement.dataset.page = home ? 'home' : 'inner';
+  }, [home]);
+
   return (
-    <div className="site">
-      <nav className="site-nav" aria-label="Main">
-        {NAV.map(([to, label]) => (
-          <NavLink key={to} to={to} end={to === '/'}>
-            {label}
-          </NavLink>
-        ))}
-        <a href={links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href={links.savvycal} target="_blank" rel="noopener noreferrer">Schedule a meeting</a>
-        <span className="spacer" />
-        <ThemeSwitch />
-      </nav>
-      <main>
+    <>
+      <a className="skip" href="#content">Skip to content</a>
+      <Backdrop mode={home ? 'home' : 'inner'} />
+      {home ? (
         <Outlet />
-      </main>
-    </div>
+      ) : (
+        <div className="panel">
+          <header className="panel-head">
+            <Link to="/" className="panel-name">Jason Chin</Link>
+            <SkyNav className="sky-nav-inline" />
+          </header>
+          <main id="content" className="panel-main" tabIndex={-1}>
+            <Outlet />
+          </main>
+        </div>
+      )}
+    </>
   );
 }
