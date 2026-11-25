@@ -281,7 +281,18 @@ html[data-page='home'] body { overflow: hidden; }
   }
   .sky-nav-stack { margin-top: 1.1rem; }
   .sky-nav-stack ul { display: flex; flex-wrap: wrap; gap: 0 0.8rem; }
+  /* With "about me" added the first line reached into the darker sky on the right, so the page links
+     wrap after "involvements" and stay in the lighter left side. */
+  .sky-nav-stack .sky-nav-pages { max-width: 14rem; }
   .sky-nav-stack .sky-nav-out { margin-top: 0; }
+}
+/* Short portrait screens (small phones, e.g. 360x640): the ridge rises to about 58% of the
+   height, so the caption sits a little higher and a size smaller to stay in the sky. */
+@media (max-aspect-ratio: 4/5) and (max-height: 740px) {
+  .caption { top: clamp(3.5rem, 15svh, 7rem); }
+  .caption-name { font-size: 2.25rem; }
+  .caption-line { font-size: 1.2rem; }
+  .sky-nav-stack { font-size: 1.125rem; margin-top: 0.85rem; }
 }
 
 /* Short, wide screens (a phone on its side): the list would reach down into the scree, so the

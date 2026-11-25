@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
+import Me from './pages/Me.jsx';
 import Blog from './pages/Blog.jsx';
 import BlogPost from './pages/BlogPost.jsx';
 import Now from './pages/Now.jsx';
@@ -17,6 +18,9 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        {/* "about me" is the nav word; /me stays as an alias. */}
+        <Route path="/about" element={<Me />} />
+        <Route path="/me" element={<Me />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/now" element={<Now />} />

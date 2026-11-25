@@ -242,3 +242,17 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
   - **Inner pages, wide screens:** the header measures 5.28 (links) and 4.79 (the large name).
   - **Inner pages, phones and portrait tablets:** the header sits at the top of the tall crop, its darkest teal, where the veil can't lift a strip that wide. There the name and links sit on a full-width strip of the mint haze at 82%: rust links compute to 6.7:1 or better over the darkest pixel (rgb 35 83 85). measure-sky.js doesn't model this strip, so its numbers there under-report.
   - **Softened (Jason: "slightly less different color-wise"):** the sheet link is now muted clay-brown #663c2c (hover #3f2419), 4.94:1 on the darkest haze blend. Over the photo it is #3e1f12 (hover #24120a), about 5.9:1 on the left sky and 7.1:1 under the phone strip. Links are still a distinct warm brown against the green-black text, just quieter.
+- **"about me" page (Jason).**
+  - The bio (`profile.intro`) and Jason-ing moved from the top of Writing to a new **About me** page at `/about` (alias `/me`). It comes first in the nav: about me, now, involvements, writing · linkedin, substack, meet. Writing now opens straight onto the posts.
+  - **Phone layout:** with the longer nav, the page links wrap after "involvements" so they stay in the lighter left sky. Short portrait screens (≤740px tall) get a slightly higher, slightly smaller caption so it stays above the ridge.
+  - **Contrast (worst pixel):**
+
+    | Viewport | Worst pixel |
+    |---|---|
+    | 1440 | 5.67 |
+    | 768 | 5.30 |
+    | 390 | 5.12 |
+    | 375x667 | 4.76 |
+    | 360x640 | 4.51 |
+
+  - **Links softened:** clay-brown #663c2c on the sheet, #3e1f12 over the photo.

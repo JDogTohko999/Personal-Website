@@ -4,10 +4,11 @@ import { links } from '../data/profile.jsx';
 
 /*
   The tiny lowercase links, the same words on every page, in Jason's order:
-  now, involvements, writing, then (after a small gap) linkedin, substack and meet.
+  about me, now, involvements, writing, then (after a small gap) linkedin, substack and meet.
   (Places and VAISI still have pages at /places and /vaisi; they're just not in the nav.)
 */
 export const PAGES = [
+  ['/about', 'about me'],
   ['/now', 'now'],
   ['/involvements', 'involvements'],
   ['/blog', 'writing'],
@@ -23,7 +24,9 @@ export default function SkyNav({ className = '' }) {
   const isCurrent = (to) =>
     to === '/involvements'
       ? pathname === '/involvements' || pathname === '/experience'
-      : pathname === to || pathname.startsWith(`${to}/`);
+      : to === '/about'
+        ? pathname === '/about' || pathname === '/me'
+        : pathname === to || pathname.startsWith(`${to}/`);
   return (
     <nav className={`sky-nav ${className}`} aria-label="Main">
       <ul className="sky-nav-pages">
