@@ -34,8 +34,10 @@
   --accent: #2c4745;
   --accent-2: #4a4626;
   --rule: #c2c8ba;
-  --link: #24433f;
-  --link-hover: #121a18;
+  --link: #7a2c12;       /* terracotta (Japandi): every link, plainly not body text */
+  --link-hover: #4f1b08;
+  --link-photo: #4a1702;  /* the same family, deepened, for links over the photo */
+  --link-photo-hover: #2b0d01;
 
   --globe-ocean: #eef0e9;
   --globe-land: #cfd4c6;
@@ -154,19 +156,19 @@ html[data-page='home'] body { overflow: hidden; }
 
 .sky-nav ul { list-style: none; margin: 0; padding: 0; }
 .sky-nav a {
-  color: var(--ink);
+  color: var(--link-photo);
   text-transform: lowercase;
   /* A resting underline at about a third of the ink: quiet, but plainly a link (critique fix 3). */
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(11, 18, 16, 0.35);
+  text-decoration-color: rgba(74, 23, 2, 0.4);
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.15s ease;
 }
 .sky-nav a:hover,
 .sky-nav a:focus-visible {
-  color: var(--ink);
-  text-decoration-color: var(--ink);
+  color: var(--link-photo-hover);
+  text-decoration-color: var(--link-photo-hover);
 }
 /* Where you are: the word goes italic. No colour, no marker. */
 .sky-nav a.is-here { font-style: italic; }
@@ -186,13 +188,32 @@ html[data-page='home'] body { overflow: hidden; }
   bottom: -2rem;
   left: -2.5rem;
   pointer-events: none;
-  background: radial-gradient(closest-side, rgba(217, 221, 206, 0.22), rgba(217, 221, 206, 0.16) 55%, rgba(217, 221, 206, 0));
+  background: radial-gradient(closest-side, rgba(200, 222, 206, 0.3), rgba(200, 222, 206, 0.2) 55%, rgba(200, 222, 206, 0));
 }
 /* 2ppl photo, dimmed 12%: the home caption needs no veil (it sits in the lighter mid sky), but
    the inner pages' name and links sit at the very top of the tall crop, its darkest teal (3.4:1
    bare at 390x844), so on phones and portrait screens they get the faint haze. */
+/* Links over the photo are terracotta-rust rather than ink, so they need a little more light behind
+   them than the ink did: the faint mint haze sits behind the home caption and the inner pages'
+   name and links at every size. */
+.caption.veil::before,
+.band-head.veil::before { content: ''; }
+/* Portrait screens: the inner pages' name and links sit at the very top of the tall crop, its
+   darkest teal, so the haze there is a little stronger (same form, so measure-sky.js reads it). */
+/* Portrait screens: the inner pages' name and links sit at the very top of the tall crop, its
+   darkest teal (down to rgb 35 83 85). A soft oval can't lift a strip that wide evenly, so there
+   the header sits on a strip of the same mint haze as the sheet, at 82%: rust links measure
+   6.7:1 or better over the darkest pixel (computed; measure-sky.js doesn't model this strip).
+   The photo still shows between the strip and the sheet. */
 @media (max-width: 40rem), (max-aspect-ratio: 4/5) {
-  .band-head.veil::before { content: ''; }
+  .band-head.veil {
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(1rem, 4.5vh, 2rem) clamp(1.25rem, 6.2vw, 6.75rem) 0.85rem;
+    background: rgba(184, 204, 190, 0.82);
+  }
+  .band-head.veil::before { content: none; }
 }
 
 /* ---------- home: the caption ---------- */
@@ -307,7 +328,7 @@ html[data-page='inner'] body { background: var(--sky); }
   color: var(--ink);
 }
 .band-name {
-  color: var(--ink);
+  color: var(--link-photo);
   font-size: clamp(1.375rem, 1.1rem + 0.6vw, 1.75rem);
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -315,7 +336,7 @@ html[data-page='inner'] body { background: var(--sky); }
   text-decoration: none;
 }
 .band-name:hover,
-.band-name:focus-visible { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.band-name:focus-visible { color: var(--link-photo-hover); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .sky-nav-inline {
   display: flex;
   flex-wrap: wrap;
@@ -484,8 +505,8 @@ html[data-page='inner'] body { background: var(--sky); }
 .jasoning figcaption { margin-top: 0.35rem; font-size: 0.8125rem; line-height: 1.35; color: var(--muted); font-style: italic; }
 
 .posts > li { margin: 0 0 1.6rem; }
-.post-link { font-size: 1.3125rem; line-height: 1.35; color: var(--ink); text-decoration: none; }
-.post-link:hover { text-decoration: underline; color: var(--ink); }
+.post-link { font-size: 1.3125rem; line-height: 1.35; color: var(--link); text-decoration: none; }
+.post-link:hover { text-decoration: underline; color: var(--link-hover); }
 .post-meta { margin: 0.15rem 0 0.3rem; font-size: 0.9375rem; font-style: italic; color: var(--muted); }
 .post-summary { margin: 0; }
 
@@ -661,8 +682,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --surface: #c3d5c8;
   --text: #121a18;
   --muted: #33403b;     /* 5.5:1 on the darkest blend (scree behind, about #b6bbac) */
-  --link: #1b3633;
-  --link-hover: #0b1210;
+  --link: #7a2c12;
+  --link-hover: #4f1b08;
   --rule: #a9b09f;
   --globe-ocean: #d3d8cb;
   --globe-frame: #ccd1c3;
@@ -677,8 +698,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --surface: #ddd5c2;
   --text: #2b2416;      /* 9.7:1 */
   --muted: #554b37;     /* 5.4:1 */
-  --link: #3a4628;      /* olive, 6.4:1 */
-  --link-hover: #1d2313;
+  --link: #1f5a5c;      /* deep teal, distinct from the brown text */
+  --link-hover: #0f3a3b;
   --ink: #2b2416;
   --rule: #b8ad94;
   --accent: #3a4628;
@@ -700,8 +721,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --text: #e3e6db;      /* 12.2-13.3:1 over the photo extremes */
   --muted: #b2b9ab;     /* 7.7-8.3:1 */
   --ink: #eef0e8;
-  --link: #d3dccb;
-  --link-hover: #ffffff;
+  --link: #f0b48a;      /* peach, distinct from the pale text */
+  --link-hover: #ffd6b8;
   --rule: #3a4643;
   --faint: #56625d;
   --accent: #c9d6c4;

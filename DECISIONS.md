@@ -235,3 +235,9 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
     | Inner | 768 | 4.80 | |
     | Inner | 390 | 4.83 (links); 4.09 (the 26px+ name, large text, needs 3:1) | |
     | Haze sheet text | | 5.7 or better | on any part of the photo behind it |
+- **Links are a different colour from text (Jason: "so one can easily tell").**
+  - **Colours:** every link on a reading surface is terracotta #7a2c12 (from the Japandi palette; hover #4f1b08), clearly a different hue from the green-black text. Links over the photo (the home caption's links, and the inner pages' name and links) are the same family deepened, #4a1702, because only a very dark colour holds 4.5:1 on the mid-tone sky. Blog-list titles, which were ink, now use the link colour too. The dev-only looks match: scree uses deep teal #1f5a5c and dusk uses peach #f0b48a.
+  - **Contrast on the sheet:** links 5.05:1 or better on any part of the photo behind the haze. Text stays 9.3+.
+  - **Over the photo:** the faint haze (veil) is back behind the home caption and the inner header, tinted mint for this sky. Home measures 5.59 (1440), 5.10 (768), 4.75 (390).
+  - **Inner pages, wide screens:** the header measures 5.28 (links) and 4.79 (the large name).
+  - **Inner pages, phones and portrait tablets:** the header sits at the top of the tall crop, its darkest teal, where the veil can't lift a strip that wide. There the name and links sit on a full-width strip of the mint haze at 82%: rust links compute to 6.7:1 or better over the darkest pixel (rgb 35 83 85). measure-sky.js doesn't model this strip, so its numbers there under-report.
