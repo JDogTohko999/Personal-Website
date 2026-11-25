@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 /*
   The hiker-on-the-ridge photo, full bleed, behind every page (public/bg3/README.md).
@@ -8,13 +8,20 @@ import React, { useState } from 'react';
   he lands on exactly that fraction of the screen at every size: cover only ever crops, and
   object-position pins that point of the image to the same point of the box.
 
-  mode="home": the whole screen. mode="inner": the same, but below 960px the photo becomes a
-  short band at the top of the page (index.css), framed on the hiker.
+  mode="home": the whole screen. mode="inner": the photo becomes a short band across the top of
+  the page (index.css), framed so the hiker stands two thirds of the way down it.
 
-  The grain is a static-or-drifting SVG noise tile laid over the photo (see .grain in index.css).
+  Before the photo arrives the box is the sampled sky (#7f8b80), flat and calm. data-ready
+  (set on load, on error, or after 2.5s, whichever is first) fades the photo in, and the home
+  caption follows it. The grain is a still SVG noise tile over the photo (.grain).
 */
 export default function Backdrop({ mode }) {
   const [ready, setReady] = useState(false);
+  useEffect(() => {
+    if (ready) return undefined;
+    const t = setTimeout(() => setReady(true), 2500);
+    return () => clearTimeout(t);
+  }, [ready]);
   return (
     <div className="backdrop" data-mode={mode} data-ready={ready || undefined} aria-hidden="true">
       <picture>
@@ -33,6 +40,7 @@ export default function Backdrop({ mode }) {
           decoding="async"
           ref={(el) => { if (el?.complete && el.naturalWidth && !ready) setReady(true); }}
           onLoad={() => setReady(true)}
+          onError={() => setReady(true)}
         />
       </picture>
       <div className="grain" />

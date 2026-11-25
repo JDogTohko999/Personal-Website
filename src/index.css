@@ -13,7 +13,7 @@
   Palette, from the photo (public/bg3/README.md):
     ink    #121a18  text on the sky and the panel (the sky is mid-tone: only a near-black reads)
     paper  #e2e5db  the reading panel, the haze lifted towards white
-    sky    #849082  top-left sky, the page colour before the photo arrives
+    sky    #7f8b80  the sampled sky: the flat, calm colour shown while the photo loads
     teal   #4a6a69  top-right sky; links on the panel are this, deepened
     scree  #3b351f  olive scree; the second accent, deepened
 */
@@ -23,7 +23,7 @@
   --ink: #121a18;
   --paper: #e2e5db;
   --panel: rgba(226, 229, 219, 0.9);
-  --sky: #849082;
+  --sky: #7f8b80;
 
   /* Semantic tokens (post bodies and the globe read these). Every text pair >= 4.5:1 on the
      panel; see DECISIONS.md for the numbers. */
@@ -137,29 +137,18 @@ html[data-page='home'] body { overflow: hidden; }
   .backdrop-photo { object-position: 61% 71%; } /* the hiker, in the tall crop */
 }
 
-/* Film grain: a tile of SVG fractal noise, overlaid. The photo already has its own grain; this
-   keeps the upscaled 1920 copy from looking smooth and makes the still feel projected. It jumps
-   a few pixels ten times a second (stepped, so it never slides), and holds still under
-   prefers-reduced-motion. */
+/* Film grain: a tile of SVG fractal noise, overlaid, and still. The photo already has its own
+   grain; this keeps the upscaled 1920 copy from looking smooth. It used to jump ten times a
+   second, which was the only motion on a still page (critique fix 9); still grain reads just as
+   "film" and costs nothing on a slow phone. */
 .grain {
   position: absolute;
-  inset: -64px;
+  inset: 0;
   pointer-events: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   background-size: 200px 200px;
   mix-blend-mode: overlay;
   opacity: 0.16;
-  animation: grain 0.8s steps(1) infinite;
-}
-@keyframes grain {
-  0% { transform: translate(0, 0); }
-  12.5% { transform: translate(-23px, 11px); }
-  25% { transform: translate(17px, -29px); }
-  37.5% { transform: translate(-9px, 31px); }
-  50% { transform: translate(29px, 7px); }
-  62.5% { transform: translate(-31px, -17px); }
-  75% { transform: translate(5px, 23px); }
-  87.5% { transform: translate(21px, -5px); }
 }
 
 /* ---------- the tiny lowercase links ---------- */
@@ -211,16 +200,17 @@ html[data-page='home'] body { overflow: hidden; }
 }
 .caption {
   position: absolute;
+  opacity: 0;
+  transition: opacity 0.7s 0.15s ease;
   left: clamp(1.5rem, 6.2vw, 6.75rem);
   top: clamp(1.75rem, 10.5vh, 7.5rem);
   max-width: min(24rem, calc(100vw - 3rem));
   color: var(--ink);
-  animation: caption-in 0.7s 0.2s ease backwards;
 }
-@keyframes caption-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/* The caption fades in only once the photo has arrived (or failed, or taken over 2.5s), so the
+   first thing a visitor sees is a flat sky, then the photo, then the words: never words on a
+   grey box (critique fix 7). */
+.backdrop[data-ready] ~ .home .caption { opacity: 1; }
 .caption-name {
   margin: 0;
   font-size: clamp(1.75rem, 1.25rem + 1.15vw, 2.375rem);
@@ -537,8 +527,7 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .grain { animation: none; }
-  .caption { animation: none; }
+  .caption { transition: none; }
   .backdrop-photo { transition: none; }
   .map-shown { transition: none; }
 }
