@@ -9,14 +9,13 @@
      cover its box, offset by its computed object-position.
   2. The veils (.veil::before radial gradients) are composited over those pixels, from their
      computed geometry and colour stops.
-  3. Text on the photo (the home caption; the name and links over the band on narrow inner
-     pages): for every text run, look at every pixel under its client rects and compute the WCAG
+  3. Text on the photo (the home caption; the name and links in the inner pages' band): for
+     every text run, look at every pixel under its client rects and compute the WCAG
      ratio of the text colour against it. The grain overlay is included as a worst case: each
      pixel is first pushed the way that hurts dark ink (darker), by the largest step the overlay
      makes (noise value 0.3 at opacity 0.16, overlay blend).
-  4. Text on the reading panel (desktop): the panel is rgba(226,229,219,0.9) with a blur. As a
-     bound, composite the panel over the DARKEST photo pixel under the text (ignoring the blur,
-     which can only average towards lighter neighbours).
+  4. Text on the reading sheet is on opaque #e2e5db, so it is checked by the token table in
+     DECISIONS.md, not here.
 
   Reports, per text run: min (the single worst pixel), p5 (5th percentile: 95% of the pixels
   behind the text are at least this), and median. Sorted worst first.
@@ -77,22 +76,15 @@ export async function measure() {
   }, p);
   const pixel = (x, y) => veilAt(x, y, raw(x, y));
 
-  const panel = document.querySelector('.panel');
-  const panelBg = panel ? rgba(getComputedStyle(panel).backgroundColor) : null;
-  const panelSolid = panelBg && (panelBg[3] ?? 1) >= 1;
-
-  const roots = [...document.querySelectorAll('.caption, .panel-head, .panel-main')];
+  const roots = [...document.querySelectorAll('.caption, .band-head')];
   const rows = [];
   for (const root of roots) {
-    // The band's name and links sit on the photo only when the head is pulled up over it.
-    const onPhoto = root.matches('.caption') || (root.matches('.panel-head') && getComputedStyle(root).position === 'absolute');
-    if (!onPhoto && (!panelBg || panelSolid)) continue; // solid panel: checked by the token table
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     for (let n = walker.nextNode(); n; n = walker.nextNode()) {
       if (!n.textContent.trim()) continue;
       const el = n.parentElement;
       const cs = getComputedStyle(el);
-      if (cs.visibility === 'hidden' || cs.display === 'none' || el.closest('.jasoning-frame, .photos, [hidden]')) continue;
+      if (cs.visibility === 'hidden' || cs.display === 'none' || el.closest('[hidden]')) continue;
       const lt = L(rgba(cs.color));
       const range = document.createRange();
       range.selectNodeContents(n);
@@ -101,24 +93,14 @@ export async function measure() {
         const x0 = Math.max(0, Math.floor(r.left)); const x1 = Math.min(W - 1, Math.ceil(r.right));
         const y0 = Math.max(0, Math.floor(r.top)); const y1 = Math.min(H - 1, Math.ceil(r.bottom));
         if (x1 <= x0 || y1 <= y0) continue;
-        if (onPhoto) {
-          for (let y = y0; y <= y1; y += 1) {
-            for (let x = x0; x <= x1; x += 1) ratios.push(ratio(lt, L(pixel(x, y).map(grainWorst))));
-          }
-        } else {
-          let dark = null; let dl = Infinity;
-          for (let y = y0; y <= y1; y += 2) {
-            for (let x = x0; x <= x1; x += 2) { const p = raw(x, y); const l = L(p); if (l < dl) { dl = l; dark = p; } }
-          }
-          const a = panelBg[3] ?? 1;
-          ratios.push(ratio(lt, L(dark.map((c, i) => c * (1 - a) + panelBg[i] * a))));
+        for (let y = y0; y <= y1; y += 1) {
+          for (let x = x0; x <= x1; x += 1) ratios.push(ratio(lt, L(pixel(x, y).map(grainWorst))));
         }
       }
       if (!ratios.length) continue;
       ratios.sort((a, b) => a - b);
       rows.push({
         text: n.textContent.trim().slice(0, 32),
-        where: onPhoto ? 'photo' : 'panel',
         min: +ratios[0].toFixed(2),
         p5: +pct(ratios, 0.05).toFixed(2),
         median: +pct(ratios, 0.5).toFixed(2),
@@ -126,16 +108,14 @@ export async function measure() {
     }
   }
   rows.sort((a, b) => a.min - b.min);
-  const photo = rows.filter((r) => r.where === 'photo');
-  const onPanel = rows.filter((r) => r.where === 'panel');
   const lo = (list, key) => (list.length ? Math.min(...list.map((r) => r[key])) : null);
   return {
     viewport: `${W}x${H}`,
     src: img.currentSrc.split('/').pop(),
     objectPosition: getComputedStyle(img).objectPosition,
     veils: veils.length,
-    photo: { count: photo.length, min: lo(photo, 'min'), p5: lo(photo, 'p5'), median: lo(photo, 'median') },
-    panel: { count: onPanel.length, min: lo(onPanel, 'min') },
+    page: document.documentElement.dataset.page,
+    photo: { count: rows.length, min: lo(rows, 'min'), p5: lo(rows, 'p5'), median: lo(rows, 'median') },
     worst: rows.slice(0, 6),
   };
 }
@@ -152,20 +132,21 @@ export function hiker() {
   const [px, py] = getComputedStyle(img).objectPosition.split(' ').map((v) => parseFloat(v) / 100);
   const x = box.left + (box.width - dw) * px + hx * dw;
   const y = box.top + (box.height - dh) * py + hy * dh;
-  const cover = [...document.querySelectorAll('.caption, .panel-head, .panel')].find((el) => {
+  // Is any text box within 12px of him?
+  const cover = [...document.querySelectorAll('.caption, .band-head')].some((el) => {
     const r = el.getBoundingClientRect();
-    return x >= r.left - 12 && x <= r.right + 12 && y >= r.top - 12 && y <= r.bottom + 12 && getComputedStyle(el).position !== 'static' && el.matches('.caption, .panel-head') ;
+    return x >= r.left - 12 && x <= r.right + 12 && y >= r.top - 12 && y <= r.bottom + 12;
   });
-  const panel = document.querySelector('.panel');
-  const pr = panel?.getBoundingClientRect();
-  const underPanel = !!(pr && x >= pr.left && x <= pr.right && y >= pr.top && y <= pr.bottom);
+  const sheet = document.querySelector('.sheet')?.getBoundingClientRect();
+  const underSheet = !!(sheet && y >= sheet.top);
   return {
     viewport: `${innerWidth}x${innerHeight}`,
     hiker: [Math.round(x), Math.round(y)],
     asFraction: [+(x / innerWidth).toFixed(3), +(y / innerHeight).toFixed(3)],
     inFrame: x > 0 && x < innerWidth && y > 0 && y < innerHeight,
-    hiddenByText: !!cover,
-    underPanel,
+    hiddenByText: cover,
+    underSheet,
+    inBand: document.documentElement.dataset.page === 'inner' ? +(y / box.height).toFixed(2) : undefined,
     scale: +k.toFixed(3),
   };
 }

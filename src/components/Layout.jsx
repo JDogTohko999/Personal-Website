@@ -4,10 +4,11 @@ import Backdrop from './Backdrop.jsx';
 import SkyNav from './SkyNav.jsx';
 
 /*
-  Two shells over one photo.
+  Two shells over one photo (the same <img>, so moving between pages never reloads it).
     home   the photo is the page; the caption sits top-left in the sky (pages/Home.jsx).
-    inner  the photo recedes: a sky-tinted reading panel down the left (desktop), or the photo as
-           a short band with the panel below it (under 960px). Same tiny lowercase nav.
+    inner  the photo shrinks to a band across the top, the ridge and the hiker two thirds of the
+           way down it, with the name and the links in its sky: the home, condensed. Below it,
+           an opaque haze sheet with one centred reading column. One layout at every width.
 */
 export default function Layout() {
   const { pathname, hash } = useLocation();
@@ -29,15 +30,17 @@ export default function Layout() {
       {home ? (
         <Outlet />
       ) : (
-        <div className="panel">
-          <header className="panel-head veil">
-            <Link to="/" className="panel-name">Jason Chin</Link>
+        <>
+          <header className="band-head veil">
+            <Link to="/" className="band-name">Jason Chin</Link>
             <SkyNav className="sky-nav-inline" />
           </header>
-          <main id="content" className="panel-main" tabIndex={-1}>
-            <Outlet />
-          </main>
-        </div>
+          <div className="sheet">
+            <main id="content" className="column" tabIndex={-1}>
+              <Outlet />
+            </main>
+          </div>
+        </>
       )}
     </>
   );

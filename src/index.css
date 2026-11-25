@@ -11,22 +11,21 @@
   links the caption cut, automatically). One ink. The photo does the rest.
 
   Palette, from the photo (public/bg3/README.md):
-    ink    #121a18  text on the sky and the panel (the sky is mid-tone: only a near-black reads)
-    paper  #e2e5db  the reading panel, the haze lifted towards white
+    ink    #0b1210  text on the sky and the sheet (the sky is mid-tone: only a near-black reads)
+    paper  #e2e5db  the opaque reading sheet, the haze lifted towards white
     sky    #7f8b80  the sampled sky: the flat, calm colour shown while the photo loads
-    teal   #4a6a69  top-right sky; links on the panel are this, deepened
+    teal   #4a6a69  top-right sky; links on the sheet are this, deepened
     scree  #3b351f  olive scree; the second accent, deepened
 */
 :root,
 :root[data-theme] {
   color-scheme: light;
-  --ink: #121a18;
+  --ink: #0b1210;
   --paper: #e2e5db;
-  --panel: rgba(226, 229, 219, 0.9);
   --sky: #7f8b80;
 
   /* Semantic tokens (post bodies and the globe read these). Every text pair >= 4.5:1 on the
-     panel; see DECISIONS.md for the numbers. */
+     sheet; see DECISIONS.md for the numbers. */
   --bg: #e2e5db;
   --surface: #ebede5;
   --text: #18211f;
@@ -160,7 +159,7 @@ html[data-page='home'] body { overflow: hidden; }
   /* A resting underline at about a third of the ink: quiet, but plainly a link (critique fix 3). */
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(18, 26, 24, 0.35);
+  text-decoration-color: rgba(11, 18, 16, 0.35);
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.15s ease;
 }
@@ -247,6 +246,22 @@ html[data-page='home'] body { overflow: hidden; }
   .sky-nav-stack a { padding: 0.3rem 0; }
 }
 
+/* Portrait screens (the tall crop). Its upper sky is darker teal; the haze just above the ridge
+   on the left is much lighter (raw contrast for the ink: 3-4:1 at the top, 4.8-5.9:1 below 38%).
+   So the caption sits low in that haze, just above where the ridge meets the left edge, and the
+   links run in two lines (the pages, then linkedin and meet), like the inner pages' head on a
+   phone. Critique fix 1's fallback: move into the haze before adding any veil. */
+@media (max-aspect-ratio: 4/5) {
+  .caption {
+    top: auto;
+    bottom: calc(39% + 2.75rem);
+    max-width: calc(100vw - 2.5rem);
+  }
+  .sky-nav-stack { margin-top: 1.1rem; }
+  .sky-nav-stack ul { display: flex; flex-wrap: wrap; gap: 0 0.8rem; }
+  .sky-nav-stack .sky-nav-out { margin-top: 0; }
+}
+
 /* Short, wide screens (a phone on its side): the list would reach down into the scree, so the
    links run in a line instead. */
 @media (max-height: 560px) and (min-aspect-ratio: 1/1) {
@@ -256,88 +271,110 @@ html[data-page='home'] body { overflow: hidden; }
   .sky-nav-stack .sky-nav-out { margin-top: 0; }
 }
 
-/* ---------- inner pages: the reading panel ---------- */
+/* ---------- inner pages: the band and the sheet ---------- */
 
-.panel {
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box;
-  width: clamp(30rem, 47vw, 43rem);
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: clamp(1.75rem, 5vh, 3rem) clamp(1.75rem, 4vw, 3.75rem) 6rem;
-  background: var(--panel);
-  -webkit-backdrop-filter: blur(24px) saturate(1.05);
-  backdrop-filter: blur(24px) saturate(1.05);
+/*
+  After edge (critique graft 1, fix 4): the photo becomes a band across the top at every width.
+  Its vertical offset puts the hiker two thirds of the way down the band, whatever the band's
+  shape. The band is full width, so the picture is scaled to the viewport's width; the hiker is
+  then 76% of 66.67vw down the wide crop (50.67vw) and 71% of 150vw down the tall one (106.5vw).
+  The clamp keeps the picture covering the band.
+*/
+:root { --band-h: clamp(10rem, 26vh, 16rem); }
+@media (max-width: 40rem) {
+  /* Phones: a little more sky, for the name and the two lines of links. */
+  :root { --band-h: clamp(12.5rem, 30svh, 15rem); }
 }
-.panel-head {
+html[data-page='inner'],
+html[data-page='inner'] body { background: var(--paper); }
+
+.backdrop[data-mode='inner'] {
+  position: absolute;
+  bottom: auto;
+  height: var(--band-h);
+}
+.backdrop[data-mode='inner'] .backdrop-photo {
+  object-position: 62% clamp(calc(var(--band-h) - 66.67vw), calc(0.66 * var(--band-h) - 50.67vw), 0px);
+}
+@media (max-aspect-ratio: 4/5) {
+  .backdrop[data-mode='inner'] .backdrop-photo {
+    object-position: 61% clamp(calc(var(--band-h) - 150vw), calc(0.66 * var(--band-h) - 106.5vw), 0px);
+  }
+}
+
+/* The head: the name and the links, up in the band's sky, at the home caption's left edge. */
+.band-head {
+  position: absolute;
+  z-index: 2;
+  left: clamp(1.25rem, 6.2vw, 6.75rem);
+  right: clamp(1.25rem, 6.2vw, 6.75rem);
+  top: clamp(1rem, 4.5vh, 2rem);
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.25rem 1.75rem;
+  gap: 0.2rem 2.25rem;
   color: var(--ink);
 }
-.panel-name {
+.band-name {
   color: var(--ink);
-  font-size: 1.0625rem;
-  font-weight: 420;
-  letter-spacing: -0.005em;
+  font-size: clamp(1.375rem, 1.1rem + 0.6vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   text-decoration: none;
 }
-.panel-name:hover { text-decoration: underline; color: var(--ink); }
+.band-name:hover,
+.band-name:focus-visible { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .sky-nav-inline {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.5rem;
-  font-size: 0.8125rem;
-  letter-spacing: 0.012em;
+  gap: 0 1.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
 }
-.sky-nav-inline ul { display: flex; flex-wrap: wrap; gap: 0 0.95rem; }
-.sky-nav-inline a { display: inline-block; padding: 0.2rem 0; }
-.panel-main { outline: none; }
+.sky-nav-inline ul { display: flex; flex-wrap: nowrap; gap: 0 1rem; }
+.sky-nav-inline a { display: inline-block; }
+@media (pointer: coarse) {
+  .sky-nav-inline a { padding: 0.3rem 0; }
+}
+@media (max-width: 40rem) {
+  /* The links on two lines, on purpose: the pages, then linkedin and meet (critique fix 6). */
+  .band-head { display: block; }
+  .sky-nav-inline { display: block; margin-top: 0.35rem; }
+  .sky-nav-inline ul { gap: 0 0.95rem; }
+}
 
-@media (max-width: 959.98px) {
-  /* The photo becomes a band at the top, framed on the hiker; the panel is the page below it. */
-  .backdrop[data-mode='inner'] {
-    position: absolute;
-    bottom: auto;
-    height: 38vh;
-    height: 38svh;
-  }
-  .backdrop[data-mode='inner'] .backdrop-photo { object-position: 60% 80%; }
-  .panel {
-    width: auto;
-    margin-top: 38vh;
-    margin-top: 38svh;
-    min-height: 62svh;
-    padding: 1.75rem clamp(1.25rem, 5vw, 2.5rem) 5rem;
-    background: var(--paper);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-  /* The name and links sit up in the band's sky, like the home caption. */
-  .panel-head {
-    position: absolute;
-    left: clamp(1.25rem, 5vw, 2.5rem);
-    right: clamp(1.25rem, 5vw, 2.5rem);
-    top: calc(-38vh + 1.1rem);
-    top: calc(-38svh + 1.1rem);
-    display: block;
-  }
-  .panel .veil::before { content: ''; }
-  .panel-name { font-size: 1.25rem; }
-  .sky-nav-inline { margin-top: 0.3rem; gap: 0 1.1rem; font-size: 0.875rem; }
-  .sky-nav-inline ul { gap: 0 0.85rem; }
-  .sky-nav-inline a { padding: 0.45rem 0; } /* ~34px tall: thumb-sized */
+/* The sheet: opaque haze, after margin (critique graft 3). No alpha, no blur. */
+.sheet {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  margin-top: var(--band-h);
+  min-height: calc(100vh - var(--band-h));
+  min-height: calc(100svh - var(--band-h));
+  padding: clamp(2.5rem, 6vw, 4.25rem) 1.25rem clamp(4rem, 10vw, 7rem);
+  background: var(--paper);
+}
+.column {
+  max-width: min(38rem, 100%);
+  margin: 0 auto;
+  outline: none;
+  font-size: 1.1875rem;
+  line-height: 1.6;
 }
 
 /* ---------- reading type ---------- */
 
+/* Reading rhythm, after edge (critique graft 2, fix 5): a 19px body at 1.6 on a 38rem measure,
+   in Newsreader. Titles about 2.25rem; meta stays italic. */
 .page-title {
-  margin: clamp(2.75rem, 9vh, 5rem) 0 0.6rem;
-  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.875rem, 1.55rem + 1vw, 2.25rem);
   font-weight: 380;
   letter-spacing: -0.012em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 .page-lede {
   margin: 0 0 2.25rem;
@@ -346,13 +383,13 @@ html[data-page='home'] body { overflow: hidden; }
 }
 .section-title {
   margin: 3rem 0 1rem;
-  font-size: 1.0625rem;
+  font-size: 1.1875rem;
   font-style: italic;
   font-weight: 400;
   color: var(--muted);
 }
-.quiet { color: var(--muted); font-size: 0.9375rem; }
-.small { font-size: 0.875rem; }
+.quiet { color: var(--muted); font-size: 1rem; }
+.small { font-size: 0.9375rem; }
 .muted { color: var(--muted); }
 .plain { list-style: none; margin: 0; padding: 0; }
 .word {
@@ -369,14 +406,14 @@ html[data-page='home'] body { overflow: hidden; }
 .word:hover { color: var(--link-hover); }
 .word + .word { margin-left: 1rem; }
 
-.prose-body { max-width: 36rem; }
-.prose-body h2 { font-size: 1.25rem; }
+.post-head .quiet { font-style: italic; }
+.prose-body h2 { font-size: 1.375rem; }
 .prose-body blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 1px solid var(--rule); color: var(--muted); }
 /* Post bodies carry some fixed pixel widths (inline styles); keep them inside a phone screen. */
 .prose-body img, .prose-body video { max-width: 100%; height: auto; }
 .prose-body figure { flex-wrap: wrap; max-width: 100%; }
 .prose-body pre, .prose-body table { max-width: 100%; overflow-x: auto; }
-.prose-body p[id^='fn'] { font-size: 0.9375rem; }
+.prose-body p[id^='fn'] { font-size: 1rem; }
 
 /* ---------- writing ---------- */
 
@@ -403,13 +440,13 @@ html[data-page='home'] body { overflow: hidden; }
 .jasoning figcaption { margin-top: 0.35rem; font-size: 0.8125rem; line-height: 1.35; color: var(--muted); font-style: italic; }
 
 .posts > li { margin: 0 0 1.6rem; }
-.post-link { font-size: 1.1875rem; line-height: 1.35; color: var(--ink); text-decoration: none; }
+.post-link { font-size: 1.3125rem; line-height: 1.35; color: var(--ink); text-decoration: none; }
 .post-link:hover { text-decoration: underline; color: var(--ink); }
-.post-meta { margin: 0.15rem 0 0.3rem; font-size: 0.875rem; color: var(--muted); }
+.post-meta { margin: 0.15rem 0 0.3rem; font-size: 0.9375rem; font-style: italic; color: var(--muted); }
 .post-summary { margin: 0; }
 
 .post-head { margin-bottom: 2.25rem; }
-.post-back { margin: clamp(2rem, 6vh, 3.5rem) 0 0; font-size: 0.875rem; }
+.post-back { margin: 0; font-size: 0.9375rem; }
 .post-back + .page-title { margin-top: 0.75rem; }
 .post-foot {
   display: grid;
@@ -488,7 +525,7 @@ html[data-page='home'] body { overflow: hidden; }
 
 /* ---------- vaisi ---------- */
 
-.vaisi-logo { display: block; width: 3.5rem; height: 3.5rem; object-fit: contain; margin-top: clamp(2.75rem, 9vh, 5rem); }
+.vaisi-logo { display: block; width: 3.5rem; height: 3.5rem; object-fit: contain; margin-top: 0; }
 .vaisi-logo + .page-title { margin-top: 1rem; }
 .vaisi-text { max-width: 18rem; width: 100%; display: block; }
 
@@ -521,12 +558,6 @@ html[data-page='home'] body { overflow: hidden; }
 
 details#now-bonus summary { cursor: pointer; color: var(--link); }
 
-@media (max-width: 959.98px) {
-  /* Under the band the page starts at once: the band already gave the breathing room. */
-  .page-title,
-  .vaisi-logo { margin-top: 0.5rem; }
-  .post-back { margin-top: 0; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .caption { transition: none; }
