@@ -6,9 +6,9 @@ import SkyNav from './SkyNav.jsx';
 /*
   Two shells over one photo (the same <img>, so moving between pages never reloads it).
     home   the photo is the page; the caption sits top-left in the sky (pages/Home.jsx).
-    inner  the photo shrinks to a band across the top, the ridge and the hiker two thirds of the
-           way down it, with the name and the links in its sky: the home, condensed. Below it,
-           an opaque haze sheet with one centred reading column. One layout at every width.
+    inner  the photo stays full screen behind the page (as on the home); the name and links sit in
+           its sky, and an opaque haze sheet with one reading column scrolls over it (hung from
+           the left on wide screens so the hiker stays in view; centred below 1100px).
 */
 export default function Layout() {
   const { pathname, hash } = useLocation();

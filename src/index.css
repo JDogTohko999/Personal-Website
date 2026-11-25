@@ -125,13 +125,13 @@ html[data-page='home'] body { overflow: hidden; }
   width: 100%;
   height: 100%;
 }
+/* No fade gate: the photo paints as soon as it arrives (a progressive JPEG, over the matching
+   flat sky colour, so there is no grey flash). The earlier opacity-0-until-ready fade could hold
+   the photo, and the home caption with it, invisible for seconds on a slow load. */
 .backdrop-photo {
   object-fit: cover;
   object-position: 62% 76%; /* the hiker, in the wide crop */
-  opacity: 0;
-  transition: opacity 0.7s ease;
 }
-.backdrop[data-ready] .backdrop-photo { opacity: 1; }
 @media (max-aspect-ratio: 4/5) {
   .backdrop-photo { object-position: 61% 71%; } /* the hiker, in the tall crop */
 }
@@ -203,17 +203,13 @@ html[data-page='home'] body { overflow: hidden; }
 }
 .caption {
   position: absolute;
-  opacity: 0;
-  transition: opacity 0.7s 0.15s ease;
   left: clamp(1.5rem, 6.2vw, 6.75rem);
   top: clamp(1.75rem, 10.5vh, 7.5rem);
   max-width: min(24rem, calc(100vw - 3rem));
   color: var(--ink);
 }
-/* The caption fades in only once the photo has arrived (or failed, or taken over 2.5s), so the
-   first thing a visitor sees is a flat sky, then the photo, then the words: never words on a
-   grey box (critique fix 7). */
-.backdrop[data-ready] ~ .home .caption { opacity: 1; }
+/* The caption is visible from the first paint (the flat sky behind it is the photo's own colour,
+   so the words read the same before and after the photo arrives). */
 .caption-name {
   margin: 0;
   font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem);
@@ -285,22 +281,12 @@ html[data-page='home'] body { overflow: hidden; }
   /* Phones: a little more sky, for the name and the two lines of links. */
   :root { --band-h: clamp(12.5rem, 30svh, 15rem); }
 }
+/* Jason, after seeing it: the photo should fill the screen on every page, not shrink to a band.
+   So inner pages keep the same fixed, full-screen photo as the home (same crop, same hiker
+   position); the name and links sit in its sky at the top, and the opaque sheet scrolls over
+   it. --band-h is now just the sky gap above the sheet. */
 html[data-page='inner'],
-html[data-page='inner'] body { background: var(--paper); }
-
-.backdrop[data-mode='inner'] {
-  position: absolute;
-  bottom: auto;
-  height: var(--band-h);
-}
-.backdrop[data-mode='inner'] .backdrop-photo {
-  object-position: 62% clamp(calc(var(--band-h) - 66.67vw), calc(0.66 * var(--band-h) - 50.67vw), 0px);
-}
-@media (max-aspect-ratio: 4/5) {
-  .backdrop[data-mode='inner'] .backdrop-photo {
-    object-position: 61% clamp(calc(var(--band-h) - 150vw), calc(0.66 * var(--band-h) - 106.5vw), 0px);
-  }
-}
+html[data-page='inner'] body { background: var(--sky); }
 
 /* The head: the name and the links, up in the band's sky, at the home caption's left edge. */
 .band-head {
@@ -352,11 +338,22 @@ html[data-page='inner'] body { background: var(--paper); }
   position: relative;
   z-index: 1;
   box-sizing: border-box;
-  margin-top: var(--band-h);
+  margin: var(--band-h) auto 0;
+  max-width: 46rem;
   min-height: calc(100vh - var(--band-h));
   min-height: calc(100svh - var(--band-h));
-  padding: clamp(2.5rem, 6vw, 4.25rem) 1.25rem clamp(4rem, 10vw, 7rem);
+  padding: clamp(2.5rem, 6vw, 4.25rem) clamp(1.25rem, 5vw, 3.5rem) clamp(4rem, 10vw, 7rem);
   background: var(--paper);
+}
+/* Wide screens: the sheet hangs from the left, under the name, so the photo (and the hiker, at
+   62% across) stays in view to its right. It ends a little above the bottom so the ridge shows
+   below the last line. */
+@media (min-width: 1100px) {
+  .sheet {
+    margin: var(--band-h) 0 clamp(3rem, 10vh, 6rem) clamp(1.25rem, 6.2vw, 6.75rem);
+    width: min(46rem, 54vw);
+    min-height: 0;
+  }
 }
 .column {
   max-width: min(38rem, 100%);

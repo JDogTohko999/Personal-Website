@@ -11,9 +11,10 @@ import React, { useEffect, useState } from 'react';
   mode="home": the whole screen. mode="inner": the photo becomes a short band across the top of
   the page (index.css), framed so the hiker stands two thirds of the way down it.
 
-  Before the photo arrives the box is the sampled sky (#7f8b80), flat and calm. data-ready
-  (set on load, on error, or after 2.5s, whichever is first) fades the photo in, and the home
-  caption follows it. The grain is a still SVG noise tile over the photo (.grain).
+  Before the photo arrives the box is the sampled sky (#7f8b80), flat and calm, and the photo
+  paints over it as it loads (no fade gate). data-ready is still set on load/error/2.5s for any
+  styling that wants it. mode="inner" keeps the same full-screen photo (Jason wanted it to fill
+  the screen on every page). The grain is a still SVG noise tile over the photo (.grain).
 */
 export default function Backdrop({ mode }) {
   const [ready, setReady] = useState(false);
