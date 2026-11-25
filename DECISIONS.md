@@ -200,3 +200,21 @@ Two fixes the numbers forced:
 
 ## Blocked (final)
 Nothing was blocked. The esbuild postinstall crash above was worked around, not denied.
+
+## Variant: the two-people photo (`redesign3/final-2ppl`)
+Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (1375x917).
+- **Source:** it is a mirrored, colour-graded crop of `NOLS_I_THINK_I_CAN.JPG` at native resolution (matches the mirrored scan at (988, 229), 1378x919, NCC 0.991).
+- **Wide copies:** his file as-is (1375, plus 800 and an upscaled 1920).
+- **Phone copy:** a taller portrait crop (933x1400, plus 1170) cut from the scan around the standing hiker, with his grade learned from the matching crop. See `scripts/make-2ppl-bg.py`; the files are in `public/bg4/`.
+- **Positions:** the standing hiker is at (84%, 61%) wide and (58%, 58%) tall. The seated person is at the bottom-left of the wide crop; on inner pages the left-hung sheet covers them, which keeps the hiker on the right in view.
+- **Colour:** the sky is a bright mint, so `--sky` (the loading colour) became #a9cbb0, and the haze sheet is tinted to match (rgba(200,222,206,0.9), #c8dece).
+- **Contrast (worst pixel / p5), measured with `scripts/measure-sky.js`:**
+
+  | Viewport | Worst pixel | p5 |
+  |---|---|---|
+  | 1440x900 | 7.7 | 8.9 |
+  | 768x1024 | 6.17 | 7.04 |
+  | 390x844 | 4.77 | 5.79 |
+
+  The phone veil is gone.
+- **Phone caption:** it moved back to the top of the sky (`top: clamp(3rem, 12svh, 6.5rem)`). The low placement was only needed for the old photo's dark upper sky, and here it sat on top of the standing hiker.

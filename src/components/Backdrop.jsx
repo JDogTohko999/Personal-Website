@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 /*
-  The hiker-on-the-ridge photo, full bleed, behind every page (public/bg3/README.md).
+  The two-people ridge photo (Jason's crop), full bleed, behind every page (scripts/make-2ppl-bg.py).
+  The standing hiker is at (84%, 61%) in the wide crop and (58%, 58%) in the tall one; the seated
+  person is at the bottom-left of the wide crop.
 
   Art direction: the portrait crop below a 4:5 viewport, the wide crop above. object-position
-  is the hiker's own spot in each crop (62% 76% wide, 61% 71% tall), so with object-fit: cover
+  is the standing hiker's own spot in each crop (84% 61% wide, 58% 58% tall), so with object-fit: cover
   he lands on exactly that fraction of the screen at every size: cover only ever crops, and
   object-position pins that point of the image to the same point of the box.
 
@@ -28,13 +30,13 @@ export default function Backdrop({ mode }) {
       <picture>
         <source
           media="(max-aspect-ratio: 4/5)"
-          srcSet="/bg3/hiker-tall-760.jpg 760w, /bg3/hiker-tall-1140.jpg 1140w"
+          srcSet="/bg4/twoppl-tall-933.jpg 933w, /bg4/twoppl-tall-1170.jpg 1170w"
           sizes="100vw"
         />
         <img
           className="backdrop-photo"
-          src="/bg3/hiker-wide-1310.jpg"
-          srcSet="/bg3/hiker-wide-800.jpg 800w, /bg3/hiker-wide-1310.jpg 1310w, /bg3/hiker-wide-1920.jpg 1920w"
+          src="/bg4/twoppl-wide-1375.jpg"
+          srcSet="/bg4/twoppl-wide-800.jpg 800w, /bg4/twoppl-wide-1375.jpg 1375w, /bg4/twoppl-wide-1920.jpg 1920w"
           sizes="100vw"
           alt=""
           fetchpriority="high"

@@ -22,7 +22,7 @@
   color-scheme: light;
   --ink: #0b1210;
   --paper: #e2e5db;
-  --sky: #7f8b80;
+  --sky: #a9cbb0; /* this photo's mid sky: the flat colour shown while it loads */
 
   /* Semantic tokens (post bodies and the globe read these). Every text pair >= 4.5:1 on the
      sheet; see DECISIONS.md for the numbers. */
@@ -130,10 +130,10 @@ html[data-page='home'] body { overflow: hidden; }
    the photo, and the home caption with it, invisible for seconds on a slow load. */
 .backdrop-photo {
   object-fit: cover;
-  object-position: 62% 76%; /* the hiker, in the wide crop */
+  object-position: 84% 61%; /* the standing hiker, in the wide crop */
 }
 @media (max-aspect-ratio: 4/5) {
-  .backdrop-photo { object-position: 61% 71%; } /* the hiker, in the tall crop */
+  .backdrop-photo { object-position: 58% 58%; } /* the standing hiker, in the tall crop */
 }
 
 /* Film grain: a tile of SVG fractal noise, overlaid, and still. The photo already has its own
@@ -188,9 +188,7 @@ html[data-page='home'] body { overflow: hidden; }
   pointer-events: none;
   background: radial-gradient(closest-side, rgba(217, 221, 206, 0.22), rgba(217, 221, 206, 0.16) 55%, rgba(217, 221, 206, 0));
 }
-@media (max-aspect-ratio: 4/5) {
-  .caption.veil::before { content: ''; }
-}
+/* 2ppl photo: the sky is bright enough that phones need no veil (ink measures 7:1+). */
 
 /* ---------- home: the caption ---------- */
 
@@ -248,9 +246,11 @@ html[data-page='home'] body { overflow: hidden; }
    links run in two lines (the pages, then linkedin and meet), like the inner pages' head on a
    phone. Critique fix 1's fallback: move into the haze before adding any veil. */
 @media (max-aspect-ratio: 4/5) {
+  /* 2ppl photo: its tall crop's sky is light all the way up, so the caption sits high in the
+     open sky, well clear of the standing hiker on the ridge (about 58% down). */
   .caption {
-    top: auto;
-    bottom: calc(39% + 2.75rem);
+    top: clamp(3rem, 12svh, 6.5rem);
+    bottom: auto;
     max-width: calc(100vw - 2.5rem);
   }
   .sky-nav-stack { margin-top: 1.1rem; }
@@ -649,11 +649,11 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 
 /* ---- haze: the sky's own grey-green, fine grain, the photo faintly through (90%) ---- */
 [data-look='haze'] .sheet {
-  background-color: rgba(196, 202, 188, 0.9);
+  background-color: rgba(200, 222, 206, 0.9); /* this photo's mint haze */
   background-image: var(--tex-grain);
   background-size: 180px 180px;
-  --bg: #c4cabc;
-  --surface: #cfd4c7;
+  --bg: #c8dece;
+  --surface: #d3e6d7;
   --text: #121a18;
   --muted: #33403b;     /* 5.5:1 on the darkest blend (scree behind, about #b6bbac) */
   --link: #1b3633;
