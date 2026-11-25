@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Backdrop from './Backdrop.jsx';
+import LookSwitcher from './LookSwitcher.jsx';
 import SkyNav from './SkyNav.jsx';
 
 /*
@@ -27,6 +28,7 @@ export default function Layout() {
     <>
       <a className="skip" href="#content">Skip to content</a>
       <Backdrop mode={home ? 'home' : 'inner'} />
+      <LookSwitcher />
       {home ? (
         <Outlet />
       ) : (
