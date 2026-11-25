@@ -9,7 +9,11 @@ scan around the standing hiker and given his grade, learned per channel from the
 """
 import numpy as np
 from pathlib import Path
-from PIL import Image, ImageOps
+from PIL import Image, ImageEnhance, ImageOps
+
+# Jason: "dim everything by a little, it's a bit too bright." Every output is darkened by this
+# factor (1.0 = his original brightness).
+DIM = 0.88
 
 DL = Path.home() / "Downloads"
 OUT = Path(__file__).resolve().parent.parent / "public" / "bg4"
@@ -19,7 +23,7 @@ jason = Image.open(DL / "background_screen saver_NOLS_2ppl_cropped.jpg").convert
 scan = ImageOps.mirror(Image.open(DL / "NOLS_I_THINK_I_CAN.JPG").convert("RGB"))
 
 def save(im, name, w=None):
-    x = im.copy()
+    x = ImageEnhance.Brightness(im).enhance(DIM)
     if w: x = x.resize((w, round(w * im.size[1] / im.size[0])), Image.LANCZOS)
     x.save(OUT / name, quality=82, optimize=True, progressive=True)
 

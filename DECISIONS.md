@@ -218,3 +218,20 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
 
   The phone veil is gone.
 - **Phone caption:** it moved back to the top of the sky (`top: clamp(3rem, 12svh, 6.5rem)`). The low placement was only needed for the old photo's dark upper sky, and here it sat on top of the standing hiker.
+- **Dimmed a touch (Jason: "a bit too bright").**
+  - Every bg4 copy is baked 12% darker (`DIM = 0.88` in `scripts/make-2ppl-bg.py`), and the URLs carry `?v=2` so browsers fetch the new files.
+  - The loading colour is now #94b29b, and the haze sheet rgba(184,204,190,0.9) (--bg #b8ccbe).
+  - Zoom stays off. The storage keys moved to `jc-look-v3` / `jc-zoom-v2`, so an earlier stored 10% or other look doesn't override the defaults (haze, no zoom).
+  - The phone home caption moved down to `top: clamp(9rem, 25svh, 14rem)`, into the lighter mid sky; it still ends ~90px above the standing hiker.
+  - Inner pages' name and links get the faint haze veil on phones and portrait screens, where they sit in the tall crop's darkest teal.
+  - **Contrast after dimming (worst pixel):**
+
+    | Page | Viewport | Worst pixel | Note |
+    |---|---|---|---|
+    | Home | 1440 | 5.78 | |
+    | Home | 768 | 4.61 | |
+    | Home | 360 / 390 / 430 | 4.52–4.56 | |
+    | Inner | 1440 | 5.12 | |
+    | Inner | 768 | 4.80 | |
+    | Inner | 390 | 4.83 (links); 4.09 (the 26px+ name, large text, needs 3:1) | |
+    | Haze sheet text | | 5.7 or better | on any part of the photo behind it |

@@ -22,7 +22,7 @@
   color-scheme: light;
   --ink: #0b1210;
   --paper: #e2e5db;
-  --sky: #a9cbb0; /* this photo's mid sky: the flat colour shown while it loads */
+  --sky: #94b29b; /* this photo's mid sky (dimmed 12%): the flat colour shown while it loads */
 
   /* Semantic tokens (post bodies and the globe read these). Every text pair >= 4.5:1 on the
      sheet; see DECISIONS.md for the numbers. */
@@ -188,7 +188,12 @@ html[data-page='home'] body { overflow: hidden; }
   pointer-events: none;
   background: radial-gradient(closest-side, rgba(217, 221, 206, 0.22), rgba(217, 221, 206, 0.16) 55%, rgba(217, 221, 206, 0));
 }
-/* 2ppl photo: the sky is bright enough that phones need no veil (ink measures 7:1+). */
+/* 2ppl photo, dimmed 12%: the home caption needs no veil (it sits in the lighter mid sky), but
+   the inner pages' name and links sit at the very top of the tall crop, its darkest teal (3.4:1
+   bare at 390x844), so on phones and portrait screens they get the faint haze. */
+@media (max-width: 40rem), (max-aspect-ratio: 4/5) {
+  .band-head.veil::before { content: ''; }
+}
 
 /* ---------- home: the caption ---------- */
 
@@ -249,7 +254,7 @@ html[data-page='home'] body { overflow: hidden; }
   /* 2ppl photo: its tall crop's sky is light all the way up, so the caption sits high in the
      open sky, well clear of the standing hiker on the ridge (about 58% down). */
   .caption {
-    top: clamp(3rem, 12svh, 6.5rem);
+    top: clamp(9rem, 25svh, 14rem);
     bottom: auto;
     max-width: calc(100vw - 2.5rem);
   }
@@ -649,11 +654,11 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 
 /* ---- haze: the sky's own grey-green, fine grain, the photo faintly through (90%) ---- */
 [data-look='haze'] .sheet {
-  background-color: rgba(200, 222, 206, 0.9); /* this photo's mint haze */
+  background-color: rgba(184, 204, 190, 0.9); /* this photo's mint haze, dimmed a touch */
   background-image: var(--tex-grain);
   background-size: 180px 180px;
-  --bg: #c8dece;
-  --surface: #d3e6d7;
+  --bg: #b8ccbe;
+  --surface: #c3d5c8;
   --text: #121a18;
   --muted: #33403b;     /* 5.5:1 on the darkest blend (scree behind, about #b6bbac) */
   --link: #1b3633;

@@ -17,8 +17,9 @@ export const ZOOMS = [
 ];
 
 // v2: haze became the default (Jason's pick); the new key drops any earlier stored choice.
-const KEY_LOOK = 'jc-look-v2';
-const KEY_ZOOM = 'jc-zoom';
+const KEY_LOOK = 'jc-look-v3';
+// v2: zoom is off by default (Jason's call); the new key drops any stored 10% choice.
+const KEY_ZOOM = 'jc-zoom-v2';
 const read = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
 const write = (k, v) => { try { localStorage.setItem(k, v); } catch { /* private mode */ } };
 
