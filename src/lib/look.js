@@ -6,8 +6,8 @@
   page shares it. CSS for each look lives at the end of index.css.
 */
 export const LOOKS = [
+  { id: 'haze', label: 'haze', note: 'sky-grey, fine grain, photo faintly through (default)' },
   { id: 'card', label: 'card', note: 'the original light sheet' },
-  { id: 'haze', label: 'haze', note: 'sky-grey, fine grain, photo faintly through' },
   { id: 'scree', label: 'scree', note: 'warm stone with a paper-fibre texture' },
   { id: 'dusk', label: 'dusk', note: 'dark teal-rock with film grain, light text' },
 ];
@@ -16,12 +16,13 @@ export const ZOOMS = [
   { id: '110', label: '10%' },
 ];
 
-const KEY_LOOK = 'jc-look';
+// v2: haze became the default (Jason's pick); the new key drops any earlier stored choice.
+const KEY_LOOK = 'jc-look-v2';
 const KEY_ZOOM = 'jc-zoom';
 const read = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
 const write = (k, v) => { try { localStorage.setItem(k, v); } catch { /* private mode */ } };
 
-export function getLook() { return document.documentElement.dataset.look || 'card'; }
+export function getLook() { return document.documentElement.dataset.look || 'haze'; }
 export function getZoom() { return document.documentElement.dataset.zoom || '100'; }
 
 export function setLook(id) {
@@ -38,6 +39,6 @@ export function setZoom(id) {
 // Run once at startup, before React renders: URL beats storage beats default.
 export function initLook() {
   const q = new URLSearchParams(window.location.search);
-  setLook(q.get('look') || read(KEY_LOOK) || 'card');
+  setLook(q.get('look') || read(KEY_LOOK) || 'haze');
   setZoom(q.get('zoom') || read(KEY_ZOOM) || '100');
 }
