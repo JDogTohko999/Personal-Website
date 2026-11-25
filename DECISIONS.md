@@ -256,3 +256,20 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
     | 360x640 | 4.51 |
 
   - **Links softened:** clay-brown #663c2c on the sheet, #3e1f12 over the photo.
+- **Ported Jason's trail content changes** (from `redesign2/final-trail`, 739f05b..a6b0ca6 plus his uncommitted tweaks), adapted to this layout:
+  - **Writing list:** each post's date sits right after its title ("Passed  Oct 7"), with no summaries or tags underneath.
+  - **Jason-ing** (on About me) is the trail reel:
+    - the photo, then "Jason-ing", a slot reel of the -ing words, and ← spin →
+    - tapping the photo or "spin" runs one shuffled ~2s decelerating pass, and the photo changes on landing; ←/→ (buttons or keys) slide one word in ~420ms
+    - it auto-spins once ~1s after load; the first spin lands on an opener, then every word lands once before any repeat
+    - tapping the word opens the list of all 27
+    - the canvassing clip is a muted looping video
+    - the figure grew to 11rem (15rem under the bio on phones) to fit the reel
+  - **Involvements:**
+    - intro "A little more detailed than LinkedIn."
+    - the highlighted roles only; then "other things I've done" (the debate with its photos and links, Eagle Scout, and every non-highlighted role), open by default on this page, with a "hide other things · LinkedIn" foot
+    - it replaces the "Show all 13" toggle and the "Also" section
+  - **Eagle Scout** reads "Boy Scouts of America, Troop 89".
+  - **VAISI row** opened: no description; a 180px homepage screenshot linking to vaisi.org, "vaisi.org", the panel-audience and fellows-on-steps photos linking to /vaisi, and "my VAISI highlights".
+  - **Already in place:** VAISI out of the nav, no "now:" line on the home, "involvements" everywhere.
+  - **Not applicable:** the trail home order (involvements before places), since places isn't on this home.

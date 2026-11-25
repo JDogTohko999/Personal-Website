@@ -19,7 +19,7 @@ export const achievements = [
   {
     id: 1,
     title: 'Eagle Scout',
-    organization: 'Boy Scouts of America',
+    organization: 'Boy Scouts of America, Troop 89',
     description: 'Achieved by 4% of scouts. Conceived and executed a project restoring and archiving local historic headstones. Led volunteers to complete 162 hours of service.',
   },
 ];

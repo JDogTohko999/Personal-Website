@@ -1,68 +1,92 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { experiences, linkedinUrl } from '../data/experience.jsx';
 import { achievements } from '../data/achievements.jsx';
+import * as vaisi from '../data/vaisi.jsx';
 import Photos from '../components/Photos.jsx';
 import WorkRow, { ExperienceRow } from '../components/WorkRow.jsx';
+import { thumb } from '../components/webImage.js';
 import { years } from '../lib/dates.js';
 import useTitle from '../lib/useTitle.js';
 
-// Work: the highlights, condensed to one line each; a role opens to the full description, and the
-// word at the bottom brings in everything else. Debate and Eagle Scout close the page.
-const KIND_LABEL = { work: 'Work', education: 'Education', volunteer: 'Volunteering' };
+/*
+  Involvements (ported from Jason's tuned trail version, src/trail/WorkList.jsx + Work.jsx):
+  the highlighted roles, then "other things I've done" (the debate, Eagle Scout, and every
+  role that isn't a highlight), already unfolded on this page. The VAISI row opens to the site
+  itself (a homepage screenshot linking to vaisi.org), two photos, and "my VAISI highlights".
+*/
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
+const VAISI_ID = 1;
+const VAISI_PHOTOS = [vaisi.imageSets.panel.images[0], vaisi.imageSets.fellowship.images[0]];
+const host = (url) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+function VaisiRow({ e }) {
+  return (
+    <WorkRow date={years(e.period)} title={e.role} org={e.company}>
+      <a href={e.link} {...ext} className="vaisi-site" aria-label="vaisi.org (opens in a new tab)">
+        <img src="/vaisi/vaisi_homepage.jpg" alt="The VAISI website's homepage" loading="lazy" />
+      </a>
+      <p className="work-meta"><a href={e.link} {...ext}>{host(e.link)}</a></p>
+      <Link to="/vaisi" className="vaisi-strip" aria-label="My VAISI highlights">
+        {VAISI_PHOTOS.map((src) => <img key={src} src={thumb(src)} alt="" loading="lazy" />)}
+      </Link>
+      <p className="work-meta"><Link to="/vaisi">my VAISI highlights</Link></p>
+    </WorkRow>
+  );
+}
+
+const Role = ({ e }) => (e.id === VAISI_ID ? <VaisiRow e={e} /> : <ExperienceRow e={e} />);
+
+function OtherThings({ id }) {
+  const debate = achievements.find((a) => a.photos);
+  const scout = achievements.find((a) => a !== debate);
+  return (
+    <ul className="plain work" id={id}>
+      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} defaultOpen>
+        {debate.description.split(/\n+/).map((para, i) => <p key={i}>{para.trim()}</p>)}
+        <Photos images={debate.photos} alt="Martin Skeptical Debate" />
+        <p className="work-meta">
+          {debate.links.map((l, i) => (
+            <React.Fragment key={l.href}>
+              {i > 0 && ' · '}
+              <a href={l.href} {...ext}>{l.label}</a>
+            </React.Fragment>
+          ))}
+        </p>
+      </WorkRow>
+      <WorkRow date="" title={scout.title} org={scout.organization} summary={scout.description} />
+      {experiences.filter((e) => !e.highlight).map((e) => <Role key={e.id} e={e} />)}
+    </ul>
+  );
+}
 
 export default function Experience() {
   useTitle('Involvements');
-  const [all, setAll] = useState(false);
-  const shown = all ? experiences : experiences.filter((e) => e.highlight);
-  const kinds = [...new Set(shown.map((e) => e.kind))];
-  const debate = achievements.find((a) => a.photos);
-  const others = achievements.filter((a) => a !== debate);
-
+  const [open, setOpen] = useState(true);
+  const othersId = useId();
   return (
     <>
       <h1 className="page-title">Involvements</h1>
       <p className="page-lede">
-        The short version. The full history is on{' '}
-        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+        A little more detailed than <a href={linkedinUrl} {...ext}>LinkedIn</a>.
       </p>
-
-      {kinds.map((kind) => (
-        <section key={kind}>
-          <h2 className="section-title">{KIND_LABEL[kind] || kind}</h2>
-          <ul className="plain work">
-            {shown.filter((e) => e.kind === kind).map((e) => <ExperienceRow key={e.id} e={e} />)}
-          </ul>
-        </section>
-      ))}
-
-      <p style={{ marginTop: '1.25rem' }}>
-        <button type="button" className="word" aria-expanded={all} onClick={() => setAll((v) => !v)}>
-          {all ? 'Show the highlights only' : `Show all ${experiences.length}`}
+      <ul className="plain work">
+        {experiences.filter((e) => e.highlight).map((e) => <Role key={e.id} e={e} />)}
+      </ul>
+      <p className="work-foot">
+        <button type="button" className="word" aria-expanded={open} aria-controls={othersId} onClick={() => setOpen((v) => !v)}>
+          {open ? 'hide other things' : "other things I've done"}
         </button>
+        <span className="muted"> · </span>
+        <a href={linkedinUrl} {...ext}>LinkedIn</a>
       </p>
-
-      <section>
-        <h2 className="section-title">Also</h2>
-        <ul className="plain work">
-          {debate && (
-            <WorkRow date={years(debate.date)} title={debate.title} org={debate.organization} defaultOpen>
-              <p style={{ whiteSpace: 'pre-line' }}>{debate.description}</p>
-              <Photos images={debate.photos} alt="Martin Skeptical Debate" />
-              <p className="work-meta">
-                {debate.links.map((l, i) => (
-                  <React.Fragment key={l.href}>
-                    {i > 0 && ', '}
-                    <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
-                  </React.Fragment>
-                ))}
-              </p>
-            </WorkRow>
-          )}
-          {others.map((a) => (
-            <WorkRow key={a.id} date={a.date ? years(a.date) : ''} title={a.title} org={a.organization} summary={a.description} />
-          ))}
-        </ul>
-      </section>
+      {open && (
+        <section>
+          <h2 className="section-title">Other things I&rsquo;ve done</h2>
+          <OtherThings id={othersId} />
+        </section>
+      )}
     </>
   );
 }
+
