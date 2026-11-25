@@ -1,5 +1,9 @@
 # sky (round 3, take A): decisions
 
+> The sections down to "Blocked" describe the round-3 sky take as first built. **"Final: refinements"** at the end describes
+> what `redesign3/final` changed on top of it. Where the two disagree (the desktop panel, the veil, the animated grain),
+> the final section wins.
+
 ## Thesis and layout
 A caption written in the corner of a photograph. The home page is the hiker photo, full bleed and left alone. Top-left, in
 the open sky, sit the name (Newsreader, about 34px at 1440, weight 380), the one line in italic, and a short vertical list
@@ -97,4 +101,102 @@ moment of motion is the photo fading in over 0.7s, followed by the caption.
   and the measurements don't depend on them.
 
 ## Blocked
-Nothing was blocked.
+Nothing was blocked in the sky take. For the final pass, see "Blocked (final)" below.
+
+---
+
+# Final: refinements (`redesign3/final`)
+
+Jason has seen round 3 and said "I like the look so far!". So this pass keeps sky's look and works through the
+R3_CRITIQUE fix list, plus its grafts: edge's band-top inner pages and reading rhythm, and margin's opaque reading
+surface. The home is still the photo with the name, one line and the plain lowercase links in the open sky, the hiker
+and the ridge uncovered, one screen, no scroll.
+
+## What changed and why
+
+| # | Critique item | Change |
+| --- | --- | --- |
+| 1 | The veil reads as a blotch | **Desktop and every wide crop: no veil at all.** The ink was deepened a step (`#121a18` to `#0b1210`, still tinted to the photo's green) so the bare left sky clears 4.5:1 on its worst pixel. **Portrait (tall crop):** the veil now hugs the caption (2-3rem past the text, not 8-9rem) at 0.22/0.16 alpha (was 0.38/0.30). That alone was not enough (390x844 measured 3.49), so I took the critique's fallback: on portrait screens the caption moves **down into the lighter haze just above where the ridge meets the left edge** (`bottom: calc(39% + 2.75rem)`), and the links run in two lines. Raw contrast for the ink there is 4.8-5.9:1, against 3-4:1 at the top. It now reads as a caption written above the hiker. |
+| 2 | Name and links too timid | Name `clamp(2rem, 1.4rem + 1.6vw, 3rem)` (43px at 1440, 48px at 1920), line 1.2rem, home links 1rem at 1.6 line-height. Top-left as before. |
+| 3 | No resting link affordance | Every nav link has a 1px underline at 35% ink, 0.2em offset, going to full ink on hover and focus. |
+| 4 | The frosted desktop half-panel | Gone, `backdrop-filter` and all. **One layout at every width:** the photo is a band across the top (`clamp(10rem, 26vh, 16rem)`; phones `clamp(12.5rem, 30svh, 15rem)` to make room for two lines of links). Its offset is computed in CSS so the hiker stands about two-thirds down the band at any width: `object-position: 62% clamp(band - 66.67vw, 0.66*band - 50.67vw, 0)` (tall crop: `150vw` / `106.5vw`). Measured: 0.63 at 1440 and 1920, 0.66 at 390, 0.60 at 768. The name and links sit in the band's sky at the home caption's left edge. It is still the same `<img>` as the home, so moving between pages never reloads the photo. |
+| 5 | Reading rhythm (edge graft) + opaque surface (margin graft) | The sheet is opaque `#e2e5db`, no alpha and no blur. One centred column, `min(38rem, 100%)`, with a 1.1875rem body at 1.6, titles `clamp(1.875rem, ..., 2.25rem)` with `text-wrap: balance`, and italic meta (post dates, list meta). Newsreader throughout. |
+| 6 | Mobile nav wrap orphaned "linkedin meet" | On phones, and on any portrait screen, the links are on two lines on purpose: `writing now places work vaisi`, then `linkedin meet`, left-aligned, in both the band head and the phone home. On landscape and desktop they stay on one row. |
+| 7 | Grey flash while the photo loads | The page and the photo's box are the sampled sky `#7f8b80` from the first byte (inline `<style>` in `index.html`, and `theme-color`). The home caption now waits for the photo: it fades in only once `data-ready` is set, on `load` or `error`, or after a 2.5s fallback so words never stay hidden on a slow line. Ink on the bare placeholder is 5.33:1. |
+| 8 | Loud figures in posts | Post photos sit flat and straight inside the measure: no tilt, no cream mat, no drop shadow, and a 1px `#c9ccbf` border. The overlapping tilted clusters in "Losing" become plain side-by-side pairs, and captions drop below a photo when there's no room beside it. The blue "Policy Summary" chart gets the same hairline border with square corners. `Frame` and the cluster wrappers in `blogPosts.jsx` got class names (`post-frame`, `post-cluster`) so the CSS can do this without rewriting the posts. |
+| 9 | Grain animates at 10 steps a second | The grain is static: the same SVG noise tile at 0.16 overlay, with no animation. The only motion left is the photo's fade-in, then the caption's. |
+| 10 | Re-verify | See "Verification" below. |
+
+Smaller things:
+- `scripts/measure-sky.js` now reads the band head (`.band-head`), understands the band's pixel-length object-position, and drops
+  the old panel branch, since the sheet is opaque and checked by tokens. `hiker()` reports `inBand`, how far down the band he stands.
+- The old "panel" vocabulary is gone from the code (`.panel` became `.band-head`, `.sheet` and `.column`).
+
+## Contrast (final), with numbers
+Method as before. `(await import('/scripts/measure-sky.js')).measure()` redraws the photo exactly as cropped, composites
+any veil, and darkens every pixel by the grain's worst step. It then takes the WCAG ratio of the ink against **every
+pixel under every text run**. "Min" is the single worst pixel, and "p5" is the value that 95% of the pixels behind the
+text beat.
+
+| Viewport | Page | Crop | Veil | Worst run | Min | p5 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 390x844 | home | tall-1140 | 0.22 hug | vaisi | **4.52** | 4.77 |
+| 768x1024 | home | tall-1140 | 0.22 hug | vaisi | **5.07** | 5.50 |
+| 844x390 | home | wide | none | meet | **4.54** | 4.76 |
+| 1280x720 | home | wide-1920 | none | Jason Chin | **4.65** | 5.13 |
+| 1440x900 | home | wide-1920 | none | Jason Chin | **4.59** | 5.00 |
+| 1920x1080 | home | wide-1920 | none | Jason Chin | **4.71** | 5.17 |
+| 2560x1080 | home | wide-1920 | none | Jason Chin | **5.04** | 5.52 |
+| 390x844 | band head (/now) | tall | none | vaisi | **4.66** | 4.81 |
+| 768x1024 | band head (/experience) | tall | none | vaisi | **5.22** | 5.52 |
+| 1440x900 | band head (/blog) | wide | none | linkedin | **5.41** | 5.64 |
+| 1920x1080 | band head (/now) | wide | none | meet | **5.65** | 5.85 |
+
+Every run of text on the photo is at least 4.5:1 on its worst pixel at every viewport, including the name, which as
+large text would only need 3:1.
+
+On the sheet (`#e2e5db`, opaque): ink 14.86, text 12.90, link 8.44, muted 6.50. Muted on the surface tint (`#ebede5`)
+is 7.01. Ink on the loading placeholder (`#7f8b80`) is 5.33.
+
+Two fixes the numbers forced:
+- At 768x1024 the one-row band head reached the darker teal on the right ("meet" 4.47), so the head stacks on every
+  portrait screen, not only below 40rem.
+- On phones, the link gaps went from 0.95rem to 0.8rem so "vaisi" clears the darker right side (4.48 to 4.66 in the band,
+  4.47 to 4.52 on the home).
+
+## Verification
+- `npm run build` passes.
+- I checked in the in-app browser, in my own tab, at 1440x900, 1920x1080, 768x1024 and 390x844, plus 1280x720, 844x390 and
+  2560x1080 for the home. At each of the four main sizes I walked every route: `/`, `/blog`, three listed posts,
+  `/blog/alice` (opens, and is not in the list), `/now`, `/now/bonus`, `/places`, `/map`, `/experience`, `/vaisi` and a 404.
+  - No console errors on any route.
+  - No horizontal overflow on any route.
+  - The home's scroll height equals the viewport (no scroll) at every size.
+  - The hiker is never within 12px of any text.
+  - Footnote anchors resolve.
+- The server is stopped and the tab is closed.
+
+## Open questions for Jason
+1. **Phone home placement.** On portrait screens the caption now sits low, just above the ridge, instead of in the top
+   corner. That was the only way to pass 4.5:1 without a visible veil. Do you like it as "a caption above the hiker", or
+   would you rather have it back in the corner with a slightly stronger haze?
+2. **The name's size.** It's a step up (43px at 1440). Is that confident enough, or do you want it bigger still, like
+   edge's title card?
+3. **The band height on desktop** is about a quarter of the screen. Is that enough photo on inner pages, or would you
+   want a taller band on posts?
+4. **Grain.** It's now completely still. Do you want a very slow shimmer (about 3 steps a second) instead?
+5. **"about".** The intro paragraph still lives at the top of writing. Should it get an eighth word?
+
+## Known issues
+- In the hidden in-app pane, transitions are throttled, so several captures show the band mid-fade, as flat sky. That's
+  the placeholder working, not a crop bug. Once loaded, the ridge and hiker are in the band at every size.
+- The home caption at 1440x900 ends at about 45% of the height, not the top third. The seven stacked 1rem links need
+  that room, and the ridge is far below it.
+- Two figure rows in "Losing" (the shoes/mayor pair and the Bores signs) wrap into stacked rows at the 38rem measure.
+  They're calm, but not the side-by-side composition the post originally had.
+- The 8px MF DOOM link inside one caption in "Losing" is left as Jason wrote it (tiny on purpose).
+- `npm install` had to run with `--ignore-scripts`: esbuild's postinstall crashed in this sandbox (exit 0xC0000142). The
+  win32 binary package installs on its own, and dev and build both work.
+
+## Blocked (final)
+Nothing was blocked. The esbuild postinstall crash above was worked around, not denied.
