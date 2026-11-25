@@ -1,0 +1,149 @@
+/*
+  Round-2 themes. Four palettes as CSS custom properties on <html data-theme="...">.
+  The hook in ./useTheme.js sets the attribute; index.html sets it before first paint.
+
+  Semantic tokens (use these in new code):
+    --bg          page background
+    --surface     a slightly raised area (asides, captions, details); use sparingly
+    --text        body text
+    --muted       secondary text: dates, captions, labels  (>= 4.5:1, safe for text)
+    --faint       decoration only: hairlines, dots, disabled  (NOT for text)
+    --accent      primary accent (headings marks, active nav, focus)
+    --accent-2    secondary accent
+    --rule        hairline rules / borders
+    --link        inline links
+    --link-hover  inline links on hover/focus
+  Globe tokens (read by TourGlobe via getComputedStyle; it re-reads on theme change):
+    --globe-ocean, --globe-land, --globe-visited, --globe-going, --globe-bucket,
+    --globe-border, --globe-pin, --globe-pin-home, --globe-halo
+
+  Palettes are sampled from Jason's images (see R2_BRIEF_COMMON.md). Nudges, all for contrast:
+    japandi        --muted is taupe #936D49 darkened to #7A5A3C (raw taupe is only 3.93:1 on #F9EAD5).
+    earth          --text is clay #745851 deepened to #3A2E2A (the palette has no dark);
+                   --accent is fresh bark #686F56 nudged to #636A51 (raw is 4.48:1);
+                   --link is bark deepened to #555C44.
+    japandi-night  bg is soft black #272018, surface leans toward deep brown #311209.
+    earth-dusk     bg is fresh bark #686F56 taken very dark (#2A2923).
+
+  WCAG contrast ratios (computed with the WCAG 2.1 relative-luminance formula):
+                    text/bg  text/surface  muted/bg  link/bg  link/surface  link-hover/bg  accent/bg
+    japandi          13.60      15.29        5.29      8.35       9.40         11.21          8.35
+    japandi-night    13.60      13.28        6.01     10.14       9.90         15.29         10.14
+    earth            11.17      12.11        5.50      5.97       6.47          5.50          4.83
+    earth-dusk       12.44      10.83        7.21      7.39       6.43         12.44          5.62
+  All text pairs are >= 4.5:1. Re-check if you change a value (any WCAG contrast checker).
+*/
+
+:root,
+[data-theme='japandi'] {
+  color-scheme: light;
+  --bg: #f9ead5;          /* page bg */
+  --surface: #fefae1;     /* soft white */
+  --text: #272018;        /* soft black */
+  --muted: #7a5a3c;       /* warm taupe, darkened */
+  --faint: #c29665;       /* natural */
+  --accent: #752c13;      /* terracotta */
+  --accent-2: #4e5230;    /* moss (greener variant) */
+  --rule: #e8c998;        /* beige */
+  --link: #752c13;        /* terracotta */
+  --link-hover: #522111;  /* walnut */
+
+  --globe-ocean: #fefae1;
+  --globe-land: #e8c998;
+  --globe-visited: #c29665;
+  --globe-going: #8b8a5a;
+  --globe-bucket: #d9b28f;
+  --globe-border: #f9ead5;
+  --globe-pin: #752c13;
+  --globe-pin-home: #4e5230;
+  --globe-halo: rgba(147, 109, 73, 0.16);
+}
+
+[data-theme='japandi-night'] {
+  color-scheme: dark;
+  --bg: #272018;          /* soft black */
+  --surface: #311f14;     /* toward deep brown */
+  --text: #f9ead5;
+  --muted: #c29665;       /* natural */
+  --faint: #6b5038;
+  --accent: #e8c998;      /* beige */
+  --accent-2: #a9a77e;    /* moss, lifted for dark */
+  --rule: #45372a;
+  --link: #e8c998;
+  --link-hover: #fefae1;
+
+  --globe-ocean: #1f1913;
+  --globe-land: #4a3b2c;
+  --globe-visited: #936d49;
+  --globe-going: #6c6b43;
+  --globe-bucket: #6e3a24;
+  --globe-border: #272018;
+  --globe-pin: #e8c998;
+  --globe-pin-home: #fefae1;
+  --globe-halo: rgba(232, 201, 152, 0.10);
+}
+
+[data-theme='earth'] {
+  color-scheme: light;
+  --bg: #f6ebe3;          /* seed puff */
+  --surface: #fbf5f0;
+  --text: #3a2e2a;        /* clay, deepened */
+  --muted: #745851;       /* clay */
+  --faint: #b59d7e;       /* sand */
+  --accent: #636a51;      /* fresh bark, nudged */
+  --accent-2: #745851;    /* clay */
+  --rule: #b9b7a6;        /* herb */
+  --link: #555c44;        /* fresh bark, deepened */
+  --link-hover: #745851;  /* clay */
+
+  --globe-ocean: #fbf5f0;
+  --globe-land: #dcd6c8;
+  --globe-visited: #a29573; /* olive */
+  --globe-going: #868d72;
+  --globe-bucket: #cdb3a6;
+  --globe-border: #f6ebe3;
+  --globe-pin: #745851;
+  --globe-pin-home: #686f56;
+  --globe-halo: rgba(116, 88, 81, 0.14);
+}
+
+[data-theme='earth-dusk'] {
+  color-scheme: dark;
+  --bg: #2a2923;          /* fresh bark, very dark */
+  --surface: #34332b;
+  --text: #f6ebe3;        /* seed puff */
+  --muted: #b9b7a6;       /* herb */
+  --faint: #5e5c4f;
+  --accent: #b59d7e;      /* sand */
+  --accent-2: #a29573;    /* olive */
+  --rule: #45443a;
+  --link: #cdb596;        /* sand, lifted */
+  --link-hover: #f6ebe3;
+
+  --globe-ocean: #22211c;
+  --globe-land: #45443a;
+  --globe-visited: #8a7f62;
+  --globe-going: #5c6249;
+  --globe-bucket: #6a4f49;
+  --globe-border: #2a2923;
+  --globe-pin: #e3cfb3;
+  --globe-pin-home: #f6ebe3;
+  --globe-halo: rgba(181, 157, 126, 0.10);
+}
+
+/*
+  Legacy tokens. Blog post bodies, nowEntries.jsx, profile.jsx etc. use Tailwind classes such as
+  text-portfolio-gold; tailwind.config.js maps those to these variables. Keep them pointing at the
+  semantic tokens so post bodies look right in every theme.
+*/
+:root {
+  --portfolio-bg: var(--bg);
+  --portfolio-text: var(--text);
+  --portfolio-gold: var(--link);        /* links and inline accents in post bodies */
+  --portfolio-muted: var(--muted);
+  --portfolio-card: var(--surface);
+  --portfolio-card-text: var(--text);
+  --portfolio-border: var(--rule);
+  --portfolio-green: var(--accent-2);
+  --portfolio-on-gold: var(--bg);       /* ink on a solid --link fill */
+}

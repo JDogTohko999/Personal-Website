@@ -1,39 +1,22 @@
 /** @type {import('tailwindcss').Config} */
+// Tailwind stays because the content modules (blog posts, now entry, profile, vaisi) use its
+// classes. The portfolio-* colours are legacy names mapped to the theme in src/theme/themes.css.
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
         'portfolio-bg': 'var(--portfolio-bg)',
-        'portfolio-text': 'var(--portfolio-text)', 
-        'portfolio-gold': 'var(--portfolio-gold)', // Acts as primary accent
-        'portfolio-green': 'var(--portfolio-green)', // Acts as secondary accent
+        'portfolio-text': 'var(--portfolio-text)',
+        'portfolio-gold': 'var(--portfolio-gold)',
+        'portfolio-green': 'var(--portfolio-green)',
         'portfolio-card': 'var(--portfolio-card)',
-        'portfolio-card-text': 'var(--portfolio-card-text)', // New variable for card text contrast
+        'portfolio-card-text': 'var(--portfolio-card-text)',
         'portfolio-muted': 'var(--portfolio-muted)',
         'portfolio-border': 'var(--portfolio-border)',
         'portfolio-on-gold': 'var(--portfolio-on-gold)',
       },
-      fontFamily: {
-        sans: ['Inter', 'Roboto', 'sans-serif'],
-      },
-      keyframes: {
-        // A short clunk when the nudge limit is hit.
-        lockshake: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '20%': { transform: 'translateX(-3px)' },
-          '45%': { transform: 'translateX(3px)' },
-          '70%': { transform: 'translateX(-2px)' },
-          '88%': { transform: 'translateX(1px)' },
-        },
-      },
-      animation: {
-        lockshake: 'lockshake 420ms ease-in-out',
-      },
     },
   },
   plugins: [],
-}
+};

@@ -1,75 +1,65 @@
+@import './theme/themes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Reference styles only: plain and readable so the data wiring is easy to see.
+  Direction builders replace this file's bottom half with their own design.
+*/
 @layer base {
-  :root {
-    /* DEFAULT (Jacarta) */
-    --portfolio-bg: rgba(35, 32, 54, 0.925); /* Jacarta */
-    --portfolio-text: #E0E0E0;
-    --portfolio-gold: #f4cc67; /* Saffron */
-    --portfolio-green: #3b3119;
-    --portfolio-card: #0f0c20; /* Darker Jacarta for cards */
-    --portfolio-card-text: #E0E0E0;
-    --portfolio-muted: #9CA3AF;
-    --portfolio-border: #4B4570;
-    --portfolio-on-gold: #231F36; /* ink for solid gold fills */
+  html {
+    background: var(--bg);
+    color: var(--text);
   }
-
-  /* NEWSPAPER THEME (Black & White) */
-  [data-theme="newspaper"] {
-    --portfolio-bg: #ffffffd2;
-    --portfolio-text: #000000;
-    --portfolio-gold: #000000; /* Accents are black */
-    --portfolio-green: #aeaeae; /* Secondary is Light Grey */
-    --portfolio-card: #F2F2F2; /* Section/Card Background */
-    --portfolio-card-text: #000000;
-    --portfolio-muted: #404040;
-    --portfolio-border: #000000;
-    --portfolio-on-gold: #FFFFFF; /* gold is black here */
-  }
-
-  /* FOREST THEME (Matte Greens) */
-  [data-theme="forest"] {
-    --portfolio-bg: #2D3A3A; /* Deep Matte Sage Green */
-    --portfolio-text: #F0EAD6; /* Soft Cream */
-    --portfolio-gold: #556B2F; /* Moss Green - Accents */
-    --portfolio-green: #1B2626; /* Darker Evergreen - Secondary */
-    --portfolio-card: #1B2626; /* Darker Evergreen - Cards */
-    --portfolio-card-text: #F0EAD6;
-    --portfolio-muted: #B0B0B0;
-    --portfolio-border: #556B2F;
-    --portfolio-on-gold: #F0EAD6; /* moss green needs light ink */
-  }
-
-  /* UVA THEME (Navy/Orange) */
-  [data-theme="uva"] {
-    --portfolio-bg: #232D4B; /* Deep Navy Blue */
-    --portfolio-text: #FFFFFF; /* White Text */
-    --portfolio-gold: #E57200; /* Bright Orange - Accents */
-    --portfolio-green: #E57200; /* Light Grey - Secondary */
-    --portfolio-card: #e2e2e2; /* Light Grey - Cards */
-    --portfolio-card-text: #040919; /* Dark Navy Text for contrast on light cards */
-    --portfolio-muted: #9f9f9f;
-    --portfolio-border: #374151;
-    --portfolio-on-gold: #231F36; /* dark ink reads best on orange */
-  }
-
   body {
-    @apply bg-portfolio-bg text-portfolio-text transition-colors duration-300;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
+  a {
+    color: var(--link);
+    text-underline-offset: 0.18em;
+  }
+  a:hover,
+  a:focus-visible {
+    color: var(--link-hover);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  h1 { font-size: 1.75rem; margin: 0 0 0.75rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
+  h3 { font-size: 1.05rem; margin: 1.25rem 0 0.25rem; }
+  p { margin: 0 0 0.9rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  button { color: inherit; }
 }
 
-/* Custom scrollbar for webkit */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  @apply bg-portfolio-bg;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-portfolio-card rounded-full;
-}
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-portfolio-gold;
-}
+.site { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; align-items: baseline; margin-bottom: 2rem; font-size: 0.95rem; }
+.site-nav a[aria-current='page'] { color: var(--text); text-decoration: none; }
+.site-nav .spacer { flex: 1; }
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+.plain-list { list-style: none; padding: 0; margin: 0; }
+.plain-list > li { margin: 0 0 0.6rem; }
+.text-button { background: none; border: 0; padding: 0; font: inherit; color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; cursor: pointer; }
+.text-button:hover { color: var(--link-hover); }
+.thumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 1rem; }
+.thumbs img { display: block; width: 120px; height: 90px; object-fit: cover; border-radius: 3px; }
+.thumbs button { padding: 0; border: 0; background: none; cursor: zoom-in; }
+.prose-body { max-width: 65ch; }
+.lightbox { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 1rem; background: rgba(20, 16, 12, 0.85); }
+.lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; }
+.lightbox button { position: absolute; top: 1rem; right: 1rem; background: none; border: 0; color: #fff; font: inherit; cursor: pointer; }
