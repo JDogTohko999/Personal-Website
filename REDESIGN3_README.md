@@ -34,11 +34,11 @@ The mood, the single small hiker and the ridge rising left-to-right are all kept
 - **Phones:** the caption sits lower, just above the ridge, so the text clears 4.5:1 contrast without a visible veil.
 - **Photo:** a still film-grain overlay, plus a flat sky colour while the photo loads, so there's no grey flash.
 
-**Inner pages.** The photo becomes a band across the top, with the hiker in it, above a calm opaque reading sheet: 19px text on a ~65-character measure. The intro and Jason-ing open the writing page. Debate and Eagle Scout are on work, and the framed, drifting globe is on places.
+**Inner pages.** The photo stays full-screen behind every page (you asked for this after the first look). A calm, opaque reading sheet scrolls over it: 19px text on a ~65-character measure. On wide screens the sheet sits under your name on the left, so the hiker stays in view on the right. The intro and Jason-ing open the writing page. Debate and Eagle Scout are on work, and the framed, drifting globe is on places.
 
 **Contrast.** Measured against the actual photo pixels at the worst pixel: 4.52–4.71:1 on the home and 4.66–5.65:1 on the band, across 390, 768, 1440 and 1920 widths. The reading sheet is 6.5:1 or better.
 
-| Phone home | Writing (phone) | Post |
+| Phone home | Writing (phone, before the full-screen fix) | Post (before the full-screen fix) |
 |---|---|---|
 | ![](docs/redesign3/final-home-mobile.jpg) | ![](docs/redesign3/final-blog-mobile.jpg) | ![](docs/redesign3/final-post-desktop.jpg) |
 
@@ -76,6 +76,6 @@ Each branch's `DECISIONS.md` has the details.
 4. **Grain:** still (as now) or a gentle shimmer?
 
 ## Notes
-- **Screenshots:** headless-Chrome captures of the production builds. Fades are switched off for the capture only, because headless virtual time doesn't advance CSS fades. In a real browser the photo fades in over 0.7s. If the load is slow, it shows after 2.5s at most.
+- **Screenshots:** headless-Chrome captures of the production builds. Fades are switched off for the capture only, because headless virtual time doesn't advance CSS fades. In the current version there is no fade: the photo paints as soon as it loads, over a matching flat sky colour.
 - **Untouched:** `.worktrees/r2-ridge` (another session's uncommitted work) and your dev servers on 5192/5194.
 - **Rounds 1 and 2** are documented in `REDESIGN_README.md` on `redesign/final` and `REDESIGN2_README.md` on `redesign2/final-hearth`/`final-trail`.
