@@ -409,9 +409,49 @@ html[data-page='inner'] body { background: var(--paper); }
 .post-head .quiet { font-style: italic; }
 .prose-body h2 { font-size: 1.375rem; }
 .prose-body blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 1px solid var(--rule); color: var(--muted); }
-/* Post bodies carry some fixed pixel widths (inline styles); keep them inside a phone screen. */
-.prose-body img, .prose-body video { max-width: 100%; height: auto; }
-.prose-body figure { flex-wrap: wrap; max-width: 100%; }
+/* Figures inside posts (critique fix 8). The old posts set photos in tilted cream "polaroid"
+   frames with heavy shadows, and one post has a bright blue chart; they were the loudest things
+   on any page. Here every picture sits flat and straight, inside the measure, with a 1px haze
+   border. Captions beside a photo keep their place when there is room and drop below it when
+   there is not. (Post bodies set widths, margins and alignment inline, hence the !important.) */
+.prose-body img,
+.prose-body video {
+  max-width: 100% !important;
+  height: auto;
+  border: 1px solid #c9ccbf !important;
+  border-radius: 0 !important;
+}
+.prose-body figure {
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 0.75rem 1.5rem !important;
+  margin: 2rem 0 !important;
+}
+.prose-body figure > * { min-width: 0; }
+.prose-body figure > figcaption {
+  flex: 1 1 12rem !important;
+  font-size: 1rem !important;
+  line-height: 1.55 !important;
+  text-align: left !important;
+  color: var(--muted);
+}
+.prose-body .post-frame {
+  position: static !important;
+  max-width: 100%;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.prose-body .post-cluster {
+  position: static !important;
+  display: flex;
+  gap: 0.5rem;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+}
+.prose-body .post-cluster > .post-frame { flex: 1 1 0; }
 .prose-body pre, .prose-body table { max-width: 100%; overflow-x: auto; }
 .prose-body p[id^='fn'] { font-size: 1rem; }
 

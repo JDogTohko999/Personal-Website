@@ -32,6 +32,9 @@ function grainWorst(c) {
   return 255 * (b * (1 - GRAIN.alpha) + o * GRAIN.alpha);
 }
 
+// object-position: a percentage of the free space, or (the inner band) a length from the top-left.
+const offset = (v, free) => (v.trim().endsWith('%') ? free * (parseFloat(v) / 100) : parseFloat(v));
+
 function pct(sorted, p) {
   return sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
 }
@@ -51,9 +54,9 @@ export async function measure() {
   const k = Math.max(box.width / nw, box.height / nh);
   const dw = nw * k;
   const dh = nh * k;
-  const [px, py] = getComputedStyle(img).objectPosition.split(' ').map((v) => parseFloat(v) / 100);
-  const ox = box.left + (box.width - dw) * px;
-  const oy = box.top + (box.height - dh) * py;
+  const [px, py] = getComputedStyle(img).objectPosition.split(' ');
+  const ox = box.left + offset(px, box.width - dw);
+  const oy = box.top + offset(py, box.height - dh);
   ctx.drawImage(img, ox, oy, dw, dh);
   const data = ctx.getImageData(0, 0, W, H).data;
   const raw = (x, y) => { const i = (y * W + x) * 4; return [data[i], data[i + 1], data[i + 2]]; };
@@ -129,9 +132,9 @@ export function hiker() {
   const [hx, hy] = tall ? [0.61, 0.71] : [0.62, 0.76];
   const k = Math.max(box.width / img.naturalWidth, box.height / img.naturalHeight);
   const dw = img.naturalWidth * k; const dh = img.naturalHeight * k;
-  const [px, py] = getComputedStyle(img).objectPosition.split(' ').map((v) => parseFloat(v) / 100);
-  const x = box.left + (box.width - dw) * px + hx * dw;
-  const y = box.top + (box.height - dh) * py + hy * dh;
+  const [px, py] = getComputedStyle(img).objectPosition.split(' ');
+  const x = box.left + offset(px, box.width - dw) + hx * dw;
+  const y = box.top + offset(py, box.height - dh) + hy * dh;
   // Is any text box within 12px of him?
   const cover = [...document.querySelectorAll('.caption, .band-head')].some((el) => {
     const r = el.getBoundingClientRect();

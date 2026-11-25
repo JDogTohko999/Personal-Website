@@ -12,8 +12,10 @@ const Footnote = ({ n, children }) => (
 );
 
 // Cream photo frame ("polaroid"). Pass rotate for the tilted cluster photos.
+// (In the sky design, index.css flattens these: no tilt, no shadow, a hairline border.)
 const Frame = ({ children, rotate = 0, pad = 8, shadow = '0 10px 24px rgba(0,0,0,.45)', style = {} }) => (
   <div
+    className="post-frame"
     style={{
       background: '#f5f3ec',
       padding: pad,
@@ -87,7 +89,7 @@ const BoresBackpackContent = () => (
 
     {/* bores signs — anti on the left, pro on the right, caption between */}
     <figure style={{ display: 'flex', gap: 18, alignItems: 'center', margin: '0 0 60px' }}>
-      <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
+      <div className="post-cluster" style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
         <Frame pad={6} rotate={-5} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 2 }}><img src="/blog/anti_bores.jpg" alt="Anti-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
         <Frame pad={6} rotate={3} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 115, top: 38, zIndex: 1 }}><img src="/blog/anti_bores2.jpg" alt="Anti-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
       </div>
@@ -95,7 +97,7 @@ const BoresBackpackContent = () => (
         "Looks like it's gonna be a great day today"<br />
         <a href="https://genius.com/Mf-doom-great-day-lyrics" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold" style={{ fontSize: 8, textDecoration: 'none' }}>"DOOM, are you pondering what I'm pondering"</a>
       </figcaption>
-      <div style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
+      <div className="post-cluster" style={{ flex: 'none', position: 'relative', width: 250, height: 215 }}>
         <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 0, top: 0, zIndex: 2 }}><img src="/blog/pro_bores.jpg" alt="Pro-Bores sign" style={{ display: 'block', width: 138 }} /></Frame>
         <Frame pad={6} rotate={-4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', right: 115, top: 38, zIndex: 1 }}><img src="/blog/pro_bores2.jpg" alt="Pro-Bores sign 2" style={{ display: 'block', width: 138 }} /></Frame>
       </div>
@@ -127,7 +129,7 @@ const BoresBackpackContent = () => (
     <figcaption className="text-portfolio-muted" style={{ flex: 1, fontSize: 15, fontStyle: 'italic', lineHeight: 1.7, textAlign: 'center' }}>
       My Monday morning canvassing. Got to meet Alex himself!
     </figcaption>
-    <div style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
+    <div className="post-cluster" style={{ flex: 'none', position: 'relative', width: 265, height: 330 }}>
       <Frame pad={6} rotate={4} shadow="0 8px 20px rgba(0,0,0,.45)" style={{ position: 'absolute', left: 0, top: 0, zIndex: 1 }}>
         <img src="/blog/AlexBores.png" alt="Alex Bores" style={{ display: 'block', width: 125 }} />
       </Frame>
