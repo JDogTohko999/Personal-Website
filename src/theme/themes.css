@@ -1,6 +1,16 @@
 /*
-  Round-2 themes. Four palettes as CSS custom properties on <html data-theme="...">.
+  Round-2 palettes as CSS custom properties on <html data-theme="...">.
   The hook in ./useTheme.js sets the attribute; index.html sets it before first paint.
+
+  Six named palettes (the visitor can switch between them; see `palettes` in useTheme.js):
+    japandi   cream and soft white, walnut text, moss accent             (light, the default)
+    clay      seed-puff ground, clay accents                             (light)
+    moss      pale olive ground, fresh-bark accents                      (light)
+    sand      sand / seed-puff ground, terracotta and taupe accents      (light)
+    herb      sage ground, deep brown text, moss links                   (light, mid-tone)
+    walnut    deep brown ground, beige text, terracotta accents          (dark)
+  Three extra palettes from the first base, unchanged so trail and hearth keep their look:
+    japandi-night (dark), earth (light), earth-dusk (dark).
 
   Semantic tokens (use these in new code):
     --bg          page background
@@ -8,45 +18,44 @@
     --text        body text
     --muted       secondary text: dates, captions, labels  (>= 4.5:1, safe for text)
     --faint       decoration only: hairlines, dots, disabled  (NOT for text)
-    --accent      primary accent (headings marks, active nav, focus)
-    --accent-2    secondary accent
+    --accent      primary accent (active nav, labels, focus)  (>= 4.5:1 on --bg)
+    --accent-2    secondary accent                            (>= 4.5:1 on --bg)
     --rule        hairline rules / borders
     --link        inline links
     --link-hover  inline links on hover/focus
-  Globe tokens (read by TourGlobe via getComputedStyle; it re-reads on theme change):
+  Globe tokens (read by TourGlobe via getComputedStyle once per theme change):
     --globe-ocean, --globe-land, --globe-visited, --globe-going, --globe-bucket,
-    --globe-border, --globe-pin, --globe-pin-home, --globe-halo
+    --globe-border (country borders), --globe-pin, --globe-pin-home, --globe-halo,
+    --globe-limb (shade inside the disc edge), --globe-frame (the framed card's tint)
 
-  Palettes are sampled from Jason's images (see R2_BRIEF_COMMON.md). Nudges, all for contrast:
-    japandi        --muted is taupe #936D49 darkened to #7A5A3C (raw taupe is only 3.93:1 on #F9EAD5).
-    earth          --text is clay #745851 deepened to #3A2E2A (the palette has no dark);
-                   --accent is fresh bark #686F56 nudged to #636A51 (raw is 4.48:1);
-                   --link is bark deepened to #555C44.
-    japandi-night  bg is soft black #272018, surface leans toward deep brown #311209.
-    earth-dusk     bg is fresh bark #686F56 taken very dark (#2A2923).
+  Values are sampled from Jason's two palette images (see R2_BRIEF_COMMON.md):
+    Japandi: soft white #FEFAE1, cream #F9EAD5, beige #E8C998, natural #C29665, warm taupe #936D49,
+             moss #4F4720 / #4E5230, soft black #272018, terracotta #752C13, walnut #522111,
+             deep brown #311209.
+    Earth:   clay #745851, fresh bark #686F56, olive #A29573, sand #B59D7E, herb #B9B7A6,
+             seed puff #F6EBE3.
+  Text colours are those values, deepened or lifted only as far as 4.5:1 needs. Grounds that
+  the images don't have (moss, sand, herb) are the named colour mixed toward seed puff.
 
-  WCAG contrast ratios (computed with the WCAG 2.1 relative-luminance formula):
-                    text/bg  text/surface  muted/bg  link/bg  link/surface  link-hover/bg  accent/bg
-    japandi          13.60      15.29        5.29      8.35       9.40         11.21          8.35
-    japandi-night    13.60      13.28        6.01     10.14       9.90         15.29         10.14
-    earth            11.17      12.11        5.50      5.97       6.47          5.50          4.83
-    earth-dusk       12.44      10.83        7.21      7.39       6.43         12.44          5.62
-  All text pairs are >= 4.5:1. Re-check if you change a value (any WCAG contrast checker).
+  Contrast: run `node scripts/check-contrast.mjs`. It parses this file, checks that every
+  palette defines every token, and fails on any text pair below 4.5:1. Its output is copied
+  into README_BASE.md.
 */
 
+/* ---- japandi: cream and soft white, walnut text, moss accent ---- */
 :root,
 [data-theme='japandi'] {
   color-scheme: light;
-  --bg: #f9ead5;          /* page bg */
+  --bg: #f9ead5;          /* cream */
   --surface: #fefae1;     /* soft white */
-  --text: #272018;        /* soft black */
+  --text: #522111;        /* walnut */
   --muted: #7a5a3c;       /* warm taupe, darkened */
   --faint: #c29665;       /* natural */
-  --accent: #752c13;      /* terracotta */
-  --accent-2: #4e5230;    /* moss (greener variant) */
+  --accent: #4e5230;      /* moss */
+  --accent-2: #752c13;    /* terracotta */
   --rule: #e8c998;        /* beige */
-  --link: #752c13;        /* terracotta */
-  --link-hover: #522111;  /* walnut */
+  --link: #4e5230;        /* moss */
+  --link-hover: #311209;  /* deep brown */
 
   --globe-ocean: #fefae1;
   --globe-land: #e8c998;
@@ -57,7 +66,146 @@
   --globe-pin: #752c13;
   --globe-pin-home: #4e5230;
   --globe-halo: rgba(147, 109, 73, 0.16);
+  --globe-limb: rgba(82, 33, 17, 0.07);
+  --globe-frame: #f4e2c8;
 }
+
+/* ---- clay: seed-puff ground, clay accents ---- */
+[data-theme='clay'] {
+  color-scheme: light;
+  --bg: #f6ebe3;          /* seed puff */
+  --surface: #fbf5f0;
+  --text: #3b2a26;        /* clay, deepened */
+  --muted: #6c5a53;       /* clay, greyed */
+  --faint: #c4ada3;
+  --accent: #745851;      /* clay */
+  --accent-2: #5f664d;    /* fresh bark, deepened */
+  --rule: #e0cfc6;
+  --link: #6a4b44;        /* clay, deepened */
+  --link-hover: #3b2a26;
+
+  --globe-ocean: #fbf5f0;
+  --globe-land: #e6d7cd;
+  --globe-visited: #b8968c;
+  --globe-going: #a29573; /* olive */
+  --globe-bucket: #d6b9ad;
+  --globe-border: #f6ebe3;
+  --globe-pin: #745851;
+  --globe-pin-home: #686f56;
+  --globe-halo: rgba(116, 88, 81, 0.14);
+  --globe-limb: rgba(59, 42, 38, 0.07);
+  --globe-frame: #efe1d7;
+}
+
+/* ---- moss: pale olive ground, fresh-bark accents ---- */
+[data-theme='moss'] {
+  color-scheme: light;
+  --bg: #ecebdc;          /* olive and herb toward seed puff */
+  --surface: #f5f4ea;
+  --text: #2c2f20;        /* moss, near black */
+  --muted: #5a5c49;
+  --faint: #b0ad94;
+  --accent: #575e45;      /* fresh bark, deepened */
+  --accent-2: #6a4f49;    /* clay, deepened */
+  --rule: #d0ceb9;
+  --link: #4b523e;        /* fresh bark, deeper */
+  --link-hover: #6a4f49;
+
+  --globe-ocean: #f5f4ea;
+  --globe-land: #d9d7c2;
+  --globe-visited: #a29573; /* olive */
+  --globe-going: #868d72;
+  --globe-bucket: #cdb3a6;
+  --globe-border: #ecebdc;
+  --globe-pin: #4b523e;
+  --globe-pin-home: #745851;
+  --globe-halo: rgba(104, 111, 86, 0.16);
+  --globe-limb: rgba(44, 47, 32, 0.07);
+  --globe-frame: #e3e2cf;
+}
+
+/* ---- sand: sand / seed-puff ground, terracotta and taupe accents ---- */
+[data-theme='sand'] {
+  color-scheme: light;
+  --bg: #efe4d6;          /* sand toward seed puff */
+  --surface: #f8f1e9;
+  --text: #3a2c22;
+  --muted: #6c5644;       /* taupe, darkened */
+  --faint: #c2ab8e;
+  --accent: #8b3f22;      /* terracotta, lifted */
+  --accent-2: #725437;    /* warm taupe, darkened */
+  --rule: #dccab3;
+  --link: #8b3f22;
+  --link-hover: #522111;  /* walnut */
+
+  --globe-ocean: #f8f1e9;
+  --globe-land: #e3d1ba;
+  --globe-visited: #b59d7e; /* sand */
+  --globe-going: #a29573;   /* olive */
+  --globe-bucket: #dbb7a0;
+  --globe-border: #efe4d6;
+  --globe-pin: #8b3f22;
+  --globe-pin-home: #686f56;
+  --globe-halo: rgba(181, 157, 126, 0.2);
+  --globe-limb: rgba(58, 44, 34, 0.07);
+  --globe-frame: #e8dac8;
+}
+
+/* ---- herb: sage ground, deep brown text, moss links ---- */
+[data-theme='herb'] {
+  color-scheme: light;
+  --bg: #d6d4c6;          /* herb, lifted */
+  --surface: #e3e1d6;
+  --text: #311209;        /* deep brown */
+  --muted: #4c4639;
+  --faint: #a3a18f;
+  --accent: #522111;      /* walnut */
+  --accent-2: #3f4329;    /* moss, deepened */
+  --rule: #b9b7a6;        /* herb */
+  --link: #3d4127;        /* moss, deepened */
+  --link-hover: #522111;
+
+  --globe-ocean: #e3e1d6;
+  --globe-land: #bdbba9;
+  --globe-visited: #938a6a;
+  --globe-going: #6e765a;
+  --globe-bucket: #b59e91;
+  --globe-border: #d6d4c6;
+  --globe-pin: #522111;
+  --globe-pin-home: #3d4127;
+  --globe-halo: rgba(49, 18, 9, 0.1);
+  --globe-limb: rgba(49, 18, 9, 0.08);
+  --globe-frame: #cdcbbc;
+}
+
+/* ---- walnut: deep brown ground, beige text, terracotta accents (dark) ---- */
+[data-theme='walnut'] {
+  color-scheme: dark;
+  --bg: #2b1b13;          /* between deep brown and soft black */
+  --surface: #382419;
+  --text: #ecd3a8;        /* beige, a touch lighter */
+  --muted: #c29665;       /* natural */
+  --faint: #6b4a35;
+  --accent: #dc8c5f;      /* terracotta, lifted for dark */
+  --accent-2: #a9a77e;    /* moss, lifted */
+  --rule: #4a3326;
+  --link: #e3a273;        /* terracotta, lifted */
+  --link-hover: #fefae1;
+
+  --globe-ocean: #20140d;
+  --globe-land: #4a3326;
+  --globe-visited: #8c5d3f;
+  --globe-going: #6c6b43;
+  --globe-bucket: #6e3a24;
+  --globe-border: #2b1b13;
+  --globe-pin: #e3a273;
+  --globe-pin-home: #ecd3a8;
+  --globe-halo: rgba(232, 201, 152, 0.1);
+  --globe-limb: rgba(0, 0, 0, 0.18);
+  --globe-frame: #33211a;
+}
+
+/* ---- extra palettes from the first base (kept as they were; trail and hearth use them) ---- */
 
 [data-theme='japandi-night'] {
   color-scheme: dark;
@@ -81,6 +229,8 @@
   --globe-pin: #e8c998;
   --globe-pin-home: #fefae1;
   --globe-halo: rgba(232, 201, 152, 0.10);
+  --globe-limb: rgba(0, 0, 0, 0.07);
+  --globe-frame: #2e261d;
 }
 
 [data-theme='earth'] {
@@ -105,6 +255,8 @@
   --globe-pin: #745851;
   --globe-pin-home: #686f56;
   --globe-halo: rgba(116, 88, 81, 0.14);
+  --globe-limb: rgba(0, 0, 0, 0.07);
+  --globe-frame: #efe3d9;
 }
 
 [data-theme='earth-dusk'] {
@@ -129,12 +281,15 @@
   --globe-pin: #e3cfb3;
   --globe-pin-home: #f6ebe3;
   --globe-halo: rgba(181, 157, 126, 0.10);
+  --globe-limb: rgba(0, 0, 0, 0.07);
+  --globe-frame: #313029;
 }
 
 /*
   Legacy tokens. Blog post bodies, nowEntries.jsx, profile.jsx etc. use Tailwind classes such as
-  text-portfolio-gold; tailwind.config.js maps those to these variables. Keep them pointing at the
-  semantic tokens so post bodies look right in every theme.
+  text-portfolio-gold; tailwind.config.js maps those to these variables. They are declared once,
+  on the same element as data-theme (<html>), so every palette above gets the full mapping. Keep
+  them pointing at the semantic tokens so post bodies look right in every palette.
 */
 :root {
   --portfolio-bg: var(--bg);

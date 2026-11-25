@@ -15,6 +15,19 @@
         } catch (e) {}
       })();
     </script>
+    <script>
+      // The named palettes added later (clay, moss, sand, herb, walnut; japandi is above). Kept as
+      // a separate block so directions that trimmed the list above merge cleanly: drop any ids
+      // you don't offer. Keep in sync with THEMES in src/theme/useTheme.js.
+      (function () {
+        try {
+          var t = localStorage.getItem('jc-theme');
+          if (['clay', 'moss', 'sand', 'herb', 'walnut'].indexOf(t) > -1) {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
