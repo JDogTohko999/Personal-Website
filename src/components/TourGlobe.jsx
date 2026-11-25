@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useId, useImperativeHandle, useRef, useState } from 'react';
-import { geoDistance, geoGraticule, geoInterpolate, geoOrthographic, geoPath } from 'd3-geo';
+import { geoCentroid, geoDistance, geoGraticule, geoInterpolate, geoOrthographic, geoPath } from 'd3-geo';
 import { cities, homePlace, tourPlaces as defaultTour } from '../data/places.js';
-import { categoryOf, loadWorld } from '../lib/geo.js';
+import { DRAW_LAST, categoryOf, loadWorld } from '../lib/geo.js';
 
 /**
  * TourGlobe: a calm, theme-aware canvas globe that tours Jason's places.
@@ -16,7 +16,7 @@ import { categoryOf, loadWorld } from '../lib/geo.js';
  * @param {object[]} tourPlaces         Stops in order (default: places.js `tourPlaces`).
  * @param {number}   holdMs=3500        Time held at each stop.
  * @param {number}   flyMs=2800         Duration of a long leg (short hops are quicker).
- * @param {number}   zoomIn=3.6         Zoom factor at a stop (1 = whole globe fits).
+ * @param {number}   zoomIn=4           Zoom factor at a stop (1 = whole globe fits).
  * @param {number}   maxZoom=8          Upper limit for wheel / pinch / +/- zoom.
  * @param {boolean}  interactive=true   Drag to spin (with inertia), click pins, keys, buttons.
  * @param {boolean}  zoomable=false     Wheel, pinch and +/- zoom.
@@ -75,7 +75,7 @@ const TourGlobe = forwardRef(function TourGlobe(
     tourPlaces = defaultTour,
     holdMs = 3500,
     flyMs = 2800,
-    zoomIn = 3.6,
+    zoomIn = 4,
     maxZoom = 8,
     interactive = true,
     zoomable = false,
@@ -243,13 +243,23 @@ const TourGlobe = forwardRef(function TourGlobe(
     let raf = 0;
     let last = performance.now();
     let alive = true;
+    if (import.meta.env?.DEV) wrap.__tourGlobe = st; // inspect from devtools: $0.__tourGlobe
 
     loadWorld()
       .then((features) => {
         if (!alive) return;
-        const groups = { base: [], visited: [], goingSoon: [], bucketList: [] };
-        features.forEach((f) => groups[categoryOf(f) || 'base'].push(f)); // per feature, never merged
-        st.world = groups;
+        const items = [];
+        features.forEach((f) => {
+          // Per feature, never merged. Keep a bounding cap (centre + angular radius) for culling.
+          const c = geoCentroid(f);
+          let rad = 0;
+          const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+          polys.forEach((poly) => poly.forEach((ring) => ring.forEach((pt) => { rad = Math.max(rad, geoDistance(c, pt)); })));
+          items.push({ f, c, rad, cat: categoryOf(f) || 'base' });
+        });
+        // Paint order: by category, then the overlaps in DRAW_LAST (Western Sahara over Morocco).
+        const rank = (it) => (DRAW_LAST.has(it.f.id) ? CATS.length : CATS.indexOf(it.cat));
+        st.world = items.sort((a, b) => rank(a) - rank(b));
         st.viewDirty = true;
       })
       .catch(() => alive && setFailed(true));
@@ -320,12 +330,18 @@ const TourGlobe = forwardRef(function TourGlobe(
       ctx.globalAlpha = 1;
 
       if (st.world) {
+        // Each country is filled and stroked on its own path (no merged shapes, so no stray
+        // island fills). Countries outside the visible cap are skipped, which is most of them
+        // when zoomed in to a stop.
+        const centre = [-st.rot[0], -st.rot[1]];
+        const view = Math.asin(Math.min(1, Math.hypot(w, h) / 2 / r)) + 0.02;
         ctx.lineJoin = 'round';
         ctx.lineWidth = clamp(0.5 + st.zoom * 0.12, 0.5, 1.2);
         ctx.strokeStyle = C.border;
-        CATS.forEach((cat) => {
+        st.world.forEach(({ f, c, rad, cat }) => {
+          if (geoDistance(c, centre) - rad > view) return;
           ctx.beginPath();
-          st.world[cat].forEach((f) => path(f));
+          path(f);
           ctx.fillStyle = C[cat];
           ctx.fill();
           ctx.stroke();
@@ -402,9 +418,11 @@ const TourGlobe = forwardRef(function TourGlobe(
       }
     };
 
-    const frame = (now) => {
-      raf = requestAnimationFrame(frame);
-      const dt = Math.min(now - last, 60);
+    const tick = (now) => {
+      const dt = clamp(now - last, 0, 60); // physics (inertia)
+      // Tour clock: real time, so a throttled tab (background pane, low-power) keeps its pace.
+      // Hidden tabs return below, so this never jumps after a tab switch.
+      const tdt = clamp(now - last, 0, 1000);
       last = now;
       if (!st.visible || document.hidden || !st.size.w || !st.size.h) return;
       const p = propsRef.current;
@@ -427,7 +445,7 @@ const TourGlobe = forwardRef(function TourGlobe(
 
       if (st.leg && (running || flying)) {
         const L = st.leg;
-        L.t += dt;
+        L.t += tdt;
         const t = clamp(L.t / L.dur, 0, 1);
         const e = ease(t);
         st.rot = rotFor(L.interp(e));
@@ -436,10 +454,10 @@ const TourGlobe = forwardRef(function TourGlobe(
         if (t >= 1) { st.leg = null; arrive(L.place); }
       } else if (running && !st.pinned) {
         if (!st.started) {
-          st.intro += dt;
+          st.intro += tdt;
           if (st.intro >= INTRO_MS) { st.started = true; st.index = 0; legTo(p.tourPlaces[0]); }
         } else if (st.hold) {
-          st.hold.el += dt;
+          st.hold.el += tdt;
           if (st.hold.el >= p.holdMs) {
             const i = p.tourPlaces.indexOf(st.hold.place);
             st.index = i >= 0 ? (i + 1) % p.tourPlaces.length : nearestIndex();
@@ -454,7 +472,12 @@ const TourGlobe = forwardRef(function TourGlobe(
       if (st.viewDirty) { drawMap(); st.viewDirty = false; st.pinsDirty = true; }
       if (st.pinsDirty) { drawPins(); st.pinsDirty = false; }
     };
+    const frame = (now) => {
+      raf = requestAnimationFrame(frame);
+      tick(now);
+    };
     raf = requestAnimationFrame(frame);
+    if (import.meta.env?.DEV) wrap.__tourGlobeTick = () => tick(performance.now()); // drive it when rAF is throttled
 
     // ---- pointer, wheel and keys ----
     const local = (e) => {

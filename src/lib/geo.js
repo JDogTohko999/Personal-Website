@@ -11,6 +11,7 @@ import { geoUrl, cities, getCountryCategory } from '../data/places.js';
     continentOf(iso3) e.g. 'ESP' -> 'Europe'
     placesByCountry   [{ iso3, name, continent, places: city[] }], countries in first-seen order
     splitOverseas(features)  splits French Guiana off France (see below)
+    DRAW_LAST         feature ids to paint after the rest (overlapped outlines)
     categoryOf(feature)      'visited' | 'goingSoon' | 'bucketList' | null, safe for split pieces
     loadWorld()       Promise<GeoJSON Feature[]> of countries, fetched once and shared
 */
@@ -46,8 +47,9 @@ export const placesByCountry = visitedIso.map((iso3) => ({
   - France's feature (id 250) also contains French Guiana, so the whole of France would light
     up "been there" on the coast of South America. The South American ring is split off into
     its own uncategorised shape.
-  - Madagascar (450) is uncategorised, Western Sahara (732) is separate from Morocco, Greenland
-    (304) from Denmark, and the US keeps Alaska and Hawaii (same country).
+  - Madagascar (450) is uncategorised, Greenland (304) is separate from Denmark, and the US
+    keeps Alaska and Hawaii (same country). Western Sahara (732) is its own feature but
+    Morocco's outline overlaps it, hence DRAW_LAST below.
 */
 const OVERSEAS = {
   250: { id: 'GUF', name: 'French Guiana', isOverseas: (ring) => geoCentroid({ type: 'Polygon', coordinates: [ring] })[0] < -30 },
@@ -71,6 +73,10 @@ export function splitOverseas(features) {
   });
   return out;
 }
+
+// Features whose 110m outline is overlapped by a neighbour's, so they must be painted after it:
+// Morocco's polygon (504) runs down to 21.4N and covers Western Sahara (732).
+export const DRAW_LAST = new Set(['732']);
 
 // Category for a (possibly split) feature. The split-off pieces have no category.
 export const categoryOf = (f) => (Object.values(OVERSEAS).some((r) => r.id === f.id) ? null : getCountryCategory(f));
