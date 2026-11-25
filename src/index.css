@@ -34,10 +34,10 @@
   --accent: #2c4745;
   --accent-2: #4a4626;
   --rule: #c2c8ba;
-  --link: #7a2c12;       /* terracotta (Japandi): every link, plainly not body text */
-  --link-hover: #4f1b08;
-  --link-photo: #4a1702;  /* the same family, deepened, for links over the photo */
-  --link-photo-hover: #2b0d01;
+  --link: #663c2c;       /* muted clay-brown: every link, a quiet step off the body text */
+  --link-hover: #3f2419;
+  --link-photo: #3e1f12;  /* the same family, deepened, for links over the photo */
+  --link-photo-hover: #24120a;
 
   --globe-ocean: #eef0e9;
   --globe-land: #cfd4c6;
@@ -161,7 +161,7 @@ html[data-page='home'] body { overflow: hidden; }
   /* A resting underline at about a third of the ink: quiet, but plainly a link (critique fix 3). */
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(74, 23, 2, 0.4);
+  text-decoration-color: rgba(62, 31, 18, 0.4);
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.15s ease;
 }
@@ -682,8 +682,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --surface: #c3d5c8;
   --text: #121a18;
   --muted: #33403b;     /* 5.5:1 on the darkest blend (scree behind, about #b6bbac) */
-  --link: #7a2c12;
-  --link-hover: #4f1b08;
+  --link: #663c2c;
+  --link-hover: #3f2419;
   --rule: #a9b09f;
   --globe-ocean: #d3d8cb;
   --globe-frame: #ccd1c3;
