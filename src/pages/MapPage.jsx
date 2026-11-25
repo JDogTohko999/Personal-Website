@@ -1,113 +1,132 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import TourGlobe from '../components/TourGlobe.jsx';
-import Lightbox from '../components/Lightbox.jsx';
-import { full, thumb } from '../components/webImage.js';
+import Photos from '../components/Photos.jsx';
 import { cities, homePlace, tourPlaces } from '../data/places.js';
 import { placesByCountry, stats } from '../lib/geo.js';
 import useTitle from '../lib/useTitle.js';
 
 /*
-  Reference /map page: a large touring globe, then every place grouped by country. Clicking a
-  place (in the list or on the globe) flies there and shows its description; the Bay shows the
-  SF photos (thumbs, full image on click). ?place=<id> selects on arrival.
-  ?motion=reduce forces the reduced-motion path (handy for checking it).
-  Styling is deliberately plain; builders restyle.
+  /places (alias /map). The framed globe drifts through the tour; under it, the place it is
+  passing and what Jason wrote about it; then every place, a word each, grouped by country.
+  Picking a word or a pin sets ?place=<id>, flies there and stays. The Bay has photos.
+  ?motion=reduce forces the reduced-motion path. Structure borrowed from hearth's MapPage.
+
+  The text under the globe follows the drift but is not a live region (the globe announces
+  only places the visitor asked for); between places it dims rather than going stale.
 */
+const finePointer = () => typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
+const stillMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function Moving({ moving, onChange }) {
+  useEffect(() => { onChange(moving); }, [moving, onChange]);
+  return null;
+}
+
 export default function MapPage() {
-  useTitle('Map');
+  useTitle('Places');
   const [params, setParams] = useSearchParams();
-  const globeRef = useRef(null);
-  const detailRef = useRef(null);
-  const [box, setBox] = useState(null);
+  const globe = useRef(null);
+  const figure = useRef(null);
+  const [stop, setStop] = useState(homePlace || tourPlaces[0] || cities[0]);
+  const [paused, setPaused] = useState(false);
+  const [moving, setMoving] = useState(false);
 
   const selectedId = Number(params.get('place')) || null;
-  const selected = useMemo(() => cities.find((c) => c.id === selectedId) || null, [selectedId]);
-  const reduced = params.get('motion') === 'reduce' ? true : undefined;
+  const selected = cities.find((c) => c.id === selectedId) || null;
+  const shown = selected || stop;
+  const forced = params.get('motion') === 'reduce' ? true : undefined;
+  const still = forced || stillMotion();
 
-  const select = useCallback((place) => {
+  const pick = (place) => {
     const next = new URLSearchParams(params);
     if (place) next.set('place', String(place.id));
     else next.delete('place');
-    setParams(next, { replace: true });
-  }, [params, setParams]);
+    setParams(next, { replace: true, preventScrollReset: true });
+    if (place) figure.current?.scrollIntoView({ block: 'nearest', behavior: still ? 'auto' : 'smooth' });
+  };
+  const step = (dir) => {
+    if (dir > 0) globe.current?.next();
+    else globe.current?.prev();
+    if (selected) pick(null);
+  };
+  const arrive = (place) => {
+    setStop(place);
+    if (selected && place && place.id !== selected.id) pick(null);
+  };
+  const toggle = () => {
+    if (paused) globe.current?.play();
+    else globe.current?.pause();
+    setPaused(!paused);
+  };
 
   return (
     <>
-      <h1>Places</h1>
-      <p className="muted">
-        {stats.places} places in {stats.countries} countries across {stats.continents} continents. The globe tours{' '}
-        {tourPlaces.length} of them; hover to pause, drag to look around, click a pin for its story.
+      <h1 className="page-title">Places</h1>
+      <p className="page-lede">
+        {stats.places} places in {stats.countries} countries, on {stats.continents} continents. The globe wanders
+        between a few of them; pick any place to go there.
       </p>
 
-      <TourGlobe
-        ref={globeRef}
-        selectedId={selectedId}
-        homeId={homePlace?.id}
-        zoomable
-        reducedMotion={reduced}
-        onPick={(place) => select(place)}
-        style={{ aspectRatio: 'auto', height: 'min(78vh, 640px, 110vw)', minHeight: 320 }}
-      />
-
-      <div ref={detailRef} aria-live="polite" style={{ minHeight: '4rem', marginTop: '1rem' }}>
-        {selected ? (
-          <section>
-            <h2 style={{ marginTop: 0 }}>{selected.name}</h2>
-            <p>{selected.description}</p>
-            {selected.images.length > 0 && (
-              <div className="thumbs">
-                {selected.images.map((src, i) => (
-                  <button key={src} type="button" onClick={() => setBox(i)} aria-label={`Open photo ${i + 1} of ${selected.images.length}`}>
-                    <img src={thumb(src)} alt="" loading="lazy" />
-                  </button>
-                ))}
-              </div>
-            )}
-            <p className="small">
-              <button type="button" className="text-button" onClick={() => select(null)}>Back to the tour</button>
-            </p>
-          </section>
-        ) : (
-          <p className="muted small">Pick a place below or on the globe.</p>
-        )}
-      </div>
-
-      {placesByCountry.map((country) => (
-        <section key={country.iso3}>
-          <h3>{country.name}</h3>
-          <ul className="plain-list">
-            {country.places.map((place) => (
-              <li key={place.id} style={{ marginBottom: '0.35rem' }}>
-                <button
-                  type="button"
-                  className="text-button"
-                  aria-pressed={place.id === selectedId}
-                  style={place.id === selectedId ? { color: 'var(--text)', textDecoration: 'none', fontWeight: 600 } : undefined}
-                  onClick={() => {
-                    select(place);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  {place.name}
-                </button>
-                {place.home && <span className="muted small"> · home</span>}
-                {place.tour && <span className="muted small"> · on the tour</span>}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
-
-      {box != null && selected && (
-        <Lightbox
-          images={selected.images.map(full)}
-          index={box}
-          alt={`${selected.name} photo`}
-          onClose={() => setBox(null)}
-          onStep={(d) => setBox((i) => (i + d + selected.images.length) % selected.images.length)}
+      <figure ref={figure} style={{ margin: 0 }}>
+        <TourGlobe
+          ref={globe}
+          aspect="4 / 3"
+          showControls={false}
+          classNames={{ frame: 'globe-frame' }}
+          zoomable={finePointer()}
+          reducedMotion={forced}
+          selectedId={selected ? selected.id : null}
+          onStop={arrive}
+          onPick={pick}
+          renderCaption={(_, { moving: m }) => <Moving moving={m} onChange={setMoving} />}
         />
-      )}
+        <figcaption>
+          <p className="map-controls">
+            <button type="button" className="word" onClick={() => step(-1)}>previous</button>
+            <button type="button" className="word" onClick={() => step(1)}>next</button>
+            {!still && (selected ? (
+              <button type="button" className="word" onClick={() => pick(null)}>back to the tour</button>
+            ) : (
+              <button type="button" className="word" onClick={toggle}>{paused ? 'play' : 'pause'}</button>
+            ))}
+          </p>
+          {shown && (
+            <div className="map-shown" data-moving={(!selected && moving) || undefined}>
+              <h2 className="map-place">{shown.name}</h2>
+              <p>{shown.description}</p>
+              {shown.images?.length > 0 && <Photos images={shown.images} alt={shown.name} />}
+            </div>
+          )}
+          <ul className="plain map-key" aria-label="Country colours">
+            <li><i style={{ background: 'var(--globe-visited)' }} />been</li>
+            <li><i style={{ background: 'var(--globe-going)' }} />going soon</li>
+            <li><i style={{ background: 'var(--globe-bucket)' }} />someday</li>
+          </ul>
+        </figcaption>
+      </figure>
+
+      <div className="countries">
+        {placesByCountry.map((country) => (
+          <section key={country.iso3}>
+            <h3>{country.name}</h3>
+            <ul className="plain">
+              {country.places.map((p) => (
+                <li key={p.id}>
+                  <button
+                    type="button"
+                    className="place-word"
+                    aria-pressed={selectedId === p.id}
+                    onClick={() => pick(selectedId === p.id ? null : p)}
+                  >
+                    {p.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { nowEntry } from '../data/nowEntries.jsx';
+import { isoDate, longDate } from '../lib/dates.js';
 import useTitle from '../lib/useTitle.js';
 
 /* /now and /now/bonus. The bonus logic is kept from the old Now.jsx: on /now/bonus, open
@@ -21,9 +22,9 @@ export default function Now() {
 
   return (
     <article className="prose-body">
-      <h1>Now</h1>
-      <p className="muted small">
-        Updated {nowEntry.date}. This is a{' '}
+      <h1 className="page-title">Now</h1>
+      <p className="page-lede">
+        Updated <time dateTime={isoDate(nowEntry.date)}>{longDate(nowEntry.date)}</time>. This is a{' '}
         <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">now</a> page.
         You should make one too!
       </p>

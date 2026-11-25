@@ -95,6 +95,7 @@
   ::selection { background: rgba(74, 106, 105, 0.28); }
 }
 
+html, body { overflow-x: clip; }
 html[data-page='home'],
 html[data-page='home'] body { overflow: hidden; }
 
@@ -129,7 +130,7 @@ html[data-page='home'] body { overflow: hidden; }
   object-fit: cover;
   object-position: 62% 76%; /* the hiker, in the wide crop */
   opacity: 0;
-  transition: opacity 1.1s ease;
+  transition: opacity 0.7s ease;
 }
 .backdrop[data-ready] .backdrop-photo { opacity: 1; }
 @media (max-aspect-ratio: 4/5) {
@@ -179,6 +180,26 @@ html[data-page='home'] body { overflow: hidden; }
 /* Where you are: the word goes italic. No colour, no marker. */
 .sky-nav a.is-here { font-style: italic; }
 
+/* The veil: where text sits on the photo, a soft oval of haze lifts the sky just enough for the
+   ink (the tall crop's sky is darker than the wide one's). It reads as light in the corner of the
+   frame, not as a box. scripts/measure-sky.js reads this geometry and these stops, so keep the
+   gradient in this exact form: closest-side, three stops, one colour. */
+.veil { position: relative; isolation: isolate; }
+.veil::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -9rem;
+  right: -9rem;
+  bottom: -5rem;
+  left: -8rem;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(217, 221, 206, 0.38), rgba(217, 221, 206, 0.3) 55%, rgba(217, 221, 206, 0));
+}
+
+/* On the desktop panel the head sits on the panel, not the photo: no veil there. */
+.panel .veil::before { content: none; }
+
 /* ---------- home: the caption ---------- */
 
 .home {
@@ -194,7 +215,7 @@ html[data-page='home'] body { overflow: hidden; }
   top: clamp(1.75rem, 10.5vh, 7.5rem);
   max-width: min(24rem, calc(100vw - 3rem));
   color: var(--ink);
-  animation: caption-in 1.2s 0.35s ease both;
+  animation: caption-in 0.7s 0.2s ease backwards;
 }
 @keyframes caption-in {
   from { opacity: 0; }
@@ -232,6 +253,15 @@ html[data-page='home'] body { overflow: hidden; }
   /* Fingers: every link at least 32px tall. */
   .sky-nav-stack li { padding: 0; }
   .sky-nav-stack a { padding: 0.45rem 0; }
+}
+
+/* Short, wide screens (a phone on its side): the list would reach down into the scree, so the
+   links run in a line instead. */
+@media (max-height: 560px) and (min-aspect-ratio: 1/1) {
+  .caption { top: 1.5rem; max-width: 34rem; }
+  .sky-nav-stack { display: flex; flex-wrap: wrap; gap: 0 1.1rem; margin-top: 1rem; }
+  .sky-nav-stack ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+  .sky-nav-stack .sky-nav-out { margin-top: 0; }
 }
 
 /* ---------- inner pages: the reading panel ---------- */
@@ -302,6 +332,7 @@ html[data-page='home'] body { overflow: hidden; }
     top: calc(-38svh + 1.1rem);
     display: block;
   }
+  .panel .veil::before { content: ''; }
   .panel-name { font-size: 1.25rem; }
   .sky-nav-inline { margin-top: 0.3rem; gap: 0 1.1rem; font-size: 0.875rem; }
   .sky-nav-inline ul { gap: 0 0.85rem; }
@@ -497,6 +528,13 @@ html[data-page='home'] body { overflow: hidden; }
 /* ---------- now ---------- */
 
 details#now-bonus summary { cursor: pointer; color: var(--link); }
+
+@media (max-width: 959.98px) {
+  /* Under the band the page starts at once: the band already gave the breathing room. */
+  .page-title,
+  .vaisi-logo { margin-top: 0.5rem; }
+  .post-back { margin-top: 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .grain { animation: none; }

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts.jsx';
 import { listedPosts } from './Blog.jsx';
 import NotFound from './NotFound.jsx';
+import { isoDate, longDate } from '../lib/dates.js';
 import useTitle from '../lib/useTitle.js';
 
 export default function BlogPost() {
@@ -18,26 +19,29 @@ export default function BlogPost() {
 
   return (
     <article className="prose-body">
-      <p className="small"><Link to="/blog">← All writing</Link></p>
-      <h1>{post.title}</h1>
-      <p className="muted small">
-        {post.date}
-        {post.lastEdited && ` · last edited ${post.lastEdited}`}
-        {post.tags.length > 0 && ` · ${post.tags.join(', ')}`}
-      </p>
-      <hr />
-      {/* Post bodies use Tailwind classes + legacy portfolio-* colours (mapped in themes.css).
+      <header className="post-head">
+        <p className="post-back"><Link to="/blog">all writing</Link></p>
+        <h1 className="page-title">{post.title}</h1>
+        <p className="quiet">
+          <time dateTime={isoDate(post.date)}>{longDate(post.date)}</time>
+          {post.lastEdited && <>, edited {longDate(post.lastEdited)}</>}
+          {post.tags.length > 0 && <>. {post.tags.join(', ')}</>}
+        </p>
+      </header>
+
+      {/* Post bodies use Tailwind classes + legacy portfolio-* colours (mapped to the sky tokens).
           Footnotes are plain #fnN / #refN anchors, so they work as normal in-page links. */}
       <div className="text-portfolio-muted">
         <post.Content />
       </div>
+
       {(newer || older) && (
         <>
           <hr />
-          <p className="small" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <span>{older && <>← <Link to={`/blog/${older.id}`}>{older.title}</Link></>}</span>
-            <span>{newer && <><Link to={`/blog/${newer.id}`}>{newer.title}</Link> →</>}</span>
-          </p>
+          <nav className="post-foot" aria-label="More writing">
+            <span>{older && <><em>earlier</em><Link to={`/blog/${older.id}`}>{older.title}</Link></>}</span>
+            <span>{newer && <><em>later</em><Link to={`/blog/${newer.id}`}>{newer.title}</Link></>}</span>
+          </nav>
         </>
       )}
     </article>

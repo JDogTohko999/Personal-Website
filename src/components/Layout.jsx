@@ -30,7 +30,7 @@ export default function Layout() {
         <Outlet />
       ) : (
         <div className="panel">
-          <header className="panel-head">
+          <header className="panel-head veil">
             <Link to="/" className="panel-name">Jason Chin</Link>
             <SkyNav className="sky-nav-inline" />
           </header>

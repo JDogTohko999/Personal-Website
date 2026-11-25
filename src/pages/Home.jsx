@@ -12,7 +12,7 @@ export default function Home() {
   useTitle('');
   return (
     <main id="content" className="home">
-      <div className="caption">
+      <div className="caption veil">
         <h1 className="caption-name">{profile.name}</h1>
         <p className="caption-line">{profile.oneLiner}</p>
         <SkyNav withDate className="sky-nav-stack" />
