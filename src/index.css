@@ -338,11 +338,13 @@ html[data-page='inner'] body { background: var(--paper); }
 @media (pointer: coarse) {
   .sky-nav-inline a { padding: 0.3rem 0; }
 }
-@media (max-width: 40rem) {
-  /* The links on two lines, on purpose: the pages, then linkedin and meet (critique fix 6). */
+@media (max-width: 40rem), (max-aspect-ratio: 4/5) {
+  /* The links on two lines, on purpose: the pages, then linkedin and meet (critique fix 6).
+     Also on any portrait screen: the tall crop's sky darkens to the right, so the words stay
+     in its lighter left side. */
   .band-head { display: block; }
   .sky-nav-inline { display: block; margin-top: 0.35rem; }
-  .sky-nav-inline ul { gap: 0 0.95rem; }
+  .sky-nav-inline ul { gap: 0 0.8rem; }
 }
 
 /* The sheet: opaque haze, after margin (critique graft 3). No alpha, no blur. */
