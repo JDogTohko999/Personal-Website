@@ -15,7 +15,7 @@ export default function Home() {
       <div className="caption veil">
         <h1 className="caption-name">{profile.name}</h1>
         <p className="caption-line">{profile.oneLiner}</p>
-        <SkyNav withDate className="sky-nav-stack" />
+        <SkyNav className="sky-nav-stack" />
       </div>
     </main>
   );

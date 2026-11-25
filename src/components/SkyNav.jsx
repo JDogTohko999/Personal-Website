@@ -1,31 +1,29 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { links } from '../data/profile.jsx';
-import { nowEntry } from '../data/nowEntries.jsx';
-import { isoDate, longDate, shortDate } from '../lib/dates.js';
 
 /*
-  The tiny lowercase links, the same words on every page:
-  writing, now, places, work, vaisi, then (after a small gap) linkedin and meet.
-  On the home page "now" carries its date, quietly: "now  nov 15".
+  The tiny lowercase links, the same words on every page, in Jason's order:
+  now, involvements, writing, then (after a small gap) linkedin, substack and meet.
+  (Places and VAISI still have pages at /places and /vaisi; they're just not in the nav.)
 */
 export const PAGES = [
-  ['/blog', 'writing'],
   ['/now', 'now'],
-  ['/places', 'places'],
-  ['/experience', 'work'],
-  ['/vaisi', 'vaisi'],
+  ['/involvements', 'involvements'],
+  ['/blog', 'writing'],
 ];
 const OUT = [
   [links.linkedin, 'linkedin', 'LinkedIn (opens in a new tab)'],
+  [links.substack, 'substack', 'Substack (opens in a new tab)'],
   [links.savvycal, 'meet', 'Meet: book a time with Jason on SavvyCal (opens in a new tab)'],
 ];
 
-export default function SkyNav({ withDate = false, className = '' }) {
+export default function SkyNav({ className = '' }) {
   const { pathname } = useLocation();
-  const nowDate = shortDate(nowEntry.date).toLowerCase();
   const isCurrent = (to) =>
-    to === '/places' ? pathname === '/places' || pathname === '/map' : pathname === to || pathname.startsWith(`${to}/`);
+    to === '/involvements'
+      ? pathname === '/involvements' || pathname === '/experience'
+      : pathname === to || pathname.startsWith(`${to}/`);
   return (
     <nav className={`sky-nav ${className}`} aria-label="Main">
       <ul className="sky-nav-pages">
@@ -34,11 +32,6 @@ export default function SkyNav({ withDate = false, className = '' }) {
             <NavLink to={to} aria-current={isCurrent(to) ? 'page' : undefined} className={() => (isCurrent(to) ? 'is-here' : undefined)}>
               {label}
             </NavLink>
-            {withDate && to === '/now' && (
-              <time className="sky-nav-when" dateTime={isoDate(nowEntry.date)} title={`Updated ${longDate(nowEntry.date)}`}>
-                {nowDate}
-              </time>
-            )}
           </li>
         ))}
       </ul>

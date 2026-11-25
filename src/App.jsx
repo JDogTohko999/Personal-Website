@@ -34,6 +34,8 @@ export default function App() {
           />
         ))}
         <Route path="/vaisi" element={<Vaisi />} />
+        {/* "involvements" is the nav word; /experience stays as an alias for old links. */}
+        <Route path="/involvements" element={<Experience />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="*" element={<NotFound />} />
       </Route>

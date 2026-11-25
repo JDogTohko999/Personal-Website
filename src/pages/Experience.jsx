@@ -11,7 +11,7 @@ import useTitle from '../lib/useTitle.js';
 const KIND_LABEL = { work: 'Work', education: 'Education', volunteer: 'Volunteering' };
 
 export default function Experience() {
-  useTitle('Work');
+  useTitle('Involvements');
   const [all, setAll] = useState(false);
   const shown = all ? experiences : experiences.filter((e) => e.highlight);
   const kinds = [...new Set(shown.map((e) => e.kind))];
@@ -20,7 +20,7 @@ export default function Experience() {
 
   return (
     <>
-      <h1 className="page-title">Work</h1>
+      <h1 className="page-title">Involvements</h1>
       <p className="page-lede">
         The short version. The full history is on{' '}
         <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>.
