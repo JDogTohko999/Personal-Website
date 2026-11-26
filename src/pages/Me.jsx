@@ -18,7 +18,7 @@ export default function Me() {
       <h1 className="visually-hidden">About me</h1>
       <div className="about">
         <div className="about-text">
-          <p className="about-hello">Hi, welcome to my corner of the internet! Here&rsquo;s a little about me:</p>
+          <p className="about-hello"><span>Hi, welcome to my corner of the internet!</span><br /><span>Here&rsquo;s a little about me:</span></p>
           <p>
             I&rsquo;m a recent grad trying to do my part in making AI go well. Currently, I&rsquo;m working on{' '}
             <A href="https://80000hours.org/ai/">AI safety</A>{' '}
@@ -30,16 +30,16 @@ export default function Me() {
           <p>Here are some non-AI safety things I enjoy in no particular order:</p>
           <ul className="enjoy">
             <li>
-              <A href="https://www.last.fm/user/JDogTohko999/listening-report/year">music</A> and{' '}
-              <A href="https://letterboxd.com/JDogTohko999/">movies</A>
-            </li>
-            <li>
               <details className="enjoy-more">
                 <summary>daily games</summary>
                 <ul>
                   {GAMES.map((g) => <li key={g}><A href={`https://${g}`}>{g}</A></li>)}
                 </ul>
               </details>
+            </li>
+            <li>
+              <A href="https://www.last.fm/user/JDogTohko999/listening-report/year">music</A> and{' '}
+              <A href="https://letterboxd.com/JDogTohko999/">movies</A>
             </li>
             <li>
               <button type="button" className="word enjoy-spin" onClick={() => jas.current?.spinTo('sacking')}>

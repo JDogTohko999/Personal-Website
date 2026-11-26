@@ -52,7 +52,7 @@
   --globe-limb: rgba(18, 26, 24, 0.07);
   --globe-frame: #e7e9e0;
 
-  --face: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --face: 'EB Garamond', Garamond, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif; /* Jason picked EB Garamond, Nov 2026 */
 }
 
 @layer base {
@@ -519,7 +519,8 @@ html[data-page='inner'] body { background: var(--sky); }
 .jasoning { margin: 0.35rem 0 0; flex: none; width: 11rem; } /* level with the opening line (the page has no visible title now) */
 .about-text { flex: 1; min-width: 0; }
 .about-text p { margin: 0 0 1rem; }
-.about-hello { font-size: 1.25em; }
+.about-hello { font-size: min(1.25em, 5vw); } /* two lines, each kept whole; shrinks on phones so line one fits */
+.about-hello span { white-space: nowrap; }
 .enjoy { margin: 0; padding-left: 1.2rem; list-style: disc; }
 .enjoy > li { margin: 0 0 0.35rem; padding-left: 0.2rem; }
 .enjoy > li::marker { color: var(--muted); }
