@@ -62,7 +62,12 @@ export default function MapPage() {
 
   return (
     <>
-      <h1 className="page-title" style={{ marginBottom: "1.5rem" }}>Travels</h1>
+      <h1 className="page-title" style={{ marginBottom: '0.5rem' }}>Travels</h1>
+      <p className="travels-note">In progress, more info to be added soon.</p>
+      <ul className="plain map-key map-key--top" aria-label="Map colours">
+        <li><i style={{ background: 'var(--globe-glow)' }} />been</li>
+        <li><i style={{ background: 'var(--globe-bucket)' }} />someday</li>
+      </ul>
 
       <figure ref={figure} style={{ margin: 0 }}>
         <TourGlobe
@@ -94,11 +99,6 @@ export default function MapPage() {
               {shown.images?.length > 0 && <Photos images={shown.images} alt={shown.name} />}
             </div>
           )}
-          <ul className="plain map-key" aria-label="Country colours">
-            <li><i style={{ background: 'var(--globe-glow)' }} />been</li>
-            <li><i style={{ background: 'var(--globe-pin-home)' }} />home</li>
-            <li><i style={{ background: 'var(--globe-bucket)' }} />someday</li>
-          </ul>
         </figcaption>
       </figure>
 

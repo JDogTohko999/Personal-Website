@@ -675,6 +675,8 @@ html[data-page='inner'] body { background: var(--sky); }
 .map-place { margin: 0 0 0.3rem; font-size: 1.25rem; font-weight: 420; }
 .map-key { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin: 1rem 0 0; font-size: 0.8125rem; color: var(--muted); }
 .map-key i { display: inline-block; width: 0.6rem; height: 0.6rem; margin-right: 0.4rem; border-radius: 50%; vertical-align: 0.05em; }
+.map-key--top { margin: 0 0 0.9rem; }
+.travels-note { margin: 0 0 0.6rem; font-style: italic; color: var(--muted); }
 .countries { columns: 2 12rem; column-gap: 2rem; margin-top: 2.5rem; }
 .countries section { break-inside: avoid; margin: 0 0 1.1rem; }
 .countries h3 { margin: 0 0 0.15rem; font-size: 0.875rem; font-style: italic; font-weight: 400; color: var(--muted); }
