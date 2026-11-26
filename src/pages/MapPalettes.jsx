@@ -47,6 +47,38 @@ export const MAP_PALETTES = [
     palette: { ocean: '#FEFAE1', land: '#C98A68', border: '#FEFAE1', glow: '#4E5230', dot: '#272018', dotRing: '#FEFAE1', going: '#752C13', bucket: '#E8C998' },
     roles: [['ocean', 'soft white', '#FEFAE1'], ['land', 'terracotta (light)', '#C98A68'], ['city glow', 'moss / olive', '#4E5230'], ['city dots', 'soft black', '#272018'], ['going soon', 'terracotta', '#752C13'], ['bucket list', 'beige', '#E8C998']],
   },
+  // Round 2 (A-G "none that great"): wider Japandi range: sage, ochre, dusty blue, indigo,
+  // charcoal, and one where visited countries get their own fill.
+  {
+    id: 'H', name: 'Linen, terracotta & dusty blue',
+    palette: { ocean: '#F1EBDD', land: '#DDD3BE', border: '#F1EBDD', glow: '#B4572F', dot: '#272018', dotRing: '#F1EBDD', going: '#6B7040', bucket: '#8FA0AE' },
+    roles: [['ocean', 'linen', '#F1EBDD'], ['land', 'stone', '#DDD3BE'], ['city glow', 'terracotta', '#B4572F'], ['city dots', 'soft black', '#272018'], ['going soon', 'olive', '#6B7040'], ['bucket list', 'dusty blue', '#8FA0AE']],
+  },
+  {
+    id: 'I', name: 'Sage sea',
+    palette: { ocean: '#D5DECF', land: '#FBF6E6', border: '#D5DECF', glow: '#A8492A', dot: '#3A2418', dotRing: '#FBF6E6', going: '#6B7040', bucket: '#D9B77A' },
+    roles: [['ocean', 'pale sage', '#D5DECF'], ['land', 'rice paper', '#FBF6E6'], ['city glow', 'rust', '#A8492A'], ['city dots', 'walnut', '#3A2418'], ['going soon', 'olive', '#6B7040'], ['bucket list', 'ochre beige', '#D9B77A']],
+  },
+  {
+    id: 'J', name: 'Been-there countries filled',
+    palette: { ocean: '#FEFAE1', land: '#D8D2C2', visited: '#EBCB9C', border: '#FEFAE1', glow: '#B4572F', dot: '#272018', dotRing: '#FEFAE1', going: '#6B7040', bucket: '#9AA9B5' },
+    roles: [['ocean', 'soft white', '#FEFAE1'], ['land', 'stone', '#D8D2C2'], ['been there', 'beige', '#EBCB9C'], ['city glow', 'terracotta', '#B4572F'], ['city dots', 'soft black', '#272018'], ['going soon', 'olive', '#6B7040'], ['bucket list', 'dusty blue', '#9AA9B5']],
+  },
+  {
+    id: 'K', name: 'Charcoal & ochre',
+    palette: { ocean: '#23201B', land: '#3A352D', border: '#23201B', glow: '#D9A441', dot: '#FEFAE1', dotRing: '#23201B', going: '#8FA585', bucket: '#A8492A' },
+    roles: [['ocean', 'charcoal', '#23201B'], ['land', 'smoke', '#3A352D'], ['city glow', 'ochre', '#D9A441'], ['city dots', 'soft white', '#FEFAE1'], ['going soon', 'sage', '#8FA585'], ['bucket list', 'rust', '#A8492A']],
+  },
+  {
+    id: 'L', name: 'Sumi ink wash',
+    palette: { ocean: '#F6F2E9', land: '#CFC8B8', border: '#F6F2E9', glow: '#272018', dot: '#B4572F', dotRing: '#F6F2E9', going: '#6B7040', bucket: '#A9B6BE' },
+    roles: [['ocean', 'washi', '#F6F2E9'], ['land', 'clay grey', '#CFC8B8'], ['city glow', 'ink', '#272018'], ['city dots', 'terracotta', '#B4572F'], ['going soon', 'olive', '#6B7040'], ['bucket list', 'mist blue', '#A9B6BE']],
+  },
+  {
+    id: 'M', name: 'Indigo sea & rust',
+    palette: { ocean: '#2F3B4A', land: '#E9E1CC', border: '#2F3B4A', glow: '#B4572F', dot: '#272018', dotRing: '#E9E1CC', going: '#7A7D4A', bucket: '#C9A04A' },
+    roles: [['ocean', 'muted indigo', '#2F3B4A'], ['land', 'oat', '#E9E1CC'], ['city glow', 'rust', '#B4572F'], ['city dots', 'soft black', '#272018'], ['going soon', 'olive', '#7A7D4A'], ['bucket list', 'ochre', '#C9A04A']],
+  },
 ];
 
 export default function MapPalettes() {

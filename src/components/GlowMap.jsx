@@ -10,7 +10,8 @@ import { categoryOf, loadWorld } from '../lib/geo.js';
   country's outline). Going-soon and bucket-list countries get their own fills, and every city
   has a small dot on top.
 
-  palette = { ocean, land, border, glow, dot, dotRing, going, bucket }
+  palette = { ocean, land, border, glow, dot, dotRing, going, bucket, visited? }
+  (visited, if set, fills the countries he has been to; otherwise they keep the land colour)
 */
 const W = 960;
 const H = 470;
@@ -39,7 +40,12 @@ export default function GlowMap({ palette, id = 'glowmap', className = '', onPic
     };
   }, [world]);
 
-  const fillFor = (cat) => (cat === 'goingSoon' ? palette.going : cat === 'bucketList' ? palette.bucket : palette.land);
+  const fillFor = (cat) => (
+    cat === 'goingSoon' ? palette.going
+      : cat === 'bucketList' ? palette.bucket
+        : cat === 'visited' && palette.visited ? palette.visited
+          : palette.land
+  );
 
   return (
     <svg
