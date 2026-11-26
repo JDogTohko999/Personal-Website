@@ -101,6 +101,17 @@ export const MAP_PALETTES = [
     palette: { ocean: '#6E8FA3', land: '#8D9762', border: '#B3B98F', glow: '#E0AD48', dot: '#2B2416', dotRing: '#F3EDD9', going: '#B29DB5', bucket: '#B29DB5' },
     roles: [['ocean', 'steel blue', '#6E8FA3'], ['land', 'olive green', '#8D9762'], ['city glow', 'golden ochre', '#E0AD48'], ['city dots', 'soft black', '#2B2416'], ['bucket list', 'dusty lilac', '#B29DB5']],
   },
+  // Round 4: salvaging A. Beige sea, natural land, moss bucket list; the glow tried in a light
+  // green, a light blue and a light purple.
+  ...[
+    ['A1', 'green', 'light sage green', '#C4E0A8'],
+    ['A2', 'blue', 'light sky blue', '#B4D8EC'],
+    ['A3', 'purple', 'light lavender', '#D6C0EC'],
+  ].map(([id, short, name, glow]) => ({
+    id, name: `Beige sea, natural land, ${short} glow`,
+    palette: { ocean: '#E8C998', land: '#C29665', border: '#E8C998', glow, dot: '#522111', dotRing: '#E8C998', going: '#4E5230', bucket: '#4E5230' },
+    roles: [['ocean', 'beige', '#E8C998'], ['land', 'natural', '#C29665'], ['city glow', name, glow], ['city dots', 'walnut', '#522111'], ['bucket list', 'moss', '#4E5230']],
+  })),
 ];
 
 export default function MapPalettes() {
