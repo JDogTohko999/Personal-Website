@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import { JASONINGS, OPENERS } from '../data/jasonings.js';
 import { thumb } from './webImage.js';
 
@@ -51,7 +51,7 @@ function keyIsFree(e) {
   return !document.querySelector('.lightbox');
 }
 
-export default function Jasoning() {
+const Jasoning = forwardRef(function Jasoning(_props, ref) {
   const [i, setI] = useState(startIndex);
   // Arrow steps per spin (Jason: two). Counts steps taken since the last spin.
   const [steps, setSteps] = useState(0);
@@ -64,10 +64,16 @@ export default function Jasoning() {
   const spinning = motion != null;
   const item = JASONINGS[i];
 
-  const spinOnce = useCallback(() => {
+  // spin(): the next landing word by the rules below; spin(label): land on that word instead
+  // (used by the "sacking" link on About me). Either way it's a full ~2s spin.
+  const spin = useCallback((forced) => {
     if (spinning) return;
     let target;
-    if (spins.current === 0) {
+    const want = forced ? JASONINGS.findIndex((x) => x.label === forced) : -1;
+    if (want >= 0) {
+      target = want;
+      bag.current = bag.current.filter((n) => n !== want);
+    } else if (spins.current === 0) {
       const pool = OPENERS.map((l) => JASONINGS.findIndex((x) => x.label === l)).filter((n) => n >= 0 && n !== i);
       target = pool.length ? pool[Math.floor(Math.random() * pool.length)] : (i + 1) % N;
       bag.current = shuffle([...Array(N).keys()].filter((n) => n !== target));
@@ -83,6 +89,29 @@ export default function Jasoning() {
     setReel(seq);
     setMotion({ id: Date.now(), from: PAD, to: seq.length - 1 - PAD, ms: SPIN_MS, ease: EASE });
   }, [spinning, i]);
+  const spinOnce = useCallback(() => spin(), [spin]);
+
+  const figRef = useRef(null);
+  // A spinTo() that arrives mid-spin (e.g. during the opening auto-spin) waits and runs on landing.
+  const pending = useRef(null);
+  useEffect(() => {
+    if (!spinning && pending.current) {
+      const label = pending.current;
+      pending.current = null;
+      spin(label);
+    }
+  }, [spinning, spin]);
+  useImperativeHandle(ref, () => ({
+    spinTo(label) {
+      // Bring the photo into view first if it's off screen (phones: it sits under the text).
+      const r = figRef.current?.getBoundingClientRect();
+      if (r && (r.top < 0 || r.bottom > window.innerHeight)) {
+        figRef.current.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'center' });
+      }
+      if (spinning) pending.current = label;
+      else spin(label);
+    },
+  }), [spin, spinning]);
 
   const step = useCallback((d) => {
     if (spinning || stepped) return;
@@ -139,7 +168,7 @@ export default function Jasoning() {
   }, [reel, center]);
 
   return (
-    <figure className="jasoning">
+    <figure className="jasoning" ref={figRef}>
       <button
         type="button"
         className={`jasoning-frame${spinning ? ' is-spinning' : ''}`}
@@ -165,7 +194,8 @@ export default function Jasoning() {
       </figcaption>
     </figure>
   );
-}
+});
+export default Jasoning;
 
 // The slot reel. Word widths vary, so centring is measured from live rects.
 function Reel({ reel, center, motion, land }) {
