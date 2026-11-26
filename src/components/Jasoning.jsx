@@ -11,7 +11,7 @@ import { thumb } from './webImage.js';
   Tapping the photo or "spin" spins the reel like the live site's slot machine: one shuffled pass over
   every word (~2s), decelerating onto the landing word; the photo changes when it lands.
     ← / →          slide one word along the reel (~420ms): the buttons, or the arrow keys. Only
-                   once per spin (Jason): after one step both arrows lock until the next spin.
+                   twice per spin (Jason): after two steps both arrows lock until the next spin.
   The word itself isn't clickable (no list of all of them): you spin and step to see more.
   It spins once by itself about a second after the page opens. The first spin lands on one of the
   openers; after that every word lands once before any repeats. The canvassing clip plays as a
@@ -24,6 +24,7 @@ const AUTO_SPIN_MS = 1000;
 const EASE = 'cubic-bezier(.16, .68, .26, 1)';
 const NUDGE_EASE = 'cubic-bezier(.22, .61, .36, 1)';
 const PAD = 2; // words parked either side so the reel never shows empty space
+const MAX_STEPS = 2; // arrow steps allowed after each spin
 
 const shuffle = (arr) => {
   const a = arr.slice();
@@ -52,8 +53,9 @@ function keyIsFree(e) {
 
 export default function Jasoning() {
   const [i, setI] = useState(startIndex);
-  // One arrow step per spin: true once a step has been taken, reset by the next spin.
-  const [stepped, setStepped] = useState(false);
+  // Arrow steps per spin (Jason: two). Counts steps taken since the last spin.
+  const [steps, setSteps] = useState(0);
+  const stepped = steps >= MAX_STEPS;
   const [reel, setReel] = useState(() => around(i));
   const [center, setCenter] = useState(PAD);
   const [motion, setMotion] = useState(null); // { id, from, to, ms, ease }
@@ -75,7 +77,7 @@ export default function Jasoning() {
       if (target === i) target = bag.current.shift() ?? (i + 1) % N;
     }
     spins.current += 1;
-    setStepped(false);
+    setSteps(0);
     const others = shuffle([...Array(N).keys()].filter((n) => n !== i && n !== target));
     const seq = [...others.slice(0, PAD), i, ...others.slice(PAD * 2), target, ...others.slice(PAD, PAD * 2)];
     setReel(seq);
@@ -84,7 +86,7 @@ export default function Jasoning() {
 
   const step = useCallback((d) => {
     if (spinning || stepped) return;
-    setStepped(true);
+    setSteps((n) => n + 1);
     let seq = reel;
     let from = center;
     const near = (k) => new Set(seq.slice(Math.max(0, k - PAD - 1), k + PAD + 2));
