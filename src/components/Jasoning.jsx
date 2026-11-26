@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { JASONINGS, OPENERS } from '../data/jasonings.js';
 import { thumb } from './webImage.js';
 
@@ -10,8 +10,9 @@ import { thumb } from './webImage.js';
     ←  spin  →
   Tapping the photo or "spin" spins the reel like the live site's slot machine: one shuffled pass over
   every word (~2s), decelerating onto the landing word; the photo changes when it lands.
-    ← / →          slide one word along the reel (~420ms): the buttons, or the arrow keys
-    tap the word   the list of all of them; picking one shows it
+    ← / →          slide one word along the reel (~420ms): the buttons, or the arrow keys. Only
+                   once per spin (Jason): after one step both arrows lock until the next spin.
+  The word itself isn't clickable (no list of all of them): you spin and step to see more.
   It spins once by itself about a second after the page opens. The first spin lands on one of the
   openers; after that every word lands once before any repeats. The canvassing clip plays as a
   real muted, looping video.
@@ -45,14 +46,14 @@ function keyIsFree(e) {
   if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return false;
   const t = e.target;
   if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|VIDEO)$/.test(t.tagName))) return false;
-  if (t?.closest?.('[data-globe], [role="dialog"], [role="radiogroup"], .jasoning-list')) return false;
+  if (t?.closest?.('[data-globe], [role="dialog"], [role="radiogroup"]')) return false;
   return !document.querySelector('.lightbox');
 }
 
 export default function Jasoning() {
-  const listId = useId();
   const [i, setI] = useState(startIndex);
-  const [listOpen, setListOpen] = useState(false);
+  // One arrow step per spin: true once a step has been taken, reset by the next spin.
+  const [stepped, setStepped] = useState(false);
   const [reel, setReel] = useState(() => around(i));
   const [center, setCenter] = useState(PAD);
   const [motion, setMotion] = useState(null); // { id, from, to, ms, ease }
@@ -60,8 +61,6 @@ export default function Jasoning() {
   const spins = useRef(0);
   const spinning = motion != null;
   const item = JASONINGS[i];
-
-  const show = useCallback((n) => { setI(n); setReel(around(n)); setCenter(PAD); }, []);
 
   const spinOnce = useCallback(() => {
     if (spinning) return;
@@ -76,6 +75,7 @@ export default function Jasoning() {
       if (target === i) target = bag.current.shift() ?? (i + 1) % N;
     }
     spins.current += 1;
+    setStepped(false);
     const others = shuffle([...Array(N).keys()].filter((n) => n !== i && n !== target));
     const seq = [...others.slice(0, PAD), i, ...others.slice(PAD * 2), target, ...others.slice(PAD, PAD * 2)];
     setReel(seq);
@@ -83,7 +83,8 @@ export default function Jasoning() {
   }, [spinning, i]);
 
   const step = useCallback((d) => {
-    if (spinning) return;
+    if (spinning || stepped) return;
+    setStepped(true);
     let seq = reel;
     let from = center;
     const near = (k) => new Set(seq.slice(Math.max(0, k - PAD - 1), k + PAD + 2));
@@ -99,7 +100,7 @@ export default function Jasoning() {
     }
     setReel(seq);
     setMotion({ id: Date.now(), from, to: from + d, ms: NUDGE_MS, ease: NUDGE_EASE });
-  }, [spinning, reel, center]);
+  }, [spinning, stepped, reel, center]);
 
   const land = useCallback(() => {
     setMotion((m) => {
@@ -153,20 +154,19 @@ export default function Jasoning() {
         <span className="jasoning-label" aria-live="polite">
           Jason-ing<span className="visually-hidden">: {spinning ? 'spinning' : item.label}</span>
         </span>
-        <Reel reel={reel} center={center} motion={motion} land={land} listOpen={listOpen} setListOpen={setListOpen} listId={listId} />
+        <Reel reel={reel} center={center} motion={motion} land={land} />
         <span className="jasoning-steps">
-          <button type="button" className="word" onClick={() => step(-1)} disabled={spinning} aria-label="Previous photo">←</button>
+          <button type="button" className="word" onClick={() => step(-1)} disabled={spinning || stepped} aria-label="Previous photo" title={stepped ? 'Spin again to step' : undefined}>←</button>
           <button type="button" className="word" onClick={spinOnce} disabled={spinning}>spin</button>
-          <button type="button" className="word" onClick={() => step(1)} disabled={spinning} aria-label="Next photo">→</button>
+          <button type="button" className="word" onClick={() => step(1)} disabled={spinning || stepped} aria-label="Next photo" title={stepped ? 'Spin again to step' : undefined}>→</button>
         </span>
       </figcaption>
-      {listOpen && <List id={listId} i={i} onPick={(n) => { if (n != null) show(n); setListOpen(false); }} />}
     </figure>
   );
 }
 
 // The slot reel. Word widths vary, so centring is measured from live rects.
-function Reel({ reel, center, motion, land, listOpen, setListOpen, listId }) {
+function Reel({ reel, center, motion, land }) {
   const vpRef = useRef(null);
   const stripRef = useRef(null);
   const centerOn = (idx, ms, ease = EASE) => {
@@ -207,43 +207,12 @@ function Reel({ reel, center, motion, land, listOpen, setListOpen, listId }) {
       <span className="jasoning-strip" ref={stripRef}>
         {reel.map((n, k) => {
           const label = JASONINGS[n].label;
-          return !motion && k === center ? (
-            <button
-              key={`${k}-${n}`}
-              type="button"
-              className="jasoning-word is-center"
-              aria-expanded={listOpen}
-              aria-controls={listOpen ? listId : undefined}
-              title="See them all"
-              onClick={() => setListOpen((v) => !v)}
-            >
-              {label}
-            </button>
-          ) : (
-            <span key={`${k}-${n}`} className="jasoning-word" aria-hidden="true">{label}</span>
+          const isCenter = !motion && k === center;
+          return (
+            <span key={`${k}-${n}`} className={`jasoning-word${isCenter ? ' is-center' : ''}`} aria-hidden="true">{label}</span>
           );
         })}
       </span>
     </span>
-  );
-}
-
-function List({ id, i, onPick }) {
-  const ref = useRef(null);
-  useEffect(() => { ref.current?.querySelector('[aria-current="true"]')?.focus({ preventScroll: true }); }, []);
-  return (
-    <ol
-      className="jasoning-list"
-      id={id}
-      ref={ref}
-      aria-label="Every photo of Jason doing something"
-      onKeyDown={(e) => { if (e.key === 'Escape') { e.preventDefault(); onPick(null); } }}
-    >
-      {JASONINGS.map((x, n) => (
-        <li key={x.label}>
-          <button type="button" aria-current={n === i ? 'true' : undefined} onClick={() => onPick(n)}>{x.label}</button>
-        </li>
-      ))}
-    </ol>
   );
 }

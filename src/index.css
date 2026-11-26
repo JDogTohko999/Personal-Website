@@ -532,21 +532,12 @@ html[data-page='inner'] body { background: var(--sky); }
 }
 .jasoning-strip { display: flex; align-items: center; gap: 1rem; width: max-content; height: 100%; will-change: transform; }
 .jasoning-word { white-space: nowrap; font-size: 1.0625rem; font-style: italic; color: var(--muted); opacity: 0.6; }
-.jasoning-word.is-center {
-  opacity: 1; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; font-style: italic;
-  color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
-}
-.jasoning-word.is-center:hover { color: var(--link-hover); }
+.jasoning-word.is-center { opacity: 1; color: var(--text); }
 .jasoning-steps { display: flex; justify-content: center; gap: 1rem; font-size: 1rem; }
+.jasoning-steps .word { text-decoration: none; }
+.jasoning-steps .word:hover:not(:disabled) { text-decoration: none; color: var(--link-hover); }
 .jasoning-steps .word + .word { margin-left: 0; }
 .jasoning-steps .word:disabled { opacity: 0.4; cursor: default; }
-.jasoning-list {
-  list-style: none; margin: 0.6rem 0 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: 0.15rem 0.8rem; justify-content: center;
-  font-size: 0.9375rem; font-style: italic;
-}
-.jasoning-list button { padding: 0.15rem 0; border: 0; background: none; font: inherit; color: var(--link); cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-.jasoning-list button[aria-current='true'] { color: var(--text); text-decoration: none; }
 /* Phones: the photo goes under the bio, a little wider. */
 @media (max-width: 40rem) {
   .about { flex-direction: column; }
