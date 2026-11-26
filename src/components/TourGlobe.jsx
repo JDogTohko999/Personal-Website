@@ -73,11 +73,22 @@ const CATS = ['base', 'bucketList', 'goingSoon', 'visited'];
 const TOKENS = {
   ocean: '--globe-ocean', base: '--globe-land', visited: '--globe-visited', goingSoon: '--globe-going',
   bucketList: '--globe-bucket', border: '--globe-border', pin: '--globe-pin', home: '--globe-pin-home',
-  halo: '--globe-halo', limb: '--globe-limb',
+  halo: '--globe-halo', limb: '--globe-limb', glow: '--globe-glow',
 };
 const FALLBACK = {
   ocean: '#fefae1', base: '#e8c998', visited: '#c29665', goingSoon: '#8b8a5a', bucketList: '#d9b28f',
   border: '#f9ead5', pin: '#752c13', home: '#4e5230', halo: 'rgba(0,0,0,0.08)', limb: 'rgba(0,0,0,0.07)',
+  glow: '',
+};
+// Glow mode (set --globe-glow to a hex colour): visited countries keep the plain land colour and
+// each city glows softly inside its own country instead, the live site's idea. Unset = fills.
+const GLOW_DEG = 9;            // halo radius on the sphere
+const GLOW_STOPS = [[0, 0.9], [0.3, 0.6], [0.62, 0.22], [1, 0]];
+const hexA = (hex, a) => {
+  const h = hex.replace('#', '');
+  const f = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+  const n = parseInt(f.slice(0, 6), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 };
 const MAX_TILT = 75;
 const HOVER_RATE = 0.12;       // hover: ease down to 12% speed (a crawl), not a stop
@@ -124,7 +135,14 @@ function prepareWorld(features) {
     }));
     const cv = new Float64Array(3);
     toXYZ(c[0], c[1], cv, 0);
-    return { f, rings, cv, rad, cat: categoryOf(f) || 'base' };
+    const cat = categoryOf(f) || 'base';
+    // Cities inside this country, as unit vectors, for glow mode.
+    const here = cat === 'visited'
+      ? cities.filter((ct) => (ct.countryCode[1] || ct.countryCode[0]) === f.id || ct.countryCode[0] === f.properties?.ISO_A3)
+      : [];
+    const glow = new Float64Array(here.length * 3);
+    here.forEach((ct, i) => toXYZ(ct.coordinates[0], ct.coordinates[1], glow, i * 3));
+    return { f, rings, cv, rad, cat, glow };
   });
   // Paint order: by category, then the overlaps in DRAW_LAST (Western Sahara over Morocco).
   const rank = (it) => (DRAW_LAST.has(it.f.id) ? CATS.length : CATS.indexOf(it.cat));
@@ -346,6 +364,7 @@ const TourGlobe = forwardRef(function TourGlobe(
       const c = {};
       Object.entries(TOKENS).forEach(([k, v]) => { c[k] = cs.getPropertyValue(v).trim() || FALLBACK[k]; });
       c.font = cs.fontFamily || 'serif';
+      c.glowStops = c.glow ? GLOW_STOPS.map(([o, a]) => [o, hexA(c.glow, a)]) : null;
       // Gradients on a unit circle at the origin, drawn under a scale transform: built once per theme.
       const halo = bctx.createRadialGradient(0, 0, 0.98, 0, 0, 1.08);
       halo.addColorStop(0, c.halo);
@@ -487,8 +506,26 @@ const TourGlobe = forwardRef(function TourGlobe(
           } else {
             path(it.f);
           }
-          ctx.fillStyle = C[it.cat];
+          const glowing = C.glowStops && it.cat === 'visited';
+          ctx.fillStyle = glowing ? C.base : C[it.cat];
           ctx.fill();
+          if (glowing && it.glow.length) {
+            // Clip to this country and paint each of its cities' halos.
+            ctx.save();
+            ctx.clip();
+            const gr = V.r * Math.sin(GLOW_DEG * D2R);
+            for (let g = 0; g < it.glow.length; g += 3) {
+              const x = it.glow[g]; const y = it.glow[g + 1]; const z = it.glow[g + 2];
+              if (x * Cx + y * Cy + z * Cz < -0.1) continue;
+              const sx = V.cx + V.r * (x * V.Ex + y * V.Ey);
+              const sy = V.cy - V.r * (x * V.Nx + y * V.Ny + z * V.Nz);
+              const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, gr);
+              C.glowStops.forEach(([o, col]) => grad.addColorStop(o, col));
+              ctx.fillStyle = grad;
+              ctx.fillRect(sx - gr, sy - gr, gr * 2, gr * 2);
+            }
+            ctx.restore();
+          }
           ctx.stroke();
         }
       }

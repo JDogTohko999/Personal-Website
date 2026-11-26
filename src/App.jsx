@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound.jsx';
 // The map page pulls in d3-geo + topojson; keep it out of the main bundle.
 const MapPage = lazy(() => import('./pages/MapPage.jsx'));
 const MapPalettes = lazy(() => import('./pages/MapPalettes.jsx'));
+const GlobeColours = lazy(() => import('./pages/GlobeColours.jsx'));
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         ))}
         {/* Review page for the map colours (not in the nav). */}
         <Route path="/map-colours" element={<Suspense fallback={null}><MapPalettes /></Suspense>} />
+        <Route path="/globe-colours" element={<Suspense fallback={null}><GlobeColours /></Suspense>} />
         <Route path="/vaisi" element={<Vaisi />} />
         {/* "involvements" is the nav word; /experience stays as an alias for old links. */}
         <Route path="/involvements" element={<Experience />} />
