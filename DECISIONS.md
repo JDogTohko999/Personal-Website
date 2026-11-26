@@ -322,3 +322,9 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
 
     The name is 3.4–4.6 (large text, needs 3:1).
   - So some small links sit just under the strict 4.5 worst-pixel target. That's the cost of no haze on this mid-tone, dimmed sky. Options if it matters: a subtler veil, a slightly less dimmed photo, or bigger link text.
+- **Nav and icons (Jason):**
+  - No haze, nothing added to the photo.
+  - "meet" is now a calendar icon between LinkedIn and Substack, linking to SavvyCal. Hovering it shows "Meet with me"; every icon shows its name on hover.
+  - New Curius icon (one-colour version of its overlapping-squares mark) at the end, linking to curius.app/jason-chin.
+  - New "travels" tab: the framed, drifting globe page, now titled Travels, at /travels (/places and /map still work).
+  - Nav: about me, now, involvements, writing, travels.

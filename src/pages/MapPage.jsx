@@ -24,7 +24,7 @@ function Moving({ moving, onChange }) {
 }
 
 export default function MapPage() {
-  useTitle('Places');
+  useTitle('Travels');
   const [params, setParams] = useSearchParams();
   const globe = useRef(null);
   const figure = useRef(null);
@@ -62,7 +62,7 @@ export default function MapPage() {
 
   return (
     <>
-      <h1 className="page-title">Places</h1>
+      <h1 className="page-title">Travels</h1>
       <p className="page-lede">
         {stats.places} places in {stats.countries} countries, on {stats.continents} continents. The globe wanders
         between a few of them; pick any place to go there.

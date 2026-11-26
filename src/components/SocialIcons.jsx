@@ -2,8 +2,9 @@ import React from 'react';
 import { links } from '../data/profile.jsx';
 
 /*
-  A quiet row of small icons for Jason's accounts (he asked for symbols instead of the words
-  "linkedin" and "substack"). Each is a 24x24 inline SVG drawn in currentColor, so it takes the
+  A quiet row of small icons for Jason's accounts and his scheduling link (he asked for symbols
+  instead of the words "linkedin", "substack" and "meet"). Hovering one shows a small label
+  (the calendar says "Meet with me"). Each is a 24x24 inline SVG drawn in currentColor, so it takes the
   link colour of wherever it sits (rust over the photo, clay-brown on the sheet).
 */
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
@@ -25,6 +26,20 @@ const ICONS = {
       <circle cx="17.6" cy="6.4" r="1.45" />
     </>
   ),
+  meet: (
+    <>
+      <rect x="3" y="4.5" width="18" height="16.5" rx="2.6" fill="none" stroke="currentColor" strokeWidth="2.6" />
+      <path d="M3 9.8h18" fill="none" stroke="currentColor" strokeWidth="2.6" />
+      <path d="M8 2.4v4M16 2.4v4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+      <rect x="6.6" y="12.3" width="3.4" height="3.2" rx="0.6" />
+    </>
+  ),
+  curius: (
+    <>
+      <rect x="7.5" y="7.5" width="15" height="15" rx="3.6" opacity="0.5" />
+      <rect x="1.9" y="1.9" width="14.2" height="14.2" rx="3.4" fill="none" stroke="currentColor" strokeWidth="2.4" />
+    </>
+  ),
   spotify: (
     <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
   ),
@@ -32,10 +47,12 @@ const ICONS = {
 
 export const ACCOUNTS = [
   { id: 'linkedin', label: 'LinkedIn', href: links.linkedin },
+  { id: 'meet', label: 'Meet with me', href: links.savvycal, aria: 'Meet with me: book a time on SavvyCal' },
   { id: 'substack', label: 'Substack', href: links.substack },
   { id: 'x', label: 'X (Twitter)', href: 'https://x.com/JasonChin098' },
   { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/jasonchin999/' },
   { id: 'spotify', label: 'Spotify', href: 'https://open.spotify.com/user/jdog152nj?si=2e6a32bd30434630' },
+  { id: 'curius', label: 'Curius', href: 'https://curius.app/jason-chin' },
 ];
 
 export default function SocialIcons({ as: Tag = 'ul', className = '' }) {
@@ -43,7 +60,7 @@ export default function SocialIcons({ as: Tag = 'ul', className = '' }) {
     <Tag className={`socials ${className}`.trim()}>
       {ACCOUNTS.map((a) => (
         <li key={a.id}>
-          <a href={a.href} {...ext} aria-label={`${a.label} (opens in a new tab)`} title={a.label}>
+          <a href={a.href} {...ext} aria-label={`${a.aria || a.label} (opens in a new tab)`} data-tip={a.label}>
             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
               {ICONS[a.id]}
             </svg>

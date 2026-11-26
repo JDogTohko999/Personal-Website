@@ -25,8 +25,8 @@ export default function App() {
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/now" element={<Now />} />
         <Route path="/now/bonus" element={<Now />} />
-        {/* /places is the page's name in the nav; /map stays as an alias for old links. */}
-        {['/places', '/map'].map((path) => (
+        {/* "travels" is the nav word (/travels); /places and /map stay as aliases. */}
+        {['/travels', '/places', '/map'].map((path) => (
           <Route
             key={path}
             path={path}

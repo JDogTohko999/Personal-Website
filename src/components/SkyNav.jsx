@@ -1,11 +1,10 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { links } from '../data/profile.jsx';
 
 /*
   The tiny lowercase links, the same words on every page, in Jason's order:
-  about me, now, involvements, writing, then (after a small gap) meet. The account icons sit
-  directly under the name instead (SocialIcons, in Home and the inner header).
+  about me, now, involvements, writing, travels. The account icons (and the calendar for
+  meeting) sit directly under the name instead (SocialIcons, in Home and the inner header).
   (Places and VAISI still have pages at /places and /vaisi; they're just not in the nav.)
 */
 export const PAGES = [
@@ -13,14 +12,16 @@ export const PAGES = [
   ['/now', 'now'],
   ['/involvements', 'involvements'],
   ['/blog', 'writing'],
+  ['/travels', 'travels'],
 ];
-const MEET = [links.savvycal, 'meet', 'Meet: book a time with Jason on SavvyCal (opens in a new tab)'];
 
 export default function SkyNav({ className = '' }) {
   const { pathname } = useLocation();
   const isCurrent = (to) =>
     to === '/involvements'
       ? pathname === '/involvements' || pathname === '/experience'
+      : to === '/travels'
+        ? pathname === '/travels' || pathname === '/places' || pathname === '/map'
       : to === '/about'
         ? pathname === '/about' || pathname === '/me'
         : pathname === to || pathname.startsWith(`${to}/`);
@@ -34,9 +35,6 @@ export default function SkyNav({ className = '' }) {
             </NavLink>
           </li>
         ))}
-      </ul>
-      <ul className="sky-nav-out">
-        <li><a href={MEET[0]} target="_blank" rel="noopener noreferrer" aria-label={MEET[2]}>{MEET[1]}</a></li>
       </ul>
     </nav>
   );
