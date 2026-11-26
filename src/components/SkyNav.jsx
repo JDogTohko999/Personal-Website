@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { links } from '../data/profile.jsx';
+import SocialIcons from './SocialIcons.jsx';
 
 /*
   The tiny lowercase links, the same words on every page, in Jason's order:
-  about me, now, involvements, writing, then (after a small gap) linkedin, substack and meet.
+  about me, now, involvements, writing, then (after a small gap) a row of account icons
+  (LinkedIn, Substack, X, Instagram, Spotify) and meet.
   (Places and VAISI still have pages at /places and /vaisi; they're just not in the nav.)
 */
 export const PAGES = [
@@ -13,11 +15,7 @@ export const PAGES = [
   ['/involvements', 'involvements'],
   ['/blog', 'writing'],
 ];
-const OUT = [
-  [links.linkedin, 'linkedin', 'LinkedIn (opens in a new tab)'],
-  [links.substack, 'substack', 'Substack (opens in a new tab)'],
-  [links.savvycal, 'meet', 'Meet: book a time with Jason on SavvyCal (opens in a new tab)'],
-];
+const MEET = [links.savvycal, 'meet', 'Meet: book a time with Jason on SavvyCal (opens in a new tab)'];
 
 export default function SkyNav({ className = '' }) {
   const { pathname } = useLocation();
@@ -38,13 +36,10 @@ export default function SkyNav({ className = '' }) {
           </li>
         ))}
       </ul>
-      <ul className="sky-nav-out">
-        {OUT.map(([href, label, aria]) => (
-          <li key={label}>
-            <a href={href} target="_blank" rel="noopener noreferrer" aria-label={aria}>{label}</a>
-          </li>
-        ))}
-      </ul>
+      <div className="sky-nav-out">
+        <SocialIcons />
+        <a className="sky-nav-meet" href={MEET[0]} target="_blank" rel="noopener noreferrer" aria-label={MEET[2]}>{MEET[1]}</a>
+      </div>
     </nav>
   );
 }

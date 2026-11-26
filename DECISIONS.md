@@ -290,3 +290,9 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
     | Home | 390 / 375 / 360 / 430 | 4.51–4.67 |
     | Inner, links | 1440 / 1024 | 5.05+ |
     | Inner, large name | | 4.25+ (large text, needs 3:1) |
+- **Account icons (Jason):**
+  - The words "linkedin" and "substack" became a row of five small icons: LinkedIn, Substack, X, Instagram, Spotify (`src/components/SocialIcons.jsx`, inline SVG in currentColor, each with an accessible label and title, opening in a new tab). "meet" stays a word.
+  - Desktop home: the icons sit on their own line, then "meet".
+  - Inner header: icons then "meet", inline.
+  - Phones: "meet" then the icons on one line, so the caption stays short and clear of the hiker, and the word sits in the lighter left sky. Icons only need 3:1 as non-text and are dark rust.
+  - Text contrast after the change: 4.77+ at every size checked.

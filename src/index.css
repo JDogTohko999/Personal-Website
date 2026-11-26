@@ -853,3 +853,24 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 .vaisi-site img { width: 180px; height: auto; border: 1px solid var(--rule); }
 .vaisi-strip { display: flex; gap: 0.5rem; margin: 0.9rem 0 0; width: max-content; line-height: 0; }
 .vaisi-strip img { width: 96px; height: 68px; object-fit: cover; border: 1px solid var(--rule); }
+
+/* ---------- account icons (LinkedIn, Substack, X, Instagram, Spotify) ---------- */
+.socials { display: flex; align-items: center; gap: 0.85rem; list-style: none; margin: 0; padding: 0; }
+.socials a { display: inline-flex; padding: 0.2rem 0; color: var(--link-photo); text-decoration: none; }
+.socials a:hover, .socials a:focus-visible { color: var(--link-photo-hover); }
+.socials svg { width: 1.05em; height: 1.05em; display: block; }
+@media (pointer: coarse) { .socials a { padding: 0.45rem 0.1rem; } }
+.sheet .socials a { color: var(--link); }
+/* Home: icons on their own line, then "meet". Inner header: icons then "meet", inline. */
+.sky-nav-stack .sky-nav-out { display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+.sky-nav-stack .socials { margin: 0.35rem 0 0.2rem; }
+.sky-nav-inline .sky-nav-out { display: flex; align-items: center; gap: 1.1rem; }
+.sky-nav-inline .socials { gap: 0.7rem; }
+/* Portrait screens: the icons and "meet" share one line, so the caption stays as short as it was
+   and keeps well clear of the hiker on the ridge. */
+@media (max-aspect-ratio: 4/5) {
+  .sky-nav-stack .sky-nav-out { flex-direction: row; align-items: center; gap: 1.1rem; margin-top: 0.2rem; }
+  .sky-nav-stack .socials { margin: 0; order: 2; }
+  /* "meet" first: the word stays in the lighter left sky; the icons (which only need 3:1) follow. */
+  .sky-nav-stack .sky-nav-meet { order: 1; }
+}
