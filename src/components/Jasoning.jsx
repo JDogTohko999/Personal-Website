@@ -188,7 +188,7 @@ const Jasoning = forwardRef(function Jasoning(_props, ref) {
         <Reel reel={reel} center={center} motion={motion} land={land} />
         <span className="jasoning-steps">
           <button type="button" className="word" onClick={() => step(-1)} disabled={spinning || stepped} aria-label="Previous photo" title={stepped ? 'Spin again to step' : undefined}>←</button>
-          <button type="button" className="word" onClick={spinOnce} disabled={spinning}>spin</button>
+          <button type="button" className="word jasoning-spin" onClick={spinOnce} disabled={spinning}>spin</button>
           <button type="button" className="word" onClick={() => step(1)} disabled={spinning || stepped} aria-label="Next photo" title={stepped ? 'Spin again to step' : undefined}>→</button>
         </span>
       </figcaption>

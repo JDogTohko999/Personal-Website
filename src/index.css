@@ -565,6 +565,9 @@ html[data-page='inner'] body { background: var(--sky); }
 .jasoning-steps .word:hover:not(:disabled) { text-decoration: none; color: var(--link-hover); }
 .jasoning-steps .word + .word { margin-left: 0; }
 .jasoning-steps .word:disabled { opacity: 0.4; cursor: default; }
+/* "spin" is underlined so it reads as clickable (the arrows stay plain) */
+.jasoning-steps .jasoning-spin { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.jasoning-steps .jasoning-spin:hover:not(:disabled) { text-decoration: underline; }
 /* Phones: the photo goes under the bio, a little wider. */
 @media (max-width: 40rem) {
   .about { flex-direction: column; }
