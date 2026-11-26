@@ -112,6 +112,19 @@ export const MAP_PALETTES = [
     palette: { ocean: '#E8C998', land: '#C29665', border: '#E8C998', glow, dot: '#522111', dotRing: '#E8C998', going: '#4E5230', bucket: '#4E5230' },
     roles: [['ocean', 'beige', '#E8C998'], ['land', 'natural', '#C29665'], ['city glow', name, glow], ['city dots', 'walnut', '#522111'], ['bucket list', 'moss', '#4E5230']],
   })),
+  // Round 5: E (soft white sea, olive land, beige bucket list) with six city glows.
+  ...[
+    ['E1', 'terracotta', '#B4572F'],
+    ['E2', 'burnt orange', '#D2733A'],
+    ['E3', 'ochre', '#E0AD48'],
+    ['E4', 'cream', '#FEFAE1'],
+    ['E5', 'light sky blue', '#B4D8EC'],
+    ['E6', 'light lavender', '#D6C0EC'],
+  ].map(([id, name, glow]) => ({
+    id, name: `Olive land, ${name} glow`,
+    palette: { ocean: '#FEFAE1', land: '#8C8A5A', border: '#FEFAE1', glow, dot: '#272018', dotRing: '#FEFAE1', going: '#E8C998', bucket: '#E8C998' },
+    roles: [['ocean', 'soft white', '#FEFAE1'], ['land', 'olive', '#8C8A5A'], ['city glow', name, glow], ['city dots', 'soft black', '#272018'], ['bucket list', 'beige', '#E8C998']],
+  })),
 ];
 
 export default function MapPalettes() {
