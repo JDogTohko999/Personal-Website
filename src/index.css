@@ -36,8 +36,8 @@
   --rule: #c2c8ba;
   --link: #663c2c;       /* muted clay-brown: every link, a quiet step off the body text */
   --link-hover: #3f2419;
-  --link-photo: #331a0f;  /* the same family, deepened, for links over the photo (a step darker for the _3 grade) */
-  --link-photo-hover: #24120a;
+  --link-photo: #1f0e06;  /* links over the photo: near-black warm brown (no haze behind them any more) */
+  --link-photo-hover: #000000;
 
   --globe-ocean: #eef0e9;
   --globe-land: #cfd4c6;
@@ -161,7 +161,7 @@ html[data-page='home'] body { overflow: hidden; }
   /* A resting underline at about a third of the ink: quiet, but plainly a link (critique fix 3). */
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(51, 26, 15, 0.4);
+  text-decoration-color: rgba(31, 14, 6, 0.45);
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.15s ease;
 }
@@ -874,3 +874,20 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 /* The home caption grew a line (the icons), so its haze reaches a little further down, to keep
    "meet" at the bottom inside it (same gradient form, so measure-sky.js still reads it). */
 .caption.veil::before { bottom: -3.25rem; }
+
+/* Jason: the light patch behind the caption doesn't belong in the photo. No veils at all now;
+   legibility comes from the ink and link colours alone (tuned below). */
+.caption.veil::before,
+.band-head.veil::before { content: none !important; }
+/* Phones/portrait, no haze: every link has to sit in the lighter left of the sky. The words flow
+   as one list in a narrow column: "about me  now" / "involvements" / "writing  meet". */
+@media (max-aspect-ratio: 4/5) {
+  .sky-nav-stack { display: flex; flex-wrap: wrap; gap: 0 0.8rem; max-width: 7.8em; }
+  .sky-nav-stack ul { display: contents; }
+  .sky-nav-stack li { white-space: nowrap; }
+}
+/* Desktop inner pages: the name and links sit a little lower, out of the darkest teal at the very
+   top of the photo. */
+@media (min-width: 52.01rem) and (min-aspect-ratio: 4/5) {
+  .band-head { top: clamp(1.75rem, 6.5vh, 3.5rem); }
+}

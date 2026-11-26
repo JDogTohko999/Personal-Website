@@ -304,3 +304,21 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
     - the phone caption starts a little higher (the icon row adds a line)
     - links over the photo are a step deeper: #331a0f, still the warm-brown family
   - **Worst link pixel:** 4.7+ at 1440, 1280, 1920, 768, 390 and 360. The large name on inner pages is 4.0+ (large text, needs 3:1).
+- **No haze (Jason: the light patch behind the caption "definitely doesn't exist" in the photo):**
+  - Confirmed: the background file is his photo, evenly 12% darker with no patch. The patch was the CSS veil. All veils are off now (home caption and desktop inner header); the phone inner-page strip is unchanged.
+  - **To compensate:**
+    - links over the photo are a near-black warm brown, #1f0e06 (hover black)
+    - on phones the words flow "about me now / involvements / writing meet", so every link sits in the lighter left sky
+    - the desktop inner header sits a little lower
+  - **Worst text pixel without haze:**
+
+    | Page | Viewport | Worst pixel |
+    |---|---|---|
+    | Home | 1440 | 4.73+ (links) |
+    | Home | 768 | 4.59+ |
+    | Home | 360 / 390 / 430 | 4.10–4.48 for "now" / "about me" |
+    | Inner header | 1440 | 4.4+ |
+    | Inner header | 1024 | 3.89+ |
+
+    The name is 3.4–4.6 (large text, needs 3:1).
+  - So some small links sit just under the strict 4.5 worst-pixel target. That's the cost of no haze on this mid-tone, dimmed sky. Options if it matters: a subtler veil, a slightly less dimmed photo, or bigger link text.
