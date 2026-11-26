@@ -125,6 +125,12 @@ export const MAP_PALETTES = [
     palette: { ocean: '#FEFAE1', land: '#8C8A5A', border: '#FEFAE1', glow, dot: '#272018', dotRing: '#FEFAE1', going: '#E8C998', bucket: '#E8C998' },
     roles: [['ocean', 'soft white', '#FEFAE1'], ['land', 'olive', '#8C8A5A'], ['city glow', name, glow], ['city dots', 'soft black', '#272018'], ['bucket list', 'beige', '#E8C998']],
   })),
+  // E3 with the glow and bucket list swapped.
+  {
+    id: 'E7', name: 'Olive land, beige glow, ochre bucket list',
+    palette: { ocean: '#FEFAE1', land: '#8C8A5A', border: '#FEFAE1', glow: '#E8C998', dot: '#272018', dotRing: '#FEFAE1', going: '#E0AD48', bucket: '#E0AD48' },
+    roles: [['ocean', 'soft white', '#FEFAE1'], ['land', 'olive', '#8C8A5A'], ['city glow', 'beige', '#E8C998'], ['city dots', 'soft black', '#272018'], ['bucket list', 'ochre', '#E0AD48']],
+  },
 ];
 
 export default function MapPalettes() {
