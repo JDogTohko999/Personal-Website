@@ -19,7 +19,8 @@ DL = Path.home() / "Downloads"
 OUT = Path(__file__).resolve().parent.parent / "public" / "bg4"
 OUT.mkdir(parents=True, exist_ok=True)
 
-jason = Image.open(DL / "background_screen saver_NOLS_2ppl_cropped.jpg").convert("RGB")
+# v2 (Nov 26): Jason re-graded the same crop ("_2"); same framing and size, slightly different after-effects.
+jason = Image.open(DL / "background_screen saver_NOLS_2ppl_cropped_2.jpg").convert("RGB")
 scan = ImageOps.mirror(Image.open(DL / "NOLS_I_THINK_I_CAN.JPG").convert("RGB"))
 
 def save(im, name, w=None):

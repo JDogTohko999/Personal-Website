@@ -273,3 +273,20 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
   - **VAISI row** opened: no description; a 180px homepage screenshot linking to vaisi.org, "vaisi.org", the panel-audience and fellows-on-steps photos linking to /vaisi, and "my VAISI highlights".
   - **Already in place:** VAISI out of the nav, no "now:" line on the home, "involvements" everywhere.
   - **Not applicable:** the trail home order (involvements before places), since places isn't on this home.
+- **Nov 26 edits (Jason):**
+  - The background is now his re-graded `background_screen saver_NOLS_2ppl_cropped_2.jpg`: same crop, slightly different after-effects. `scripts/make-2ppl-bg.py` reads it; the phone crop learns the new grade; still 12% dimmed; URLs moved to `?v=3`.
+  - Copy: "making AI go well" (typo fixed), "my corner of the internet" (was pocket). "eraly.io" kept as he wrote it.
+  - Home drops the one-liner ("I'm trying to make AI go well."): the name and links only.
+  - **Contrast follow-ups for the slightly darker grade:**
+    - the inner header's haze is a bit stronger on desktop
+    - the full-width header strip now also applies under 52rem wide
+    - the phone home caption moved back down 2.25rem, to where it sat with the one-liner, with a touch more haze
+  - **Worst text pixel after the edits:**
+
+    | Page | Viewport | Worst pixel |
+    |---|---|---|
+    | Home | 1440 | 5.02 |
+    | Home | 768 | 4.80 |
+    | Home | 390 / 375 / 360 / 430 | 4.51–4.67 |
+    | Inner, links | 1440 / 1024 | 5.05+ |
+    | Inner, large name | | 4.25+ (large text, needs 3:1) |

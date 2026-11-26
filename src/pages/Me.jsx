@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Jasoning from '../components/Jasoning.jsx';
 import useTitle from '../lib/useTitle.js';
 
-/* About me (/about, alias /me). Jason's own words (Nov 2026): a hello, the AI safety bit, and a
+/* About me (/about, alias /me). Jason's own words (Nov 2026): a hello ("my corner of the internet"), the AI safety bit, and a
    list of non-AI-safety things he enjoys, with Jason-ing beside it. "sacking" spins Jason-ing
    onto the sacking photo. No visible page title; the h1 is for screen readers only. */
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
@@ -18,9 +18,9 @@ export default function Me() {
       <h1 className="visually-hidden">About me</h1>
       <div className="about">
         <div className="about-text">
-          <p className="about-hello">Hi, welcome to my pocket of the internet! Here&rsquo;s a little about me:</p>
+          <p className="about-hello">Hi, welcome to my corner of the internet! Here&rsquo;s a little about me:</p>
           <p>
-            I&rsquo;m a recent grad trying to do my part in make AI go well. Currently, I&rsquo;m working on{' '}
+            I&rsquo;m a recent grad trying to do my part in making AI go well. Currently, I&rsquo;m working on{' '}
             <A href="https://80000hours.org/ai/">AI safety</A>{' '}
             <A href="https://80000hours.org/career-reviews/ai-safety-fieldbuilding/">field-building</A> in Boston.
             I was quite bullish on <A href="https://kairos-project.org/">strengthening</A> and{' '}

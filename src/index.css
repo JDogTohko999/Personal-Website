@@ -198,14 +198,25 @@ html[data-page='home'] body { overflow: hidden; }
    name and links at every size. */
 .caption.veil::before,
 .band-head.veil::before { content: ''; }
-/* Portrait screens: the inner pages' name and links sit at the very top of the tall crop, its
-   darkest teal, so the haze there is a little stronger (same form, so measure-sky.js reads it). */
-/* Portrait screens: the inner pages' name and links sit at the very top of the tall crop, its
+/* Portrait screens: without the one-liner the caption (and so its haze oval) is shorter, and the
+   haze no longer reached "meet" at the end of the last line; a little more haze there. */
+@media (max-aspect-ratio: 4/5) {
+  .caption.veil::before {
+    background: radial-gradient(closest-side, rgba(200, 222, 206, 0.36), rgba(200, 222, 206, 0.26) 55%, rgba(200, 222, 206, 0));
+  }
+}
+/* The re-graded photo (_2) is a touch darker at the top, where the inner pages' header sits, so
+   its haze is a little stronger than the home caption's (same form, so measure-sky.js reads it). */
+.band-head.veil::before {
+  background: radial-gradient(closest-side, rgba(200, 222, 206, 0.46), rgba(200, 222, 206, 0.34) 55%, rgba(200, 222, 206, 0));
+}
+/* Portrait and small screens: the inner pages' name and links sit at the very top of the tall crop, its
    darkest teal (down to rgb 35 83 85). A soft oval can't lift a strip that wide evenly, so there
    the header sits on a strip of the same mint haze as the sheet, at 82%: rust links measure
    6.7:1 or better over the darkest pixel (computed; measure-sky.js doesn't model this strip).
-   The photo still shows between the strip and the sheet. */
-@media (max-width: 40rem), (max-aspect-ratio: 4/5) {
+   The photo still shows between the strip and the sheet. Also windows under 52rem wide, where the
+   header wraps and reaches into the darker sky (the re-graded photo measured 4.39 there bare). */
+@media (max-width: 52rem), (max-aspect-ratio: 4/5) {
   .band-head.veil {
     top: 0;
     left: 0;
@@ -275,7 +286,7 @@ html[data-page='home'] body { overflow: hidden; }
   /* 2ppl photo: its tall crop's sky is light all the way up, so the caption sits high in the
      open sky, well clear of the standing hiker on the ridge (about 58% down). */
   .caption {
-    top: clamp(9rem, 25svh, 14rem);
+    top: clamp(11.25rem, calc(25svh + 2.25rem), 16.25rem); /* +2.25rem: back where the caption sat with the one-liner */
     bottom: auto;
     max-width: calc(100vw - 2.5rem);
   }
@@ -289,7 +300,7 @@ html[data-page='home'] body { overflow: hidden; }
 /* Short portrait screens (small phones, e.g. 360x640): the ridge rises to about 58% of the
    height, so the caption sits a little higher and a size smaller to stay in the sky. */
 @media (max-aspect-ratio: 4/5) and (max-height: 740px) {
-  .caption { top: clamp(3.5rem, 15svh, 7rem); }
+  .caption { top: clamp(5.5rem, calc(15svh + 2rem), 9rem); }
   .caption-name { font-size: 2.25rem; }
   .caption-line { font-size: 1.2rem; }
   .sky-nav-stack { font-size: 1.125rem; margin-top: 0.85rem; }
