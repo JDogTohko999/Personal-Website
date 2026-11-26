@@ -96,7 +96,6 @@ export default function MapPage() {
           )}
           <ul className="plain map-key" aria-label="Country colours">
             <li><i style={{ background: 'var(--globe-visited)' }} />been</li>
-            <li><i style={{ background: 'var(--globe-going)' }} />going soon</li>
             <li><i style={{ background: 'var(--globe-bucket)' }} />someday</li>
           </ul>
         </figcaption>

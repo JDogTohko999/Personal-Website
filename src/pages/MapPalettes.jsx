@@ -79,6 +79,28 @@ export const MAP_PALETTES = [
     palette: { ocean: '#2F3B4A', land: '#E9E1CC', border: '#2F3B4A', glow: '#B4572F', dot: '#272018', dotRing: '#E9E1CC', going: '#7A7D4A', bucket: '#C9A04A' },
     roles: [['ocean', 'muted indigo', '#2F3B4A'], ['land', 'oat', '#E9E1CC'], ['city glow', 'rust', '#B4572F'], ['city dots', 'soft black', '#272018'], ['going soon', 'olive', '#7A7D4A'], ['bucket list', 'ochre', '#C9A04A']],
   },
+  // Round 3: earth colours, as Jason asked: blue ocean, earthy green land, ochre glow, light
+  // earthy purple bucket list. Going soon is gone (Armenia is on the bucket list now).
+  {
+    id: 'N', name: 'Earth: soft',
+    palette: { ocean: '#9DB4C0', land: '#A9B28C', border: '#D9DCC6', glow: '#D39B35', dot: '#2B2416', dotRing: '#F3EDD9', going: '#B9A6BC', bucket: '#B9A6BC' },
+    roles: [['ocean', 'dusty blue', '#9DB4C0'], ['land', 'sage green', '#A9B28C'], ['city glow', 'ochre', '#D39B35'], ['city dots', 'soft black', '#2B2416'], ['bucket list', 'heather', '#B9A6BC']],
+  },
+  {
+    id: 'O', name: 'Earth: deep',
+    palette: { ocean: '#56788E', land: '#76845A', border: '#9AA67F', glow: '#E2A73F', dot: '#2B2416', dotRing: '#F3EDD9', going: '#A893AC', bucket: '#A893AC' },
+    roles: [['ocean', 'slate blue', '#56788E'], ['land', 'fern green', '#76845A'], ['city glow', 'ochre', '#E2A73F'], ['city dots', 'soft black', '#2B2416'], ['bucket list', 'dusty mauve', '#A893AC']],
+  },
+  {
+    id: 'P', name: 'Earth: pale atlas',
+    palette: { ocean: '#BCCFD8', land: '#C5CBA6', border: '#EEF0E2', glow: '#C78A2C', dot: '#3A2418', dotRing: '#F6F1E1', going: '#CDBFD0', bucket: '#CDBFD0' },
+    roles: [['ocean', 'pale sky blue', '#BCCFD8'], ['land', 'pale olive green', '#C5CBA6'], ['city glow', 'deep ochre', '#C78A2C'], ['city dots', 'walnut', '#3A2418'], ['bucket list', 'lavender grey', '#CDBFD0']],
+  },
+  {
+    id: 'Q', name: 'Earth: olive & steel',
+    palette: { ocean: '#6E8FA3', land: '#8D9762', border: '#B3B98F', glow: '#E0AD48', dot: '#2B2416', dotRing: '#F3EDD9', going: '#B29DB5', bucket: '#B29DB5' },
+    roles: [['ocean', 'steel blue', '#6E8FA3'], ['land', 'olive green', '#8D9762'], ['city glow', 'golden ochre', '#E0AD48'], ['city dots', 'soft black', '#2B2416'], ['bucket list', 'dusty lilac', '#B29DB5']],
+  },
 ];
 
 export default function MapPalettes() {

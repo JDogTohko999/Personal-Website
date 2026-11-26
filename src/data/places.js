@@ -297,8 +297,9 @@ export const cities = [
 ];
 
 // Countries for going soon and bucket list (solid fill only, no markers)
-export const goingSoon = ["ARM", "051"];
-export const bucketList = ["IND", "356", "CHN", "156", "MNG", "496", "IDN", "360", "NGA", "566", "KOR", "410"];
+// Going soon was dropped (Jason, Nov 2026): Armenia joined the bucket list. Kept empty so the category code still works.
+export const goingSoon = [];
+export const bucketList = ["ARM", "051", "IND", "356", "CHN", "156", "MNG", "496", "IDN", "360", "NGA", "566", "KOR", "410"];
 
 export const visitedCountryCodes = new Set(
   cities.flatMap((city) => city.countryCode)

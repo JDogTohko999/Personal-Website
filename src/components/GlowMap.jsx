@@ -52,7 +52,7 @@ export default function GlowMap({ palette, id = 'glowmap', className = '', onPic
       viewBox={`0 0 ${W} ${H}`}
       className={`glowmap ${className}`.trim()}
       role="img"
-      aria-label="World map: the countries and cities Jason has been to glow; going soon and bucket list countries are shaded."
+      aria-label="World map: the countries and cities Jason has been to glow; bucket list countries are shaded."
       style={{ background: palette.ocean, display: 'block', width: '100%', height: 'auto' }}
     >
       {failed && <text x={W / 2} y={H / 2} textAnchor="middle" fill={palette.dot} fontSize="16">The map couldn&rsquo;t load.</text>}
