@@ -296,3 +296,11 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
   - Inner header: icons then "meet", inline.
   - Phones: "meet" then the icons on one line, so the caption stays short and clear of the hiker, and the word sits in the lighter left sky. Icons only need 3:1 as non-text and are dark rust.
   - Text contrast after the change: 4.77+ at every size checked.
+- **_3 photo and small icons under the name (Jason):**
+  - The background is now `background_screen saver_NOLS_2ppl_cropped_3.jpg` (same crop, another re-grade; `?v=4`).
+  - The account icons are much smaller: 13px on the home and 12px in the inner header, down from about 21px. They sit directly under the name in both places; the nav is back to the page words plus "meet". On touch screens each icon gets a bigger invisible tap area.
+  - The _3 grade is a little darker again, so:
+    - the home haze is a bit stronger and reaches lower
+    - the phone caption starts a little higher (the icon row adds a line)
+    - links over the photo are a step deeper: #331a0f, still the warm-brown family
+  - **Worst link pixel:** 4.7+ at 1440, 1280, 1920, 768, 390 and 360. The large name on inner pages is 4.0+ (large text, needs 3:1).

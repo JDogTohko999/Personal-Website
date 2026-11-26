@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import Backdrop from './Backdrop.jsx';
 import LookSwitcher from './LookSwitcher.jsx';
 import SkyNav from './SkyNav.jsx';
+import SocialIcons from './SocialIcons.jsx';
 
 /*
   Two shells over one photo (the same <img>, so moving between pages never reloads it).
@@ -34,7 +35,10 @@ export default function Layout() {
       ) : (
         <>
           <header className="band-head veil">
-            <Link to="/" className="band-name">Jason Chin</Link>
+            <div className="band-id">
+              <Link to="/" className="band-name">Jason Chin</Link>
+              <SocialIcons className="socials--name" />
+            </div>
             <SkyNav className="sky-nav-inline" />
           </header>
           <div className="sheet">

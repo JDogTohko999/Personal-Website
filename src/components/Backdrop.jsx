@@ -30,13 +30,13 @@ export default function Backdrop({ mode }) {
       <picture>
         <source
           media="(max-aspect-ratio: 4/5)"
-          srcSet="/bg4/twoppl-tall-933.jpg?v=3 933w, /bg4/twoppl-tall-1170.jpg?v=3 1170w"
+          srcSet="/bg4/twoppl-tall-933.jpg?v=4 933w, /bg4/twoppl-tall-1170.jpg?v=4 1170w"
           sizes="100vw"
         />
         <img
           className="backdrop-photo"
-          src="/bg4/twoppl-wide-1375.jpg?v=3"
-          srcSet="/bg4/twoppl-wide-800.jpg?v=3 800w, /bg4/twoppl-wide-1375.jpg?v=3 1375w, /bg4/twoppl-wide-1920.jpg?v=3 1920w"
+          src="/bg4/twoppl-wide-1375.jpg?v=4"
+          srcSet="/bg4/twoppl-wide-800.jpg?v=4 800w, /bg4/twoppl-wide-1375.jpg?v=4 1375w, /bg4/twoppl-wide-1920.jpg?v=4 1920w"
           sizes="100vw"
           alt=""
           fetchpriority="high"

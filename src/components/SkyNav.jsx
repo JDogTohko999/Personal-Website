@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { links } from '../data/profile.jsx';
-import SocialIcons from './SocialIcons.jsx';
 
 /*
   The tiny lowercase links, the same words on every page, in Jason's order:
-  about me, now, involvements, writing, then (after a small gap) a row of account icons
-  (LinkedIn, Substack, X, Instagram, Spotify) and meet.
+  about me, now, involvements, writing, then (after a small gap) meet. The account icons sit
+  directly under the name instead (SocialIcons, in Home and the inner header).
   (Places and VAISI still have pages at /places and /vaisi; they're just not in the nav.)
 */
 export const PAGES = [
@@ -36,10 +35,9 @@ export default function SkyNav({ className = '' }) {
           </li>
         ))}
       </ul>
-      <div className="sky-nav-out">
-        <SocialIcons />
-        <a className="sky-nav-meet" href={MEET[0]} target="_blank" rel="noopener noreferrer" aria-label={MEET[2]}>{MEET[1]}</a>
-      </div>
+      <ul className="sky-nav-out">
+        <li><a href={MEET[0]} target="_blank" rel="noopener noreferrer" aria-label={MEET[2]}>{MEET[1]}</a></li>
+      </ul>
     </nav>
   );
 }
