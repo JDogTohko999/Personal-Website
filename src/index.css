@@ -864,8 +864,6 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 .socials a:hover, .socials a:focus-visible { color: var(--link-photo-hover); }
 .socials svg { width: 13px; height: 13px; display: block; }
 .socials--name { margin-top: 0.45rem; }
-.band-id .socials--name { margin-top: 0.25rem; gap: 0.6rem; }
-.band-id .socials svg { width: 12px; height: 12px; }
 /* Fingers: a bigger hit area around each small icon, without moving them apart visually much. */
 @media (pointer: coarse) {
   .socials { gap: 0.35rem; }
