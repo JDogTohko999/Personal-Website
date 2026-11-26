@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import TourGlobe from '../components/TourGlobe.jsx';
 import Photos from '../components/Photos.jsx';
 import { cities, homePlace, tourPlaces } from '../data/places.js';
-import { placesByCountry, stats } from '../lib/geo.js';
+import { placesByCountry } from '../lib/geo.js';
 import useTitle from '../lib/useTitle.js';
 
 /*
@@ -62,11 +62,7 @@ export default function MapPage() {
 
   return (
     <>
-      <h1 className="page-title">Travels</h1>
-      <p className="page-lede">
-        {stats.places} places in {stats.countries} countries, on {stats.continents} continents. The globe wanders
-        between a few of them; pick any place to go there.
-      </p>
+      <h1 className="page-title" style={{ marginBottom: "1.5rem" }}>Travels</h1>
 
       <figure ref={figure} style={{ margin: 0 }}>
         <TourGlobe
