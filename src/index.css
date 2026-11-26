@@ -46,7 +46,8 @@
   --globe-bucket: #d8d0b4;
   --globe-border: #eef0e9;
   --globe-pin: #4a4626;
-  --globe-pin-home: #2c4745;
+  --globe-pin-home: #a083ad;  /* heather: Boston, where Jason lives now */
+  --globe-glow: #5f7656;      /* fern green: each city glows inside its country (G2 on /globe-colours) */
   --globe-halo: rgba(74, 106, 105, 0.14);
   --globe-limb: rgba(18, 26, 24, 0.07);
   --globe-frame: #e7e9e0;
@@ -752,8 +753,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --link: #663c2c;
   --link-hover: #3f2419;
   --rule: #a9b09f;
-  --globe-ocean: #d3d8cb;
-  --globe-frame: #ccd1c3;
+  --globe-ocean: #eef0e9;   /* G2, as Jason picked it */
+  --globe-frame: #eef0e9;
 }
 
 /* ---- scree: warm stone from the rocks, with a paper-fibre texture ---- */
@@ -801,7 +802,8 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --globe-bucket: #5b5440;
   --globe-border: #1f2927;
   --globe-pin: #e8dcae;
-  --globe-pin-home: #cfe0dc;
+  --globe-pin-home: #cdb8d6;
+  --globe-glow: #9fb592;
   --globe-halo: rgba(207, 224, 220, 0.12);
   --globe-limb: rgba(0, 0, 0, 0.25);
   --globe-frame: #1c2523;
@@ -927,6 +929,6 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 /* ---------- map colour review page ---------- */
 .map-variant { margin: 0 0 2.75rem; }
 .map-variant .glowmap { border: 1px solid var(--rule); }
-.map-key { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 0.25rem 1rem; font-size: 0.9375rem; }
-.map-key li { display: flex; align-items: center; gap: 0.5rem; }
+.palette-key { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: 0.25rem 1rem; font-size: 0.9375rem; }
+.palette-key li { display: flex; align-items: center; gap: 0.5rem; }
 .map-swatch { flex: none; width: 1rem; height: 1rem; border-radius: 2px; border: 1px solid rgba(0,0,0,0.25); }

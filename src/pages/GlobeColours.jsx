@@ -63,7 +63,7 @@ export default function GlobeColours() {
             zoomIn={1.5}
             showCaption={false}
           />
-          <ul className="map-key">
+          <ul className="palette-key">
             {m.roles.map(([role, name, hex]) => (
               <li key={role}>
                 <span className="map-swatch" style={{ background: hex }} />

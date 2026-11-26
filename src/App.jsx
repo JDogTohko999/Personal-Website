@@ -12,8 +12,8 @@ import NotFound from './pages/NotFound.jsx';
 
 // The map page pulls in d3-geo + topojson; keep it out of the main bundle.
 const MapPage = lazy(() => import('./pages/MapPage.jsx'));
-const MapPalettes = lazy(() => import('./pages/MapPalettes.jsx'));
-const GlobeColours = lazy(() => import('./pages/GlobeColours.jsx'));
+const MapPalettes = import.meta.env.DEV ? lazy(() => import('./pages/MapPalettes.jsx')) : null;
+const GlobeColours = import.meta.env.DEV ? lazy(() => import('./pages/GlobeColours.jsx')) : null;
 
 export default function App() {
   return (
@@ -40,8 +40,9 @@ export default function App() {
           />
         ))}
         {/* Review page for the map colours (not in the nav). */}
-        <Route path="/map-colours" element={<Suspense fallback={null}><MapPalettes /></Suspense>} />
-        <Route path="/globe-colours" element={<Suspense fallback={null}><GlobeColours /></Suspense>} />
+        {/* Colour review pages: dev server only, not on the live site. */}
+        {import.meta.env.DEV && <Route path="/map-colours" element={<Suspense fallback={null}><MapPalettes /></Suspense>} />}
+        {import.meta.env.DEV && <Route path="/globe-colours" element={<Suspense fallback={null}><GlobeColours /></Suspense>} />}
         <Route path="/vaisi" element={<Vaisi />} />
         {/* "involvements" is the nav word; /experience stays as an alias for old links. */}
         <Route path="/involvements" element={<Experience />} />

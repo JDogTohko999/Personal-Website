@@ -95,7 +95,8 @@ export default function MapPage() {
             </div>
           )}
           <ul className="plain map-key" aria-label="Country colours">
-            <li><i style={{ background: 'var(--globe-visited)' }} />been</li>
+            <li><i style={{ background: 'var(--globe-glow)' }} />been</li>
+            <li><i style={{ background: 'var(--globe-pin-home)' }} />home</li>
             <li><i style={{ background: 'var(--globe-bucket)' }} />someday</li>
           </ul>
         </figcaption>

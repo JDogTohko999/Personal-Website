@@ -144,7 +144,7 @@ export default function MapPalettes() {
         <section key={m.id} className="map-variant">
           <h2 className="section-title">{m.id}. {m.name}</h2>
           <GlowMap palette={m.palette} id={`map-${m.id}`} />
-          <ul className="map-key">
+          <ul className="palette-key">
             {m.roles.map(([role, name, hex]) => (
               <li key={role}>
                 <span className="map-swatch" style={{ background: hex }} />

@@ -328,3 +328,10 @@ Jason asked for a version over `background_screen saver_NOLS_2ppl_cropped.jpg` (
   - New Curius icon (one-colour version of its overlapping-squares mark) at the end, linking to curius.app/jason-chin.
   - New "travels" tab: the framed, drifting globe page, now titled Travels, at /travels (/places and /map still work).
   - Nav: about me, now, involvements, writing, travels.
+
+## Travels globe colours (Nov 2026)
+- Visited countries are no longer filled; each city glows fern green (#5f7656) inside its own country (TourGlobe glow mode, `--globe-glow`). Picked as G2 from the /globe-colours review page.
+- Haze look: globe ocean and frame #eef0e9, as in G2.
+- Boston (home) pin is heather (#a083ad), since that's where Jason lives now; the legend reads been / home / someday.
+- "Going soon" dropped; Armenia joined the bucket list.
+- The /map-colours and /globe-colours review pages exist on the dev server only.
