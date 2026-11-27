@@ -6,7 +6,7 @@ import * as vaisi from '../data/vaisi.jsx';
 import Photos from '../components/Photos.jsx';
 import WorkRow, { ExperienceRow } from '../components/WorkRow.jsx';
 import { thumb } from '../components/webImage.js';
-import { years } from '../lib/dates.js';
+import { span, years } from '../lib/dates.js';
 import useTitle from '../lib/useTitle.js';
 
 /*
@@ -22,7 +22,7 @@ const host = (url) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
 function VaisiRow({ e }) {
   return (
-    <WorkRow date={years(e.period)} title={e.role} org={e.company} orgUrl={e.orgUrl}>
+    <WorkRow date={span(e.period)} title={e.role} org={e.company} orgUrl={e.orgUrl}>
       <a href={e.link} {...ext} className="vaisi-site" aria-label="vaisi.org (opens in a new tab)">
         <img src="/vaisi/vaisi_homepage.jpg" alt="The VAISI website's homepage" loading="lazy" />
       </a>
