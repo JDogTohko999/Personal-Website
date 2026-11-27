@@ -1090,3 +1090,6 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --globe-bucket: #bfa77a;
   --globe-frame: #cfccc2;
 }
+/* One row, two roles (Pathfinder fellow, then mentor): each on its own line with a little air. */
+.work-part { display: block; }
+.work-part + .work-part { margin-top: 0.55em; }

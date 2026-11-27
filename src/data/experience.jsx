@@ -56,15 +56,20 @@ export const experiences = [
   },
   {
     id: 2,
-    role: 'Pathfinder Fellow',
+    role: 'Pathfinder Fellow and Mentor',
     company: 'Kairos',
-    period: 'Aug 2025 - Dec 2025',
-    description: 'Received mentorship, community, and funding crucial for establishing VAISI.',
-    short: 'Mentorship, community, and funding for establishing VAISI.',
+    period: 'Aug 2025 - Present',
+    description: (
+      <>
+        <span className="work-part"><strong>Fellow</strong>, Fall &rsquo;25. Received mentorship, community, and funding crucial for establishing VAISI.</span>
+        <span className="work-part"><strong>Mentor</strong>, Fall &rsquo;26. Mentoring university group founders at BYU, Dartmouth, and UNC.</span>
+      </>
+    ),
+    short: "Fellow in Fall '25 (mentorship and funding for VAISI); mentor in Fall '26 for founders at BYU, Dartmouth, and UNC.",
     link: 'https://pathfinder.kairos-project.org/',
     orgUrl: 'https://kairos-project.org/',
     kind: 'work',
-    current: false,
+    current: true,
     highlight: false,
   },
   {
