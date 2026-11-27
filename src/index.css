@@ -975,3 +975,6 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 /* Words that open photos (PhotoLink): styled like the links around them. */
 .photo-link { background: none; border: 0; padding: 0; font: inherit; color: var(--link); cursor: pointer; text-decoration: none; }
 .photo-link:hover, .photo-link:focus-visible { color: var(--link-hover); }
+
+/* Opened Involvements rows: the description matches the role title (15px), not the 18px body. */
+.work-more { font-size: 0.9375rem; }
