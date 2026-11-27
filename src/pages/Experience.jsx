@@ -37,28 +37,51 @@ function VaisiRow({ e }) {
 
 const Role = ({ e }) => (e.id === VAISI_ID ? <VaisiRow e={e} /> : <ExperienceRow e={e} />);
 
+// Start of a period ("Nov 2025 – Feb 2026", "Sep 2018 - Jun 2022") as a sortable month number.
+const MON = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const startOf = (period) => {
+  const m = /([A-Za-z]{3})[a-z]*\.?\s+(\d{4})/.exec(String(period || ''));
+  return m ? +m[2] * 12 + MON.indexOf(m[1].toLowerCase()) : 0;
+};
+
 function OtherThings({ id }) {
   const debate = achievements.find((a) => a.photos);
   const scout = achievements.find((a) => a !== debate);
+  // Everything here, newest first by when it started (Jason: "chronological").
+  const rows = [
+    {
+      start: startOf(debate.date),
+      key: 'debate',
+      el: (
+        <WorkRow key="debate" date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} orgUrl={debate.orgUrl}>
+          {debate.description.split(/\n+/).map((para, i) => <p key={i}>{para.trim()}</p>)}
+          <Photos images={debate.photos} alt="Martin Skeptical Debate" />
+          <p className="work-meta">
+            {debate.links.map((l, i) => (
+              <React.Fragment key={l.href}>
+                {i > 0 && ' · '}
+                <a href={l.href} {...ext}>{l.label}</a>
+              </React.Fragment>
+            ))}
+          </p>
+        </WorkRow>
+      ),
+    },
+    {
+      start: startOf(scout.date),
+      key: 'scout',
+      el: (
+        <WorkRow key="scout" date={scout.date} title={scout.title} org={scout.organization}>
+          <p><em>{scout.palms}</em></p>
+          <p>{scout.description}</p>
+        </WorkRow>
+      ),
+    },
+    ...experiences.filter((e) => !e.highlight).map((e) => ({ start: startOf(e.period), key: e.id, el: <Role key={e.id} e={e} /> })),
+  ].sort((a, b) => b.start - a.start);
   return (
     <ul className="plain work" id={id}>
-      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} orgUrl={debate.orgUrl}>
-        {debate.description.split(/\n+/).map((para, i) => <p key={i}>{para.trim()}</p>)}
-        <Photos images={debate.photos} alt="Martin Skeptical Debate" />
-        <p className="work-meta">
-          {debate.links.map((l, i) => (
-            <React.Fragment key={l.href}>
-              {i > 0 && ' · '}
-              <a href={l.href} {...ext}>{l.label}</a>
-            </React.Fragment>
-          ))}
-        </p>
-      </WorkRow>
-      <WorkRow date={scout.date} title={scout.title} org={scout.organization}>
-        <p><em>{scout.palms}</em></p>
-        <p>{scout.description}</p>
-      </WorkRow>
-      {experiences.filter((e) => !e.highlight).map((e) => <Role key={e.id} e={e} />)}
+      {rows.map((r) => r.el)}
     </ul>
   );
 }
