@@ -977,3 +977,116 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 
 /* Opened Involvements rows: the description matches the role title (15px), not the 18px body. */
 .work-more { font-size: 0.9375rem; }
+
+/* =====================================================================================
+   Mellow natural looks (Jason, Nov 2026: "mellow colors with a natural look"). Same paper-fibre
+   texture as scree; each has a link colour in a different hue from its text.
+   ===================================================================================== */
+[data-look='linen'] .sheet {
+  background-color: #e8e2d4;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #e8e2d4;
+  --surface: #ede8dc;
+  --text: #2a261f;
+  --muted: #5b5445;
+  --link: #4c5a2c;
+  --link-hover: #2f3a18;
+  --ink: #2a261f;
+  --rule: #c9c0ab;
+  --globe-ocean: #efeadf;
+  --globe-land: #d3cab4;
+  --globe-border: #efeadf;
+  --globe-bucket: #b49d6e;
+  --globe-frame: #e3dccc;
+}
+[data-look='sage'] .sheet {
+  background-color: #ccd4c2;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #ccd4c2;
+  --surface: #d4dbcb;
+  --text: #1d271f;
+  --muted: #46503f;
+  --link: #7a3f26;
+  --link-hover: #542813;
+  --ink: #1d271f;
+  --rule: #aab49f;
+  --globe-ocean: #dbe1d3;
+  --globe-land: #b3bda6;
+  --globe-border: #dbe1d3;
+  --globe-bucket: #c2ad84;
+  --globe-frame: #c6cebb;
+}
+[data-look='sand'] .sheet {
+  background-color: #e2d5bb;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #e2d5bb;
+  --surface: #e8dcc5;
+  --text: #2c2417;
+  --muted: #5a4e38;
+  --link: #36566a;
+  --link-hover: #203a4a;
+  --ink: #2c2417;
+  --rule: #c5b598;
+  --globe-ocean: #ebe1cc;
+  --globe-land: #cdbe9e;
+  --globe-border: #ebe1cc;
+  --globe-bucket: #a89070;
+  --globe-frame: #dccfb3;
+}
+[data-look='moss'] .sheet {
+  background-color: #b4bca3;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #b4bca3;
+  --surface: #bcc4ac;
+  --text: #182015;
+  --muted: #353f2e;
+  --link: #5a2614;
+  --link-hover: #3a1608;
+  --ink: #182015;
+  --rule: #939d82;
+  --globe-ocean: #c6cdb6;
+  --globe-land: #9ca78a;
+  --globe-border: #c6cdb6;
+  --globe-bucket: #c9b07a;
+  --globe-frame: #adb69c;
+}
+[data-look='clay'] .sheet {
+  background-color: #dcc6b4;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #dcc6b4;
+  --surface: #e2cfbf;
+  --text: #2a1c15;
+  --muted: #57443a;
+  --link: #22504e;
+  --link-hover: #123634;
+  --ink: #2a1c15;
+  --rule: #bfa592;
+  --globe-ocean: #e6d6c8;
+  --globe-land: #c8ae99;
+  --globe-border: #e6d6c8;
+  --globe-bucket: #9fb3a8;
+  --globe-frame: #d5bfac;
+}
+[data-look='fog'] .sheet {
+  background-color: #d5d2c9;
+  background-image: var(--tex-fibre), var(--tex-grain);
+  background-size: 320px 320px, 180px 180px;
+  --bg: #d5d2c9;
+  --surface: #dbd8d0;
+  --text: #22211e;
+  --muted: #4c4a43;
+  --link: #4a5d2c;
+  --link-hover: #2e3c17;
+  --ink: #22211e;
+  --rule: #b5b2a8;
+  --globe-ocean: #dfddd6;
+  --globe-land: #bdbab0;
+  --globe-border: #dfddd6;
+  --globe-bucket: #bfa77a;
+  --globe-frame: #cfccc2;
+}

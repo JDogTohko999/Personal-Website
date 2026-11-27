@@ -10,6 +10,12 @@ export const LOOKS = [
   { id: 'card', label: 'card', note: 'the original light sheet' },
   { id: 'scree', label: 'scree', note: 'warm stone with a paper-fibre texture (default)' },
   { id: 'dusk', label: 'dusk', note: 'dark teal-rock with film grain, light text' },
+  { id: 'linen', label: 'linen', note: 'warm off-white linen, moss links' },
+  { id: 'sage', label: 'sage', note: 'soft sage green, clay links' },
+  { id: 'sand', label: 'sand', note: 'pale sand, slate-blue links' },
+  { id: 'moss', label: 'moss', note: 'muted moss, rust links' },
+  { id: 'clay', label: 'clay', note: 'light clay wash, deep teal links' },
+  { id: 'fog', label: 'fog', note: 'warm grey fog, moss links' },
 ];
 export const ZOOMS = [
   { id: '100', label: 'off' },
