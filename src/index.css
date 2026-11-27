@@ -662,8 +662,6 @@ html[data-page='inner'] body { background: var(--sky); }
 
 /* ---------- vaisi ---------- */
 
-.vaisi-logo { display: block; width: 3.5rem; height: 3.5rem; object-fit: contain; margin-top: 0; }
-.vaisi-logo + .page-title { margin-top: 1rem; }
 .vaisi-text { max-width: 18rem; width: 100%; display: block; }
 
 /* ---------- places ---------- */

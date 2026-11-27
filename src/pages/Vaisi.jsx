@@ -9,7 +9,6 @@ export default function Vaisi() {
   const sets = Object.values(vaisi.imageSets);
   return (
     <>
-      <img className="vaisi-logo" src={vaisi.logo} alt="" width="56" height="56" />
       <h1 className="page-title">{vaisi.name}</h1>
       <p className="page-lede">
         {vaisi.role}, {vaisi.period}.{' '}
