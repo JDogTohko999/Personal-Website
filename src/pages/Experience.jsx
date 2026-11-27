@@ -42,7 +42,7 @@ function OtherThings({ id }) {
   const scout = achievements.find((a) => a !== debate);
   return (
     <ul className="plain work" id={id}>
-      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} orgUrl={debate.orgUrl} defaultOpen>
+      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} orgUrl={debate.orgUrl}>
         {debate.description.split(/\n+/).map((para, i) => <p key={i}>{para.trim()}</p>)}
         <Photos images={debate.photos} alt="Martin Skeptical Debate" />
         <p className="work-meta">
@@ -54,7 +54,10 @@ function OtherThings({ id }) {
           ))}
         </p>
       </WorkRow>
-      <WorkRow date="" title={scout.title} org={scout.organization} summary={scout.description} />
+      <WorkRow date={scout.date} title={scout.title} org={scout.organization}>
+        <p><em>{scout.palms}</em></p>
+        <p>{scout.description}</p>
+      </WorkRow>
       {experiences.filter((e) => !e.highlight).map((e) => <Role key={e.id} e={e} />)}
     </ul>
   );

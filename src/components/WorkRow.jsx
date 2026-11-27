@@ -57,20 +57,19 @@ function When({ text }) {
    Either way the organisation's own link is inside what opens, so a closed row has no underline
    at all. An entry with nothing more to say and no link doesn't open. */
 export function ExperienceRow({ e, condensed = false }) {
-  const more = e.description && e.description !== e.short ? e.description : null;
   const period = span(e.period);
-  const opens = condensed || more || e.link;
+  // Nothing shows under a closed row (Jason): the description only appears once it's opened.
+  const opens = condensed || e.description || e.short || e.link;
   return (
     <WorkRow
       date={<When text={condensed ? years(e.period) : period} />}
       title={e.role}
       org={e.company}
       orgUrl={e.orgUrl}
-      summary={condensed ? undefined : e.short}
     >
       {opens && (
         <>
-          <p>{condensed ? e.short : more || e.short}</p>
+          <p>{condensed ? e.short : e.description || e.short}</p>
           {(condensed || e.link) && (
             <p className="work-meta">
               {condensed && <>{period.replace('Present', 'present')}{e.link && ', '}</>}
