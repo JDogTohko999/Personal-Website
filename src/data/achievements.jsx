@@ -4,6 +4,7 @@ export const achievements = [
     featured: true,
     title: 'Finalist — Martin Skeptical Debate',
     organization: 'Jefferson Society at UVA',
+    orgUrl: 'https://jeffersonsociety.org/',
     date: 'Nov 2025 – Feb 2026',
     description: 'Lost in the finals of UVA\'s inaugural Martin Skeptical Debate series. \nResolution: "Artificial intelligence will significantly increase biological risk in the next five years."\n\nThis was my first time ever debating, and wow, what an eye opening experience. Makes me wish I\'d started sooner! Also, such a great excuse to research a topic I\'m passionate about. Huge shoutout to my friends that came to watch and to Lisa for carrying me.',
     links: [

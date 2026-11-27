@@ -1,9 +1,13 @@
 import React from 'react';
 import { links } from './profile';
+import PhotoLink from '../components/PhotoLink.jsx';
+
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
 
 export const linkedinUrl = links.linkedin;
 
 // kind: 'work' | 'education' | 'volunteer'. highlight: shown by default in a condensed view.
+// orgUrl: the organisation's own site (its name links there). link: a project/paper link shown when open.
 export const experiences = [
   {
     id: 13,
@@ -12,11 +16,11 @@ export const experiences = [
     period: 'Sep 2026 - Present',
     description: (
       <>
-        Organizing MIT's AI safety group (<a href="https://mitaialignment.org/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">MAIA</a>), and likely some shared programming with Harvard's (<a href="https://haist.ai/" target="_blank" rel="noopener noreferrer" className="text-portfolio-gold hover:underline">AISST</a>).
+        Helping run MIT's AI safety group (<a href="https://mitaialignment.org/" {...ext}>MAIA</a>), and some shared programming with Harvard's (<a href="https://haist.ai/" {...ext}>AIST</a>). Recently I've been focused on organizing AIST/MAIA's three fall <a href="https://mitaialignment.org/getinvolved/#workshops" {...ext}>workshops</a>.
       </>
     ),
-    short: "Organizing MIT's AI safety group, with likely Harvard collaboration.",
-    link: 'https://mitaialignment.org/',
+    short: "Helping run MIT's AI safety group and organizing AIST/MAIA's fall workshops.",
+    orgUrl: 'https://www.cbai.ai/',
     kind: 'work',
     current: true,
     highlight: true,
@@ -32,7 +36,7 @@ export const experiences = [
       </>
     ),
     short: 'Sourcing and supporting founders of AI safety university groups.',
-    link: 'https://aisafetyseeding.org/',
+    orgUrl: 'https://aisafetyseeding.org/',
     kind: 'work',
     current: true,
     highlight: true,
@@ -40,11 +44,12 @@ export const experiences = [
   {
     id: 1,
     role: 'Co-founder and Former President',
-    company: 'Virginia AI Security Initiative (VAISI)',
+    company: 'Virginia AI Security Initiative',
     period: 'Aug 2025 - May 2026',
     description: 'Created an environment that enabled the UVA community to engage with and take action on AI risks. Focused on team management, effective recruitment, event coordination, and creating + leading VAISI\'s AI Governance Fellowship.',
     short: "Built UVA's AI risk community; led recruitment, events, and the AI Governance Fellowship.",
     link: 'https://vaisi.org',
+    orgUrl: 'https://www.vaisi.org/',
     kind: 'work',
     current: false,
     highlight: true,
@@ -57,6 +62,7 @@ export const experiences = [
     description: 'Received mentorship, community, and funding crucial for establishing VAISI.',
     short: 'Mentorship, community, and funding for establishing VAISI.',
     link: 'https://pathfinder.kairos-project.org/',
+    orgUrl: 'https://kairos-project.org/',
     kind: 'work',
     current: false,
     highlight: false,
@@ -69,6 +75,7 @@ export const experiences = [
     description: 'Learned about trends, risks, stakeholders, and proposed frameworks for steering AI towards beneficial outcomes. Still working on final project',
     short: 'Studied AI trends, risks, stakeholders, and frameworks for beneficial outcomes.',
     link: 'https://bluedot.org/courses/agi-strategy',
+    orgUrl: 'https://bluedot.org/',
     kind: 'work',
     current: false,
     highlight: false,
@@ -77,6 +84,7 @@ export const experiences = [
     id: 4,
     role: 'IT Summer Intern (Systems Engineering)',
     company: 'UPS',
+    orgUrl: 'https://www.ups.com/',
     period: 'Jun 2024 - Aug 2024',
     description: 'Identified bottlenecks and coded a PowerShell script to automate system setup, reducing process time from 2-3hrs to seconds. Estimated anual savings ~$4,000. Won 3rd place in Google Cloud Vision AI Hackathon category.',
     short: 'Automated system setup with PowerShell, cutting 2-3hrs to seconds; ~$4,000 annual savings.',
@@ -92,6 +100,7 @@ export const experiences = [
     description: 'Co-authored research paper for UbiComp/ISWC 2024. Spearheaded research on musical chords and emotionality, conducting qualitative and quantitative user studies.',
     short: 'Co-authored UbiComp/ISWC 2024 paper on musical chords and emotionality.',
     link: 'https://doi.org/10.1145/3675094.3678495',
+    orgUrl: 'https://engineering.virginia.edu/labs-groups/link-lab',
     kind: 'work',
     current: false,
     highlight: false,
@@ -100,6 +109,7 @@ export const experiences = [
     id: 6,
     role: 'IT Summer Intern (Global Networking)',
     company: 'UPS',
+    orgUrl: 'https://www.ups.com/',
     period: 'Jun 2023 - Aug 2023',
     description: 'Worked with SD-WAN, SNMP, and telemetry. Led front-end development for a team that placed top 10% in the UPS 2023 Hackathon.',
     short: 'Worked with SD-WAN, SNMP, telemetry; led front-end for top-10% hackathon team.',
@@ -124,9 +134,25 @@ export const experiences = [
     role: 'B.S. Computer Engineering | AI Focal Path',
     company: 'University of Virginia',
     period: 'Aug 2022 - May 2026',
-    description: 'GPA: 3.7/4.0. Lead of AI Security Initiative. Former Exec of Google Developer Group at UVA, Trigon Engineering Society, Founding member of the Boomsticks (3x IM Co-ed Volleyball Champs).',
-    short: 'GPA 3.7/4.0; led AI Security Initiative; exec in Google Developer Group and Trigon.',
-    link: 'https://doi.org/10.18130/yqgv-1g90',
+    description: (
+      <>
+        <a href="https://doi.org/10.18130/yqgv-1g90" {...ext}>Capstone + Thesis</a>
+        {' · '}
+        <a href="https://doi.org/10.1145/3675094.3678495" {...ext}>Extraneous research</a>
+        <br />
+        VAISI, Dsig, Trigon, chess club, and founding member of the Boomsticks (
+        <PhotoLink
+          images={['/now/Boomsticks_AFC.jpg', '/now/boomsticks_beach_outside_grad.JPG']}
+          alt="The Boomsticks"
+          alts={['The Boomsticks on the banner at the AFC', 'The Boomsticks on the beach court at graduation']}
+        >
+          3x IM Co-ed Volleyball Champs
+        </PhotoLink>
+        ).
+      </>
+    ),
+    short: 'Capstone + Thesis, research; VAISI, Dsig, Trigon, chess club, and the Boomsticks.',
+    orgUrl: 'https://www.virginia.edu/',
     kind: 'education',
     current: false,
     highlight: true,
@@ -135,6 +161,7 @@ export const experiences = [
     id: 9,
     role: 'Engineering & Design Program',
     company: 'Ramapo High School',
+    orgUrl: 'https://ramapo.rih.org/',
     period: 'Sep 2018 - Jun 2022',
     description: 'GPA: 3.8/4.0. Chess Club President, Varsity Tennis Co-Captain.',
     short: 'GPA 3.8/4.0; Chess Club President, Varsity Tennis Co-Captain.',
@@ -162,6 +189,7 @@ export const experiences = [
     description: 'Pledged to give at least 10% of lifetime income to effective charities.',
     short: 'Pledged at least 10% of lifetime income to effective charities.',
     link: 'https://www.givingwhatwecan.org/pledge',
+    orgUrl: 'https://www.givingwhatwecan.org/',
     kind: 'volunteer',
     current: true,
     highlight: false,

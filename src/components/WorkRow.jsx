@@ -14,7 +14,7 @@ import { span, years } from '../lib/dates.js';
   With no children there is nothing to open, and the role is plain text. defaultOpen starts
   the row open (the debate entry, whose photos shouldn't hide).
 */
-export default function WorkRow({ date, title, org, summary, defaultOpen = false, children }) {
+export default function WorkRow({ date, title, org, orgUrl, summary, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   const canOpen = !!children;
@@ -30,7 +30,7 @@ export default function WorkRow({ date, title, org, summary, defaultOpen = false
             </button>
           ) : title}
         </h3>
-        <p className="work-org">{org}</p>
+        <p className="work-org">{orgUrl ? <a href={orgUrl} target="_blank" rel="noopener noreferrer">{org}</a> : org}</p>
         {summary && !open && <p className="work-text">{summary}</p>}
         {canOpen && (
           <div id={id} className="work-more" hidden={!open}>
@@ -65,6 +65,7 @@ export function ExperienceRow({ e, condensed = false }) {
       date={<When text={condensed ? years(e.period) : period} />}
       title={e.role}
       org={e.company}
+      orgUrl={e.orgUrl}
       summary={condensed ? undefined : e.short}
     >
       {opens && (

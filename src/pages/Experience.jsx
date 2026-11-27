@@ -22,7 +22,7 @@ const host = (url) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
 function VaisiRow({ e }) {
   return (
-    <WorkRow date={years(e.period)} title={e.role} org={e.company}>
+    <WorkRow date={years(e.period)} title={e.role} org={e.company} orgUrl={e.orgUrl}>
       <a href={e.link} {...ext} className="vaisi-site" aria-label="vaisi.org (opens in a new tab)">
         <img src="/vaisi/vaisi_homepage.jpg" alt="The VAISI website's homepage" loading="lazy" />
       </a>
@@ -42,7 +42,7 @@ function OtherThings({ id }) {
   const scout = achievements.find((a) => a !== debate);
   return (
     <ul className="plain work" id={id}>
-      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} defaultOpen>
+      <WorkRow date={years(debate.date)} title={debate.title.replace(' — ', ', ')} org={debate.organization} orgUrl={debate.orgUrl} defaultOpen>
         {debate.description.split(/\n+/).map((para, i) => <p key={i}>{para.trim()}</p>)}
         <Photos images={debate.photos} alt="Martin Skeptical Debate" />
         <p className="work-meta">
