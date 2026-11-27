@@ -6,9 +6,9 @@
   page shares it. CSS for each look lives at the end of index.css.
 */
 export const LOOKS = [
-  { id: 'haze', label: 'haze', note: 'sky-grey, fine grain, photo faintly through (default)' },
+  { id: 'haze', label: 'haze', note: 'sky-grey, fine grain, photo faintly through' },
   { id: 'card', label: 'card', note: 'the original light sheet' },
-  { id: 'scree', label: 'scree', note: 'warm stone with a paper-fibre texture' },
+  { id: 'scree', label: 'scree', note: 'warm stone with a paper-fibre texture (default)' },
   { id: 'dusk', label: 'dusk', note: 'dark teal-rock with film grain, light text' },
 ];
 export const ZOOMS = [
@@ -16,14 +16,14 @@ export const ZOOMS = [
   { id: '110', label: '10%' },
 ];
 
-// v2: haze became the default (Jason's pick); the new key drops any earlier stored choice.
-const KEY_LOOK = 'jc-look-v3';
+// v4: scree became the default (Jason, Nov 2026); the new key drops any earlier stored choice.
+const KEY_LOOK = 'jc-look-v4';
 // v2: zoom is off by default (Jason's call); the new key drops any stored 10% choice.
 const KEY_ZOOM = 'jc-zoom-v2';
 const read = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
 const write = (k, v) => { try { localStorage.setItem(k, v); } catch { /* private mode */ } };
 
-export function getLook() { return document.documentElement.dataset.look || 'haze'; }
+export function getLook() { return document.documentElement.dataset.look || 'scree'; }
 export function getZoom() { return document.documentElement.dataset.zoom || '100'; }
 
 export function setLook(id) {
@@ -40,6 +40,6 @@ export function setZoom(id) {
 // Run once at startup, before React renders: URL beats storage beats default.
 export function initLook() {
   const q = new URLSearchParams(window.location.search);
-  setLook(q.get('look') || read(KEY_LOOK) || 'haze');
+  setLook(q.get('look') || read(KEY_LOOK) || 'scree');
   setZoom(q.get('zoom') || read(KEY_ZOOM) || '100');
 }

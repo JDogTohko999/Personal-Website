@@ -779,6 +779,7 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   --globe-ocean: #e2dbc9;
   --globe-land: #c9bfa6;
   --globe-visited: #8f8259;
+  --globe-bucket: #a99266;  /* deeper sand: the default sand vanishes on scree's stone */
   --globe-border: #e2dbc9;
   --globe-frame: #dcd3bf;
 }
