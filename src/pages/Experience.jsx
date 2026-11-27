@@ -71,7 +71,7 @@ export default function Experience() {
     <>
       <h1 className="page-title">Involvements</h1>
       <p className="page-lede">
-        A little more detailed than <a href={linkedinUrl} {...ext}>LinkedIn</a>.
+        My <a href={linkedinUrl} {...ext}>LinkedIn</a> with a little zhuzh
       </p>
       <ul className="plain work">
         {experiences.filter((e) => e.highlight).map((e) => <Role key={e.id} e={e} />)}
