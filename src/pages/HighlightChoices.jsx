@@ -4,11 +4,11 @@ import useTitle from '../lib/useTitle.js';
 
 /* Review page (dev server only): colours for the hover-note highlight, on the sage sheet. */
 export const HIGHLIGHTS = [
-  { id: 'clay', name: 'Clay (current)', bg: 'color-mix(in srgb, var(--link) 15%, transparent)', hover: 'color-mix(in srgb, var(--link) 27%, transparent)' },
+  { id: 'clay', name: 'Clay', bg: 'color-mix(in srgb, var(--link) 15%, transparent)', hover: 'color-mix(in srgb, var(--link) 27%, transparent)' },
   { id: 'moss', name: 'Moss green', bg: 'rgba(78, 90, 48, 0.17)', hover: 'rgba(78, 90, 48, 0.3)' },
   { id: 'honey', name: 'Honey / ochre', bg: 'rgba(214, 166, 64, 0.32)', hover: 'rgba(214, 166, 64, 0.5)' },
   { id: 'blue', name: 'Dusty blue', bg: 'rgba(96, 132, 156, 0.22)', hover: 'rgba(96, 132, 156, 0.36)' },
-  { id: 'heather', name: 'Heather', bg: 'rgba(150, 118, 166, 0.24)', hover: 'rgba(150, 118, 166, 0.38)' },
+  { id: 'heather', name: 'Heather (current)', bg: 'rgba(150, 118, 166, 0.24)', hover: 'rgba(150, 118, 166, 0.38)' },
   { id: 'cream', name: 'Cream (lighter than the page)', bg: 'rgba(254, 250, 225, 0.7)', hover: 'rgba(254, 250, 225, 0.95)' },
   { id: 'terracotta', name: 'Terracotta', bg: 'rgba(180, 87, 47, 0.2)', hover: 'rgba(180, 87, 47, 0.33)' },
   { id: 'marker', name: 'Honey marker (lower half only)', bg: 'linear-gradient(transparent 55%, rgba(214, 166, 64, 0.45) 55%)', hover: 'linear-gradient(transparent 30%, rgba(214, 166, 64, 0.5) 30%)' },

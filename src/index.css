@@ -1102,12 +1102,12 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 .hover-note {
   display: inline; padding: 0 0.18em; margin: 0 -0.05em; border: 0; border-radius: 3px;
   font: inherit; color: inherit; cursor: help; text-decoration: none;
-  background: var(--note-bg, color-mix(in srgb, var(--link) 15%, transparent));
+  background: var(--note-bg, rgba(150, 118, 166, 0.24)); /* heather (Jason's pick) */
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
   transition: background-color 0.15s;
 }
 .hover-note:hover, .hover-note[aria-expanded='true'], .hover-note:focus-visible {
-  background: var(--note-bg-hover, color-mix(in srgb, var(--link) 27%, transparent));
+  background: var(--note-bg-hover, rgba(150, 118, 166, 0.38));
 }
 .hover-note-box {
   position: fixed; z-index: 60; display: block; box-sizing: border-box;
