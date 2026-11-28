@@ -1096,3 +1096,22 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 
 /* Writing: a little air between the title and the list of posts. */
 .posts { margin-top: 1.6rem; }
+
+/* Hover notes (components/HoverNote.jsx): a dotted underline marks a word with a note; the box is
+   a small card in the sheet's colours, kept inside the window. */
+.hover-note {
+  display: inline; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: help;
+  text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: 0.22em;
+  text-decoration-color: var(--link);
+}
+.hover-note:hover, .hover-note[aria-expanded='true'] { color: var(--link-hover); text-decoration-style: solid; }
+.footnote-ref { cursor: help; }
+.hover-note-box {
+  position: fixed; z-index: 60; display: block; box-sizing: border-box;
+  width: max-content; max-width: min(22rem, calc(100vw - 24px));
+  padding: 0.6rem 0.8rem; border: 1px solid var(--rule, #a9b09f); border-radius: 4px;
+  background: var(--surface, #e7e9e0); color: var(--text, #121a18);
+  font: 400 0.9375rem/1.5 var(--face); text-align: left; white-space: normal;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+.hover-note-box a { color: var(--link); }

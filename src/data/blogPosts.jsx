@@ -1,7 +1,11 @@
 import React from 'react';
+import { FootnoteRef, Note } from '../components/HoverNote.jsx';
 
+/* Footnotes: <Ref n={1} /> in the text, <Footnote n={1}>...</Footnote> at the bottom. Hovering
+   (or tapping) the [1] previews the footnote; clicking it still jumps down.
+   Hover notes without a footnote: <Note text="the extra bit">the word</Note>. */
 const Ref = ({ n }) => (
-  <a href={`#fn${n}`} id={`ref${n}`} className="text-portfolio-gold hover:opacity-70 transition-opacity font-semibold ml-0.5 text-xs align-super">[{n}]</a>
+  <FootnoteRef n={n} className="text-portfolio-gold hover:opacity-70 transition-opacity font-semibold ml-0.5 text-xs align-super" />
 );
 
 const Footnote = ({ n, children }) => (
