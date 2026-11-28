@@ -1105,7 +1105,9 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
   text-decoration-color: var(--link);
 }
 .hover-note:hover, .hover-note[aria-expanded='true'] { color: var(--link-hover); text-decoration-style: solid; }
-.footnote-ref { cursor: help; }
+.footnote-ref { cursor: help; position: relative; }
+/* The [1] is a tiny superscript: give it an invisible, bigger hover/tap area. */
+.footnote-ref::after { content: ''; position: absolute; inset: -0.45em -0.4em; }
 .hover-note-box {
   position: fixed; z-index: 60; display: block; box-sizing: border-box;
   width: max-content; max-width: min(22rem, calc(100vw - 24px));
