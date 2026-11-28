@@ -1,19 +1,7 @@
 import React from 'react';
-import { FootnoteRef, Note } from '../components/HoverNote.jsx';
+import { Note } from '../components/HoverNote.jsx';
 
-/* Footnotes: <Ref n={1} /> in the text, <Footnote n={1}>...</Footnote> at the bottom. Hovering
-   (or tapping) the [1] previews the footnote; clicking it still jumps down.
-   Hover notes without a footnote: <Note text="the extra bit">the word</Note>. */
-const Ref = ({ n }) => (
-  <FootnoteRef n={n} className="text-portfolio-gold hover:opacity-70 transition-opacity font-semibold ml-0.5 text-xs align-super" />
-);
-
-const Footnote = ({ n, children }) => (
-  <p id={`fn${n}`} className="scroll-mt-24">
-    <a href={`#ref${n}`} className="text-portfolio-gold hover:opacity-70 transition-opacity font-semibold mr-1">[{n}]</a>
-    {children}
-  </p>
-);
+/* Hover notes: <Note text="what pops up">the highlighted word</Note> (no footnotes any more). */
 
 // Cream photo frame ("polaroid"). Pass rotate for the tilted cluster photos.
 // (In the sky design, index.css flattens these: no tilt, no shadow, a hairline border.)
@@ -228,7 +216,7 @@ const BoresAIDividendContent = () => (
       I've recently been thinking about optimal AI-related tax policies, so I was super excited when I found out about this. I think this is an important initiative worth exploring, and this is a great first step.
     </p>
     <p className="mb-5">
-      As I was reading, annoyed by the frequent oversimplifications<Ref n={1} />, I suddenly stopped — <em>that can't be right...</em> I must have misread that. Wait, but surely ", or" implies that they're defining the previous word. I checked with my CS roommate as he brushed his teeth: "read this, does anything feel off about it?" He agreed.
+      As I was reading, annoyed by the frequent <Note text={<>I wish briefs like this were longer, or at least had some appendix, methodologies, or further supporting research. I want to know exactly <em>how</em> these will be executed on. The suggestions sound interesting, but implementation specifications matter so much. Ahh, are these early signs that I'm going to be a policy wonk? Thinking about what is optimal to tax is extremely complex, and it felt unsatisfying to see how unnuanced the "tax tokens" section was. I know it's a 3-page brief, so they're not really supposed to go into the details. Is this how all policy people feel about briefs?</>}>oversimplifications</Note>, I suddenly stopped — <em>that can't be right...</em> I must have misread that. Wait, but surely ", or" implies that they're defining the previous word. I checked with my CS roommate as he brushed his teeth: "read this, does anything feel off about it?" He agreed.
     </p>
 
     <p className="mb-5">
@@ -240,7 +228,7 @@ const BoresAIDividendContent = () => (
     <p className="mb-5 mt-8">
       This sentence incorrectly defines tokens.{' '}
       <strong className="font-bold text-portfolio-text px-1 rounded" style={{ backgroundColor: 'rgba(244, 204, 103, 0.25)' }}>Tokens are not units of computation.</strong>{' '}
-      I had to triple-check my understanding of what a token is, then reconfirmed with Claude and yet another CS friend. Equating them is incorrect — this might be pedantic, but I do think the distinction is meaningful and should have been caught before publishing<Ref n={2} />. That said, this probably reflects common industry shorthand where tokens are a proxy for computational cost in billing. Tokens currently correlate quite well with computation, but this might not always be the case. New model architectures or reasoning modes could render this correlation less reliable, which is why it's important to be precise in definitions.
+      I had to triple-check my understanding of what a token is, then reconfirmed with Claude and yet another CS friend. Equating them is incorrect — this might be pedantic, but I do think the distinction is meaningful and should have been <Note text={<>I'm a campaign fellow and a genuine supporter of Alex Bores, and one of my deeply held priors is that his AI policy work would be technically grounded. That's probably why this caught me off guard, and why I felt a tinge of disappointment when finding this. It's a small thing, and seemingly not that important. I assume Alex read this before it went out (it's only 3 pages), but there is a chance he did not. I'm not really sure how these things go!</>}>caught before publishing</Note>. That said, this probably reflects common industry shorthand where tokens are a proxy for computational cost in billing. Tokens currently correlate quite well with computation, but this might not always be the case. New model architectures or reasoning modes could render this correlation less reliable, which is why it's important to be precise in definitions.
     </p>
 
     <p className="mb-5">
@@ -265,17 +253,6 @@ const BoresAIDividendContent = () => (
       Tokens are like miles on an odometer: they measure how far you traveled, i.e. how much text was processed. Computation is like the fuel burned to get there. Two trips of identical mileage can consume very different amounts of fuel depending on terrain, speed, and the vehicle. A short prompt that triggers deep reasoning burns far more "fuel" than a long prompt that gets a rote answer. Taxing tokens, then, is like taxing miles driven: often a very reasonable proxy, but a proxy nonetheless, not the thing itself.
     </p>
 
-    <div className="w-full h-px bg-portfolio-border mt-14 mb-8"></div>
-
-    {/* Footnotes */}
-    <div className="space-y-4 text-sm text-portfolio-muted">
-      <Footnote n={1}>
-        I wish briefs like this were longer, or at least had some appendix, methodologies, or further supporting research. I want to know exactly <em>how</em> these will be executed on. The suggestions sound interesting, but implementation specifications matter so much. Ahh, are these early signs that I'm going to be a policy wonk? Thinking about what is optimal to tax is extremely complex, and it felt unsatisfying to see how unnuanced the "tax tokens" section was. I know it's a 3-page brief, so they're not really supposed to go into the details. Is this how all policy people feel about briefs?
-      </Footnote>
-      <Footnote n={2}>
-        I'm a campaign fellow and a genuine supporter of Alex Bores, and one of my deeply held priors is that his AI policy work would be technically grounded. That's probably why this caught me off guard, and why I felt a tinge of disappointment when finding this. It's a small thing, and seemingly not that important. I assume Alex read this before it went out (it's only 3 pages), but there is a chance he did not. I'm not really sure how these things go!
-      </Footnote>
-    </div>
 
   </div>
 );

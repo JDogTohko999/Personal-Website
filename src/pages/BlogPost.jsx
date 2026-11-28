@@ -30,7 +30,7 @@ export default function BlogPost() {
       </header>
 
       {/* Post bodies use Tailwind classes + legacy portfolio-* colours (mapped to the sky tokens).
-          Footnotes are plain #fnN / #refN anchors, so they work as normal in-page links. */}
+          Side notes are highlighted words that pop up on hover (components/HoverNote.jsx). */}
       <div className="text-portfolio-muted">
         <post.Content />
       </div>

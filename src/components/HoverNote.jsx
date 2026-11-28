@@ -2,11 +2,10 @@ import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState
 import { createPortal } from 'react-dom';
 
 /*
-  Hover notes: a word (or a footnote number) that shows a little pop-up with more on hover.
-  The idea is from arunim.fyi (Quartz's link previews); this is a light version for the posts.
+  Hover notes: a highlighted word that shows a little pop-up with more on hover (in place of
+  footnotes). The idea is from arunim.fyi (Quartz's link previews), without Quartz.
 
-    <Note text="the extra info, can include <em>markup</em>">the word</Note>
-    <FootnoteRef n={1} />   a [1] that previews <Footnote n={1}> on hover and still jumps to it
+    <Note text={<>the extra info, can include <em>markup</em></>}>the word</Note>
 
   Mouse: opens after a short pause on hover and stays open while the pointer is on the word or
   the box. Touch: a tap opens it, a tap anywhere else closes it. Keyboard: focus opens it,
@@ -86,10 +85,10 @@ function useHoverPopup() {
   return { open, setOpen, triggerProps, boxProps, container };
 }
 
-function Box({ id, boxProps, children, html, container }) {
+function Box({ id, boxProps, children, container }) {
   return createPortal(
     <span className="hover-note-box" role="tooltip" id={id} {...boxProps}>
-      {html != null ? <span dangerouslySetInnerHTML={{ __html: html }} /> : children}
+      {children}
     </span>,
     container(),
   );
@@ -101,56 +100,20 @@ export function Note({ text, children }) {
   const { open, setOpen, triggerProps, boxProps, container } = useHoverPopup();
   return (
     <>
-      <button
-        type="button"
+      {/* A span, not a <button>: buttons can't wrap across lines, and a note can be a phrase. */}
+      <span
+        role="button"
+        tabIndex={0}
         className="hover-note"
         aria-describedby={open ? id : undefined}
         aria-expanded={open}
         onClick={(e) => { if (e.nativeEvent.pointerType !== 'mouse') setOpen((v) => !v); }}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen((v) => !v); } }}
         {...triggerProps}
       >
         {children}
-      </button>
+      </span>
       {open && <Box id={id} boxProps={boxProps} container={container}>{text}</Box>}
-    </>
-  );
-}
-
-function footnoteHtml(n) {
-  const fn = typeof document !== 'undefined' && document.getElementById(`fn${n}`);
-  if (!fn) return '';
-  const copy = fn.cloneNode(true);
-  copy.querySelector(`a[href="#ref${n}"]`)?.remove(); // drop the [n] back-link
-  copy.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
-  return copy.innerHTML.trim();
-}
-
-// A footnote number that previews its footnote. Clicking with a mouse still jumps to the
-// footnote at the bottom; a tap on a phone opens the preview instead.
-export function FootnoteRef({ n, className = '' }) {
-  const id = useId();
-  const { open, setOpen, triggerProps, boxProps, container } = useHoverPopup();
-  // Read the footnote off the page while rendering, so the box exists in the same commit as
-  // `open` and can be placed straight away.
-  const html = open ? footnoteHtml(n) : '';
-  return (
-    <>
-      <a
-        href={`#fn${n}`}
-        id={`ref${n}`}
-        className={`footnote-ref ${className}`.trim()}
-        aria-describedby={open ? id : undefined}
-        onClick={(e) => {
-          if (e.nativeEvent.pointerType && e.nativeEvent.pointerType !== 'mouse') {
-            e.preventDefault();
-            setOpen((v) => !v);
-          }
-        }}
-        {...triggerProps}
-      >
-        [{n}]
-      </a>
-      {open && html && <Box id={id} boxProps={boxProps} html={html} container={container} />}
     </>
   );
 }

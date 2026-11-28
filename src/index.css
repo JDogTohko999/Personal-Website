@@ -1097,17 +1097,18 @@ details#now-bonus summary { cursor: pointer; color: var(--link); }
 /* Writing: a little air between the title and the list of posts. */
 .posts { margin-top: 1.6rem; }
 
-/* Hover notes (components/HoverNote.jsx): a dotted underline marks a word with a note; the box is
-   a small card in the sheet's colours, kept inside the window. */
+/* Hover notes (components/HoverNote.jsx): a soft highlight marks a word with a note (not
+   underlined like a link); hovering or tapping it opens a small card in the sheet's colours. */
 .hover-note {
-  display: inline; padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: help;
-  text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: 0.22em;
-  text-decoration-color: var(--link);
+  display: inline; padding: 0 0.18em; margin: 0 -0.05em; border: 0; border-radius: 3px;
+  font: inherit; color: inherit; cursor: help; text-decoration: none;
+  background: color-mix(in srgb, var(--link) 15%, transparent);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  transition: background-color 0.15s;
 }
-.hover-note:hover, .hover-note[aria-expanded='true'] { color: var(--link-hover); text-decoration-style: solid; }
-.footnote-ref { cursor: help; position: relative; }
-/* The [1] is a tiny superscript: give it an invisible, bigger hover/tap area. */
-.footnote-ref::after { content: ''; position: absolute; inset: -0.45em -0.4em; }
+.hover-note:hover, .hover-note[aria-expanded='true'], .hover-note:focus-visible {
+  background: color-mix(in srgb, var(--link) 27%, transparent);
+}
 .hover-note-box {
   position: fixed; z-index: 60; display: block; box-sizing: border-box;
   width: max-content; max-width: min(22rem, calc(100vw - 24px));
